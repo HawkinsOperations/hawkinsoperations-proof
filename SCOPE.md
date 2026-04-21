@@ -1,0 +1,20 @@
+# Scope
+
+Repository: `hawkinsoperations-proof`
+
+## In Scope
+
+- Evidence indexes and proof bundles
+- Public-safe claim-to-evidence mapping
+- Release verification snapshots
+
+## Out of Scope
+
+- Primary detection authoring
+- Standalone validation harness authoring
+- Platform runtime control ownership
+
+## Promotion Boundary
+
+Proof entries require traceable artifact references and checksums.
+
