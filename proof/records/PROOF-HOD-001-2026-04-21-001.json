@@ -1,0 +1,29 @@
+{
+  "proof_id": "PROOF-HOD-001-2026-04-21-001",
+  "created_at": "2026-04-21T11:10:31-05:00",
+  "detection": {
+    "id": "HOD-001",
+    "repository": "hawkinsoperations-detections",
+    "commit": "037ef3d",
+    "artifact_paths": [
+      "detections/hero/001-powershell-encoded-command/rule.yml",
+      "detections/hero/001-powershell-encoded-command/manifest.sha256",
+      "detections/hero/001-powershell-encoded-command/tests/positive-event-sysmon-1.json",
+      "detections/hero/001-powershell-encoded-command/tests/negative-event-sysmon-1.json"
+    ]
+  },
+  "validation": {
+    "repository": "hawkinsoperations-validation",
+    "commit": "f54a435",
+    "validation_timestamp": "2026-04-21T10:54:31-05:00",
+    "report_hash_sha256": "b919006a124f241b1a8dbbfa2c25e2d3a4dceb06adde1d2ecaaf2bfdd9fafc81",
+    "artifact_paths": [
+      "reports/hero001-validation-report.json",
+      "reports/hero001-validation-report.md",
+      "validation/hero/001-powershell-encoded-command/validation-cases.json",
+      "scripts/validate-hero001.ps1"
+    ]
+  },
+  "outcome_summary": "Baseline harness pass for HOD-001: 15 of 15 validation cases passed (5 positive, 10 negative).",
+  "claim_boundary": "Baseline harness pass only. This proof record does not claim production efficacy, coverage completeness, or adversary-resistant detection performance."
+}

@@ -1,7 +1,24 @@
 {
   "ledger_version": "1.0.0",
   "repository": "hawkinsoperations-proof",
-  "generated_at": "2026-04-21T00:00:00Z",
-  "entries": []
+  "generated_at": "2026-04-21T11:10:31-05:00",
+  "entries": [
+    {
+      "id": "PROOF-HOD-001-2026-04-21-001",
+      "timestamp": "2026-04-21T11:10:31-05:00",
+      "type": "proof_record",
+      "summary": "First closed chain record linking HOD-001 detection commit 037ef3d to validation commit f54a435 with baseline harness pass outcome.",
+      "artifact_paths": [
+        "proof/records/PROOF-HOD-001-2026-04-21-001.json",
+        "hawkinsoperations-detections/detections/hero/001-powershell-encoded-command/rule.yml",
+        "hawkinsoperations-detections/detections/hero/001-powershell-encoded-command/manifest.sha256",
+        "hawkinsoperations-validation/reports/hero001-validation-report.json",
+        "hawkinsoperations-validation/reports/hero001-validation-report.md",
+        "hawkinsoperations-validation/validation/hero/001-powershell-encoded-command/validation-cases.json"
+      ],
+      "sha256": "b919006a124f241b1a8dbbfa2c25e2d3a4dceb06adde1d2ecaaf2bfdd9fafc81",
+      "source_ref": "HOD-001",
+      "notes": "Claim boundary: baseline harness pass, not a production efficacy claim."
+    }
+  ]
 }
-
