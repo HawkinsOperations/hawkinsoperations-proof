@@ -1,0 +1,22 @@
+name: baseline-proof-integrity
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+jobs:
+  baseline-hod001-proof-integrity:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Validate Baseline HOD-001 Proof Integrity
+        # Scope is intentionally narrow right now:
+        # - validates HOD-001 baseline proof record schema/integrity fields
+        # - validates current baseline proof artifact paths in this repo
+        # - does not yet validate non-baseline families or cross-family maturity
+        run: python3 ./scripts/verify_proof_integrity.py
