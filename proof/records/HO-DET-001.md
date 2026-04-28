@@ -5,8 +5,8 @@
 - Detection ID: HO-DET-001
 - Detection title: HO-DET-001 — Suspicious PowerShell EncodedCommand Execution via Sysmon Event ID 1
 - Proof packet status: SOURCE_EXISTS as a draft record in the proof repo
-- Current proof level: 0 IDEA
-- Current trust class: DRAFT
+- Current proof level: 1 SOURCE_EXISTS
+- Current trust class: SOURCE_EXISTS
 - Public-safe status: NOT_PUBLIC_SAFE
 - Approval status: NOT_APPROVED
 
@@ -15,9 +15,9 @@ This packet is a governed proof-lifecycle demonstration showing how HawkinsOpera
 ## Status Clarification
 
 - Proof packet status: SOURCE_EXISTS as a draft record in the proof repo.
-- Detection proof level: 0 IDEA.
-- Detection trust class: DRAFT.
-- Canonical detection source: UNKNOWN.
+- Detection proof level: 1 SOURCE_EXISTS.
+- Detection trust class: SOURCE_EXISTS.
+- Canonical detection source: `hawkinsoperations-detections/detections/successor/ho-det-001/rule.yml`.
 - Canonical validation path: UNKNOWN.
 - Runtime-active status: UNKNOWN.
 - Signal-observed status: UNKNOWN.
@@ -25,7 +25,7 @@ This packet is a governed proof-lifecycle demonstration showing how HawkinsOpera
 - Public-safe status: NOT_PUBLIC_SAFE.
 - Approval status: NOT_APPROVED.
 
-The proof packet itself exists as a draft proof packet. The detection source is not yet proven as HO-DET-001. Related HOD-001 encoded-command artifacts may inform future review, but they are not HO-DET-001 truth. Current detection proof level remains 0 IDEA until canonical HO-DET-001 source exists. Current trust class remains DRAFT.
+The proof packet itself exists as a draft proof packet. The canonical HO-DET-001 source artifact exists in the detection source repository. Related HOD-001 encoded-command artifacts may inform future review, but they are not HO-DET-001 truth. Current detection proof level is limited to SOURCE_EXISTS until static review, validation, runtime, signal, evidence-linkage, and public-safe gates are satisfied.
 
 ## Detection identity
 
@@ -45,7 +45,7 @@ The proof packet itself exists as a draft proof packet. The detection source is 
 | Claim | Truth label | Evidence/reference | Allowed wording | Blocked wording | Next promotion gate |
 |---|---|---|---|---|---|
 | HO-DET-001 proof packet exists in the proof repo. | PROVEN | proof/records/HO-DET-001.md | "A draft proof packet exists for HO-DET-001." | "The detection is proven." | Identify source path and owner review. |
-| HO-DET-001 detection source exists. | UNKNOWN | No HO-DET-001 source file found during read-only search of related detections repo. | "Detection source is not yet proven for HO-DET-001." | "Detection source exists." | Create or identify canonical source in hawkinsoperations-detections. |
+| HO-DET-001 detection source exists. | PROVEN | hawkinsoperations-detections/detections/successor/ho-det-001/rule.yml | "Detection source exists for HO-DET-001." | "The detection is active." | Static review against source and rule contract. |
 | A related encoded-command baseline exists under HOD-001. | INFERRED | Read-only search found HOD-001 encoded-command artifacts in related repos. | "Related HOD-001 artifacts may inform review but do not automatically become HO-DET-001 truth." | "HOD-001 is HO-DET-001." | Reclassify or map through successor governance. |
 | HO-DET-001 static review has passed. | UNKNOWN | No static review record for HO-DET-001 found. | "Static review is required." | "This passed static validation." | Static review against source and rule contract. |
 | HO-DET-001 test definition exists. | UNKNOWN | No HO-DET-001 validation plan found in related validation repo. | "Validation plan is not yet proven for HO-DET-001." | "A validation plan is defined." | Create or identify positive and negative tests. |
@@ -67,10 +67,10 @@ The proof packet itself exists as a draft proof packet. The detection source is 
 
 ### 1 SOURCE_EXISTS
 
-- Status: NOT_SATISFIED
+- Status: SATISFIED
 - Evidence required: Canonical source file path, source owner repo, commit or stable reference, and source review context.
-- Current evidence: UNKNOWN for HO-DET-001. Read-only search found related HOD-001 encoded-command artifacts, but they are not automatically HO-DET-001 source truth.
-- Promotion gate: Create or identify HO-DET-001 source under hawkinsoperations-detections and record path.
+- Current evidence: `hawkinsoperations-detections/detections/successor/ho-det-001/rule.yml`.
+- Promotion gate: Complete static review against the source artifact and rule contract.
 - Blocked claim if not satisfied: "Detection source exists."
 
 ### 2 STATIC_VALIDATED
@@ -131,20 +131,20 @@ The proof packet itself exists as a draft proof packet. The detection source is 
 
 ## Trust class assessment
 
-- Current trust class: DRAFT
-- Reason: The proof packet exists and defines the controlled lifecycle, but canonical source, static validation, test definition, test result, runtime evidence, signal observation, evidence linkage, and public approval are not proven for HO-DET-001.
-- What would promote it: A canonical HO-DET-001 source path in hawkinsoperations-detections and a logged source review could promote the detection claim to SOURCE_EXISTS.
+- Current trust class: SOURCE_EXISTS
+- Reason: The proof packet exists and the canonical source path is identified, but static validation, test definition, test result, runtime evidence, signal observation, evidence linkage, and public approval are not proven for HO-DET-001.
+- What would promote it: A logged static review against the canonical source and rule contract could promote the detection claim to STATIC_VALIDATED.
 - What would block promotion: Missing source path, missing owner, private or unsafe details, stale or unreviewed evidence, unlogged changes, or any attempt to self-promote through AI output.
 
 ## Source truth
 
-- Known source path if proven: UNKNOWN.
-- Expected source path if not proven: hawkinsoperations-detections should own the canonical source path after source creation or reclassification.
+- Known source path: `hawkinsoperations-detections/detections/successor/ho-det-001/rule.yml`.
+- Source path status: SOURCE_EXISTS.
 - Source owner repo: hawkinsoperations-detections.
 - What source existence supports: Only that a source artifact exists at a known path under the source owner repo.
 - What source existence does not support: Runtime activity, validation success, signal observation, evidence linkage, public-safe status, or production readiness.
 
-Read-only inspection found related HOD-001 encoded-command files in hawkinsoperations-detections, but those files are not promoted as HO-DET-001 source truth by copy, similarity, or AI interpretation.
+Related HOD-001 encoded-command files may inform review, but those files are not promoted as HO-DET-001 source truth by copy, similarity, or AI interpretation.
 
 ## Validation truth
 
@@ -178,15 +178,15 @@ Read-only inspection found related HOD-001 validation artifacts in hawkinsoperat
 
 | Evidence item ID | Evidence type | Evidence owner | Supports which claim | Does not support which claim | Privacy status | Stale review status | Promotion status |
 |---|---|---|---|---|---|---|---|
-| HO-DET-001-PACKET-001 | Draft proof packet | hawkinsoperations-proof | A governed proof packet exists and defines required boundaries. | Detection source exists, test passed, runtime active, signal observed, evidence-linked, public-safe. | Public-safe candidate wording only; no private terms intentionally included. | Review required before any public use. | DRAFT |
-| HO-DET-001-SOURCE-001 | Source artifact | hawkinsoperations-detections | UNKNOWN; no HO-DET-001 source linked. | Runtime activity, validation success, signal observation, public-safe status. | UNKNOWN | UNKNOWN | NOT_PROMOTED |
+| HO-DET-001-PACKET-001 | Draft proof packet | hawkinsoperations-proof | A governed proof packet exists and defines required boundaries. | Test passed, runtime active, signal observed, evidence-linked, public-safe. | Public-safe candidate wording only; no private terms intentionally included. | Review required before any public use. | DRAFT |
+| HO-DET-001-SOURCE-001 | Source artifact | hawkinsoperations-detections | Source exists at `detections/successor/ho-det-001/rule.yml`. | Runtime activity, validation success, signal observation, public-safe status. | No private terms intentionally included. | Review required before further promotion. | SOURCE_EXISTS |
 | HO-DET-001-VALIDATION-001 | Validation plan/result | hawkinsoperations-validation | UNKNOWN; no HO-DET-001 validation linked. | Runtime activity, signal observation, public-safe status. | UNKNOWN | UNKNOWN | NOT_PROMOTED |
 | HO-DET-001-RUNTIME-001 | Runtime deployment evidence | platform owner | UNKNOWN; no runtime evidence linked. | Signal observation, public-safe status. | UNKNOWN | UNKNOWN | NOT_PROMOTED |
 | HO-DET-001-SIGNAL-001 | Telemetry/search/alert evidence | evidence owner to be assigned | UNKNOWN; no signal evidence linked. | Public-safe status without review and approval. | UNKNOWN | UNKNOWN | NOT_PROMOTED |
 
 ## Public proof / public-safe review
 
-- Candidate public wording: "HO-DET-001 demonstrates the HawkinsOperations successor promotion path for a single detection. Current status is limited to the evidence linked in this proof packet. Runtime-active, signal-observed, evidence-linked, and public-safe claims require separate preserved evidence and review."
+- Candidate public wording: "HO-DET-001 demonstrates the HawkinsOperations successor promotion path for a single detection. Current status is limited to source existence and the evidence linked in this proof packet. Runtime-active, signal-observed, evidence-linked, and public-safe claims require separate preserved evidence and review."
 - Sanitization status: No private opportunity terms, hostnames, IP addresses, raw logs, secrets, screenshots, or local machine paths are intentionally included in candidate public wording.
 - Stale review status: NOT_REVIEWED.
 - Claim review status: NOT_REVIEWED.
@@ -195,7 +195,8 @@ Read-only inspection found related HOD-001 validation artifacts in hawkinsoperat
 ## Allowed claims
 
 - "A draft proof packet exists for HO-DET-001."
-- "HO-DET-001 demonstrates the HawkinsOperations successor promotion path for a single detection. Current status is limited to the evidence linked in this proof packet. Runtime-active, signal-observed, evidence-linked, and public-safe claims require separate preserved evidence and review."
+- "Detection source exists for HO-DET-001."
+- "HO-DET-001 demonstrates the HawkinsOperations successor promotion path for a single detection. Current status is limited to source existence and the evidence linked in this proof packet. Runtime-active, signal-observed, evidence-linked, and public-safe claims require separate preserved evidence and review."
 - "Runtime-active status requires deployment evidence."
 - "Signal-observed status requires preserved telemetry, alert, log, or search output."
 - "Public-safe status requires reviewed wording, privacy review, stale review, evidence linkage, and Raylee approval."
@@ -217,4 +218,4 @@ Read-only inspection found related HOD-001 validation artifacts in hawkinsoperat
 
 ## Next promotion gate
 
-The next promotion gate is SOURCE_EXISTS: identify or create the canonical HO-DET-001 source artifact in hawkinsoperations-detections, record the exact source path and owner, and complete a source review without claiming runtime, signal, evidence-linked, or public-safe status.
+The next promotion gate is STATIC_VALIDATED: complete a source review against `hawkinsoperations-detections/detections/successor/ho-det-001/rule.yml` and the rule contract without claiming runtime, signal, evidence-linked, or public-safe status.
