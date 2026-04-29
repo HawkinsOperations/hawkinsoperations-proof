@@ -1,0 +1,63 @@
+{
+  "id": "HO-DET-001-SYNTHETIC-VALIDATION-001",
+  "detection_id": "HO-DET-001",
+  "proof_type": "synthetic_validation_record",
+  "status": "TEST_VALIDATED_SYNTHETIC_SCOPE",
+  "created_at": "2026-04-29T11:09:22-05:00",
+  "source_refs": {
+    "detections_merge_commit": "13a74f812fd17027b4a1968b615a4aae78c99f51",
+    "validation_merge_commit": "e3bcf6c087b8e22ea62c08438fae6a60e800b094",
+    "artifact_paths": [
+      "hawkinsoperations-detections/detections/successor/ho-det-001/rule.yml",
+      "hawkinsoperations-detections/detections/successor/ho-det-001/splunk.spl",
+      "hawkinsoperations-validation/validation/successor/ho-det-001/validation-cases.json",
+      "hawkinsoperations-validation/reports/ho-det-001/validation-result.json",
+      "hawkinsoperations-validation/reports/ho-det-001/validation-result.md",
+      "hawkinsoperations-validation/validation/successor/ho-det-001/autosoc-triage-packet.json",
+      "hawkinsoperations-validation/validation/successor/ho-det-001/llm-summary.json",
+      "hawkinsoperations-validation/scripts/validate-ho-det-001.py",
+      "hawkinsoperations-validation/scripts/autosoc-triage-ho-det-001.py",
+      "hawkinsoperations-validation/scripts/offline-llm-summary-ho-det-001.py"
+    ]
+  },
+  "supported_claim": "HO-DET-001 passed synthetic validation against controlled positive and negative process-creation fixtures.",
+  "unsupported_claims": [
+    "runtime-active",
+    "signal-observed",
+    "public-safe",
+    "production-ready",
+    "live Splunk fired",
+    "Cribl-routed telemetry",
+    "Wazuh live collection",
+    "production AutoSOC triage",
+    "analyst-approved disposition",
+    "HO-GPU-01 runtime-active",
+    "AI-decided disposition"
+  ],
+  "validation_summary": {
+    "status": "pass",
+    "total_cases": 14,
+    "matched_positive_count": 7,
+    "missed_positive_cases": [],
+    "false_positive_negative_cases": []
+  },
+  "autosoc_summary": {
+    "packet_id": "HO-DET-001-SYNTHETIC-TRIAGE-001",
+    "scope": "deterministic synthetic output only",
+    "not_production_autosoc": true
+  },
+  "llm_summary": {
+    "model_runtime_status": "BLOCKED",
+    "execution_mode": "deterministic_stub_no_model_call",
+    "hypothesis_support_only": true
+  },
+  "public_safe_status": "NOT_PUBLIC_SAFE",
+  "approval_status": "NOT_APPROVED",
+  "notes": [
+    "Synthetic validation only.",
+    "No runtime or signal evidence.",
+    "No public-safe promotion.",
+    "AutoSOC packet is deterministic synthetic output only.",
+    "Offline LLM summary is a blocked-runtime deterministic stub."
+  ]
+}
