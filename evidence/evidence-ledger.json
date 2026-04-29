@@ -1,7 +1,7 @@
 {
   "ledger_version": "1.0.0",
   "repository": "hawkinsoperations-proof",
-  "generated_at": "2026-04-21T11:10:31-05:00",
+  "generated_at": "2026-04-29T11:09:22-05:00",
   "entries": [
     {
       "id": "PROOF-HOD-001-2026-04-21-001",
@@ -19,6 +19,26 @@
       "sha256": "b919006a124f241b1a8dbbfa2c25e2d3a4dceb06adde1d2ecaaf2bfdd9fafc81",
       "source_ref": "HOD-001",
       "notes": "Claim boundary: baseline harness pass, not a production efficacy claim."
+    },
+    {
+      "id": "HO-DET-001-SYNTHETIC-VALIDATION-001",
+      "timestamp": "2026-04-29T11:09:22-05:00",
+      "type": "synthetic_validation_record",
+      "summary": "HO-DET-001 merged synthetic validation proof recording 14 of 14 controlled cases passed with 7 matched positives, no missed positives, and no false-positive negative cases.",
+      "artifact_paths": [
+        "proof/records/HO-DET-001-SYNTHETIC-VALIDATION-001.json",
+        "proof/records/HO-DET-001.md",
+        "hawkinsoperations-detections/detections/successor/ho-det-001/rule.yml",
+        "hawkinsoperations-detections/detections/successor/ho-det-001/splunk.spl",
+        "hawkinsoperations-validation/validation/successor/ho-det-001/validation-cases.json",
+        "hawkinsoperations-validation/reports/ho-det-001/validation-result.json",
+        "hawkinsoperations-validation/reports/ho-det-001/validation-result.md",
+        "hawkinsoperations-validation/validation/successor/ho-det-001/autosoc-triage-packet.json",
+        "hawkinsoperations-validation/validation/successor/ho-det-001/llm-summary.json"
+      ],
+      "sha256": "e7b2ded33c3a26a6dd53ea6500fb9fba37a42c977fbfe70d927e931f41839561",
+      "source_ref": "HO-DET-001",
+      "notes": "Synthetic validation scope only; not runtime-active, not signal-observed, not public-safe."
     }
   ]
 }
