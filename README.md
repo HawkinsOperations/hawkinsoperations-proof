@@ -1,6 +1,6 @@
 # HawkinsOperations Proof
 
-Evidence repository for HawkinsOps V2, focused on verifiable and shareable proof artifacts.
+Evidence repository for HawkinsOperations, focused on verifiable and shareable proof artifacts.
 
 ## Purpose
 

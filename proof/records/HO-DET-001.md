@@ -27,13 +27,12 @@ This packet records merged synthetic validation evidence for HO-DET-001. It does
 - Public-safe status: NOT_PUBLIC_SAFE.
 - Approval status: NOT_APPROVED.
 
-Related HOD-001 encoded-command artifacts may inform review, but they are not HO-DET-001 truth. V1 artifacts do not promote V2 status.
+Related HOD-001 encoded-command artifacts may inform review, but they are not HO-DET-001 truth. Legacy artifacts do not promote current HawkinsOperations status.
 
 ## Linked Artifacts
 
 - `hawkinsoperations-detections/detections/successor/ho-det-001/rule.yml`
 - `hawkinsoperations-detections/detections/successor/ho-det-001/splunk.spl`
-- `hawkinsoperations-validation/docs/HO-DET-001_CLOSED_LOOP.md`
 - `hawkinsoperations-validation/validation/successor/ho-det-001/validation-cases.json`
 - `hawkinsoperations-validation/reports/ho-det-001/validation-result.json`
 - `hawkinsoperations-validation/reports/ho-det-001/validation-result.md`
