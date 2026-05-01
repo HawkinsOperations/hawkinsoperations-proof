@@ -30,6 +30,10 @@ This repository stores curated evidence that supports technical claims across de
 - Versioned claims-to-proof mapping
 - Release-level verification snapshots
 
+## Case Studies
+
+- [HO-DET-001: AI Authority Boundary Case Study](docs/case-studies/HO-DET-001-AI-AUTHORITY-BOUNDARY.md)
+
 ## Related Repositories
 
 - Detections: `hawkinsoperations-detections`
