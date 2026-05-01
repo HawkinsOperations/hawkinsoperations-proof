@@ -39,11 +39,30 @@ Related HOD-001 encoded-command artifacts may inform review, but they are not HO
 - `hawkinsoperations-validation/reports/ho-det-001/validation-result.md`
 - `hawkinsoperations-validation/validation/successor/ho-det-001/autosoc-triage-packet.json`
 - `hawkinsoperations-validation/validation/successor/ho-det-001/llm-summary.json`
+- `hawkinsoperations-validation/.github/workflows/ho-det-001-proof-loop.yml`
+- `hawkinsoperations-validation/.github/contracts/case-packet.schema.json`
+- `hawkinsoperations-validation/validation/successor/ho-det-001/case-packet.json`
+- `hawkinsoperations-validation/scripts/verify-ho-det-001-triage-boundary.py`
+- `hawkinsoperations-validation/scripts/scan-ho-det-001-claim-boundaries.py`
+- `hawkinsoperations-validation/scripts/verify-ho-det-001-result-parity.py`
+- `hawkinsoperations-validation/scripts/verify_case_packet_contract.py`
+- `hawkinsoperations-validation/scripts/build-ho-det-001-case-packet.py`
 
 ## Source Refs
 
 - Detections merge commit: `13a74f812fd17027b4a1968b615a4aae78c99f51`
 - Validation merge commit: `e3bcf6c087b8e22ea62c08438fae6a60e800b094`
+- Validation enforcement PR: `HawkinsOperations/hawkinsoperations-validation#10`
+- Validation enforcement merge commit: `8b48500d2ebbaacd93ac88e77a31dccf1d3b4e25`
+
+## Validation Enforcement Status
+
+- Validation enforcement status: CI_ENFORCED_FOR_SYNTHETIC_SCOPE.
+- Validation enforcement PR: `HawkinsOperations/hawkinsoperations-validation#10`.
+- Validation enforcement merge commit: `8b48500d2ebbaacd93ac88e77a31dccf1d3b4e25`.
+- Proof-loop workflow: `hawkinsoperations-validation/.github/workflows/ho-det-001-proof-loop.yml`.
+- Enforcement scope: HO-DET-001 synthetic validation, case-packet contract, deterministic triage boundary, claim-boundary scan, result parity, and proof-loop CI.
+- Control boundary: This is a real control only for the exact checked synthetic validation scope. It does not prove runtime-active, signal-observed, evidence-linked public proof, public-safe, production, fleet, Cribl, Wazuh, AWS-live, HO-GPU-01 runtime-active, autonomous SOC, or AI-approved disposition.
 
 ## Supported Claim
 
@@ -71,6 +90,7 @@ Related HOD-001 encoded-command artifacts may inform review, but they are not HO
 | HO-DET-001 detection source exists. | PROVEN | `hawkinsoperations-detections/detections/successor/ho-det-001/rule.yml` | "Detection source exists for HO-DET-001." | "The detection is active." | Runtime deployment evidence. |
 | HO-DET-001 Splunk source exists. | PROVEN | `hawkinsoperations-detections/detections/successor/ho-det-001/splunk.spl` at merge commit `13a74f812fd17027b4a1968b615a4aae78c99f51` | "A Splunk SPL source artifact exists for HO-DET-001." | "Live Splunk fired." | Deploy and preserve runtime/search evidence. |
 | HO-DET-001 synthetic validation passed. | PROVEN | `hawkinsoperations-validation/reports/ho-det-001/validation-result.json` at merge commit `e3bcf6c087b8e22ea62c08438fae6a60e800b094` | "HO-DET-001 passed synthetic validation against controlled positive and negative process-creation fixtures." | "This catches attacks." | Runtime and signal evidence. |
+| HO-DET-001 validation enforcement exists. | PROVEN | `hawkinsoperations-validation#10`; `.github/workflows/ho-det-001-proof-loop.yml`; merge commit `8b48500d2ebbaacd93ac88e77a31dccf1d3b4e25` | "HO-DET-001 validation enforcement exists for synthetic scope." | "Validation enforcement proves runtime, signal, production, or public-safe status." | Runtime/signal/public-safe evidence review. |
 | AutoSOC synthetic triage packet exists. | PROVEN | `hawkinsoperations-validation/validation/successor/ho-det-001/autosoc-triage-packet.json` | "A deterministic synthetic triage packet was generated from the validation result." | "Production AutoSOC triage occurred." | Production AutoSOC run evidence. |
 | Offline LLM support stub exists. | PROVEN | `hawkinsoperations-validation/validation/successor/ho-det-001/llm-summary.json` | "A deterministic blocked-runtime LLM support stub exists." | "HO-GPU-01 was runtime-active." | Approved local model runtime evidence. |
 | HO-DET-001 runtime-active status is proven. | BLOCKED | No deployment, enablement, schedule, or backend state evidence linked. | "Runtime-active status requires deployment evidence." | "This detection is active." | Preserve runtime deployment evidence. |
