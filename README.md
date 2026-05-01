@@ -33,6 +33,7 @@ This repository stores curated evidence that supports technical claims across de
 ## Case Studies
 
 - [HO-DET-001: AI Authority Boundary Case Study](docs/case-studies/HO-DET-001-AI-AUTHORITY-BOUNDARY.md)
+- [Purple Team Closed Loop 001](docs/case-studies/PURPLE-TEAM-CLOSED-LOOP-001.md)
 
 ## Related Repositories
 
