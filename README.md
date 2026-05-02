@@ -30,6 +30,10 @@ This repository stores curated evidence that supports technical claims across de
 - Versioned claims-to-proof mapping
 - Release-level verification snapshots
 
+## Proving Ground
+
+- [Proving Ground Thesis Packet 001](docs/proving-ground/PROVING-GROUND-THESIS-PACKET-001.md)
+
 ## Proof Records
 
 - [AWS-DET-001](proof/records/AWS-DET-001.md)

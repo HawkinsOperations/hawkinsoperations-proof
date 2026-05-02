@@ -29,6 +29,7 @@ This packet records fixture-only validation evidence for AWS-DET-001. It does no
 
 ## Linked Artifacts
 
+- `docs/proving-ground/PROVING-GROUND-THESIS-PACKET-001.md`
 - `hawkinsoperations-detections/detections/cloud/aws/aws-det-001/rule.yml`
 - `hawkinsoperations-detections/detections/cloud/aws/aws-det-001/cloudtrail.jsonpath`
 - `hawkinsoperations-detections/detections/cloud/aws/aws-det-001/README.md`

@@ -86,6 +86,7 @@ These are next-gate lanes, not current closed-loop proof. Do not say Microsoft D
 
 ## Reviewer links
 
+- [Proving Ground Thesis Packet 001](../proving-ground/PROVING-GROUND-THESIS-PACKET-001.md)
 - [HO-DET-001 AI authority-boundary case study](HO-DET-001-AI-AUTHORITY-BOUNDARY.md)
 - [HO-DET-001 proof record](../../proof/records/HO-DET-001.md)
 - [Synthetic validation result](https://github.com/HawkinsOperations/hawkinsoperations-validation/blob/main/reports/ho-det-001/validation-result.json)

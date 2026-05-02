@@ -47,6 +47,7 @@ Related HOD-001 encoded-command artifacts may inform review, but they are not HO
 - `hawkinsoperations-validation/scripts/verify_case_packet_contract.py`
 - `hawkinsoperations-validation/scripts/build-ho-det-001-case-packet.py`
 - `docs/case-studies/PURPLE-TEAM-CLOSED-LOOP-001.md`
+- `docs/proving-ground/PROVING-GROUND-THESIS-PACKET-001.md`
 
 ## Source Refs
 
