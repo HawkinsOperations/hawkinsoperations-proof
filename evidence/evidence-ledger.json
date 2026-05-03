@@ -39,6 +39,21 @@
       "sha256": "e7b2ded33c3a26a6dd53ea6500fb9fba37a42c977fbfe70d927e931f41839561",
       "source_ref": "HO-DET-001",
       "notes": "Synthetic validation scope only; not runtime-active, not signal-observed, not public-safe."
+    },
+    {
+      "id": "HO-DET-001-PLATFORM-RUNTIME-CONTRACT-GUARDRAIL-001",
+      "timestamp": "2026-05-03T00:00:00-05:00",
+      "type": "platform_contract_guardrail_record",
+      "summary": "HO-DET-001 platform runtime contract guardrail record preserving TEST_VALIDATED_SYNTHETIC_SCOPE and blocking runtime, signal, public-safe, production, fleet, routing, cloud-live, autonomous SOC, and disposition-authority promotions.",
+      "artifact_paths": [
+        "proof/records/HO-DET-001.md",
+        "hawkinsoperations-platform/contracts/examples/ho-det-001-runtime-contract.sample.json",
+        "hawkinsoperations-platform/contracts/schemas/ho-det-001-runtime-contract.schema.json",
+        "hawkinsoperations-platform/scripts/verify-ho-det-001-runtime-contract.py"
+      ],
+      "sha256": "0b8e778ece43d3fd8fe48bc639f2cef92b7db71fc059d89232ce74c14e53e30c",
+      "source_ref": "HO-DET-001",
+      "notes": "Non-promotional platform contract guardrail only; preserves TEST_VALIDATED_SYNTHETIC_SCOPE and does not prove runtime-active, signal-observed, evidence-linked public proof, public-safe, production-ready, fleet-wide, Cribl-routed, Wazuh-routed, AWS-live, autonomous SOC, AI-approved disposition, or analyst-approved disposition."
     }
   ]
 }
