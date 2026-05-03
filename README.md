@@ -10,7 +10,7 @@ This repository stores curated evidence that supports technical claims across de
 
 - Evidence index and proof bundles
 - Validation summaries and release evidence
-- Public-safe artifacts linked to specific versions/commits
+- Reviewer-facing artifacts linked to specific versions/commits
 
 ## Out of Scope
 
@@ -25,7 +25,7 @@ This repository stores curated evidence that supports technical claims across de
 - Public-facing claims should map to concrete proof records here.
 - Platform runtime contract enforcement for HO-DET-001 is a non-promotional guardrail. It preserves the current public ceiling but does not prove runtime-active status, signal-observed public proof, public-safe runtime proof, live Splunk fired, Cribl-routed status, Wazuh-routed public proof, AWS-live status, production-ready status, fleet-wide coverage, autonomous SOC operation, AI-approved disposition, or analyst-approved disposition.
 
-## Public-Safe Proof
+## Claim-Bounded Proof
 
 - Redacted evidence packets
 - Versioned claims-to-proof mapping

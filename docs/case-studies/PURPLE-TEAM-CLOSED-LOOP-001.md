@@ -4,7 +4,7 @@ A synthetic HO-DET-001 loop showing how AI can support triage without gaining au
 
 ## 60-second summary
 
-This card explains a public-safe, synthetic purple-team-style loop for HO-DET-001: controlled PowerShell EncodedCommand-style process creation, HO-DET-001 detection and Splunk source review, positive and negative synthetic validation, case-packet triage, support-only AI, and deterministic authority checks.
+This card explains a reviewer-facing, synthetic purple-team-style loop for HO-DET-001: controlled PowerShell EncodedCommand-style process creation, HO-DET-001 detection and Splunk source review, positive and negative synthetic validation, case-packet triage, support-only AI, and deterministic authority checks.
 
 AI was allowed to provide support-only triage over a sanitized case packet. AI was blocked from approving, promoting, closing, deciding disposition, or marking anything public-safe. The current public claim ceiling remains `TEST_VALIDATED_SYNTHETIC_SCOPE`.
 
