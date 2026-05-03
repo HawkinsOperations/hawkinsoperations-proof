@@ -7,23 +7,26 @@
 - Proof packet status: TEST_VALIDATED_SYNTHETIC_SCOPE recorded in the proof repo
 - Current proof level: TEST_VALIDATED_SYNTHETIC_SCOPE
 - Current trust class: TEST_VALIDATED_SYNTHETIC_SCOPE
+- Private controlled runtime status: CONTROLLED_LAB_RUNTIME_MATCH_VERIFIED
 - Public-safe status: NOT_PUBLIC_SAFE
 - Approval status: NOT_APPROVED
 
-This packet records merged synthetic validation evidence for HO-DET-001. It does not assert runtime activity, observed signal, production deployment, public-safe status, or live SOC operation.
+This packet records merged synthetic validation evidence for HO-DET-001 and a verifier-backed private controlled lab runtime match. It does not assert runtime activity, production deployment, public-safe status, or live SOC operation.
 
 ## Status Clarification
 
 - Proof packet status: TEST_VALIDATED_SYNTHETIC_SCOPE.
 - Detection proof level: TEST_VALIDATED_SYNTHETIC_SCOPE.
 - Detection trust class: TEST_VALIDATED_SYNTHETIC_SCOPE.
+- Private controlled runtime status: CONTROLLED_LAB_RUNTIME_MATCH_VERIFIED.
 - Canonical detection source: `hawkinsoperations-detections/detections/successor/ho-det-001/rule.yml`.
 - Canonical Splunk source: `hawkinsoperations-detections/detections/successor/ho-det-001/splunk.spl`.
 - Canonical validation path: `hawkinsoperations-validation/reports/ho-det-001/validation-result.json`.
 - Synthetic proof record: `proof/records/HO-DET-001-SYNTHETIC-VALIDATION-001.json`.
 - Runtime-active status: BLOCKED.
-- Signal-observed status: BLOCKED.
-- Evidence-linked status: BLOCKED for runtime or signal evidence; this packet links synthetic validation artifacts only.
+- Public signal-observed status: BLOCKED.
+- Private controlled lab runtime match status: VERIFIED by validation PR `HawkinsOperations/hawkinsoperations-validation#22`.
+- Public evidence-linked status: BLOCKED for public runtime or signal evidence; private/internal packet evidence is verifier-backed but not public-safe raw evidence.
 - Public-safe status: NOT_PUBLIC_SAFE.
 - Approval status: NOT_APPROVED.
 
@@ -47,7 +50,9 @@ Related HOD-001 encoded-command artifacts may inform review, but they are not HO
 - `hawkinsoperations-validation/scripts/verify_case_packet_contract.py`
 - `hawkinsoperations-validation/scripts/build-ho-det-001-case-packet.py`
 - `hawkinsoperations-validation/scripts/verify-ho-det-001-reproducible-proof-pack.py`
+- `hawkinsoperations-validation/scripts/verify-ho-det-001-runtime-packet.py`
 - `hawkinsoperations-validation/validation/successor/ho-det-001/reproducible-proof/`
+- `HawkinsOperations/hawkinsoperations-validation#22`
 - `docs/case-studies/PURPLE-TEAM-CLOSED-LOOP-001.md`
 
 ## Source Refs
@@ -59,6 +64,11 @@ Related HOD-001 encoded-command artifacts may inform review, but they are not HO
 - Platform runtime contract enforcement PR: `HawkinsOperations/hawkinsoperations-platform#5`
 - Platform runtime contract enforcement merge commit: `b3d0ffbd66c1bd5f60f7e9ff99712cdc3e0595bd`
 - Clone-runnable proof-pack PR: `HawkinsOperations/hawkinsoperations-validation#18`
+- Controlled runtime packet verifier PR: `HawkinsOperations/hawkinsoperations-validation#22`
+- Controlled runtime packet verifier merge commit: `b47dd02d08565baec76018f5ef909d1b7895737d`
+- Controlled runtime packet verifier source commit: `4015c6acce044321fd6c3000f9be64e4b99c3550`
+- Controlled runtime packet verifier path: `hawkinsoperations-validation/scripts/verify-ho-det-001-runtime-packet.py`
+- Controlled runtime packet verifier verdict: `VERIFIED_CONTROLLED_LAB_RUNTIME_MATCH_CAPTURED`
 
 ## Clone-Runnable Public Proof Pack
 
@@ -85,9 +95,30 @@ Related HOD-001 encoded-command artifacts may inform review, but they are not HO
 - Verifier output: `PLATFORM_RUNTIME_CONTRACT=pass`; `PROOF_CEILING=TEST_VALIDATED_SYNTHETIC_SCOPE`; `PUBLIC_SAFE_STATUS=NOT_PUBLIC_SAFE`; `PROMOTION_STATUS=BLOCKED`; `RUNTIME_ACTIVE=false`; `SIGNAL_OBSERVED=false`; `AI_DECIDED_DISPOSITION=false`.
 - Control boundary: This contract preserves the public ceiling at TEST_VALIDATED_SYNTHETIC_SCOPE. It does not prove runtime-active status, signal-observed public proof, public-safe runtime proof, live Splunk fired, Splunk-proven Runtime Signal 001, Cribl-routed status, Wazuh-routed public proof, production-ready status, fleet-wide coverage, AWS-live status, autonomous SOC operation, AI-approved disposition, or analyst-approved disposition.
 
+## Controlled Runtime Signal Packet 001
+
+- Packet ID: `HO-DET-001_CONTROLLED_RUNTIME_SIGNAL_PACKET_001`.
+- Private/internal status: CONTROLLED_LAB_RUNTIME_MATCH_VERIFIED.
+- Public-safe status: NOT_PUBLIC_SAFE.
+- Validation PR: `HawkinsOperations/hawkinsoperations-validation#22`.
+- Validation merge commit: `b47dd02d08565baec76018f5ef909d1b7895737d`.
+- Verifier path: `hawkinsoperations-validation/scripts/verify-ho-det-001-runtime-packet.py`.
+- Verifier verdict: `VERIFIED_CONTROLLED_LAB_RUNTIME_MATCH_CAPTURED`.
+- Private verifier output SHA256: `A405AE1DF92D639396A8D48C3F6DDE31DFCCBEA3F92E7DE0AFE0CDE87D8F56DC`.
+- Packet hash manifest: present and verifier-confirmed for 28 of 28 referenced files.
+- Marker correlation: manifest, local Sysmon telemetry, Splunk marker export, and HO-DET-001 result evidence.
+- Match count: 2 controlled child Windows PowerShell EncodedCommand events tied to marker and search time window.
+- Sanitization status: pass.
+- Blocked-claim boundary scan: pass.
+- Raw packet evidence status: private/internal only; private packet files were not committed publicly.
+- Supported private/internal claim: "HO-DET-001 produced a controlled lab runtime match in Splunk."
+- Boundary: This section records verifier-backed controlled lab runtime match evidence. It does not promote public-safe runtime proof, runtime-active deployment, production-ready status, fleet-wide status, Cribl-routed status, Wazuh-routed status, AWS-live status, autonomous SOC operation, AI-approved disposition, or analyst-approved disposition.
+
 ## Supported Claim
 
 "HO-DET-001 passed synthetic validation against controlled positive and negative process-creation fixtures."
+
+"HO-DET-001 produced a controlled lab runtime match in Splunk."
 
 ## Unsupported Claims
 
@@ -97,11 +128,16 @@ Related HOD-001 encoded-command artifacts may inform review, but they are not HO
 - production-ready
 - live Splunk fired
 - Cribl-routed telemetry
+- Cribl-routed
 - Wazuh live collection
+- Wazuh-routed
+- AWS-live
+- autonomous SOC
 - production AutoSOC triage
 - analyst-approved disposition
 - HO-GPU-01 runtime-active
 - AI-decided disposition
+- AI-approved disposition
 
 ## Current Truth Table
 
@@ -113,6 +149,7 @@ Related HOD-001 encoded-command artifacts may inform review, but they are not HO
 | HO-DET-001 synthetic validation passed. | PROVEN | `hawkinsoperations-validation/reports/ho-det-001/validation-result.json` at merge commit `e3bcf6c087b8e22ea62c08438fae6a60e800b094` | "HO-DET-001 passed synthetic validation against controlled positive and negative process-creation fixtures." | "This catches attacks." | Runtime and signal evidence. |
 | HO-DET-001 validation enforcement exists. | PROVEN | `hawkinsoperations-validation#10`; `.github/workflows/ho-det-001-proof-loop.yml`; merge commit `8b48500d2ebbaacd93ac88e77a31dccf1d3b4e25` | "HO-DET-001 validation enforcement exists for synthetic scope." | "Validation enforcement proves runtime, signal, production, or public-safe status." | Runtime/signal/public-safe evidence review. |
 | HO-DET-001 platform runtime contract enforcement exists. | PROVEN | `hawkinsoperations-platform#5`; `contracts/examples/ho-det-001-runtime-contract.sample.json`; merge commit `b3d0ffbd66c1bd5f60f7e9ff99712cdc3e0595bd` | "HO-DET-001 platform runtime contract enforcement exists as a non-promotional guardrail." | "Platform contract enforcement proves runtime-active, signal-observed, public-safe runtime proof, production-ready, fleet-wide, Cribl-routed, Wazuh-routed public proof, AWS-live, autonomous SOC, AI-approved disposition, or analyst-approved disposition." | Runtime/signal/public-safe evidence review. |
+| HO-DET-001 controlled lab runtime match is verifier-backed. | PROVEN_PRIVATE_INTERNAL | `HawkinsOperations/hawkinsoperations-validation#22`; merge commit `b47dd02d08565baec76018f5ef909d1b7895737d`; verifier verdict `VERIFIED_CONTROLLED_LAB_RUNTIME_MATCH_CAPTURED` | "HO-DET-001 produced a controlled lab runtime match in Splunk." | "HO-DET-001 is runtime-active."; "HO-DET-001 has public-safe runtime proof."; "HO-DET-001 is production-ready."; "HO-DET-001 is fleet-wide."; "HO-DET-001 is Cribl-routed."; "HO-DET-001 is Wazuh-routed."; "HO-DET-001 is AWS-live."; "HO-DET-001 runs an autonomous SOC."; "AI approved the disposition."; "An analyst approved the disposition." | Public evidence linkage, privacy review, stale review, wording review, and Raylee approval. |
 | AutoSOC synthetic triage packet exists. | PROVEN | `hawkinsoperations-validation/validation/successor/ho-det-001/autosoc-triage-packet.json` | "A deterministic synthetic triage packet was generated from the validation result." | "Production AutoSOC triage occurred." | Production AutoSOC run evidence. |
 | Offline LLM support stub exists. | PROVEN | `hawkinsoperations-validation/validation/successor/ho-det-001/llm-summary.json` | "A deterministic blocked-runtime LLM support stub exists." | "HO-GPU-01 was runtime-active." | Approved local model runtime evidence. |
 | HO-DET-001 runtime-active status is proven. | BLOCKED | No deployment, enablement, schedule, or backend state evidence linked. | "Runtime-active status requires deployment evidence." | "This detection is active." | Preserve runtime deployment evidence. |
@@ -124,6 +161,7 @@ Related HOD-001 encoded-command artifacts may inform review, but they are not HO
 - Validation status: pass
 - Total controlled cases: 14
 - Matched positive count: 7
+- Negative cases not matched: 7
 - Missed positive cases: none
 - False-positive negative cases: none
 - Validation scope: synthetic process-creation fixtures only
@@ -161,6 +199,16 @@ Related HOD-001 encoded-command artifacts may inform review, but they are not HO
 - Evidence: `hawkinsoperations-validation/reports/ho-det-001/validation-result.json`.
 - Supported claim: "HO-DET-001 passed synthetic validation against controlled positive and negative process-creation fixtures."
 
+### CONTROLLED_LAB_RUNTIME_MATCH_VERIFIED
+
+- Status: SATISFIED_PRIVATE_INTERNAL.
+- Evidence: `HawkinsOperations/hawkinsoperations-validation#22`, merge commit `b47dd02d08565baec76018f5ef909d1b7895737d`, and verifier `hawkinsoperations-validation/scripts/verify-ho-det-001-runtime-packet.py`.
+- Verifier verdict: `VERIFIED_CONTROLLED_LAB_RUNTIME_MATCH_CAPTURED`.
+- Private verifier output SHA256: `A405AE1DF92D639396A8D48C3F6DDE31DFCCBEA3F92E7DE0AFE0CDE87D8F56DC`.
+- Match count: 2 controlled child Windows PowerShell EncodedCommand events tied to marker and search time window.
+- Supported claim: "HO-DET-001 produced a controlled lab runtime match in Splunk."
+- Public ceiling boundary: Current proof level and current trust class remain TEST_VALIDATED_SYNTHETIC_SCOPE until public-safe evidence linkage, privacy review, stale review, wording review, and Raylee approval are complete.
+
 ### RUNTIME_ACTIVE
 
 - Status: NOT_SATISFIED
@@ -181,6 +229,7 @@ Related HOD-001 encoded-command artifacts may inform review, but they are not HO
 - "HO-DET-001 has merged source artifacts in the detections repository."
 - "HO-DET-001 has merged synthetic validation artifacts in the validation repository."
 - "HO-DET-001 passed synthetic validation against controlled positive and negative process-creation fixtures."
+- "HO-DET-001 produced a controlled lab runtime match in Splunk."
 - "HO-DET-001 platform runtime contract enforcement exists as a non-promotional guardrail."
 - "A deterministic synthetic AutoSOC triage packet was generated from the HO-DET-001 synthetic validation result."
 - "The offline LLM support artifact is a deterministic blocked-runtime stub and does not prove HO-GPU-01 runtime."
@@ -194,9 +243,14 @@ Related HOD-001 encoded-command artifacts may inform review, but they are not HO
 - "This is public-safe."
 - "Live Splunk fired."
 - "Cribl routed live telemetry."
+- "HO-DET-001 is Cribl-routed."
 - "Wazuh collected live telemetry."
+- "HO-DET-001 is Wazuh-routed."
+- "HO-DET-001 is AWS-live."
+- "HO-DET-001 runs an autonomous SOC."
 - "Production AutoSOC triage occurred."
 - "An analyst approved the disposition."
+- "AI approved the disposition."
 - "HO-GPU-01 ran the model."
 - "AI decided the disposition."
 - "The website proves detection status."
@@ -204,4 +258,4 @@ Related HOD-001 encoded-command artifacts may inform review, but they are not HO
 
 ## Next Promotion Gate
 
-The next promotion gate is runtime deployment evidence or preserved signal evidence, depending on operator priority. Public proof and website updates remain blocked until evidence linkage, privacy review, stale review, wording review, and Raylee approval are complete.
+The next promotion gate is proof-record review of this controlled lab runtime match update, followed by public evidence linkage, privacy review, stale review, wording review, and Raylee approval. Public proof and website updates remain blocked until those reviews are complete. Runtime-active deployment remains a separate blocked claim requiring deployment or enablement proof.
