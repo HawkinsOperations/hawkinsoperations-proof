@@ -46,6 +46,8 @@ Related HOD-001 encoded-command artifacts may inform review, but they are not HO
 - `hawkinsoperations-validation/scripts/verify-ho-det-001-result-parity.py`
 - `hawkinsoperations-validation/scripts/verify_case_packet_contract.py`
 - `hawkinsoperations-validation/scripts/build-ho-det-001-case-packet.py`
+- `hawkinsoperations-validation/scripts/verify-ho-det-001-reproducible-proof-pack.py`
+- `hawkinsoperations-validation/validation/successor/ho-det-001/reproducible-proof/`
 - `docs/case-studies/PURPLE-TEAM-CLOSED-LOOP-001.md`
 
 ## Source Refs
@@ -56,6 +58,15 @@ Related HOD-001 encoded-command artifacts may inform review, but they are not HO
 - Validation enforcement merge commit: `8b48500d2ebbaacd93ac88e77a31dccf1d3b4e25`
 - Platform runtime contract enforcement PR: `HawkinsOperations/hawkinsoperations-platform#5`
 - Platform runtime contract enforcement merge commit: `b3d0ffbd66c1bd5f60f7e9ff99712cdc3e0595bd`
+- Clone-runnable proof-pack PR: `HawkinsOperations/hawkinsoperations-validation#18`
+
+## Clone-Runnable Public Proof Pack
+
+- Public clone-run verifier: `hawkinsoperations-validation/scripts/verify-ho-det-001-reproducible-proof-pack.py`.
+- Public fixture path: `hawkinsoperations-validation/validation/successor/ho-det-001/reproducible-proof/`.
+- Scope: STRUCTURE_AND_BOUNDARY_ONLY / TEST_VALIDATED_SYNTHETIC_SCOPE.
+- Validation PR: `HawkinsOperations/hawkinsoperations-validation#18`.
+- This does not prove runtime-active, signal-observed, public-safe runtime proof, live Splunk fired, Cribl-routed telemetry, Wazuh live collection, production-ready, fleet-wide, AWS-live, autonomous SOC, AI-approved disposition, or analyst-approved disposition.
 
 ## Validation Enforcement Status
 

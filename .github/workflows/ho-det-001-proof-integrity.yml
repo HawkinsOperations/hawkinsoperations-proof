@@ -1,0 +1,35 @@
+name: ho-det-001-proof-integrity
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  ho-det-001-proof-integrity:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Verify HO-DET-001 proof integrity
+        run: python scripts/verify-ho-det-001-proof-integrity.py
+
+      - name: Verify baseline proof integrity
+        run: |
+          if [ -f scripts/verify_proof_integrity.py ]; then
+            python scripts/verify_proof_integrity.py
+          fi
+
+      - name: Check diff whitespace
+        run: git diff --check
