@@ -16,8 +16,8 @@ What was tested:
 What worked:
 
 - The synthetic validation result passed.
-- The local model support pass completed in a private controlled lab setting.
-- Private controlled lab GPU activity was observed during a bounded model call.
+- Private/internal local model support was recorded in a controlled lab setting.
+- Private/internal GPU activity was observed during a bounded model call.
 - The authority-boundary verifier preserved AI support-only status.
 
 What stayed blocked:
@@ -76,8 +76,8 @@ The supported public claim remains:
 
 - Synthetic validation passed for the checked fixture scope.
 - The AI authority boundary was deterministically checked.
-- Private lab LLM triage support completed.
-- Private controlled lab GPU activity was observed during the bounded model call.
+- Private/internal lab LLM triage support was recorded outside the public proof basis.
+- Private/internal controlled lab GPU activity was observed during the bounded model call outside the public proof basis.
 - AI remained support-only.
 
 ## What this does not prove

@@ -32,7 +32,7 @@ AI was allowed to provide support-only triage over a sanitized case packet. AI w
 - A sanitized case packet existed for support-only triage.
 - AI authority boundary was checked.
 - AI did not approve, promote, close, decide disposition, or mark public-safe.
-- Private lab model support and GPU activity were observed in private evidence, but remain outside the public proof basis and do not promote model-runtime, runtime, signal, or public-safe status.
+- Private/internal lab model support and GPU activity were recorded in private evidence, remain outside the public proof basis, and do not promote model-runtime, runtime, signal, or public-safe status.
 
 ## What was not proven
 
