@@ -25,6 +25,7 @@ This packet records merged synthetic validation evidence for HO-DET-001 and a ve
 - Synthetic proof record: `proof/records/HO-DET-001-SYNTHETIC-VALIDATION-001.json`.
 - Runtime-active status: BLOCKED.
 - Public signal-observed status: BLOCKED.
+- Signal-observed status: BLOCKED.
 - Private controlled lab runtime match status: VERIFIED by validation PR `HawkinsOperations/hawkinsoperations-validation#22`.
 - Public evidence-linked status: BLOCKED for public runtime or signal evidence; private/internal packet evidence is verifier-backed but not public-safe raw evidence.
 - Public-safe status: NOT_PUBLIC_SAFE.
