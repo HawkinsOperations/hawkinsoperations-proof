@@ -118,6 +118,6 @@ Codex review is AI labor, not human governance.
 
 ## Doctrine
 
-AI is labor. Governance is authority.
+AI generates work. Evidence and human review authorize claims.
 
 Build loud. Verify hard. Claim tight. Ship receipts.
