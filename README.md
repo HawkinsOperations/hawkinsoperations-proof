@@ -85,15 +85,17 @@ A claim can move toward public use only when:
 
 ## Current Claim Boundary
 
+The left column lists what the current proof record can support. The right column lists claims this README explicitly does not make.
+
 | Supported within current public ceiling | Explicitly not claimed |
 |---|---|
-| HO-DET-001 has merged source artifacts | runtime-active public proof |
-| HO-DET-001 has merged synthetic validation artifacts | public signal-observed proof |
-| HO-DET-001 passed controlled synthetic validation | evidence-linked public proof |
-| Platform contract guardrail exists as a non-promotional guardrail | public-safe runtime proof |
-| Private/internal runtime match status is scoped private/internal | production-ready claim, fleet-wide claim, enterprise deployed claim |
-| AI can support work, but cannot approve claims | live Splunk fired as public proof, Cribl-routed claim, Wazuh-routed claim, AWS-live claim |
-| Human review is required before public promotion | autonomous SOC claim, AI-approved disposition, AI-decided disposition, analyst-approved disposition, production AutoSOC claim |
+| HO-DET-001 has merged source artifacts | Not claimed: runtime-active public proof |
+| HO-DET-001 has merged synthetic validation artifacts | Not claimed: public signal-observed proof |
+| HO-DET-001 passed controlled synthetic validation | Not claimed: evidence-linked public proof |
+| Platform contract guardrail exists as a non-promotional guardrail | Not claimed: public-safe runtime proof |
+| Private/internal runtime match status is scoped private/internal | Not claimed: production-ready claim, fleet-wide claim, enterprise deployed claim |
+| AI can support work, but cannot approve claims | Not claimed: live Splunk fired as public proof, Cribl-routed claim, Wazuh-routed claim, AWS-live claim |
+| Human review is required before public promotion | Not claimed: autonomous SOC claim, AI-approved disposition, AI-decided disposition, analyst-approved disposition, production AutoSOC claim |
 
 ## Real Controls Rule
 
