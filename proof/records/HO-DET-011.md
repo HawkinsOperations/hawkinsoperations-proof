@@ -4,19 +4,19 @@
 
 - Detection ID: HO-DET-011
 - Detection title: Windows service creation / service binary change
-- Proof packet status: TEST_VALIDATED_SYNTHETIC_SCOPE recorded in the proof repo
-- Current proof level: TEST_VALIDATED_SYNTHETIC_SCOPE
-- Current trust class: TEST_VALIDATED_SYNTHETIC_SCOPE
+- Proof packet status: PRIVATE_RUNTIME_EVIDENCE_CAPTURED recorded in the proof repo
+- Current proof level: PRIVATE_RUNTIME_EVIDENCE_CAPTURED
+- Current trust class: PRIVATE_RUNTIME_EVIDENCE_CAPTURED
 - Public-safe status: NOT_PUBLIC_SAFE
 - Approval status: NOT_APPROVED
 
-This packet records merged source, synthetic validation, and platform case-packet guardrail evidence for HO-DET-011. It does not assert runtime-active status, signal-observed status, public-safe proof, live Splunk firing, routed telemetry, production deployment, fleet-wide coverage, complete service-creation coverage, autonomous SOC operation, AI-approved disposition, AI-decided disposition, or analyst-approved disposition.
+This packet records merged source, synthetic validation, platform case-packet guardrail evidence, and a sanitized private local Windows runtime evidence summary for HO-DET-011. It does not assert runtime-active status, public or routed signal-observed status, public-safe proof, Wazuh observation, Splunk observation, Cribl routing, production deployment, fleet-wide coverage, complete service-creation coverage, autonomous SOC operation, AI-approved disposition, AI-decided disposition, or analyst-approved disposition.
 
 ## Status Clarification
 
-- Proof packet status: TEST_VALIDATED_SYNTHETIC_SCOPE.
-- Detection proof level: TEST_VALIDATED_SYNTHETIC_SCOPE.
-- Detection trust class: TEST_VALIDATED_SYNTHETIC_SCOPE.
+- Proof packet status: PRIVATE_RUNTIME_EVIDENCE_CAPTURED.
+- Detection proof level: PRIVATE_RUNTIME_EVIDENCE_CAPTURED.
+- Detection trust class: PRIVATE_RUNTIME_EVIDENCE_CAPTURED.
 - Canonical detection source: `hawkinsoperations-detections/detections/successor/ho-det-011/rule.yml`.
 - Canonical Splunk source: `hawkinsoperations-detections/detections/successor/ho-det-011/splunk.spl`.
 - Canonical Wazuh source: `hawkinsoperations-detections/detections/successor/ho-det-011/wazuh.xml`.
@@ -25,8 +25,12 @@ This packet records merged source, synthetic validation, and platform case-packe
 - Platform case-packet sample: `hawkinsoperations-platform/contracts/examples/ho-det-011-case-packet.sample.json`.
 - Platform case-packet schema: `hawkinsoperations-platform/contracts/schemas/ho-det-011-case-packet.schema.json`.
 - Platform case-packet verifier: `hawkinsoperations-platform/scripts/verify-ho-det-011-case-packet.py`.
-- Runtime status: BLOCKED / NOT_PROVEN.
-- Signal status: BLOCKED / NOT_OBSERVED.
+- Runtime evidence status: PRIVATE_RUNTIME_EVIDENCE_CAPTURED for local Windows event capture only.
+- Runtime-active status: BLOCKED / NOT_PROVEN.
+- Public or routed signal status: BLOCKED / NOT_PROVEN.
+- Wazuh status: NOT_PROVEN.
+- Splunk status: NOT_PROVEN.
+- Cribl status: NOT_PROVEN.
 - Public-safe status: NOT_PUBLIC_SAFE.
 - Approval status: NOT_APPROVED.
 
@@ -66,10 +70,28 @@ This packet records merged source, synthetic validation, and platform case-packe
 - False-positive negative cases: none.
 - Validation scope: controlled synthetic Windows service creation fixtures only.
 - Supported validation claim: "HO-DET-011 passed synthetic validation against controlled Windows service creation fixtures."
-- Current proof ceiling: TEST_VALIDATED_SYNTHETIC_SCOPE.
-- Runtime status: BLOCKED / NOT_PROVEN.
-- Signal status: BLOCKED / NOT_OBSERVED.
+- Current proof ceiling: PRIVATE_RUNTIME_EVIDENCE_CAPTURED.
+- Synthetic validation scope: TEST_VALIDATED_SYNTHETIC_SCOPE.
+- Runtime evidence status: PRIVATE_RUNTIME_EVIDENCE_CAPTURED for local Windows event capture only.
+- Runtime-active status: BLOCKED / NOT_PROVEN.
+- Public or routed signal status: BLOCKED / NOT_PROVEN.
 - Public-safe status: NOT_PUBLIC_SAFE.
+
+## Private Runtime Evidence Summary
+
+- Evidence run ID: `20260510-143232`.
+- Evidence location: raw evidence retained under the approved private Data evidence route; raw event logs are not copied into this proof repo.
+- Sanitized evidence basis: manifest, claim boundary, and hash receipt were verified from the approved private route.
+- Local Windows System Event ID 7045 observed: yes.
+- Local Windows Security Event ID 4697 observed: yes.
+- Local Sysmon Event ID 1 observed: yes.
+- Cleanup result: CLEANED_UP.
+- Final disposable service state: SERVICE_ABSENT.
+- Wazuh observed: NOT_PROVEN.
+- Splunk observed: NOT_PROVEN.
+- Cribl routed: NOT_PROVEN.
+- Public-safe proof: NOT_PROVEN / NOT_PUBLIC_SAFE.
+- Coverage boundary: this proves one controlled private local Windows service-creation capture only; it does not prove service-creation coverage completeness, production readiness, fleet-wide coverage, Wazuh correlation, Splunk correlation, Cribl routing, or public-safe proof.
 
 ## Platform Case-Packet Guardrail
 
@@ -81,7 +103,7 @@ This packet records merged source, synthetic validation, and platform case-packe
   - `hawkinsoperations-platform/contracts/examples/ho-det-011-case-packet.sample.json`
   - `hawkinsoperations-platform/scripts/verify-ho-det-011-case-packet.py`
   - `hawkinsoperations-platform/contracts/contract-version.json`
-- Guardrail boundary: This platform packet preserves the proof ceiling at TEST_VALIDATED_SYNTHETIC_SCOPE and keeps runtime-active, signal-observed, public-safe, live Splunk fired, Wazuh-routed, Cribl-routed, AWS-live, production-ready, fleet-wide, service-creation coverage completeness, autonomous SOC, AI-approved disposition, AI-decided disposition, and analyst-approved disposition claims blocked.
+- Guardrail boundary: This platform packet and the later private local Windows runtime evidence preserve public-safe status at NOT_PUBLIC_SAFE and keep runtime-active, signal-observed public proof, live Splunk fired, Wazuh-routed, Cribl-routed, AWS-live, production-ready, fleet-wide, service-creation coverage completeness, autonomous SOC, AI-approved disposition, AI-decided disposition, and analyst-approved disposition claims blocked.
 
 ## Supported Claim
 
@@ -92,7 +114,8 @@ This packet records merged source, synthetic validation, and platform case-packe
 - "HO-DET-011 source artifacts exist in the detections repository."
 - "HO-DET-011 passed synthetic validation against controlled Windows service creation fixtures."
 - "HO-DET-011 has a platform case-packet guardrail that preserves synthetic-scope claim boundaries."
-- "HO-DET-011 is capped at TEST_VALIDATED_SYNTHETIC_SCOPE."
+- "HO-DET-011 has sanitized private local Windows runtime evidence captured for one controlled service-creation test."
+- "HO-DET-011 is capped at PRIVATE_RUNTIME_EVIDENCE_CAPTURED for private evidence and NOT_PUBLIC_SAFE for public use."
 
 ## Blocked Claims
 
@@ -101,7 +124,10 @@ This packet records merged source, synthetic validation, and platform case-packe
 - public-safe
 - evidence-linked public proof
 - live Splunk fired
+- Splunk observed
+- Wazuh observed
 - Wazuh-routed
+- Cribl routed
 - Cribl-routed
 - AWS-live
 - production-ready
@@ -114,8 +140,8 @@ This packet records merged source, synthetic validation, and platform case-packe
 
 ## Current Claim Ceiling
 
-TEST_VALIDATED_SYNTHETIC_SCOPE
+PRIVATE_RUNTIME_EVIDENCE_CAPTURED
 
 ## Next Promotion Gate
 
-HO-DET-011 requires controlled runtime capture with `RUNTIME_APPROVED` before any runtime, signal, routed-telemetry, public-safe, production, fleet, service-completeness, autonomous SOC, AI disposition, or analyst disposition claim can advance.
+HO-DET-011 requires separate event-specific Wazuh, Splunk, or Cribl correlation review before any routed-telemetry wording can advance. Public-safe wording remains blocked until public evidence linkage, redaction review, stale review, wording review, and Raylee approval are complete.
