@@ -22,6 +22,9 @@ This packet records merged source, synthetic validation, platform case-packet gu
 - Canonical Wazuh source: `hawkinsoperations-detections/detections/successor/ho-det-011/wazuh.xml`.
 - Canonical event mapping: `hawkinsoperations-detections/detections/successor/ho-det-011/event-mapping.yml`.
 - Canonical validation path: `hawkinsoperations-validation/reports/ho-det-011/validation-result.json`.
+- Validation fixture loop workflow: `hawkinsoperations-validation/.github/workflows/ho-det-011-fixture-loop.yml`.
+- Validation result parity verifier: `hawkinsoperations-validation/scripts/verify-ho-det-011-result-parity.py`.
+- Validation claim-boundary scanner: `hawkinsoperations-validation/scripts/scan-ho-det-011-claim-boundaries.py`.
 - Platform case-packet sample: `hawkinsoperations-platform/contracts/examples/ho-det-011-case-packet.sample.json`.
 - Platform case-packet schema: `hawkinsoperations-platform/contracts/schemas/ho-det-011-case-packet.schema.json`.
 - Platform case-packet verifier: `hawkinsoperations-platform/scripts/verify-ho-det-011-case-packet.py`.
@@ -46,6 +49,9 @@ This packet records merged source, synthetic validation, platform case-packet gu
 - `hawkinsoperations-validation/reports/ho-det-011/validation-result.json`
 - `hawkinsoperations-validation/reports/ho-det-011/validation-result.md`
 - `hawkinsoperations-validation/scripts/validate-ho-det-011.py`
+- `hawkinsoperations-validation/scripts/verify-ho-det-011-result-parity.py`
+- `hawkinsoperations-validation/scripts/scan-ho-det-011-claim-boundaries.py`
+- `hawkinsoperations-validation/.github/workflows/ho-det-011-fixture-loop.yml`
 - `hawkinsoperations-platform/contracts/schemas/ho-det-011-case-packet.schema.json`
 - `hawkinsoperations-platform/contracts/examples/ho-det-011-case-packet.sample.json`
 - `hawkinsoperations-platform/scripts/verify-ho-det-011-case-packet.py`
@@ -55,21 +61,33 @@ This packet records merged source, synthetic validation, platform case-packet gu
 
 - Detections source PR: `HawkinsOperations/hawkinsoperations-detections#11`.
 - Detections merge commit: `3bf93b820eee300630f5784979deec049f1845fa`.
-- Validation PR: `HawkinsOperations/hawkinsoperations-validation#25`.
-- Validation merge commit: `4c4bf5a64b90692ea363bc68ab9f606ed1e84698`.
+- Initial validation PR: `HawkinsOperations/hawkinsoperations-validation#25`.
+- Initial validation merge commit: `4c4bf5a64b90692ea363bc68ab9f606ed1e84698`.
+- Validation expansion PR: `HawkinsOperations/hawkinsoperations-validation#26`.
+- Validation expansion title: `test(validation): expand HO-DET-011 synthetic fixtures`.
+- Validation expansion merge commit: `4df879ea7b3c4dc8d564596accc2f66a87ede6a6`.
+- Validation expansion source commit: `62c6cdad7047f5f2ff26d93a171132c4c3515c1b`.
 - Platform guardrail PR: `HawkinsOperations/hawkinsoperations-platform#9`.
 - Platform merge/squash commit: `e3374181148f044b75782689db252e3f12d5c6fc`.
 
 ## Validation Summary
 
 - Validation status: pass.
-- Total controlled cases: 6.
-- Matched positive count: 3.
-- Negative cases not matched: 3.
+- Validation evidence source: `HawkinsOperations/hawkinsoperations-validation#26`.
+- Validation merge commit: `4df879ea7b3c4dc8d564596accc2f66a87ede6a6`.
+- Total controlled cases: 17.
+- Positive cases: 7.
+- Negative cases: 10.
+- Matched positive count: 7.
+- Negative cases not matched: 10.
 - Missed positive cases: none.
 - False-positive negative cases: none.
 - Validation scope: controlled synthetic Windows service creation fixtures only.
-- Supported validation claim: "HO-DET-011 passed synthetic validation against controlled Windows service creation fixtures."
+- Supported validation claim: "HO-DET-011 passed synthetic validation against 17 controlled Windows service creation fixtures."
+- Validation result: TEST_VALIDATED_SYNTHETIC_SCOPE for the synthetic validation layer.
+- Focused validation CI workflow: `hawkinsoperations-validation/.github/workflows/ho-det-011-fixture-loop.yml`.
+- Result parity verifier: `hawkinsoperations-validation/scripts/verify-ho-det-011-result-parity.py`.
+- Claim-boundary scanner: `hawkinsoperations-validation/scripts/scan-ho-det-011-claim-boundaries.py`.
 - Current proof ceiling: PRIVATE_RUNTIME_EVIDENCE_CAPTURED.
 - Synthetic validation scope: TEST_VALIDATED_SYNTHETIC_SCOPE.
 - Runtime evidence status: PRIVATE_RUNTIME_EVIDENCE_CAPTURED for local Windows event capture only.
@@ -80,7 +98,7 @@ This packet records merged source, synthetic validation, platform case-packet gu
 ## Private Runtime Evidence Summary
 
 - Evidence run ID: `20260510-143232`.
-- Evidence location: raw evidence retained under the approved private Data evidence route; raw event logs are not copied into this proof repo.
+- Evidence location: private source material is retained under the approved private Data evidence route; event logs are not copied into this proof repo.
 - Sanitized evidence basis: manifest, claim boundary, and hash receipt were verified from the approved private route.
 - Local Windows System Event ID 7045 observed: yes.
 - Local Windows Security Event ID 4697 observed: yes.
@@ -107,12 +125,12 @@ This packet records merged source, synthetic validation, platform case-packet gu
 
 ## Supported Claim
 
-"HO-DET-011 passed synthetic validation against controlled Windows service creation fixtures."
+"HO-DET-011 passed synthetic validation against 17 controlled Windows service creation fixtures."
 
 ## Allowed Claims
 
 - "HO-DET-011 source artifacts exist in the detections repository."
-- "HO-DET-011 passed synthetic validation against controlled Windows service creation fixtures."
+- "HO-DET-011 passed synthetic validation against 17 controlled Windows service creation fixtures."
 - "HO-DET-011 has a platform case-packet guardrail that preserves synthetic-scope claim boundaries."
 - "HO-DET-011 has sanitized private local Windows runtime evidence captured for one controlled service-creation test."
 - "HO-DET-011 is capped at PRIVATE_RUNTIME_EVIDENCE_CAPTURED for private evidence and NOT_PUBLIC_SAFE for public use."
