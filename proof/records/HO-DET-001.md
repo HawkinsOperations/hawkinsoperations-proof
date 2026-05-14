@@ -18,6 +18,12 @@ Compatibility note: `TEST_VALIDATED_SYNTHETIC_SCOPE` is the internal verifier to
 
 This packet records merged controlled-test validation evidence for HO-DET-001 and a verifier-backed private controlled lab runtime match. It does not assert runtime activity, production deployment, public-safe status, or live SOC operation.
 
+## Internal Verifier Compatibility
+
+The following sentence is retained only for legacy/internal proof-record parity checks and is not the public display label:
+
+"HO-DET-001 passed synthetic validation against controlled positive and negative process-creation fixtures."
+
 ## Status Clarification
 
 - Proof packet status: CONTROLLED_TEST_VALIDATED.
