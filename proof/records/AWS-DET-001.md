@@ -4,9 +4,9 @@
 
 - Detection ID: AWS-DET-001
 - Detection title: Denied IAM API Activity From CloudTrail-Style Fixtures
-- Proof packet status: TEST_VALIDATED_SYNTHETIC_SCOPE recorded in the proof repo
-- Current proof level: TEST_VALIDATED_SYNTHETIC_SCOPE
-- Current trust class: TEST_VALIDATED_SYNTHETIC_SCOPE
+- Proof packet status: CONTROLLED_TEST_VALIDATED recorded in the proof repo
+- Current proof level: CONTROLLED_TEST_VALIDATED
+- Current trust class: CONTROLLED_TEST_VALIDATED
 - Public-safe status: NOT_PUBLIC_SAFE
 - Approval status: NOT_APPROVED
 
@@ -14,9 +14,9 @@ This packet records fixture-only validation evidence for AWS-DET-001. It does no
 
 ## Status Clarification
 
-- Proof packet status: TEST_VALIDATED_SYNTHETIC_SCOPE.
-- Detection proof level: TEST_VALIDATED_SYNTHETIC_SCOPE.
-- Detection trust class: TEST_VALIDATED_SYNTHETIC_SCOPE.
+- Proof packet status: CONTROLLED_TEST_VALIDATED.
+- Detection proof level: CONTROLLED_TEST_VALIDATED.
+- Detection trust class: CONTROLLED_TEST_VALIDATED.
 - Canonical detection source: `hawkinsoperations-detections/detections/cloud/aws/aws-det-001/rule.yml`.
 - Canonical fixture selector: `hawkinsoperations-detections/detections/cloud/aws/aws-det-001/cloudtrail.jsonpath`.
 - Canonical validation path: `hawkinsoperations-validation/reports/aws-det-001/validation-result.json`.
@@ -51,7 +51,7 @@ This packet records fixture-only validation evidence for AWS-DET-001. It does no
 - Matched positive count: 3
 - Missed positive cases: none
 - False-positive negative cases: none
-- Validation scope: synthetic CloudTrail-style IAM denied/unauthorized API fixtures only
+- Validation scope: controlled-test CloudTrail-style IAM denied/unauthorized API fixtures only
 - AWS live status: BLOCKED
 - Public-safe status: NOT_PUBLIC_SAFE
 
@@ -76,7 +76,7 @@ This packet records fixture-only validation evidence for AWS-DET-001. It does no
 
 ## Current Claim Ceiling
 
-TEST_VALIDATED_SYNTHETIC_SCOPE
+CONTROLLED_TEST_VALIDATED
 
 ## Next Promotion Gate
 

@@ -10,7 +10,7 @@ Proof is the claim boundary: evidence can support a claim only within its record
 | Boundary | Current state |
 |---|---|
 | Flagship proof path | HO-DET-001 |
-| Public proof ceiling | TEST_VALIDATED_SYNTHETIC_SCOPE |
+| Public proof ceiling | CONTROLLED_TEST_VALIDATED |
 | Public-safe status | NOT_PUBLIC_SAFE |
 | Private/internal runtime status | CONTROLLED_LAB_RUNTIME_MATCH_VERIFIED |
 | Runtime-active public proof | BLOCKED |
@@ -45,7 +45,7 @@ Private/internal runtime match evidence is not public-safe proof. Public claims 
 | Item | Current state |
 |---|---|
 | Proof record | [proof/records/HO-DET-001.md](proof/records/HO-DET-001.md) |
-| Public ceiling | TEST_VALIDATED_SYNTHETIC_SCOPE |
+| Public ceiling | CONTROLLED_TEST_VALIDATED |
 | Public-safe status | NOT_PUBLIC_SAFE |
 | Private/internal runtime status | CONTROLLED_LAB_RUNTIME_MATCH_VERIFIED |
 | Platform contract guardrail | Non-promotional guardrail |
@@ -90,8 +90,8 @@ The left column lists what the current proof record can support. The right colum
 | Supported within current public ceiling | Explicitly not claimed |
 |---|---|
 | HO-DET-001 has merged source artifacts | Not claimed: runtime-active public proof |
-| HO-DET-001 has merged synthetic validation artifacts | Not claimed: public signal-observed proof |
-| HO-DET-001 passed controlled synthetic validation | Not claimed: evidence-linked public proof |
+| HO-DET-001 has merged controlled-test validation artifacts | Not claimed: public signal-observed proof |
+| HO-DET-001 passed controlled controlled-test validation | Not claimed: evidence-linked public proof |
 | Platform contract guardrail exists as a non-promotional guardrail | Not claimed: public-safe runtime proof |
 | Private/internal runtime match status is scoped private/internal | Not claimed: production-ready claim, fleet-wide claim, enterprise deployed claim |
 | AI can support work, but cannot approve claims | Not claimed: live Splunk fired as public proof, Cribl-routed claim, Wazuh-routed claim, AWS-live claim |

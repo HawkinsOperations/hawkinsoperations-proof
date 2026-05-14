@@ -11,8 +11,8 @@ PROOF_RECORD = ROOT / "proof" / "records" / "HO-DET-001.md"
 
 REQUIRED_STATUS_FIELDS = [
     "Detection ID: HO-DET-001",
-    "Current proof level: TEST_VALIDATED_SYNTHETIC_SCOPE",
-    "Current trust class: TEST_VALIDATED_SYNTHETIC_SCOPE",
+    "Current proof level: CONTROLLED_TEST_VALIDATED",
+    "Current trust class: CONTROLLED_TEST_VALIDATED",
     "Public-safe status: NOT_PUBLIC_SAFE",
     "Approval status: NOT_APPROVED",
 ]
@@ -53,7 +53,7 @@ REQUIRED_VALIDATION_FACTS = [
     "Matched positive count: 7",
     "Missed positive cases: none",
     "False-positive negative cases: none",
-    "Validation scope: synthetic process-creation fixtures only",
+    "Validation scope: controlled-test process-creation fixtures only",
 ]
 
 REQUIRED_BLOCKED_CLAIMS = [

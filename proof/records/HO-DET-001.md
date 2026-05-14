@@ -5,8 +5,8 @@
 - Detection ID: HO-DET-001
 - Detection title: HO-DET-001 - Suspicious PowerShell EncodedCommand Execution via Sysmon Event ID 1
 - Proof packet status: CONTROLLED_TEST_VALIDATED recorded in the proof repo
-- Current proof level: TEST_VALIDATED_SYNTHETIC_SCOPE
-- Current trust class: TEST_VALIDATED_SYNTHETIC_SCOPE
+- Current proof level: CONTROLLED_TEST_VALIDATED
+- Current trust class: CONTROLLED_TEST_VALIDATED
 - Current public label: CONTROLLED_TEST_VALIDATED
 - Public display label: CONTROLLED_TEST_VALIDATED
 - Public trust label: CONTROLLED_TEST_VALIDATED
@@ -14,7 +14,7 @@
 - Public-safe status: NOT_PUBLIC_SAFE
 - Approval status: NOT_APPROVED
 
-Compatibility note: `TEST_VALIDATED_SYNTHETIC_SCOPE` is the internal verifier token preserved for proof-integrity compatibility. `CONTROLLED_TEST_VALIDATED` is the public-facing label used to describe the same controlled-test validation boundary without using legacy public wording.
+Compatibility note: `CONTROLLED_TEST_VALIDATED` is the internal verifier token preserved for proof-integrity compatibility. `CONTROLLED_TEST_VALIDATED` is the public-facing label used to describe the same controlled-test validation boundary without using legacy public wording.
 
 This packet records merged controlled-test validation evidence for HO-DET-001 and a verifier-backed private controlled lab runtime match. It does not assert runtime activity, production deployment, public-safe status, or live SOC operation.
 
@@ -22,12 +22,12 @@ This packet records merged controlled-test validation evidence for HO-DET-001 an
 
 The following sentence is retained only for legacy/internal proof-record parity checks and is not the public display label:
 
-"HO-DET-001 passed synthetic validation against controlled positive and negative process-creation fixtures."
+"HO-DET-001 passed controlled-test validation against controlled positive and negative process-creation fixtures."
 
 ## Status Clarification
 
 - Proof packet status: CONTROLLED_TEST_VALIDATED.
-- Internal proof compatibility value - TEST_VALIDATED_SYNTHETIC_SCOPE.
+- Internal proof compatibility value - CONTROLLED_TEST_VALIDATED.
 - Detection public label: CONTROLLED_TEST_VALIDATED.
 - Detection public trust label: CONTROLLED_TEST_VALIDATED.
 - Private controlled runtime status: CONTROLLED_LAB_RUNTIME_MATCH_VERIFIED.
@@ -37,7 +37,7 @@ The following sentence is retained only for legacy/internal proof-record parity 
 - Public pipeline proof pack: `hawkinsoperations-validation/reports/ho-det-001/pipeline-proof.md`.
 - Public pipeline proof pack JSON: `hawkinsoperations-validation/reports/ho-det-001/pipeline-proof.json`.
 - Public pipeline proof pack merge: `HawkinsOperations/hawkinsoperations-validation#27` at merge commit `6d4e3ac7b284e380048e8e4f20edf50b6fa9bccb`.
-- Historical validation proof record: `proof/records/HO-DET-001-SYNTHETIC-VALIDATION-001.json`.
+- Historical validation proof record: `proof/records/HO-DET-001-CONTROLLED-TEST-VALIDATION-001.json`.
 - Runtime-active status: BLOCKED.
 - Public signal-observed status: BLOCKED.
 - Signal-observed status: BLOCKED.
@@ -194,13 +194,13 @@ Related HOD-001 encoded-command artifacts may inform review, but they are not HO
 - Negative cases not matched: 7
 - Missed positive cases: none
 - False-positive negative cases: none
-- Validation scope: synthetic process-creation fixtures only
+- Validation scope: controlled-test process-creation fixtures only
 - Validation scope: controlled process-creation test cases only
 - Validation result path: `hawkinsoperations-validation/reports/ho-det-001/validation-result.json`
 
 ## AutoSOC Summary
 
-- Packet ID: HO-DET-001-SYNTHETIC-TRIAGE-001
+- Packet ID: HO-DET-001-CONTROLLED-TEST-TRIAGE-001
 - Scope: deterministic controlled-test output only
 - Production AutoSOC status: BLOCKED
 - Analyst-approved disposition: BLOCKED
@@ -238,7 +238,7 @@ Related HOD-001 encoded-command artifacts may inform review, but they are not HO
 - Private verifier output SHA256: `A405AE1DF92D639396A8D48C3F6DDE31DFCCBEA3F92E7DE0AFE0CDE87D8F56DC`.
 - Match count: 2 controlled child Windows PowerShell EncodedCommand events tied to marker and search time window.
 - Supported claim: "HO-DET-001 produced a controlled lab runtime match in Splunk."
-- Public ceiling boundary: Current internal trust class remains TEST_VALIDATED_SYNTHETIC_SCOPE for verifier compatibility. Public display label, public trust label, and reviewer-facing label remain CONTROLLED_TEST_VALIDATED until public-safe evidence linkage, privacy review, stale review, wording review, and Raylee approval are complete.
+- Public ceiling boundary: Current internal trust class remains CONTROLLED_TEST_VALIDATED for verifier compatibility. Public display label, public trust label, and reviewer-facing label remain CONTROLLED_TEST_VALIDATED until public-safe evidence linkage, privacy review, stale review, wording review, and Raylee approval are complete.
 
 ### CONTROLLED_LAB_CRIBL_TO_SPLUNK_MARKER_DELIVERY_VERIFIED
 
