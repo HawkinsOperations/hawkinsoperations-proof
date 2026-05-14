@@ -7,18 +7,24 @@
 | ID | HO-DET-001 |
 | Title | Suspicious PowerShell EncodedCommand Execution via Sysmon Event ID 1 |
 | Record type | proof record |
-| Current ceiling | TEST_VALIDATED_SYNTHETIC_SCOPE |
+| Internal verifier token | TEST_VALIDATED_SYNTHETIC_SCOPE |
+| Current ceiling | CONTROLLED_TEST_VALIDATED |
+| Public display label | CONTROLLED_TEST_VALIDATED |
 | Public-safe status | NOT_PUBLIC_SAFE |
 | Last reviewed | UNKNOWN |
 
+Compatibility note: `TEST_VALIDATED_SYNTHETIC_SCOPE` is the internal verifier token preserved for proof-integrity compatibility. `CONTROLLED_TEST_VALIDATED` is the public-facing label used to describe the same controlled-test validation boundary without using legacy public wording.
+
 ## Supported Claim
 
-HO-DET-001 passed synthetic validation against controlled positive and negative process-creation fixtures.
+HO-DET-001 is CONTROLLED_TEST_VALIDATED through a public proof-loop workflow with controlled positive and negative test cases, deterministic pass/fail output, and blocked-claim enforcement.
 
 ## What This Proves
 
 - The proof record exists at `proof/records/HO-DET-001.md`.
-- The synthetic validation result is linked at `hawkinsoperations-validation/reports/ho-det-001/validation-result.json`.
+- The controlled-test validation result is linked at `hawkinsoperations-validation/reports/ho-det-001/validation-result.json`.
+- The public pipeline proof pack is linked at `hawkinsoperations-validation/reports/ho-det-001/pipeline-proof.md`.
+- The machine-readable public pipeline proof pack is linked at `hawkinsoperations-validation/reports/ho-det-001/pipeline-proof.json`.
 - The proof record reports 14 controlled cases: 7 matched positives and 7 negative cases without false-positive negative matches.
 - The proof loop route is linked at `hawkinsoperations-validation/.github/workflows/ho-det-001-proof-loop.yml`.
 - The proof repo verifier exists at `scripts/verify-ho-det-001-proof-integrity.py`.
@@ -44,18 +50,18 @@ HO-DET-001 passed synthetic validation against controlled positive and negative 
 
 ## Control Reality
 
-CI-enforced synthetic scope and verifier-backed proof record. The proof card is route/display only. It does not raise the public ceiling, and it does not turn private/internal controlled lab runtime match evidence into public proof.
+CI-enforced controlled-test scope and verifier-backed proof record. The proof card is route/display only. It does not raise the public ceiling, and it does not turn private/internal controlled lab runtime match evidence into public proof.
 
 ## Current Status
 
 | Plane | Truth |
 |---|---|
 | Repo truth | PROVEN: proof record and linked source artifact routes exist. |
-| Validation truth | PROVEN: synthetic validation passed within controlled fixture scope. |
+| Validation truth | PROVEN: controlled-test validation passed within controlled test-case scope. |
 | Runtime truth | PRIVATE_INTERNAL only where recorded; public runtime-active status remains BLOCKED. |
 | Signal truth | BLOCKED for public signal-observed proof. |
-| Evidence truth | Ledger-backed for synthetic validation and platform guardrail records; private/internal runtime evidence is not public-safe proof. |
-| Public proof | TEST_VALIDATED_SYNTHETIC_SCOPE only; NOT_PUBLIC_SAFE for public promotion. |
+| Evidence truth | Ledger-backed for controlled-test validation and platform guardrail records; private/internal runtime evidence is not public-safe proof. |
+| Public proof | CONTROLLED_TEST_VALIDATED only; NOT_PUBLIC_SAFE for public promotion. |
 
 ## Next Promotion Gate
 
@@ -63,4 +69,4 @@ To raise the claim, HO-DET-001 needs approved evidence linkage for the specific 
 
 ## Reviewer Takeaway
 
-HO-DET-001 has a strong synthetic validation record and verifier-backed proof routing for that scope. Treat this card as a fast map to the proof record, not as proof of live operation, public signal observation, routed telemetry, production coverage, or public-safe status.
+HO-DET-001 has a strong controlled-test validation record and verifier-backed proof routing for that scope. Treat this card as a fast map to the proof record, not as proof of live operation, public signal observation, routed telemetry, production coverage, or public-safe status.
