@@ -232,7 +232,7 @@ Related HOD-001 encoded-command artifacts may inform review, but they are not HO
 - Private verifier output SHA256: `A405AE1DF92D639396A8D48C3F6DDE31DFCCBEA3F92E7DE0AFE0CDE87D8F56DC`.
 - Match count: 2 controlled child Windows PowerShell EncodedCommand events tied to marker and search time window.
 - Supported claim: "HO-DET-001 produced a controlled lab runtime match in Splunk."
-- Public ceiling boundary: Current public label and trust class remain CONTROLLED_TEST_VALIDATED until public-safe evidence linkage, privacy review, stale review, wording review, and Raylee approval are complete.
+- Public ceiling boundary: Current internal trust class remains TEST_VALIDATED_SYNTHETIC_SCOPE for verifier compatibility. Public display label, public trust label, and reviewer-facing label remain CONTROLLED_TEST_VALIDATED until public-safe evidence linkage, privacy review, stale review, wording review, and Raylee approval are complete.
 
 ### CONTROLLED_LAB_CRIBL_TO_SPLUNK_MARKER_DELIVERY_VERIFIED
 
