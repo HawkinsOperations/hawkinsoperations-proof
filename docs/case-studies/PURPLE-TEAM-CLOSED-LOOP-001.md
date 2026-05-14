@@ -12,7 +12,7 @@ AI was allowed to provide support-only triage over a sanitized case packet. AI w
 
 | Step | Status | Evidence basis | Public-safe wording | Blocked wording |
 |---|---|---|---|---|
-| 1. Controlled controlled-test behavior | PROVEN | Controlled-test fixture scope. | Controlled EncodedCommand-style behavior. | Production or live attack. |
+| 1. Controlled-test behavior | PROVEN | Controlled-test fixture scope. | Controlled EncodedCommand-style behavior. | Production or live attack. |
 | 2. Sysmon process-creation style telemetry target | PROVEN | Sysmon Event ID 1/process-creation scope. | Process-creation style telemetry target. | Live telemetry proof. |
 | 3. HO-DET-001 detection source and Splunk source | PROVEN | Proof-record source references. | HO-DET-001 source and Splunk source exist. | Live Splunk fired. |
 | 4. Controlled-test validation with positive and negative fixtures | PROVEN | 14 fixtures: 7 positive, 7 negative. | Controlled-test validation passed. | Runtime or signal proof. |

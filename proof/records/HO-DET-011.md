@@ -82,7 +82,7 @@ This packet records merged source, controlled-test validation, platform case-pac
 - Negative cases not matched: 10.
 - Missed positive cases: none.
 - False-positive negative cases: none.
-- Validation scope: controlled controlled-test Windows service creation fixtures only.
+- Validation scope: controlled-test Windows service creation fixtures only.
 - Supported validation claim: "HO-DET-011 passed controlled-test validation against 17 controlled Windows service creation fixtures."
 - Validation result: CONTROLLED_TEST_VALIDATED for the controlled-test validation layer.
 - Focused validation CI workflow: `hawkinsoperations-validation/.github/workflows/ho-det-011-fixture-loop.yml`.
