@@ -7,7 +7,7 @@
 | ID | AWS-DET-001 |
 | Title | Denied IAM API Activity From CloudTrail-Style Fixtures |
 | Record type | proof record |
-| Current ceiling | TEST_VALIDATED_SYNTHETIC_SCOPE |
+| Current ceiling | CONTROLLED_TEST_VALIDATED |
 | Public-safe status | NOT_PUBLIC_SAFE |
 | Last reviewed | UNKNOWN |
 
@@ -43,7 +43,7 @@ AWS-DET-001 passed fixture-only validation against controlled CloudTrail-style I
 
 ## Control Reality
 
-CI-enforced synthetic fixture scope is referenced through validation routes, but no AWS-specific proof repo card verifier was found. This card is a route/display artifact and must not be read as a cloud-live, deployed, or public-safe proof record.
+CI-enforced controlled-test fixture scope is referenced through validation routes, but no AWS-specific proof repo card verifier was found. This card is a route/display artifact and must not be read as a cloud-live, deployed, or public-safe proof record.
 
 ## Current Status
 
@@ -54,7 +54,7 @@ CI-enforced synthetic fixture scope is referenced through validation routes, but
 | Runtime truth | BLOCKED for cloud runtime-active status. |
 | Signal truth | BLOCKED for public signal-observed proof. |
 | Evidence truth | Linked validation artifacts exist; evidence ledger entry is UNKNOWN. |
-| Public proof | TEST_VALIDATED_SYNTHETIC_SCOPE only; NOT_PUBLIC_SAFE for public promotion. |
+| Public proof | CONTROLLED_TEST_VALIDATED only; NOT_PUBLIC_SAFE for public promotion. |
 
 ## Next Promotion Gate
 

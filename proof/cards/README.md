@@ -10,7 +10,7 @@ AI generates work. Evidence and human review authorize claims.
 
 | Field | Current default |
 |---|---|
-| Public proof ceiling | TEST_VALIDATED_SYNTHETIC_SCOPE |
+| Public proof ceiling | CONTROLLED_TEST_VALIDATED |
 | Public-safe status | NOT_PUBLIC_SAFE |
 | Rendering status | NON_PROOF_ROUTE_ONLY |
 
@@ -18,8 +18,8 @@ AI generates work. Evidence and human review authorize claims.
 
 | ID | Card | Record type | Supported claim ceiling | Public-safe status |
 |---|---|---|---|---|
-| HO-DET-001 | [HO-DET-001](HO-DET-001.md) | proof record | TEST_VALIDATED_SYNTHETIC_SCOPE | NOT_PUBLIC_SAFE |
-| AWS-DET-001 | [AWS-DET-001](AWS-DET-001.md) | proof record | TEST_VALIDATED_SYNTHETIC_SCOPE | NOT_PUBLIC_SAFE |
+| HO-DET-001 | [HO-DET-001](HO-DET-001.md) | proof record | CONTROLLED_TEST_VALIDATED | NOT_PUBLIC_SAFE |
+| AWS-DET-001 | [AWS-DET-001](AWS-DET-001.md) | proof record | CONTROLLED_TEST_VALIDATED | NOT_PUBLIC_SAFE |
 | HO-NDR-001 | [HO-NDR-001](HO-NDR-001.md) | boundary contract | PRIVATE_NDR_MODULE_VISIBILITY_ROLLUP_DEFINED | NOT_PUBLIC_SAFE |
 
 ## Reviewer Use

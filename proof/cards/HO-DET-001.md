@@ -7,13 +7,13 @@
 | ID | HO-DET-001 |
 | Title | Suspicious PowerShell EncodedCommand Execution via Sysmon Event ID 1 |
 | Record type | proof record |
-| Internal verifier token | TEST_VALIDATED_SYNTHETIC_SCOPE |
+| Internal verifier token | CONTROLLED_TEST_VALIDATED |
 | Current ceiling | CONTROLLED_TEST_VALIDATED |
 | Public display label | CONTROLLED_TEST_VALIDATED |
 | Public-safe status | NOT_PUBLIC_SAFE |
 | Last reviewed | UNKNOWN |
 
-Compatibility note: `TEST_VALIDATED_SYNTHETIC_SCOPE` is the internal verifier token preserved for proof-integrity compatibility. `CONTROLLED_TEST_VALIDATED` is the public-facing label used to describe the same controlled-test validation boundary without using legacy public wording.
+Compatibility note: `CONTROLLED_TEST_VALIDATED` is the internal verifier token preserved for proof-integrity compatibility. `CONTROLLED_TEST_VALIDATED` is the public-facing label used to describe the same controlled-test validation boundary without using legacy public wording.
 
 ## Supported Claim
 
@@ -45,7 +45,7 @@ HO-DET-001 is CONTROLLED_TEST_VALIDATED through a public proof-loop workflow wit
 | Validation | `hawkinsoperations-validation/reports/ho-det-001/validation-result.json` |
 | Workflow | `hawkinsoperations-validation/.github/workflows/ho-det-001-proof-loop.yml`; `.github/workflows/ho-det-001-proof-integrity.yml` |
 | Verifier | `scripts/verify-ho-det-001-proof-integrity.py`; `hawkinsoperations-validation/scripts/verify-ho-det-001-reproducible-proof-pack.py`; `hawkinsoperations-validation/scripts/verify-ho-det-001-runtime-packet.py` |
-| Ledger | `evidence/evidence-ledger.json` entries `HO-DET-001-SYNTHETIC-VALIDATION-001` and `HO-DET-001-PLATFORM-RUNTIME-CONTRACT-GUARDRAIL-001` |
+| Ledger | `evidence/evidence-ledger.json` entries `HO-DET-001-CONTROLLED-TEST-VALIDATION-001` and `HO-DET-001-PLATFORM-RUNTIME-CONTRACT-GUARDRAIL-001` |
 | Related PR/commit | `HawkinsOperations/hawkinsoperations-validation#10`; `HawkinsOperations/hawkinsoperations-validation#18`; `HawkinsOperations/hawkinsoperations-validation#22`; `HawkinsOperations/hawkinsoperations-platform#5` |
 
 ## Control Reality

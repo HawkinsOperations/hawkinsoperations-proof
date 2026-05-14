@@ -10,7 +10,7 @@
 - Public-safe status: NOT_PUBLIC_SAFE
 - Approval status: NOT_APPROVED
 
-This packet records merged source, synthetic validation, platform case-packet guardrail evidence, and a sanitized private local Windows runtime evidence summary for HO-DET-011. It does not assert runtime-active status, public or routed signal-observed status, public-safe proof, Wazuh observation, Splunk observation, Cribl routing, production deployment, fleet-wide coverage, complete service-creation coverage, autonomous SOC operation, AI-approved disposition, AI-decided disposition, or analyst-approved disposition.
+This packet records merged source, controlled-test validation, platform case-packet guardrail evidence, and a sanitized private local Windows runtime evidence summary for HO-DET-011. It does not assert runtime-active status, public or routed signal-observed status, public-safe proof, Wazuh observation, Splunk observation, Cribl routing, production deployment, fleet-wide coverage, complete service-creation coverage, autonomous SOC operation, AI-approved disposition, AI-decided disposition, or analyst-approved disposition.
 
 ## Status Clarification
 
@@ -64,7 +64,7 @@ This packet records merged source, synthetic validation, platform case-packet gu
 - Initial validation PR: `HawkinsOperations/hawkinsoperations-validation#25`.
 - Initial validation merge commit: `4c4bf5a64b90692ea363bc68ab9f606ed1e84698`.
 - Validation expansion PR: `HawkinsOperations/hawkinsoperations-validation#26`.
-- Validation expansion title: `test(validation): expand HO-DET-011 synthetic fixtures`.
+- Validation expansion title: `test(validation): expand HO-DET-011 controlled-test fixtures`.
 - Validation expansion merge commit: `4df879ea7b3c4dc8d564596accc2f66a87ede6a6`.
 - Validation expansion source commit: `62c6cdad7047f5f2ff26d93a171132c4c3515c1b`.
 - Platform guardrail PR: `HawkinsOperations/hawkinsoperations-platform#9`.
@@ -82,14 +82,14 @@ This packet records merged source, synthetic validation, platform case-packet gu
 - Negative cases not matched: 10.
 - Missed positive cases: none.
 - False-positive negative cases: none.
-- Validation scope: controlled synthetic Windows service creation fixtures only.
-- Supported validation claim: "HO-DET-011 passed synthetic validation against 17 controlled Windows service creation fixtures."
-- Validation result: TEST_VALIDATED_SYNTHETIC_SCOPE for the synthetic validation layer.
+- Validation scope: controlled controlled-test Windows service creation fixtures only.
+- Supported validation claim: "HO-DET-011 passed controlled-test validation against 17 controlled Windows service creation fixtures."
+- Validation result: CONTROLLED_TEST_VALIDATED for the controlled-test validation layer.
 - Focused validation CI workflow: `hawkinsoperations-validation/.github/workflows/ho-det-011-fixture-loop.yml`.
 - Result parity verifier: `hawkinsoperations-validation/scripts/verify-ho-det-011-result-parity.py`.
 - Claim-boundary scanner: `hawkinsoperations-validation/scripts/scan-ho-det-011-claim-boundaries.py`.
 - Current proof ceiling: PRIVATE_RUNTIME_EVIDENCE_CAPTURED.
-- Synthetic validation scope: TEST_VALIDATED_SYNTHETIC_SCOPE.
+- Controlled-test validation scope: CONTROLLED_TEST_VALIDATED.
 - Runtime evidence status: PRIVATE_RUNTIME_EVIDENCE_CAPTURED for local Windows event capture only.
 - Runtime-active status: BLOCKED / NOT_PROVEN.
 - Public or routed signal status: BLOCKED / NOT_PROVEN.
@@ -125,13 +125,13 @@ This packet records merged source, synthetic validation, platform case-packet gu
 
 ## Supported Claim
 
-"HO-DET-011 passed synthetic validation against 17 controlled Windows service creation fixtures."
+"HO-DET-011 passed controlled-test validation against 17 controlled Windows service creation fixtures."
 
 ## Allowed Claims
 
 - "HO-DET-011 source artifacts exist in the detections repository."
-- "HO-DET-011 passed synthetic validation against 17 controlled Windows service creation fixtures."
-- "HO-DET-011 has a platform case-packet guardrail that preserves synthetic-scope claim boundaries."
+- "HO-DET-011 passed controlled-test validation against 17 controlled Windows service creation fixtures."
+- "HO-DET-011 has a platform case-packet guardrail that preserves controlled-test-scope claim boundaries."
 - "HO-DET-011 has sanitized private local Windows runtime evidence captured for one controlled service-creation test."
 - "HO-DET-011 is capped at PRIVATE_RUNTIME_EVIDENCE_CAPTURED for private evidence and NOT_PUBLIC_SAFE for public use."
 

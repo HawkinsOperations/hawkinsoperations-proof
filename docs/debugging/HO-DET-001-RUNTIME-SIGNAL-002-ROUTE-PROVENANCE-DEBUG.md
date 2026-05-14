@@ -122,7 +122,7 @@ Route conclusion:
 
 `PUBLIC_SAFE_STATUS=NOT_PUBLIC_SAFE`
 
-`PUBLIC_PROOF_CEILING=TEST_VALIDATED_SYNTHETIC_SCOPE`
+`PUBLIC_PROOF_CEILING=CONTROLLED_TEST_VALIDATED`
 
 ## Blocked Claims
 
@@ -144,7 +144,7 @@ Allowed bounded wording:
 - Private/internal Splunk export proved marker-bearing Sysmon Event ID 1 rows.
 - Route provenance remains Splunk-indexed through a non-Cribl or unknown route.
 - HO-DET-001 Cribl-routed Sysmon proof remains blocked.
-- Public ceiling remains test-validated synthetic scope.
+- Public ceiling remains test-validated controlled-test scope.
 
 ## Why This Matters To HawkinsOperations
 
@@ -173,7 +173,7 @@ This should be a plan-only control first. No new event, service change, route ch
 
 Draft for private review only; not approved for publication:
 
-HO-DET-001 remains publicly bounded to test-validated synthetic scope. A private/internal debugging pass proved marker-bearing Sysmon rows in Splunk, but route provenance did not support a Cribl-routed Sysmon claim. Public-safe runtime proof remains blocked pending a separate approved claim record.
+HO-DET-001 remains publicly bounded to test-validated controlled-test scope. A private/internal debugging pass proved marker-bearing Sysmon rows in Splunk, but route provenance did not support a Cribl-routed Sysmon claim. Public-safe runtime proof remains blocked pending a separate approved claim record.
 
 Required boundary sentence if this is later reviewed for public use:
 

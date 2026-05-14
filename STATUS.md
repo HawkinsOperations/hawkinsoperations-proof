@@ -4,7 +4,7 @@
 
 HOD-001 baseline has separate validation/proof artifacts.
 
-HO-DET-001 successor proof record now records merged synthetic validation proof at TEST_VALIDATED_SYNTHETIC_SCOPE.
+HO-DET-001 successor proof record now records merged controlled-test validation proof at CONTROLLED_TEST_VALIDATED.
 
 ## Next Gate
 
@@ -20,4 +20,4 @@ Next gate for HO-DET-001 is runtime deployment evidence or preserved signal evid
 
 - Proof ledger `sha256` currently tracks validation report hash; add proof-packet hash convention for future entries.
 - Do not use HOD-001 proof as HO-DET-001 proof.
-- HO-DET-001 synthetic validation proof does not support runtime-active, signal-observed, public-safe, production-ready, live Splunk, Cribl-routed telemetry, Wazuh live collection, production AutoSOC triage, analyst-approved disposition, HO-GPU-01 runtime-active, or AI-decided disposition claims.
+- HO-DET-001 controlled-test validation proof does not support runtime-active, signal-observed, public-safe, production-ready, live Splunk, Cribl-routed telemetry, Wazuh live collection, production AutoSOC triage, analyst-approved disposition, HO-GPU-01 runtime-active, or AI-decided disposition claims.

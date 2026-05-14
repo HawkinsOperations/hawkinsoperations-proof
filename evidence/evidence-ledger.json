@@ -21,12 +21,12 @@
       "notes": "Claim boundary: baseline harness pass, not a production efficacy claim."
     },
     {
-      "id": "HO-DET-001-SYNTHETIC-VALIDATION-001",
+      "id": "HO-DET-001-CONTROLLED-TEST-VALIDATION-001",
       "timestamp": "2026-04-29T11:09:22-05:00",
-      "type": "synthetic_validation_record",
-      "summary": "HO-DET-001 merged synthetic validation proof recording 14 of 14 controlled cases passed with 7 matched positives, no missed positives, and no false-positive negative cases.",
+      "type": "controlled_test_validation_record",
+      "summary": "HO-DET-001 merged controlled-test validation proof recording 14 of 14 controlled cases passed with 7 matched positives, no missed positives, and no false-positive negative cases.",
       "artifact_paths": [
-        "proof/records/HO-DET-001-SYNTHETIC-VALIDATION-001.json",
+        "proof/records/HO-DET-001-CONTROLLED-TEST-VALIDATION-001.json",
         "proof/records/HO-DET-001.md",
         "hawkinsoperations-detections/detections/successor/ho-det-001/rule.yml",
         "hawkinsoperations-detections/detections/successor/ho-det-001/splunk.spl",
@@ -38,13 +38,13 @@
       ],
       "sha256": "e7b2ded33c3a26a6dd53ea6500fb9fba37a42c977fbfe70d927e931f41839561",
       "source_ref": "HO-DET-001",
-      "notes": "Synthetic validation scope only; not runtime-active, not signal-observed, not public-safe."
+      "notes": "Controlled-test validation scope only; not runtime-active, not signal-observed, not public-safe."
     },
     {
       "id": "HO-DET-001-PLATFORM-RUNTIME-CONTRACT-GUARDRAIL-001",
       "timestamp": "2026-05-03T00:00:00-05:00",
       "type": "platform_contract_guardrail_record",
-      "summary": "HO-DET-001 platform runtime contract guardrail record preserving TEST_VALIDATED_SYNTHETIC_SCOPE and blocking runtime, signal, public-safe, production, fleet, routing, cloud-live, autonomous SOC, and disposition-authority promotions.",
+      "summary": "HO-DET-001 platform runtime contract guardrail record preserving CONTROLLED_TEST_VALIDATED and blocking runtime, signal, public-safe, production, fleet, routing, cloud-live, autonomous SOC, and disposition-authority promotions.",
       "artifact_paths": [
         "proof/records/HO-DET-001.md",
         "hawkinsoperations-platform/contracts/examples/ho-det-001-runtime-contract.sample.json",
@@ -53,7 +53,7 @@
       ],
       "sha256": "0b8e778ece43d3fd8fe48bc639f2cef92b7db71fc059d89232ce74c14e53e30c",
       "source_ref": "HO-DET-001",
-      "notes": "Non-promotional platform contract guardrail only; preserves TEST_VALIDATED_SYNTHETIC_SCOPE and does not prove runtime-active, signal-observed, evidence-linked public proof, public-safe, production-ready, fleet-wide, Cribl-routed, Wazuh-routed, AWS-live, autonomous SOC, AI-approved disposition, or analyst-approved disposition."
+      "notes": "Non-promotional platform contract guardrail only; preserves CONTROLLED_TEST_VALIDATED and does not prove runtime-active, signal-observed, evidence-linked public proof, public-safe, production-ready, fleet-wide, Cribl-routed, Wazuh-routed, AWS-live, autonomous SOC, AI-approved disposition, or analyst-approved disposition."
     }
   ]
 }

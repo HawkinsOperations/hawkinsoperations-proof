@@ -11,11 +11,11 @@ What was tested:
 - A sanitized HO-DET-001 case packet was passed through local LLM triage support.
 - The model was allowed to summarize, not decide.
 - A deterministic verifier checked that AI could not approve, promote, close, decide disposition, or mark anything public-safe.
-- Synthetic validation remained the public proof ceiling.
+- Controlled-test validation remained the public proof ceiling.
 
 What worked:
 
-- The synthetic validation result passed.
+- The controlled-test validation result passed.
 - Private/internal local model support was recorded in a controlled lab setting.
 - Private/internal GPU activity was observed during a bounded model call.
 - The authority-boundary verifier preserved AI support-only status.
@@ -28,7 +28,7 @@ What stayed blocked:
 - Public-safe runtime proof.
 - AI-approved or analyst-approved disposition.
 
-Current public claim ceiling: `TEST_VALIDATED_SYNTHETIC_SCOPE`.
+Current public claim ceiling: `CONTROLLED_TEST_VALIDATED`.
 
 ## The problem
 
@@ -42,8 +42,8 @@ The useful question was not whether an LLM could produce a readable summary. The
 - A local Qwen 2.5 14B model support pass.
 - Private controlled lab GPU activity observation during the bounded model call.
 - A deterministic authority-boundary verifier.
-- A synthetic validation result for controlled positive and negative fixtures.
-- A proof-loop workflow for the checked synthetic scope, including triage boundary, AI triage schema, claim-boundary, parity, case-packet, evidence-manifest, synthetic validation, and closed-loop verifier checks.
+- A controlled-test validation result for controlled positive and negative fixtures.
+- A proof-loop workflow for the checked controlled-test scope, including triage boundary, AI triage schema, claim-boundary, parity, case-packet, evidence-manifest, controlled-test validation, and closed-loop verifier checks.
 
 The private lab GPU observation does not promote HO-DET-001 to runtime-active public proof, signal-observed public proof, evidence-linked public proof, or public-safe status.
 
@@ -56,7 +56,7 @@ AI_MAY_APPROVE=false
 AI_MAY_PROMOTE=false
 AI_MAY_CLOSE=false
 PUBLIC_SAFE_STATUS=NOT_PUBLIC_SAFE
-PROOF_CEILING=TEST_VALIDATED_SYNTHETIC_SCOPE
+PROOF_CEILING=CONTROLLED_TEST_VALIDATED
 ```
 
 ## Validation result
@@ -70,11 +70,11 @@ FALSE_POSITIVE_NEGATIVE_CASES=none
 
 The supported public claim remains:
 
-> HO-DET-001 passed synthetic validation against controlled positive and negative process-creation fixtures.
+> HO-DET-001 passed controlled-test validation against controlled positive and negative process-creation fixtures.
 
 ## What this proves
 
-- Synthetic validation passed for the checked fixture scope.
+- Controlled-test validation passed for the checked fixture scope.
 - The AI authority boundary was deterministically checked.
 - Private/internal lab LLM triage support was recorded outside the public proof basis.
 - Private/internal controlled lab GPU activity was observed during the bounded model call outside the public proof basis.
@@ -95,15 +95,15 @@ The supported public claim remains:
 
 ## Public claim ceiling
 
-Current ceiling: `TEST_VALIDATED_SYNTHETIC_SCOPE`.
+Current ceiling: `CONTROLLED_TEST_VALIDATED`.
 
 This artifact does not promote the proof record beyond that ceiling.
 
 ## Reviewer links
 
 - [HO-DET-001 proof record](../../proof/records/HO-DET-001.md)
-- [Synthetic validation result](https://github.com/HawkinsOperations/hawkinsoperations-validation/blob/main/reports/ho-det-001/validation-result.json)
-- [Synthetic validation report](https://github.com/HawkinsOperations/hawkinsoperations-validation/blob/main/reports/ho-det-001/validation-result.md)
+- [Controlled-test validation result](https://github.com/HawkinsOperations/hawkinsoperations-validation/blob/main/reports/ho-det-001/validation-result.json)
+- [Controlled-test validation report](https://github.com/HawkinsOperations/hawkinsoperations-validation/blob/main/reports/ho-det-001/validation-result.md)
 - [Proof-loop workflow](https://github.com/HawkinsOperations/hawkinsoperations-validation/blob/main/.github/workflows/ho-det-001-proof-loop.yml)
 - [Closed AutoSOC Loop 001 verifier](https://github.com/HawkinsOperations/hawkinsoperations-validation/blob/main/scripts/verify-closed-autosoc-loop-001.py)
 
