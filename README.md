@@ -91,7 +91,7 @@ The left column lists what the current proof record can support. The right colum
 |---|---|
 | HO-DET-001 has merged source artifacts | Not claimed: runtime-active public proof |
 | HO-DET-001 has merged controlled-test validation artifacts | Not claimed: public signal-observed proof |
-| HO-DET-001 passed controlled controlled-test validation | Not claimed: evidence-linked public proof |
+| HO-DET-001 passed controlled-test validation | Not claimed: evidence-linked public proof |
 | Platform contract guardrail exists as a non-promotional guardrail | Not claimed: public-safe runtime proof |
 | Private/internal runtime match status is scoped private/internal | Not claimed: production-ready claim, fleet-wide claim, enterprise deployed claim |
 | AI can support work, but cannot approve claims | Not claimed: live Splunk fired as public proof, Cribl-routed claim, Wazuh-routed claim, AWS-live claim |
