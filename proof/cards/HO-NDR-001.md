@@ -6,7 +6,7 @@
 |---|---|
 | ID | HO-NDR-001 |
 | Title | Security Onion Cross-Source Corroboration Scaffold |
-| Record type | private proof record scaffold |
+| Record type | boundary scaffold route |
 | Current ceiling | CROSS_SOURCE_CORROBORATION_CONTRACT_DEFINED |
 | Planned post-runtime ceiling | PRIVATE_CROSS_SOURCE_CORROBORATION_CAPTURED |
 | Public-safe status | NOT_PUBLIC_SAFE |
@@ -19,7 +19,6 @@ A sanitized Security Onion visibility validation contract and cross-source corro
 ## What This Proves
 
 - The boundary record exists at `docs/boundaries/HO-NDR-001-SECURITY-ONION-VISIBILITY-CONTRACT.md`.
-- The proof record scaffold exists at `proof/records/HO-NDR-001.md`.
 - The boundary record states that validation owns the schema, sample, verifier, and workflow.
 - The cross-source scaffold defines required future evidence for Security Onion / Suricata, endpoint telemetry, Splunk correlation, and optional Cribl route receipts.
 - The boundary record links merged validation reference `HawkinsOperations/hawkinsoperations-validation#24`.
@@ -38,7 +37,6 @@ A sanitized Security Onion visibility validation contract and cross-source corro
 
 | Route | Path |
 |---|---|
-| Source record | `proof/records/HO-NDR-001.md` |
 | Boundary record | `docs/boundaries/HO-NDR-001-SECURITY-ONION-VISIBILITY-CONTRACT.md` |
 | Validation | `HawkinsOperations/hawkinsoperations-validation#24` |
 | Workflow | `hawkinsoperations-validation/.github/workflows/security-onion-visibility-contract.yml` |
@@ -48,13 +46,13 @@ A sanitized Security Onion visibility validation contract and cross-source corro
 
 ## Control Reality
 
-Private proof record scaffold. This is not public-safe proof, not evidence of production NDR, and not evidence that cross-source corroboration has been captured. It records that sanitized validation contract routes exist and that promotion requires later runtime evidence and review.
+Private boundary scaffold route. This is not public-safe proof, not evidence of production NDR, and not evidence that cross-source corroboration has been captured. It records that sanitized validation contract routes exist and that promotion requires later runtime evidence and review.
 
 ## Current Status
 
 | Plane | Truth |
 |---|---|
-| Repo truth | PROVEN: boundary record, proof scaffold, and validation contract routes exist. |
+| Repo truth | PROVEN: boundary record, proof card, and validation contract routes exist. |
 | Validation truth | PROVEN for contract/verifier shape only; not runtime packet content. |
 | Runtime truth | BLOCKED for public or production NDR claims. |
 | Signal truth | BLOCKED for signal-observed public proof. |
@@ -67,4 +65,4 @@ HO-NDR-001 needs separate runtime approval, event-specific evidence capture, ver
 
 ## Reviewer Takeaway
 
-HO-NDR-001 is a private scaffold. It gives reviewers a clean route to the Security Onion visibility and cross-source corroboration contracts without treating those contracts as production NDR proof, public-safe evidence, or achieved cross-source corroboration.
+HO-NDR-001 is a private boundary scaffold route. It gives reviewers a clean route to the Security Onion visibility and cross-source corroboration contracts without treating those contracts as production NDR proof, public-safe evidence, or achieved cross-source corroboration.
