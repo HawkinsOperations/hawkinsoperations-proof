@@ -14,7 +14,7 @@ HOD-001 artifacts may inform review, but they do not validate or promote HO-DET-
 
 After the merged detections and validation PRs, HO-DET-001 may be described as CONTROLLED_TEST_VALIDATED only.
 
-The supported validation is controlled-test fixture validation only. It does not prove runtime-active status, signal-observed status, public-safe status, production readiness, live Splunk firing, Cribl-routed telemetry, Wazuh live collection, HO-GPU-01 runtime activity, or AI-decided disposition.
+The supported validation is controlled-test fixture validation only. It does not prove runtime-active status, signal-observed status, public-safe status, production readiness, live Splunk firing, Cribl-routed telemetry, Wazuh live collection, private model host runtime activity, or AI-decided disposition.
 
 Evidence-linked status beyond the recorded controlled-test validation artifacts remains blocked unless explicitly recorded in a proof record and evidence ledger entry.
 
@@ -40,6 +40,6 @@ Evidence-linked status beyond the recorded controlled-test validation artifacts 
 - "Live Splunk fired for HO-DET-001."
 - "Cribl routed HO-DET-001 telemetry."
 - "Wazuh collected live HO-DET-001 telemetry."
-- "HO-GPU-01 is runtime-active for HO-DET-001."
+- "A private model host is runtime-active for HO-DET-001."
 - "AI decided the HO-DET-001 disposition."
 - "The website proves HO-DET-001 status."
