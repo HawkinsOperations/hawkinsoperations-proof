@@ -23,10 +23,9 @@ jobs:
           )
           $missing = @()
           foreach ($f in $required) {
-            if (-not (Test-Path -LiteralPath $f)) { $missing += $f }
+            if (-not (Test-Path -LiteralPath $f -PathType Leaf)) { $missing += $f }
           }
           if ($missing.Count -gt 0) {
             Write-Error ("Missing required files: " + ($missing -join ", "))
             exit 1
           }
-

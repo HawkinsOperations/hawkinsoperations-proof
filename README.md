@@ -92,7 +92,7 @@ The left column lists what the current proof record can support. The right colum
 | HO-DET-001 has merged source artifacts | Not claimed: runtime-active public proof |
 | HO-DET-001 has merged controlled-test validation artifacts | Not claimed: public signal-observed proof |
 | HO-DET-001 passed controlled-test validation | Not claimed: evidence-linked public proof |
-| Platform contract guardrail exists as a non-promotional guardrail | Not claimed: public-safe runtime proof |
+| Internal platform contract guardrail exists as a non-promotional guardrail | Not claimed: public-safe runtime proof |
 | Private/internal runtime match status is scoped private/internal | Not claimed: production-ready claim, fleet-wide claim, enterprise deployed claim |
 | AI can support work, but cannot approve claims | Not claimed: live Splunk fired as public proof, Cribl-routed claim, Wazuh-routed claim, AWS-live claim |
 | Human review is required before public promotion | Not claimed: autonomous SOC claim, AI-approved disposition, AI-decided disposition, analyst-approved disposition, production AutoSOC claim |
@@ -112,7 +112,7 @@ Codex review is AI labor, not human governance.
 |---|---|
 | `hawkinsoperations-detections` | Source truth |
 | `hawkinsoperations-validation` | Behavior truth |
-| `hawkinsoperations-platform` | Runtime contracts / integration guardrails |
+| Internal platform route | Runtime contracts / integration guardrails; not a public proof surface |
 | `hawkinsoperations-website` | Public rendering only |
 | `.github` | Org governance / reviewer routing |
 

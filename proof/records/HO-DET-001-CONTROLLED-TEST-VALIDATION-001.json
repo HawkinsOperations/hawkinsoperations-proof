@@ -31,7 +31,7 @@
     "Wazuh live collection",
     "production AutoSOC triage",
     "analyst-approved disposition",
-    "HO-GPU-01 runtime-active",
+    "private model host runtime-active",
     "AI-decided disposition"
   ],
   "validation_summary": {
@@ -58,6 +58,6 @@
     "No runtime or signal evidence.",
     "No public-safe promotion.",
     "AutoSOC packet is deterministic controlled-test output only.",
-    "Offline LLM summary is a blocked-runtime deterministic stub."
+    "Offline LLM summary is a blocked-runtime deterministic stub and does not identify a public model host."
   ]
 }

@@ -101,7 +101,7 @@ Related HOD-001 encoded-command artifacts may inform review, but they are not HO
 - Validation enforcement merge commit: `8b48500d2ebbaacd93ac88e77a31dccf1d3b4e25`.
 - Proof-loop workflow: `hawkinsoperations-validation/.github/workflows/ho-det-001-proof-loop.yml`.
 - Enforcement scope: HO-DET-001 controlled-test validation, case-packet contract, deterministic triage boundary, claim-boundary scan, result parity, and proof-loop CI.
-- Control boundary: This is a real control only for the exact checked controlled-test validation scope. It does not prove runtime-active, signal-observed, evidence-linked public proof, public-safe, production, fleet, Cribl, Wazuh, AWS-live, HO-GPU-01 runtime-active, autonomous SOC, or AI-approved disposition.
+- Control boundary: This is a real control only for the exact checked controlled-test validation scope. It does not prove runtime-active, signal-observed, evidence-linked public proof, public-safe, production, fleet, Cribl, Wazuh, AWS-live, private model host runtime-active, autonomous SOC, or AI-approved disposition.
 
 ## Platform Runtime Contract Enforcement
 
@@ -127,7 +127,7 @@ Related HOD-001 encoded-command artifacts may inform review, but they are not HO
 - Sanitization status: pass.
 - Blocked-claim boundary scan: pass.
 - Raw packet evidence status: private/internal only; private packet files were not committed publicly.
-- Supported private/internal claim: "HO-DET-001 produced a controlled lab runtime match in Splunk."
+- Public claim boundary: private/internal runtime material is recorded as non-public context only and does not authorize public promotion.
 - Boundary: This section records verifier-backed controlled lab runtime match evidence. It does not promote public-safe runtime proof, runtime-active deployment, production-ready status, fleet-wide status, Cribl-routed status, Wazuh-routed status, AWS-live status, autonomous SOC operation, AI-approved disposition, or analyst-approved disposition.
 
 ## Controlled Cribl-to-Splunk Marker Delivery Packet 001
@@ -137,16 +137,14 @@ Related HOD-001 encoded-command artifacts may inform review, but they are not HO
 - Public proof ceiling: CONTROLLED_TEST_VALIDATED.
 - Evidence custody: retained outside this repository in the Phase 4H/4I private packet. Local paths and raw capture names are intentionally omitted from this proof record.
 - Marker digest: `sha256:8f061426e75134286ce958b74a7488d70d49960597b6f0c15b265f5fdd47649f`.
-- Supported private/internal claim: "A controlled clean remote marker was delivered through the Cribl-to-Splunk lab lane and observed in expected Splunk rawdata with marker fields preserved."
+- Public claim boundary: private/internal marker-delivery material is recorded as non-public context only and does not authorize public promotion.
 - Boundary: This does not prove HO-DET-001/Sysmon telemetry is Cribl-routed, does not prove Cribl-routed telemetry for production or fleet scope, does not prove Wazuh live collection as public proof, does not prove live Splunk fired as public proof, does not prove public-safe runtime proof, and does not change the public proof ceiling.
 
 ## Supported Claim
 
 "HO-DET-001 is CONTROLLED_TEST_VALIDATED through a public proof-loop workflow with controlled positive and negative test cases, deterministic pass/fail output, and blocked-claim enforcement."
 
-"HO-DET-001 produced a controlled lab runtime match in Splunk."
-
-"A controlled clean remote marker was delivered through the Cribl-to-Splunk lab lane and observed in expected Splunk rawdata with marker fields preserved."
+Private/internal runtime and marker-delivery sections in this record are non-public boundary context only. They do not add public supported claims, do not authorize public-safe wording, and do not raise the public ceiling beyond CONTROLLED_TEST_VALIDATED.
 
 ## Unsupported Claims
 
@@ -163,7 +161,7 @@ Related HOD-001 encoded-command artifacts may inform review, but they are not HO
 - autonomous SOC
 - production AutoSOC triage
 - analyst-approved disposition
-- HO-GPU-01 runtime-active
+- private model host runtime-active
 - AI-decided disposition
 - AI-approved disposition
 
@@ -178,10 +176,10 @@ Related HOD-001 encoded-command artifacts may inform review, but they are not HO
 | HO-DET-001 public pipeline proof pack exists. | PROVEN | `hawkinsoperations-validation/reports/ho-det-001/pipeline-proof.md`; `hawkinsoperations-validation/reports/ho-det-001/pipeline-proof.json`; `HawkinsOperations/hawkinsoperations-validation#27`; merge commit `6d4e3ac7b284e380048e8e4f20edf50b6fa9bccb` | "HO-DET-001 is CONTROLLED_TEST_VALIDATED through a public proof-loop workflow with controlled positive and negative test cases, deterministic pass/fail output, and blocked-claim enforcement." | "This proves runtime-active, production-ready, fleet-wide, or public-safe runtime evidence status." | Runtime/signal/public-safe evidence review. |
 | HO-DET-001 validation enforcement exists. | PROVEN | `hawkinsoperations-validation#10`; `.github/workflows/ho-det-001-proof-loop.yml`; merge commit `8b48500d2ebbaacd93ac88e77a31dccf1d3b4e25` | "HO-DET-001 validation enforcement exists for controlled-test scope." | "Validation enforcement proves runtime, signal, production, or public-safe status." | Runtime/signal/public-safe evidence review. |
 | HO-DET-001 platform runtime contract enforcement exists. | PROVEN | `hawkinsoperations-platform#5`; `contracts/examples/ho-det-001-runtime-contract.sample.json`; merge commit `b3d0ffbd66c1bd5f60f7e9ff99712cdc3e0595bd` | "HO-DET-001 platform runtime contract enforcement exists as a non-promotional guardrail." | "Platform contract enforcement proves runtime-active, signal-observed, public-safe runtime proof, production-ready, fleet-wide, Cribl-routed, Wazuh-routed public proof, AWS-live, autonomous SOC, AI-approved disposition, or analyst-approved disposition." | Runtime/signal/public-safe evidence review. |
-| HO-DET-001 controlled lab runtime match is verifier-backed. | PROVEN_PRIVATE_INTERNAL | `HawkinsOperations/hawkinsoperations-validation#22`; merge commit `b47dd02d08565baec76018f5ef909d1b7895737d`; verifier verdict `VERIFIED_CONTROLLED_LAB_RUNTIME_MATCH_CAPTURED` | "HO-DET-001 produced a controlled lab runtime match in Splunk." | "HO-DET-001 is runtime-active."; "HO-DET-001 has public-safe runtime proof."; "HO-DET-001 is production-ready."; "HO-DET-001 is fleet-wide."; "HO-DET-001 is Cribl-routed."; "HO-DET-001 is Wazuh-routed."; "HO-DET-001 is AWS-live."; "HO-DET-001 runs an autonomous SOC."; "AI approved the disposition."; "An analyst approved the disposition." | Public evidence linkage, privacy review, stale review, wording review, and Raylee approval. |
-| Controlled clean Cribl-to-Splunk lab marker delivery is privately verified. | PROVEN_PRIVATE_INTERNAL | Phase 4H/4I private packet; marker digest `sha256:8f061426e75134286ce958b74a7488d70d49960597b6f0c15b265f5fdd47649f`; status `CONTROLLED_LAB_CRIBL_TO_SPLUNK_MARKER_DELIVERY_VERIFIED` | "A controlled clean remote marker was delivered through the Cribl-to-Splunk lab lane and observed in expected Splunk rawdata with marker fields preserved." | "HO-DET-001 is Cribl-routed."; "Cribl routed live telemetry."; "Live Splunk fired."; "HO-DET-001 is runtime-active."; "HO-DET-001 is production-ready."; "HO-DET-001 is fleet-wide."; "HO-DET-001 is public-safe." | Public evidence linkage, privacy review, stale review, wording review, and Raylee approval. |
+| HO-DET-001 private runtime-match material exists. | PRIVATE_INTERNAL_BOUNDARY_CONTEXT | `HawkinsOperations/hawkinsoperations-validation#22`; merge commit `b47dd02d08565baec76018f5ef909d1b7895737d`; verifier verdict `VERIFIED_CONTROLLED_LAB_RUNTIME_MATCH_CAPTURED` | "Private/internal runtime material is recorded as non-public boundary context and does not authorize public promotion." | "HO-DET-001 is runtime-active."; "HO-DET-001 has public-safe runtime proof."; "HO-DET-001 is production-ready."; "HO-DET-001 is fleet-wide."; "HO-DET-001 is Cribl-routed."; "HO-DET-001 is Wazuh-routed."; "HO-DET-001 is AWS-live."; "HO-DET-001 runs an autonomous SOC."; "AI approved the disposition."; "An analyst approved the disposition." | Public evidence linkage, privacy review, stale review, wording review, and Raylee approval. |
+| Private marker-delivery material exists. | PRIVATE_INTERNAL_BOUNDARY_CONTEXT | Private packet retained outside this repository; marker digest retained as a private/internal receipt; status `CONTROLLED_LAB_CRIBL_TO_SPLUNK_MARKER_DELIVERY_VERIFIED` | "Private/internal marker-delivery material is recorded as non-public boundary context and does not authorize public promotion." | "HO-DET-001 is Cribl-routed."; "Cribl routed live telemetry."; "Live Splunk fired."; "HO-DET-001 is runtime-active."; "HO-DET-001 is production-ready."; "HO-DET-001 is fleet-wide."; "HO-DET-001 is public-safe." | Public evidence linkage, privacy review, stale review, wording review, and Raylee approval. |
 | AutoSOC triage packet exists. | PROVEN | `hawkinsoperations-validation/validation/successor/ho-det-001/autosoc-triage-packet.json` | "A deterministic controlled-test triage packet was generated from the validation result." | "Production AutoSOC triage occurred." | Production AutoSOC run evidence. |
-| Offline LLM support stub exists. | PROVEN | `hawkinsoperations-validation/validation/successor/ho-det-001/llm-summary.json` | "A deterministic blocked-runtime LLM support stub exists." | "HO-GPU-01 was runtime-active." | Approved local model runtime evidence. |
+| Offline LLM support stub exists. | PROVEN | `hawkinsoperations-validation/validation/successor/ho-det-001/llm-summary.json` | "A deterministic blocked-runtime LLM support stub exists." | "A private model host was runtime-active." | Approved local model runtime evidence. |
 | HO-DET-001 runtime-active status is proven. | BLOCKED | No deployment, enablement, schedule, or backend state evidence linked. | "Runtime-active status requires deployment evidence." | "This detection is active." | Preserve runtime deployment evidence. |
 | HO-DET-001 signal-observed status is proven. | BLOCKED | No preserved telemetry, alert, log, or search output linked. | "Signal-observed status requires preserved telemetry, alert, log, or search output." | "This catches attacks." | Preserve signal observation evidence. |
 | HO-DET-001 public-safe status is approved. | BLOCKED | No reviewed public wording, privacy review, stale review, evidence linkage, or Raylee approval. | "Public-safe status requires reviewed wording, privacy review, stale review, evidence linkage, and Raylee approval." | "HO-DET-001 is PUBLIC_SAFE." | Raylee approval after evidence and claim review. |
@@ -232,19 +230,19 @@ Related HOD-001 encoded-command artifacts may inform review, but they are not HO
 
 ### CONTROLLED_LAB_RUNTIME_MATCH_VERIFIED
 
-- Status: SATISFIED_PRIVATE_INTERNAL.
+- Status: PRIVATE_INTERNAL_BOUNDARY_CONTEXT.
 - Evidence: `HawkinsOperations/hawkinsoperations-validation#22`, merge commit `b47dd02d08565baec76018f5ef909d1b7895737d`, and verifier `hawkinsoperations-validation/scripts/verify-ho-det-001-runtime-packet.py`.
 - Verifier verdict: `VERIFIED_CONTROLLED_LAB_RUNTIME_MATCH_CAPTURED`.
 - Private verifier output SHA256: `A405AE1DF92D639396A8D48C3F6DDE31DFCCBEA3F92E7DE0AFE0CDE87D8F56DC`.
 - Match count: 2 controlled child Windows PowerShell EncodedCommand events tied to marker and search time window.
-- Supported claim: "HO-DET-001 produced a controlled lab runtime match in Splunk."
+- Public claim boundary: private/internal runtime material is recorded as non-public context only and does not authorize public promotion.
 - Public ceiling boundary: Current internal trust class remains CONTROLLED_TEST_VALIDATED for verifier compatibility. Public display label, public trust label, and reviewer-facing label remain CONTROLLED_TEST_VALIDATED until public-safe evidence linkage, privacy review, stale review, wording review, and Raylee approval are complete.
 
 ### CONTROLLED_LAB_CRIBL_TO_SPLUNK_MARKER_DELIVERY_VERIFIED
 
-- Status: SATISFIED_PRIVATE_INTERNAL.
+- Status: PRIVATE_INTERNAL_BOUNDARY_CONTEXT.
 - Evidence: Phase 4H/4I private packet retained outside this repository, marker digest `sha256:8f061426e75134286ce958b74a7488d70d49960597b6f0c15b265f5fdd47649f`, and status `CONTROLLED_LAB_CRIBL_TO_SPLUNK_MARKER_DELIVERY_VERIFIED`.
-- Supported claim: "A controlled clean remote marker was delivered through the Cribl-to-Splunk lab lane and observed in expected Splunk rawdata with marker fields preserved."
+- Public claim boundary: private/internal marker-delivery material is recorded as non-public context only and does not authorize public promotion.
 - Boundary: This does not prove HO-DET-001/Sysmon telemetry is Cribl-routed, does not prove Cribl-routed telemetry for production or fleet scope, does not prove Wazuh live collection as public proof, does not prove live Splunk fired as public proof, does not prove runtime-active deployment, does not prove production-ready status, does not prove fleet-wide status, does not prove public-safe runtime proof, and does not change the public proof ceiling.
 
 ### RUNTIME_ACTIVE
@@ -267,11 +265,9 @@ Related HOD-001 encoded-command artifacts may inform review, but they are not HO
 - "HO-DET-001 has merged source artifacts in the detections repository."
 - "HO-DET-001 has merged controlled-test validation artifacts in the validation repository."
 - "HO-DET-001 is CONTROLLED_TEST_VALIDATED through a public proof-loop workflow with controlled positive and negative test cases, deterministic pass/fail output, and blocked-claim enforcement."
-- "HO-DET-001 produced a controlled lab runtime match in Splunk."
-- "A controlled clean remote marker was delivered through the Cribl-to-Splunk lab lane and observed in expected Splunk rawdata with marker fields preserved."
 - "HO-DET-001 platform runtime contract enforcement exists as a non-promotional guardrail."
 - "A deterministic controlled-test AutoSOC triage packet was generated from the HO-DET-001 validation result."
-- "The offline LLM support artifact is a deterministic blocked-runtime stub and does not prove HO-GPU-01 runtime."
+- "The offline LLM support artifact is a deterministic blocked-runtime stub and does not prove private model host runtime."
 
 ## Blocked Claims
 
@@ -290,11 +286,11 @@ Related HOD-001 encoded-command artifacts may inform review, but they are not HO
 - "Production AutoSOC triage occurred."
 - "An analyst approved the disposition."
 - "AI approved the disposition."
-- "HO-GPU-01 ran the model."
+- "A private model host ran the model."
 - "AI decided the disposition."
 - "The website proves detection status."
 - "Original detections are now successor detections."
 
 ## Next Promotion Gate
 
-The next promotion gate is proof-record review of the controlled lab runtime match and controlled Cribl-to-Splunk marker-delivery updates, followed by public evidence linkage, privacy review, stale review, wording review, and Raylee approval. Public proof and website updates remain blocked until those reviews are complete. Runtime-active deployment remains a separate blocked claim requiring deployment or enablement proof.
+The next promotion gate is public-boundary review of the private runtime and marker-delivery sections, followed by public evidence linkage, privacy review, stale review, wording review, and Raylee approval. Public proof and website updates remain blocked until those reviews are complete. Runtime-active deployment remains a separate blocked claim requiring deployment or enablement proof.

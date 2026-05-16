@@ -66,7 +66,7 @@ REQUIRED_BLOCKED_CLAIMS = [
     "Wazuh live collection",
     "production AutoSOC triage",
     "analyst-approved disposition",
-    "HO-GPU-01 runtime-active",
+    "private model host runtime-active",
     "AI-decided disposition",
     "website proves detection status",
 ]
