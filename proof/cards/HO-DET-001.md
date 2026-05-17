@@ -76,10 +76,10 @@ HO-DET-001 has a strong controlled-test validation record and verifier-backed pr
 Current state:
 
 - No signed GitHub Release artifact exists yet for this proof card.
-- The current release effort ceiling is PLANNED_RELEASE_PATH.
-- Repo-side source status: REVIEWER_PACKET_PATH_DEFINED_SOURCE_ONLY.
-- This section defines the future reviewer packet path and exclusion contract only.
-- It does not create `REVIEWER_PACKET.md`, `RELEASE_MANIFEST.json`, `SHA256SUMS.txt`, a zip, a tag, a GitHub Release, a Sigstore bundle, or a signed artifact.
+- The current release effort ceiling is RELEASE_IMPLEMENTED_CHECK_MODE_NO_TAG_NO_RELEASE.
+- Repo-side source status: RELEASE_PATH_IMPLEMENTED_CHECK_MODE_ONLY.
+- This section defines the reviewer packet, release manifest, checksum file, release notes template, verifier, and check-mode workflow source only.
+- It does not create a zip, a tag, a GitHub Release, a Sigstore bundle, a signature, a signed artifact, or a published checksum release.
 
 Planned artifact:
 
@@ -90,12 +90,16 @@ Planned artifact:
 - Planned checksum file: `SHA256SUMS.txt`.
 - Planned generated reviewer packet inside zip: `REVIEWER_PACKET.md`.
 - Planned generated manifest inside zip: `RELEASE_MANIFEST.json`.
+- Release notes template: `RELEASE_NOTES_TEMPLATE.md`.
+- Check-mode release workflow: `.github/workflows/publish-proof-release.yml`.
+- Release verifier: `scripts/verify-proof-pack-001-release.py`.
 
 Candidate Pack 001 contents:
 
 - `REVIEWER_PACKET.md`
 - `RELEASE_MANIFEST.json`
 - `SHA256SUMS.txt`
+- `RELEASE_NOTES_TEMPLATE.md`
 - `SCOPE.md`
 - `GOVERNANCE.md`
 - `STATUS.md`
@@ -132,14 +136,15 @@ Claim boundary:
 
 Verification language:
 
-- Future verification wording must remain planned until the release workflow, tag, artifact, Sigstore bundle, and clean reviewer-side verification are actually created and tested.
+- Release verification wording must remain check-mode/source-only until the tag, artifact, Sigstore bundle, and clean reviewer-side verification are actually created and tested.
 - The final Cosign certificate identity must not be frozen until it is confirmed from the actual signed bundle.
 - The expected future OIDC issuer is `https://token.actions.githubusercontent.com`.
-- The expected future release workflow path is `.github/workflows/publish-proof-release.yml`, but that workflow does not exist yet and must not be created in this edit.
+- The release workflow path is `.github/workflows/publish-proof-release.yml`, and it must remain check-mode by default.
+- The release workflow must not create a tag, GitHub Release, zip, signature, signed artifact, or published checksum unless a later explicitly approved release step changes that behavior.
 
 Source-side implementation checks:
 
-- The proof integrity verifier must fail if this card no longer names `PLANNED_RELEASE_PATH`.
+- The proof integrity verifier must fail if this card no longer names `RELEASE_IMPLEMENTED_CHECK_MODE_NO_TAG_NO_RELEASE`.
 - The verifier must fail if Pack 001 no longer names `CONTROLLED_TEST_VALIDATED` as the only allowed future support level.
 - The verifier must fail if Pack 001 no longer keeps `NOT_PUBLIC_SAFE` public-safe status.
 - The verifier must fail if Pack 001 no longer excludes `proof/records/HO-NDR-001.md`.

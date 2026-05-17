@@ -1,0 +1,76 @@
+{
+  "pack_id": "HAWKINSOPERATIONS_PROOF_PACK_001",
+  "detection_id": "HO-DET-001",
+  "ceiling": "CONTROLLED_TEST_VALIDATED",
+  "public_safe": "NOT_PUBLIC_SAFE",
+  "included_files": [
+    "REVIEWER_PACKET.md",
+    "RELEASE_MANIFEST.json",
+    "SHA256SUMS.txt",
+    "RELEASE_NOTES_TEMPLATE.md",
+    "SCOPE.md",
+    "GOVERNANCE.md",
+    "STATUS.md",
+    "proof/cards/HO-DET-001.md",
+    "proof/records/HO-DET-001.md",
+    "proof/records/HO-DET-001-CONTROLLED-TEST-VALIDATION-001.json",
+    "evidence/evidence-ledger.json",
+    "evidence/EVIDENCE_LEDGER_SCHEMA.json",
+    "scripts/verify-ho-det-001-proof-integrity.py",
+    ".github/contracts/proof-record.schema.json"
+  ],
+  "excluded_files": [
+    "README.md",
+    "proof/records/HO-NDR-001.md",
+    "proof/records/HO-DET-011.md",
+    "proof/cards/HO-NDR-001.md",
+    "docs/boundaries/HO-NDR-001-SECURITY-ONION-VISIBILITY-CONTRACT.md",
+    "docs/debugging/*",
+    "proof/records/PROOF-HOD-001-2026-04-21-001.json",
+    "proof/records/AWS-DET-001.md",
+    "proof/cards/AWS-DET-001.md",
+    ".github/workflows/*",
+    "docs/case-studies/*"
+  ],
+  "generated_files": [
+    "REVIEWER_PACKET.md",
+    "RELEASE_MANIFEST.json",
+    "SHA256SUMS.txt",
+    "RELEASE_NOTES_TEMPLATE.md",
+    "scripts/verify-proof-pack-001-release.py",
+    ".github/workflows/publish-proof-release.yml"
+  ],
+  "checksum_file": "SHA256SUMS.txt",
+  "release_tag_planned": "hawkinsoperations-proof-pack-001",
+  "release_status": "CHECK_MODE_SOURCE_ONLY_NO_TAG_NO_RELEASE",
+  "claim_boundary": {
+    "allowed": [
+      "HO-DET-001 is CONTROLLED_TEST_VALIDATED through a public proof-loop workflow with controlled positive and negative test cases, deterministic pass/fail output, and blocked-claim enforcement.",
+      "Proof Pack 001 release source is implemented in check mode only."
+    ],
+    "must_not_promote": [
+      "runtime-active public proof",
+      "signal-observed public proof",
+      "evidence-linked public runtime proof",
+      "public-safe status",
+      "production-ready status",
+      "SOCaaS",
+      "live Splunk",
+      "Cribl-routed telemetry",
+      "Wazuh-routed collection",
+      "AWS-live status",
+      "autonomous SOC",
+      "AI-approved disposition",
+      "analyst-approved disposition",
+      "fleet-wide deployment",
+      "enterprise deployment"
+    ]
+  },
+  "validation_commands": [
+    "python scripts/verify-ho-det-001-proof-integrity.py",
+    "python scripts/verify_proof_integrity.py",
+    "python scripts/verify-proof-pack-001-release.py",
+    "git diff --check"
+  ],
+  "verifier_command": "python scripts/verify-proof-pack-001-release.py"
+}
