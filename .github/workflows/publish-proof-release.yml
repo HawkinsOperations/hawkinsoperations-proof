@@ -1,0 +1,37 @@
+name: Proof Pack 001 Release Check
+
+on:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  proof-pack-001-release-check:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Verify HO-DET-001 proof integrity
+        run: python scripts/verify-ho-det-001-proof-integrity.py
+
+      - name: Verify baseline proof integrity
+        run: python scripts/verify_proof_integrity.py
+
+      - name: Verify Proof Pack 001 release source
+        run: python scripts/verify-proof-pack-001-release.py
+
+      - name: Check diff whitespace
+        run: git diff --check
+
+      - name: Print check-mode boundary
+        run: |
+          echo "Proof Pack 001 release workflow ran in check mode only."
+          echo "No tag, GitHub Release, published checksum, signature, signed artifact, or official packaged artifact is created by this workflow."
