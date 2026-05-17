@@ -123,6 +123,11 @@ PUBLIC_SAFE_REVIEWER_CONTEXT_MARKERS = [
     "sanitized release artifact",
 ]
 
+PUBLIC_SAFE_RUNTIME_PROMOTION_PATTERNS = [
+    re.compile(r"\bpublic-safe\s+runtime\s+proof\b"),
+    re.compile(r"\bruntime\s+public-safe\s+proof\b"),
+]
+
 PRIVATE_LEAK_PATTERNS = [
     ("Windows local path", re.compile(r"(?i)\b(?:C:\\Raylee|C:\\Users|C:\\Work|C:\\Repo|C:\\Data)\b")),
     ("LAN IP", re.compile(r"\b192\.168\.\d{1,3}\.\d{1,3}\b")),
@@ -314,6 +319,23 @@ def validate_private_leaks(paths: list[Path]) -> None:
                 fail(f"private/local leakage in {rel(path)} matched {label}: {match.group(0)}")
 
 
+def public_safe_reviewer_context_is_package_only(lower: str) -> bool:
+    if not any(marker in lower for marker in PUBLIC_SAFE_REVIEWER_CONTEXT_MARKERS):
+        return False
+    if any(pattern.search(lower) for pattern in PUBLIC_SAFE_RUNTIME_PROMOTION_PATTERNS):
+        return False
+    remainder = lower
+    for marker in PUBLIC_SAFE_REVIEWER_CONTEXT_MARKERS:
+        remainder = remainder.replace(marker, "")
+    return "public-safe" not in remainder
+
+
+def validate_public_safe_reviewer_context_self_test() -> None:
+    bad = "This public-safe reviewer package provides public-safe runtime proof."
+    if public_safe_reviewer_context_is_package_only(bad.lower()):
+        fail("public-safe reviewer package context allowed public-safe runtime proof")
+
+
 def validate_claim_boundaries(paths: list[Path]) -> None:
     for path in paths:
         text = path.read_text(encoding="utf-8")
@@ -336,7 +358,7 @@ def validate_claim_boundaries(paths: list[Path]) -> None:
             for term in BLOCKED_TERMS:
                 if term.lower() not in lower:
                     continue
-                if term.lower() == "public-safe" and any(marker in lower for marker in PUBLIC_SAFE_REVIEWER_CONTEXT_MARKERS):
+                if term.lower() == "public-safe" and public_safe_reviewer_context_is_package_only(lower):
                     continue
                 if "not_public_safe" in lower or "not public-safe" in lower:
                     continue
@@ -383,6 +405,7 @@ def main() -> int:
     args = parser.parse_args()
 
     manifest = load_manifest()
+    validate_public_safe_reviewer_context_self_test()
     validate_manifest(manifest)
     validate_files(manifest)
     validate_checksums(manifest, args.write_checksums)
