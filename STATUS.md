@@ -6,9 +6,11 @@ HOD-001 baseline has separate validation/proof artifacts.
 
 HO-DET-001 successor proof record now records merged controlled-test validation proof at CONTROLLED_TEST_VALIDATED.
 
+Proof Pack 001 package status is PUBLIC_SAFE_REVIEWER_RELEASE_CANDIDATE for sanitized reviewer package review only.
+
 ## Next Gate
 
-Next gate for HO-DET-001 is runtime deployment evidence or preserved signal evidence; website, social/profile surfaces, and public-safe promotion remain blocked unless separately approved.
+Next gate for HO-DET-001 is runtime deployment evidence or preserved signal evidence; website, social/profile surfaces, and public-safe runtime proof promotion remain blocked unless separately approved.
 
 ## Baseline Integrity Check Scope
 
