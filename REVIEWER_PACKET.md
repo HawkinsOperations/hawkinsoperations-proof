@@ -8,12 +8,16 @@
 | Detection ID | HO-DET-001 |
 | Detection title | Suspicious PowerShell EncodedCommand Execution via Sysmon Event ID 1 |
 | Ceiling | CONTROLLED_TEST_VALIDATED |
-| Public-safe | NOT_PUBLIC_SAFE |
-| Release status | CHECK_MODE_SOURCE_ONLY_NO_TAG_NO_RELEASE |
+| Reviewer package status | PUBLIC_SAFE_REVIEWER_RELEASE_CANDIDATE |
+| Raw/private runtime evidence public-safe | NOT_PUBLIC_SAFE |
+| Public-safe runtime proof | BLOCKED |
+| Release status | PUBLIC_SAFE_REVIEWER_RELEASE_CANDIDATE_NO_TAG_NO_RELEASE |
 
 ## Boundary
 
-This reviewer packet is a bounded source packet for HO-DET-001. It is designed to let a reviewer inspect the controlled-test proof loop, proof record, release manifest, and checksum plan before any official tag or GitHub Release exists.
+This reviewer packet is a public-safe reviewer package for HO-DET-001. It is designed to let a reviewer inspect the controlled-test proof loop, proof record, release manifest, and checksum plan before any official tag or GitHub Release exists.
+
+The package is a sanitized release artifact candidate. Raw/private runtime evidence is excluded and remains NOT_PUBLIC_SAFE. Public-safe runtime proof remains blocked unless separately approved.
 
 Website rendering is not proof. Public pages can route to this packet after review, but the proof authority remains the proof record and the deterministic verifier outputs.
 
@@ -65,7 +69,7 @@ HO-DET-001 is CONTROLLED_TEST_VALIDATED through controlled positive and negative
 
 ## Proof Loop Summary
 
-The proof loop routes through source artifacts, validation artifacts, case-packet checks, deterministic verifier checks, and a proof record. The release path in this branch adds check-mode release packet validation only. It does not publish the packet.
+The proof loop routes through source artifacts, validation artifacts, case-packet checks, deterministic verifier checks, and a proof record. The release path prepares a public-safe reviewer package only. It does not publish the packet.
 
 Key routes:
 
@@ -105,8 +109,8 @@ The following claims remain blocked for this packet:
 3. Run `python scripts/verify-ho-det-001-proof-integrity.py` from the repository root.
 4. Run `python scripts/verify_proof_integrity.py` from the repository root.
 5. Confirm `SHA256SUMS.txt` matches the included packet files named by the manifest.
-6. Treat every runtime, signal, public-safe, production, SOCaaS, autonomous, AI-approved, analyst-approved, fleet-wide, and enterprise wording path as blocked unless a later approved release changes the trust state.
+6. Treat every runtime, signal, public-safe runtime proof, production, SOCaaS, autonomous, AI-approved, analyst-approved, fleet-wide, and enterprise wording path as blocked unless a later approved release changes the trust state.
 
 ## Release Status
 
-This packet is ready for review as a source-controlled release implementation. It is not an official release, does not create a tag, does not create a zip, does not create a GitHub Release, and does not sign an artifact.
+This packet is ready for review as a public-safe reviewer release candidate package. It is not an official release, does not create a tag, does not upload a zip, does not create a GitHub Release, and does not sign an artifact. Release publication still requires separate approval.

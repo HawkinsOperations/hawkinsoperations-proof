@@ -18,9 +18,11 @@ WORKFLOW_PATH = ROOT / ".github" / "workflows" / "publish-proof-release.yml"
 EXPECTED_PACK_ID = "HAWKINSOPERATIONS_PROOF_PACK_001"
 EXPECTED_DETECTION_ID = "HO-DET-001"
 EXPECTED_CEILING = "CONTROLLED_TEST_VALIDATED"
-EXPECTED_PUBLIC_SAFE = "NOT_PUBLIC_SAFE"
+EXPECTED_PUBLIC_SAFE = "PUBLIC_SAFE_REVIEWER_RELEASE_CANDIDATE"
+EXPECTED_RUNTIME_PUBLIC_SAFE = "NOT_PUBLIC_SAFE"
+EXPECTED_PUBLIC_SAFE_RUNTIME_PROOF = "BLOCKED"
 EXPECTED_TAG = "hawkinsoperations-proof-pack-001"
-EXPECTED_RELEASE_STATUS = "CHECK_MODE_SOURCE_ONLY_NO_TAG_NO_RELEASE"
+EXPECTED_RELEASE_STATUS = "PUBLIC_SAFE_REVIEWER_RELEASE_CANDIDATE_NO_TAG_NO_RELEASE"
 
 REQUIRED_INCLUDED_FILES = [
     "REVIEWER_PACKET.md",
@@ -112,6 +114,13 @@ BLOCKED_CONTEXT_MARKERS = [
     "no tag",
     "no release",
     "no_tag_no_release",
+]
+
+PUBLIC_SAFE_REVIEWER_CONTEXT_MARKERS = [
+    "public-safe reviewer package",
+    "public-safe reviewer route",
+    "public-safe reviewer release candidate",
+    "sanitized release artifact",
 ]
 
 PRIVATE_LEAK_PATTERNS = [
@@ -215,6 +224,8 @@ def validate_manifest(manifest: dict) -> None:
         "detection_id",
         "ceiling",
         "public_safe",
+        "raw_private_runtime_evidence_public_safe",
+        "public_safe_runtime_proof",
         "included_files",
         "excluded_files",
         "generated_files",
@@ -233,6 +244,8 @@ def validate_manifest(manifest: dict) -> None:
     require_equal(manifest, "detection_id", EXPECTED_DETECTION_ID)
     require_equal(manifest, "ceiling", EXPECTED_CEILING)
     require_equal(manifest, "public_safe", EXPECTED_PUBLIC_SAFE)
+    require_equal(manifest, "raw_private_runtime_evidence_public_safe", EXPECTED_RUNTIME_PUBLIC_SAFE)
+    require_equal(manifest, "public_safe_runtime_proof", EXPECTED_PUBLIC_SAFE_RUNTIME_PROOF)
     require_equal(manifest, "checksum_file", "SHA256SUMS.txt")
     require_equal(manifest, "release_tag_planned", EXPECTED_TAG)
     require_equal(manifest, "release_status", EXPECTED_RELEASE_STATUS)
@@ -322,6 +335,8 @@ def validate_claim_boundaries(paths: list[Path]) -> None:
                 fail(f"release wording implies current publication in {rel(path)}: {line}")
             for term in BLOCKED_TERMS:
                 if term.lower() not in lower:
+                    continue
+                if term.lower() == "public-safe" and any(marker in lower for marker in PUBLIC_SAFE_REVIEWER_CONTEXT_MARKERS):
                     continue
                 if "not_public_safe" in lower or "not public-safe" in lower:
                     continue

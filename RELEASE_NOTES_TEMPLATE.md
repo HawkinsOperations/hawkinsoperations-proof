@@ -6,12 +6,16 @@
 - Planned tag: `hawkinsoperations-proof-pack-001`
 - Detection ID: HO-DET-001
 - Ceiling: CONTROLLED_TEST_VALIDATED
-- Public-safe status: NOT_PUBLIC_SAFE
-- Release status before approval: CHECK_MODE_SOURCE_ONLY_NO_TAG_NO_RELEASE
+- Reviewer package status: PUBLIC_SAFE_REVIEWER_RELEASE_CANDIDATE
+- Raw/private runtime evidence public-safe: NOT_PUBLIC_SAFE
+- Public-safe runtime proof: BLOCKED
+- Release status before approval: PUBLIC_SAFE_REVIEWER_RELEASE_CANDIDATE_NO_TAG_NO_RELEASE
 
 ## Summary
 
-This release packet provides a bounded reviewer route for HO-DET-001 controlled-test proof. It packages the reviewer packet, manifest, checksums, proof card, proof record, controlled-test validation record, evidence ledger schema, evidence ledger, and verifier source needed to review the supported claim.
+This release packet provides a bounded public-safe reviewer route for HO-DET-001 controlled-test proof. It packages the reviewer packet, manifest, checksums, proof card, proof record, controlled-test validation record, evidence ledger schema, evidence ledger, and verifier source needed to review the supported claim.
+
+This package is a sanitized release artifact candidate. Raw/private runtime evidence is excluded and remains NOT_PUBLIC_SAFE. Public-safe runtime proof remains blocked unless separately approved.
 
 Supported claim:
 
@@ -31,7 +35,7 @@ HO-DET-001 is CONTROLLED_TEST_VALIDATED through a public proof-loop workflow wit
 
 ## Explicitly Not Claimed
 
-This release does not prove runtime-active public proof, signal-observed public proof, evidence-linked public runtime proof, public-safe status, production-ready status, SOCaaS, live Splunk, Cribl-routed telemetry, Wazuh-routed collection, AWS-live status, autonomous SOC, AI-approved disposition, analyst-approved disposition, fleet-wide deployment, or enterprise deployment.
+This release does not prove runtime-active public proof, signal-observed public proof, evidence-linked public runtime proof, public-safe runtime proof, public-safe status, production-ready status, SOCaaS, live Splunk, Cribl-routed telemetry, Wazuh-routed collection, AWS-live status, autonomous SOC, AI-approved disposition, analyst-approved disposition, fleet-wide deployment, or enterprise deployment.
 
 Website rendering is not proof. Website pages may route reviewers to this release after review, but the release packet and proof record remain the bounded proof surfaces.
 

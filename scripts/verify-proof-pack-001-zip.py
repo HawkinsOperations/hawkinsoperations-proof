@@ -17,7 +17,9 @@ MANIFEST_PATH = ROOT / "RELEASE_MANIFEST.json"
 EXPECTED_PACK_ID = "HAWKINSOPERATIONS_PROOF_PACK_001"
 EXPECTED_DETECTION_ID = "HO-DET-001"
 EXPECTED_CEILING = "CONTROLLED_TEST_VALIDATED"
-EXPECTED_PUBLIC_SAFE = "NOT_PUBLIC_SAFE"
+EXPECTED_PUBLIC_SAFE = "PUBLIC_SAFE_REVIEWER_RELEASE_CANDIDATE"
+EXPECTED_RUNTIME_PUBLIC_SAFE = "NOT_PUBLIC_SAFE"
+EXPECTED_PUBLIC_SAFE_RUNTIME_PROOF = "BLOCKED"
 ZIP_NAME = "HAWKINSOPERATIONS_PROOF_PACK_001.zip"
 
 FORBIDDEN_PAYLOAD_PATTERNS = [
@@ -68,6 +70,13 @@ BOUNDARY_MARKERS = [
     "requires",
 ]
 
+PUBLIC_SAFE_REVIEWER_CONTEXT_MARKERS = [
+    "public-safe reviewer package",
+    "public-safe reviewer route",
+    "public-safe reviewer release candidate",
+    "sanitized release artifact",
+]
+
 PRIVATE_LEAK_PATTERNS = [
     ("Windows local path", re.compile(r"(?i)\b(?:C:\\Raylee|C:\\Users|C:\\Work|C:\\Repo|C:\\Data)\b")),
     ("LAN IP", re.compile(r"\b(?:(?:10|127)\.\d{1,3}|172\.(?:1[6-9]|2[0-9]|3[0-1])|192\.168)\.\d{1,3}\.\d{1,3}\b")),
@@ -114,6 +123,10 @@ def expected_payload(manifest: dict) -> list[str]:
         fail(f"ceiling must be {EXPECTED_CEILING}")
     if manifest.get("public_safe") != EXPECTED_PUBLIC_SAFE:
         fail(f"public_safe must be {EXPECTED_PUBLIC_SAFE}")
+    if manifest.get("raw_private_runtime_evidence_public_safe") != EXPECTED_RUNTIME_PUBLIC_SAFE:
+        fail(f"raw_private_runtime_evidence_public_safe must be {EXPECTED_RUNTIME_PUBLIC_SAFE}")
+    if manifest.get("public_safe_runtime_proof") != EXPECTED_PUBLIC_SAFE_RUNTIME_PROOF:
+        fail(f"public_safe_runtime_proof must be {EXPECTED_PUBLIC_SAFE_RUNTIME_PROOF}")
     included = [normalize_name(name) for name in manifest.get("included_files", [])]
     excluded = [normalize_name(name) for name in manifest.get("excluded_files", [])]
     if not included:
@@ -169,6 +182,8 @@ def validate_claim_boundary(name: str, data: bytes) -> None:
         for term in BLOCKED_TERMS:
             if term.lower() not in lower:
                 continue
+            if term.lower() == "public-safe" and any(marker in lower for marker in PUBLIC_SAFE_REVIEWER_CONTEXT_MARKERS):
+                continue
             if "not_public_safe" in lower or "not public-safe" in lower:
                 continue
             if boundary_context or any(marker in lower for marker in BOUNDARY_MARKERS):
@@ -192,6 +207,10 @@ def verify_zip(zip_path: Path, manifest: dict) -> None:
             fail(f"ZIP manifest ceiling must be {EXPECTED_CEILING}")
         if manifest_inside.get("public_safe") != EXPECTED_PUBLIC_SAFE:
             fail(f"ZIP manifest public_safe must be {EXPECTED_PUBLIC_SAFE}")
+        if manifest_inside.get("raw_private_runtime_evidence_public_safe") != EXPECTED_RUNTIME_PUBLIC_SAFE:
+            fail(f"ZIP manifest raw_private_runtime_evidence_public_safe must be {EXPECTED_RUNTIME_PUBLIC_SAFE}")
+        if manifest_inside.get("public_safe_runtime_proof") != EXPECTED_PUBLIC_SAFE_RUNTIME_PROOF:
+            fail(f"ZIP manifest public_safe_runtime_proof must be {EXPECTED_PUBLIC_SAFE_RUNTIME_PROOF}")
         checksums = parse_checksums(archive.read("SHA256SUMS.txt").decode("utf-8"))
         expected_checksum_targets = [name for name in expected if name != "SHA256SUMS.txt"]
         if list(checksums) != expected_checksum_targets:

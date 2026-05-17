@@ -23,7 +23,9 @@ PAYLOAD_SHA256_NAME = "HAWKINSOPERATIONS_PROOF_PACK_001.payload-sha256sums.txt"
 EXPECTED_PACK_ID = "HAWKINSOPERATIONS_PROOF_PACK_001"
 EXPECTED_DETECTION_ID = "HO-DET-001"
 EXPECTED_CEILING = "CONTROLLED_TEST_VALIDATED"
-EXPECTED_PUBLIC_SAFE = "NOT_PUBLIC_SAFE"
+EXPECTED_PUBLIC_SAFE = "PUBLIC_SAFE_REVIEWER_RELEASE_CANDIDATE"
+EXPECTED_RUNTIME_PUBLIC_SAFE = "NOT_PUBLIC_SAFE"
+EXPECTED_PUBLIC_SAFE_RUNTIME_PROOF = "BLOCKED"
 RELEASE_APPROVAL = "RELEASE_APPROVED_PROOF_PACK_001"
 ZIP_TIMESTAMP = (2026, 1, 1, 0, 0, 0)
 
@@ -71,6 +73,8 @@ def require_manifest_boundary(manifest: dict) -> None:
         "detection_id": EXPECTED_DETECTION_ID,
         "ceiling": EXPECTED_CEILING,
         "public_safe": EXPECTED_PUBLIC_SAFE,
+        "raw_private_runtime_evidence_public_safe": EXPECTED_RUNTIME_PUBLIC_SAFE,
+        "public_safe_runtime_proof": EXPECTED_PUBLIC_SAFE_RUNTIME_PROOF,
     }
     for key, value in expected.items():
         if manifest.get(key) != value:
@@ -151,7 +155,7 @@ def output_label(args: argparse.Namespace) -> str:
                 "or RELEASE_APPROVAL=RELEASE_APPROVED_PROOF_PACK_001"
             )
         return "OFFICIAL_RELEASE_CANDIDATE_PENDING_GITHUB_RELEASE_PUBLICATION"
-    return "LOCAL_REVIEW_ONLY_NOT_OFFICIAL_RELEASE"
+    return "PUBLIC_SAFE_REVIEWER_RELEASE_CANDIDATE"
 
 
 def build_payload_manifest(names: list[str], label: str) -> dict:
@@ -160,6 +164,8 @@ def build_payload_manifest(names: list[str], label: str) -> dict:
         "detection_id": EXPECTED_DETECTION_ID,
         "ceiling": EXPECTED_CEILING,
         "public_safe": EXPECTED_PUBLIC_SAFE,
+        "raw_private_runtime_evidence_public_safe": EXPECTED_RUNTIME_PUBLIC_SAFE,
+        "public_safe_runtime_proof": EXPECTED_PUBLIC_SAFE_RUNTIME_PROOF,
         "artifact_status": label,
         "zip_name": ZIP_NAME,
         "included_files": [
@@ -176,7 +182,7 @@ def build_payload_manifest(names: list[str], label: str) -> dict:
 def render_payload_sha256sums(payload: dict, zip_path: Path | None = None) -> str:
     lines = [
         "# SHA256 checksums for Proof Pack 001 ZIP payload files.",
-        "# This is local packaging checksum data until an approved GitHub Release publishes it.",
+        "# This is local release-candidate checksum data until an approved GitHub Release publishes it.",
     ]
     for item in payload["included_files"]:
         lines.append(f"{item['sha256']}  {item['path']}")
