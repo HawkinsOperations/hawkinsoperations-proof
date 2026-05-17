@@ -44,7 +44,7 @@
       "id": "HO-DET-001-PLATFORM-RUNTIME-CONTRACT-GUARDRAIL-001",
       "timestamp": "2026-05-03T00:00:00-05:00",
       "type": "platform_contract_guardrail_record",
-      "summary": "HO-DET-001 platform runtime contract guardrail record preserving CONTROLLED_TEST_VALIDATED and blocking runtime, signal, public-safe, production, fleet, routing, cloud-live, autonomous SOC, and disposition-authority promotions.",
+      "summary": "HO-DET-001 platform runtime contract guardrail record preserving CONTROLLED_TEST_VALIDATED and keeping runtime, signal, public-safe, production, fleet, routing, cloud-live, autonomous SOC, and disposition-authority promotions blocked.",
       "artifact_paths": [
         "proof/records/HO-DET-001.md",
         "hawkinsoperations-platform/contracts/examples/ho-det-001-runtime-contract.sample.json",

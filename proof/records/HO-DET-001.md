@@ -16,7 +16,7 @@
 
 Compatibility note: `CONTROLLED_TEST_VALIDATED` is the internal verifier token preserved for proof-integrity compatibility. `CONTROLLED_TEST_VALIDATED` is the public-facing label used to describe the same controlled-test validation boundary without using legacy public wording.
 
-This packet records merged controlled-test validation evidence for HO-DET-001 and a verifier-backed private controlled lab runtime match. It does not assert runtime activity, production deployment, public-safe status, or live SOC operation.
+This packet records merged controlled-test validation evidence for HO-DET-001 and a verifier-backed private controlled lab runtime match. Runtime activity, production deployment, public-safe status, and live SOC operation remain blocked unless separately approved.
 
 ## Internal Verifier Compatibility
 
@@ -148,22 +148,22 @@ Private/internal runtime and marker-delivery sections in this record are non-pub
 
 ## Unsupported Claims
 
-- runtime-active
-- signal-observed
-- public-safe
-- production-ready
-- live Splunk fired
-- Cribl-routed telemetry
-- Cribl-routed
-- Wazuh live collection
-- Wazuh-routed
-- AWS-live
-- autonomous SOC
-- production AutoSOC triage
-- analyst-approved disposition
-- private model host runtime-active
-- AI-decided disposition
-- AI-approved disposition
+- blocked: runtime-active
+- blocked: signal-observed
+- blocked: public-safe
+- blocked: production-ready
+- blocked: live Splunk fired
+- blocked: Cribl-routed telemetry
+- blocked: Cribl-routed
+- blocked: Wazuh live collection
+- blocked: Wazuh-routed
+- blocked: AWS-live
+- blocked: autonomous SOC
+- blocked: production AutoSOC triage
+- blocked: analyst-approved disposition
+- blocked: private model host runtime-active
+- blocked: AI-decided disposition
+- blocked: AI-approved disposition
 
 ## Current Truth Table
 
@@ -171,15 +171,15 @@ Private/internal runtime and marker-delivery sections in this record are non-pub
 |---|---|---|---|---|---|
 | HO-DET-001 proof packet exists in the proof repo. | PROVEN | `proof/records/HO-DET-001.md` | "A proof packet exists for HO-DET-001." | "The detection is production proven." | Keep proof current as gates change. |
 | HO-DET-001 detection source exists. | PROVEN | `hawkinsoperations-detections/detections/successor/ho-det-001/rule.yml` | "Detection source exists for HO-DET-001." | "The detection is active." | Runtime deployment evidence. |
-| HO-DET-001 Splunk source exists. | PROVEN | `hawkinsoperations-detections/detections/successor/ho-det-001/splunk.spl` at merge commit `13a74f812fd17027b4a1968b615a4aae78c99f51` | "A Splunk SPL source artifact exists for HO-DET-001." | "Live Splunk fired." | Deploy and preserve runtime/search evidence. |
+| HO-DET-001 Splunk source exists. | PROVEN | `hawkinsoperations-detections/detections/successor/ho-det-001/splunk.spl` at merge commit `13a74f812fd17027b4a1968b615a4aae78c99f51` | "A Splunk SPL source artifact exists for HO-DET-001." | blocked: "Live Splunk fired." | Deploy and preserve runtime/search evidence. |
 | HO-DET-001 controlled-test validation passed. | PROVEN | `hawkinsoperations-validation/reports/ho-det-001/validation-result.json` at merge commit `e3bcf6c087b8e22ea62c08438fae6a60e800b094` | "HO-DET-001 is CONTROLLED_TEST_VALIDATED through controlled positive and negative process-creation test cases." | "This catches attacks." | Runtime and signal evidence. |
-| HO-DET-001 public pipeline proof pack exists. | PROVEN | `hawkinsoperations-validation/reports/ho-det-001/pipeline-proof.md`; `hawkinsoperations-validation/reports/ho-det-001/pipeline-proof.json`; `HawkinsOperations/hawkinsoperations-validation#27`; merge commit `6d4e3ac7b284e380048e8e4f20edf50b6fa9bccb` | "HO-DET-001 is CONTROLLED_TEST_VALIDATED through a public proof-loop workflow with controlled positive and negative test cases, deterministic pass/fail output, and blocked-claim enforcement." | "This proves runtime-active, production-ready, fleet-wide, or public-safe runtime evidence status." | Runtime/signal/public-safe evidence review. |
-| HO-DET-001 validation enforcement exists. | PROVEN | `hawkinsoperations-validation#10`; `.github/workflows/ho-det-001-proof-loop.yml`; merge commit `8b48500d2ebbaacd93ac88e77a31dccf1d3b4e25` | "HO-DET-001 validation enforcement exists for controlled-test scope." | "Validation enforcement proves runtime, signal, production, or public-safe status." | Runtime/signal/public-safe evidence review. |
-| HO-DET-001 platform runtime contract enforcement exists. | PROVEN | `hawkinsoperations-platform#5`; `contracts/examples/ho-det-001-runtime-contract.sample.json`; merge commit `b3d0ffbd66c1bd5f60f7e9ff99712cdc3e0595bd` | "HO-DET-001 platform runtime contract enforcement exists as a non-promotional guardrail." | "Platform contract enforcement proves runtime-active, signal-observed, public-safe runtime proof, production-ready, fleet-wide, Cribl-routed, Wazuh-routed public proof, AWS-live, autonomous SOC, AI-approved disposition, or analyst-approved disposition." | Runtime/signal/public-safe evidence review. |
+| HO-DET-001 public pipeline proof pack exists. | PROVEN | `hawkinsoperations-validation/reports/ho-det-001/pipeline-proof.md`; `hawkinsoperations-validation/reports/ho-det-001/pipeline-proof.json`; `HawkinsOperations/hawkinsoperations-validation#27`; merge commit `6d4e3ac7b284e380048e8e4f20edf50b6fa9bccb` | "HO-DET-001 is CONTROLLED_TEST_VALIDATED through a public proof-loop workflow with controlled positive and negative test cases, deterministic pass/fail output, and blocked-claim enforcement." | blocked: "This proves runtime-active, production-ready, fleet-wide, or public-safe runtime evidence status." | Runtime/signal/public-safe evidence review. |
+| HO-DET-001 validation enforcement exists. | PROVEN | `hawkinsoperations-validation#10`; `.github/workflows/ho-det-001-proof-loop.yml`; merge commit `8b48500d2ebbaacd93ac88e77a31dccf1d3b4e25` | "HO-DET-001 validation enforcement exists for controlled-test scope." | blocked: "Validation enforcement proves runtime, signal, production, or public-safe status." | Runtime/signal/public-safe evidence review. |
+| HO-DET-001 platform runtime contract enforcement exists. | PROVEN | `hawkinsoperations-platform#5`; `contracts/examples/ho-det-001-runtime-contract.sample.json`; merge commit `b3d0ffbd66c1bd5f60f7e9ff99712cdc3e0595bd` | "HO-DET-001 platform runtime contract enforcement exists as a non-promotional guardrail." | blocked: "Platform contract enforcement proves runtime-active, signal-observed, public-safe runtime proof, production-ready, fleet-wide, Cribl-routed, Wazuh-routed public proof, AWS-live, autonomous SOC, AI-approved disposition, or analyst-approved disposition." | Runtime/signal/public-safe evidence review. |
 | HO-DET-001 private runtime-match material exists. | PRIVATE_INTERNAL_BOUNDARY_CONTEXT | `HawkinsOperations/hawkinsoperations-validation#22`; merge commit `b47dd02d08565baec76018f5ef909d1b7895737d`; verifier verdict `VERIFIED_CONTROLLED_LAB_RUNTIME_MATCH_CAPTURED` | "Private/internal runtime material is recorded as non-public boundary context and does not authorize public promotion." | "HO-DET-001 is runtime-active."; "HO-DET-001 has public-safe runtime proof."; "HO-DET-001 is production-ready."; "HO-DET-001 is fleet-wide."; "HO-DET-001 is Cribl-routed."; "HO-DET-001 is Wazuh-routed."; "HO-DET-001 is AWS-live."; "HO-DET-001 runs an autonomous SOC."; "AI approved the disposition."; "An analyst approved the disposition." | Public evidence linkage, privacy review, stale review, wording review, and Raylee approval. |
 | Private marker-delivery material exists. | PRIVATE_INTERNAL_BOUNDARY_CONTEXT | Private packet retained outside this repository; marker digest retained as a private/internal receipt; status `CONTROLLED_LAB_CRIBL_TO_SPLUNK_MARKER_DELIVERY_VERIFIED` | "Private/internal marker-delivery material is recorded as non-public boundary context and does not authorize public promotion." | "HO-DET-001 is Cribl-routed."; "Cribl routed live telemetry."; "Live Splunk fired."; "HO-DET-001 is runtime-active."; "HO-DET-001 is production-ready."; "HO-DET-001 is fleet-wide."; "HO-DET-001 is public-safe." | Public evidence linkage, privacy review, stale review, wording review, and Raylee approval. |
-| AutoSOC triage packet exists. | PROVEN | `hawkinsoperations-validation/validation/successor/ho-det-001/autosoc-triage-packet.json` | "A deterministic controlled-test triage packet was generated from the validation result." | "Production AutoSOC triage occurred." | Production AutoSOC run evidence. |
-| Offline LLM support stub exists. | PROVEN | `hawkinsoperations-validation/validation/successor/ho-det-001/llm-summary.json` | "A deterministic blocked-runtime LLM support stub exists." | "A private model host was runtime-active." | Approved local model runtime evidence. |
+| AutoSOC triage packet exists. | PROVEN | `hawkinsoperations-validation/validation/successor/ho-det-001/autosoc-triage-packet.json` | "A deterministic controlled-test triage packet was generated from the validation result." | blocked: "Production AutoSOC triage occurred." | Production AutoSOC run evidence. |
+| Offline LLM support stub exists. | PROVEN | `hawkinsoperations-validation/validation/successor/ho-det-001/llm-summary.json` | "A deterministic blocked-runtime LLM support stub exists." | blocked: "A private model host was runtime-active." | Approved local model runtime evidence. |
 | HO-DET-001 runtime-active status is proven. | BLOCKED | No deployment, enablement, schedule, or backend state evidence linked. | "Runtime-active status requires deployment evidence." | "This detection is active." | Preserve runtime deployment evidence. |
 | HO-DET-001 signal-observed status is proven. | BLOCKED | No preserved telemetry, alert, log, or search output linked. | "Signal-observed status requires preserved telemetry, alert, log, or search output." | "This catches attacks." | Preserve signal observation evidence. |
 | HO-DET-001 public-safe status is approved. | BLOCKED | No reviewed public wording, privacy review, stale review, evidence linkage, or Raylee approval. | "Public-safe status requires reviewed wording, privacy review, stale review, evidence linkage, and Raylee approval." | "HO-DET-001 is PUBLIC_SAFE." | Raylee approval after evidence and claim review. |

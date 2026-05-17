@@ -22,17 +22,17 @@
   },
   "supported_claim": "HO-DET-001 passed controlled-test validation against controlled positive and negative process-creation fixtures.",
   "unsupported_claims": [
-    "runtime-active",
-    "signal-observed",
-    "public-safe",
-    "production-ready",
-    "live Splunk fired",
-    "Cribl-routed telemetry",
-    "Wazuh live collection",
-    "production AutoSOC triage",
-    "analyst-approved disposition",
-    "private model host runtime-active",
-    "AI-decided disposition"
+    "blocked: runtime-active",
+    "blocked: signal-observed",
+    "blocked: public-safe",
+    "blocked: production-ready",
+    "blocked: live Splunk fired",
+    "blocked: Cribl-routed telemetry",
+    "blocked: Wazuh live collection",
+    "blocked: production AutoSOC triage",
+    "blocked: analyst-approved disposition",
+    "blocked: private model host runtime-active",
+    "blocked: AI-decided disposition"
   ],
   "validation_summary": {
     "status": "pass",

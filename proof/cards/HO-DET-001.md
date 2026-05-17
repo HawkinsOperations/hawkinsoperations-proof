@@ -69,7 +69,7 @@ To raise the claim, HO-DET-001 needs approved evidence linkage for the specific 
 
 ## Reviewer Takeaway
 
-HO-DET-001 has a strong controlled-test validation record and verifier-backed proof routing for that scope. Treat this card as a fast map to the proof record, not as proof of live operation, public signal observation, routed telemetry, production coverage, or public-safe status.
+HO-DET-001 has a strong controlled-test validation record and verifier-backed proof routing for that scope. Treat this card as a fast map to the proof record. Live operation, public signal observation, routed telemetry, production coverage, and public-safe status remain blocked unless separately approved.
 
 ## Planned Signed Release Packet
 
@@ -148,7 +148,7 @@ Source-side implementation checks:
 - The verifier must fail if Pack 001 no longer names `CONTROLLED_TEST_VALIDATED` as the only allowed future support level.
 - The verifier must fail if Pack 001 no longer keeps `NOT_PUBLIC_SAFE` public-safe status.
 - The verifier must fail if Pack 001 no longer excludes `proof/records/HO-NDR-001.md`.
-- The verifier must fail if Pack 001 wording implies a release, tag, zip, signature, checksum publication, downloaded-artifact verification, or public-safe promotion already exists.
+- The verifier must fail if Pack 001 wording implies a release, tag, zip, signature, checksum publication, downloaded-artifact verification, or public-safe promotion already exists; public-safe promotion remains blocked unless separately approved.
 
 Reviewer meaning:
 
