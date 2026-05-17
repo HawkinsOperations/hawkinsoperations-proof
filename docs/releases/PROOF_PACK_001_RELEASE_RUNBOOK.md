@@ -54,7 +54,20 @@ The local build command is:
 python -B scripts/build-proof-pack-001-zip.py
 ```
 
-The script writes only under `dist/proof-pack-001/` and refuses to write unless that output path is ignored by Git.
+The script writes only under `dist/proof-pack-001/`, which is ignored by Git. Generated ZIPs, checksum sidecars, release artifacts, signatures, signing bundles, and payload manifests must stay untracked and must not be committed.
+
+Official mode requires the literal release approval token. GitHub Actions context is never approval by itself.
+
+```powershell
+python -B scripts/build-proof-pack-001-zip.py --official --release-approved RELEASE_APPROVED_PROOF_PACK_001
+```
+
+Equivalent environment-variable form:
+
+```powershell
+$env:RELEASE_APPROVAL = 'RELEASE_APPROVED_PROOF_PACK_001'
+python -B scripts/build-proof-pack-001-zip.py --official
+```
 
 ## Verify Command
 

@@ -144,10 +144,12 @@ def is_ignored(path: Path) -> bool:
 
 def output_label(args: argparse.Namespace) -> str:
     if args.official:
-        approved = args.release_approved == RELEASE_APPROVAL
-        workflow = os.environ.get("GITHUB_ACTIONS") == "true" and os.environ.get("GITHUB_WORKFLOW")
-        if not approved and not workflow:
-            fail("official mode requires release approval input or approved GitHub Actions workflow context")
+        approval = args.release_approved or os.environ.get("RELEASE_APPROVAL", "")
+        if approval != RELEASE_APPROVAL:
+            fail(
+                "official mode requires --release-approved RELEASE_APPROVED_PROOF_PACK_001 "
+                "or RELEASE_APPROVAL=RELEASE_APPROVED_PROOF_PACK_001"
+            )
         return "OFFICIAL_RELEASE_CANDIDATE_PENDING_GITHUB_RELEASE_PUBLICATION"
     return "LOCAL_REVIEW_ONLY_NOT_OFFICIAL_RELEASE"
 
