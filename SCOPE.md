@@ -5,7 +5,7 @@ Repository: `hawkinsoperations-proof`
 ## In Scope
 
 - Evidence indexes and proof bundles
-- Public-safe claim-to-evidence mapping
+- Public-safe claim-to-evidence mapping remains blocked
 - Release verification snapshots
 
 ## Out of Scope
@@ -17,4 +17,3 @@ Repository: `hawkinsoperations-proof`
 ## Promotion Boundary
 
 Proof entries require traceable artifact references and checksums.
-

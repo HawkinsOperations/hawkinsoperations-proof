@@ -49,21 +49,21 @@
       "Proof Pack 001 release source is implemented in check mode only."
     ],
     "must_not_promote": [
-      "runtime-active public proof",
-      "signal-observed public proof",
-      "evidence-linked public runtime proof",
-      "public-safe status",
-      "production-ready status",
-      "SOCaaS",
-      "live Splunk",
-      "Cribl-routed telemetry",
-      "Wazuh-routed collection",
-      "AWS-live status",
-      "autonomous SOC",
-      "AI-approved disposition",
-      "analyst-approved disposition",
-      "fleet-wide deployment",
-      "enterprise deployment"
+      "blocked: runtime-active public proof",
+      "blocked: signal-observed public proof",
+      "blocked: evidence-linked public runtime proof / evidence-linked public proof",
+      "blocked: public-safe status / public-safe",
+      "blocked: production-ready status / production-ready",
+      "blocked: SOCaaS",
+      "blocked: live Splunk / live Splunk public proof",
+      "blocked: Cribl-routed telemetry / Cribl-routed public proof",
+      "blocked: Wazuh-routed collection / Wazuh-routed public proof",
+      "blocked: AWS-live status / AWS-live proof",
+      "blocked: autonomous SOC",
+      "blocked: AI-approved disposition",
+      "blocked: analyst-approved disposition",
+      "blocked: fleet-wide deployment / fleet-wide",
+      "blocked: enterprise deployment"
     ]
   },
   "validation_commands": [

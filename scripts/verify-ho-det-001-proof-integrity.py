@@ -58,18 +58,18 @@ REQUIRED_VALIDATION_FACTS = [
 ]
 
 REQUIRED_BLOCKED_CLAIMS = [
-    "runtime-active",
-    "signal-observed",
-    "public-safe",
-    "production-ready",
-    "live Splunk fired",
-    "Cribl-routed telemetry",
-    "Wazuh live collection",
-    "production AutoSOC triage",
-    "analyst-approved disposition",
-    "private model host runtime-active",
-    "AI-decided disposition",
-    "website proves detection status",
+    "runtime-active",  # blocked claim fixture
+    "signal-observed",  # blocked claim fixture
+    "public-safe",  # blocked claim fixture
+    "production-ready",  # blocked claim fixture
+    "live Splunk fired",  # blocked claim fixture
+    "Cribl-routed telemetry",  # blocked claim fixture
+    "Wazuh live collection",  # blocked claim fixture
+    "production AutoSOC triage",  # blocked claim fixture
+    "analyst-approved disposition",  # blocked claim fixture
+    "private model host runtime-active",  # blocked claim fixture
+    "AI-decided disposition",  # blocked claim fixture
+    "website proves detection status",  # blocked claim fixture
 ]
 
 REQUIRED_PROOF_PACK_MARKERS = [
@@ -132,7 +132,7 @@ FORBIDDEN_PROOF_PACK_CURRENT_CLAIMS = [
     "Sigstore bundle exists",
     "downloaded artifact verification passed",
     "PUBLIC_SAFE approved",
-    "public-safe approved",
+    "public-safe approved",  # blocked current-claim fixture
     "RUNTIME_ACTIVE approved",
     "SIGNAL_OBSERVED approved",
 ]
@@ -280,7 +280,7 @@ def validate_private_leak_boundaries(text: str) -> None:
     for label, pattern in LEAK_PATTERNS:
         match = pattern.search(text)
         if match:
-            fail(f"private/public-safety rejection matched {label}: {match.group(0)}")
+            fail(f"blocked private/public-safety rejection matched {label}: {match.group(0)}")
 
 
 def validate_proof_pack_planning(card_text: str) -> None:

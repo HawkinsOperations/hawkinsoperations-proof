@@ -8,7 +8,7 @@ HO-DET-001 successor proof record now records merged controlled-test validation 
 
 ## Next Gate
 
-Next gate for HO-DET-001 is runtime deployment evidence or preserved signal evidence, not website, LinkedIn, or public-safe promotion.
+Next gate for HO-DET-001 is runtime deployment evidence or preserved signal evidence; website, social/profile surfaces, and public-safe promotion remain blocked unless separately approved.
 
 ## Baseline Integrity Check Scope
 
@@ -20,4 +20,4 @@ Next gate for HO-DET-001 is runtime deployment evidence or preserved signal evid
 
 - Proof ledger `sha256` currently tracks validation report hash; add proof-packet hash convention for future entries.
 - Do not use HOD-001 proof as HO-DET-001 proof.
-- HO-DET-001 controlled-test validation proof does not support runtime-active, signal-observed, public-safe, production-ready, live Splunk, Cribl-routed telemetry, Wazuh live collection, production AutoSOC triage, analyst-approved disposition, private model host runtime-active, or AI-decided disposition claims.
+- HO-DET-001 controlled-test validation proof keeps runtime-active, signal-observed, public-safe, production-ready, live Splunk, Cribl-routed telemetry, Wazuh live collection, production AutoSOC triage, analyst-approved disposition, private model host runtime-active, or AI-decided disposition claims blocked.
