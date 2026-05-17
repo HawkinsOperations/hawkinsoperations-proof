@@ -7,6 +7,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 PROOF_RECORD = ROOT / "proof" / "records" / "HO-DET-001.md"
+PROOF_CARD = ROOT / "proof" / "cards" / "HO-DET-001.md"
 
 
 REQUIRED_STATUS_FIELDS = [
@@ -69,6 +70,66 @@ REQUIRED_BLOCKED_CLAIMS = [
     "private model host runtime-active",
     "AI-decided disposition",
     "website proves detection status",
+]
+
+REQUIRED_PROOF_PACK_MARKERS = [
+    "## Planned Signed Release Packet",
+    "No signed GitHub Release artifact exists yet for this proof card.",
+    "The current release effort ceiling is PLANNED_RELEASE_PATH.",
+    "Repo-side source status: REVIEWER_PACKET_PATH_DEFINED_SOURCE_ONLY.",
+    "It does not create `REVIEWER_PACKET.md`, `RELEASE_MANIFEST.json`, `SHA256SUMS.txt`, a zip, a tag, a GitHub Release, a Sigstore bundle, or a signed artifact.",
+    "Planned release name: HawkinsOperations Proof Pack 001.",
+    "Planned tag: `hawkinsoperations-proof-pack-001`.",
+    "Planned zip: `HAWKINSOPERATIONS_PROOF_PACK_001.zip`.",
+    "Planned generated reviewer packet inside zip: `REVIEWER_PACKET.md`.",
+    "Planned generated manifest inside zip: `RELEASE_MANIFEST.json`.",
+    "The future signed release, once implemented and verified, may support CONTROLLED_TEST_VALIDATED only.",
+    "It must not promote PUBLIC_SAFE.",
+    "It must not promote RUNTIME_ACTIVE.",
+    "It must not promote SIGNAL_OBSERVED.",
+    "It must not promote EVIDENCE_LINKED public proof.",
+    "The expected future release workflow path is `.github/workflows/publish-proof-release.yml`, but that workflow does not exist yet and must not be created in this edit.",
+]
+
+REQUIRED_PROOF_PACK_CONTENTS = [
+    "`REVIEWER_PACKET.md`",
+    "`RELEASE_MANIFEST.json`",
+    "`SHA256SUMS.txt`",
+    "`SCOPE.md`",
+    "`GOVERNANCE.md`",
+    "`STATUS.md`",
+    "`proof/cards/HO-DET-001.md`",
+    "`proof/records/HO-DET-001.md`",
+    "`proof/records/HO-DET-001-CONTROLLED-TEST-VALIDATION-001.json`",
+    "`evidence/evidence-ledger.json`",
+    "`evidence/EVIDENCE_LEDGER_SCHEMA.json`",
+    "`scripts/verify-ho-det-001-proof-integrity.py`",
+    "`.github/contracts/proof-record.schema.json`",
+]
+
+REQUIRED_PROOF_PACK_EXCLUSIONS = [
+    "`README.md`",
+    "`proof/records/HO-NDR-001.md`",
+    "`proof/records/HO-DET-011.md`",
+    "`proof/cards/HO-NDR-001.md`",
+    "`docs/boundaries/HO-NDR-001-SECURITY-ONION-VISIBILITY-CONTRACT.md`",
+    "`docs/debugging/*`",
+    "`proof/records/PROOF-HOD-001-2026-04-21-001.json`",
+    "`proof/records/AWS-DET-001.md`",
+    "`proof/cards/AWS-DET-001.md`",
+    "`.github/workflows/*`",
+    "`docs/case-studies/*`",
+]
+
+FORBIDDEN_PROOF_PACK_CURRENT_CLAIMS = [
+    "signed GitHub Release artifact exists",
+    "release artifact exists",
+    "Sigstore bundle exists",
+    "downloaded artifact verification passed",
+    "PUBLIC_SAFE approved",
+    "public-safe approved",
+    "RUNTIME_ACTIVE approved",
+    "SIGNAL_OBSERVED approved",
 ]
 
 PATH_SEPARATOR_CLASS = "[" + chr(92) + "/]"
@@ -217,15 +278,33 @@ def validate_private_leak_boundaries(text: str) -> None:
             fail(f"private/public-safety rejection matched {label}: {match.group(0)}")
 
 
+def validate_proof_pack_planning(card_text: str) -> None:
+    proof_pack_body = section_body(card_text, "Planned Signed Release Packet")
+    for marker in REQUIRED_PROOF_PACK_MARKERS:
+        require_contains(card_text, marker, "proof pack planning marker")
+    for candidate in REQUIRED_PROOF_PACK_CONTENTS:
+        require_contains(proof_pack_body, candidate, "proof pack candidate content")
+    for exclusion in REQUIRED_PROOF_PACK_EXCLUSIONS:
+        require_contains(proof_pack_body, exclusion, "proof pack exclusion")
+    for forbidden in FORBIDDEN_PROOF_PACK_CURRENT_CLAIMS:
+        if forbidden in card_text and f"No {forbidden}" not in card_text:
+            fail(f"proof pack wording implies current publication/promotion: {forbidden}")
+
+
 def main() -> int:
     if not PROOF_RECORD.exists():
         fail("missing proof/records/HO-DET-001.md")
+    if not PROOF_CARD.exists():
+        fail("missing proof/cards/HO-DET-001.md")
     text = PROOF_RECORD.read_text(encoding="utf-8")
+    card_text = PROOF_CARD.read_text(encoding="utf-8")
     validate_status_fields(text)
     validate_sections(text)
     validate_links_and_facts(text)
     validate_blocked_claims(text)
     validate_private_leak_boundaries(text)
+    validate_private_leak_boundaries(card_text)
+    validate_proof_pack_planning(card_text)
     print("HO-DET-001 proof integrity check passed.")
     return 0
 
