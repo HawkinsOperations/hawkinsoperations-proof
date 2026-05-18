@@ -19,6 +19,29 @@ Proof is the claim boundary: evidence can support a claim only within its record
 
 Private/internal runtime match evidence is not public-safe proof. Public claims require reviewed wording, evidence linkage, privacy review, stale review, and Raylee approval.
 
+## Proof Pack 001 Official Release Route
+
+Proof Pack 001 has an official direct GitHub Release route in `hawkinsoperations-proof`:
+
+[HawkinsOperations Proof Pack 001](https://github.com/HawkinsOperations/hawkinsoperations-proof/releases/tag/hawkinsoperations-proof-pack-001)
+
+The release package is a bounded reviewer packet for `HO-DET-001` and does not raise the public proof ceiling.
+
+| Item | Current state |
+|---|---|
+| Release tag | `hawkinsoperations-proof-pack-001` |
+| Pack ID | `HAWKINSOPERATIONS_PROOF_PACK_001` |
+| Release asset | `HAWKINSOPERATIONS_PROOF_PACK_001.zip` |
+| ZIP SHA256 | `44d8a643aa2b113c9e99be0462e699d39af707a67190823cc05bb381907dc452` |
+| Public ceiling | `CONTROLLED_TEST_VALIDATED` |
+| Reviewer package status | `PUBLIC_SAFE_REVIEWER_RELEASE_CANDIDATE` |
+| Raw/private runtime evidence | `NOT_PUBLIC_SAFE` |
+| Public-safe runtime proof | `BLOCKED` |
+
+Use the exact tag release URL above for public routing. Do not rely on GitHub's generic `/releases` index if it renders inconsistently.
+
+Website and GitHub rendering route reviewers; rendering is not proof. The release package does not prove runtime-active deployment, signal-observed proof, production readiness, Cribl/Wazuh/Splunk/AWS live proof, autonomous SOC operation, or public-safe runtime proof.
+
 ## What This Repository Proves
 
 | Proof surface | What it can support |
