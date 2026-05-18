@@ -4,22 +4,26 @@
 
 This runbook prepares release packaging only. It does not create a tag, GitHub Release, ZIP upload, signature, signed artifact, website update, public-safe approval, runtime-active claim, signal-observed claim, production claim, autonomous SOC claim, AI-approved disposition claim, or analyst-approved disposition claim.
 
-Official release is not complete until all of these exist and verify cleanly:
+Official release is absent until all of these exist and verify cleanly:
 
 - release tag: `hawkinsoperations-proof-pack-001`
 - GitHub Release: `HawkinsOperations Proof Pack 001`
-- release ZIP: `HAWKINSOPERATIONS_PROOF_PACK_001.zip`
+- uploaded release ZIP asset: `HAWKINSOPERATIONS_PROOF_PACK_001.zip`
 - checksum verification for the release ZIP and payload
 
 Current ceiling remains `CONTROLLED_TEST_VALIDATED`.
 
-Current public-safe status remains `NOT_PUBLIC_SAFE`.
+Reviewer package status remains `PUBLIC_SAFE_REVIEWER_RELEASE_CANDIDATE`.
+
+Raw/private runtime evidence remains `NOT_PUBLIC_SAFE` and excluded.
+
+Public-safe runtime proof remains `BLOCKED`.
 
 ## Pre-Release Checklist
 
 - Confirm the checkout is clean and based on `main`.
 - Confirm `RELEASE_MANIFEST.json` still names `HAWKINSOPERATIONS_PROOF_PACK_001`.
-- Confirm `release_status` remains `CHECK_MODE_SOURCE_ONLY_NO_TAG_NO_RELEASE` until the approved release workflow runs.
+- Confirm `release_status` remains `PUBLIC_SAFE_REVIEWER_RELEASE_CANDIDATE_NO_TAG_NO_RELEASE` until the approved release workflow runs.
 - Confirm no tag named `hawkinsoperations-proof-pack-001` exists.
 - Confirm no GitHub Release for `hawkinsoperations-proof-pack-001` exists.
 - Confirm no generated ZIP, Sigstore bundle, signature, or signed artifact is staged or committed.
@@ -37,6 +41,7 @@ python -B scripts/verify_proof_integrity.py
 python -B scripts/verify-proof-pack-001-release.py
 python -B scripts/build-proof-pack-001-zip.py --check
 python -B scripts/verify-proof-pack-001-zip.py --check
+python -B scripts/verify-proof-pack-001-zip.py dist/proof-pack-001/HAWKINSOPERATIONS_PROOF_PACK_001.zip
 git diff --check
 ```
 
@@ -136,7 +141,9 @@ HawkinsOperations Proof Pack 001
 This release packages the bounded HO-DET-001 controlled-test proof packet.
 
 Ceiling: CONTROLLED_TEST_VALIDATED
-Public-safe status: NOT_PUBLIC_SAFE
+Reviewer package status: PUBLIC_SAFE_REVIEWER_RELEASE_CANDIDATE
+Raw/private runtime evidence public-safe: NOT_PUBLIC_SAFE
+Public-safe runtime proof: BLOCKED
 
 Included payload:
 
