@@ -2,13 +2,20 @@
 
 ## Boundary
 
-This runbook prepares release packaging only. It does not create a tag, GitHub Release, ZIP upload, signature, signed artifact, website update, public-safe approval, runtime-active claim, signal-observed claim, production claim, autonomous SOC claim, AI-approved disposition claim, or analyst-approved disposition claim.
+This runbook records the Proof Pack 001 release-packaging boundary and post-release public route. It does not authorize another tag, another GitHub Release, another ZIP upload, a signature, a signed artifact, a website update, public-safe approval, runtime-active claim, signal-observed claim, production claim, autonomous SOC claim, AI-approved disposition claim, or analyst-approved disposition claim.
 
-Official release is absent until all of these exist and verify cleanly:
+Proof Pack 001 has an official direct GitHub Release route:
+
+https://github.com/HawkinsOperations/hawkinsoperations-proof/releases/tag/hawkinsoperations-proof-pack-001
+
+The generic GitHub `/releases` index is not the source of truth if it renders inconsistently. Public surfaces should route reviewers to the exact tag release URL above.
+
+The official release state is bounded by:
 
 - release tag: `hawkinsoperations-proof-pack-001`
 - GitHub Release: `HawkinsOperations Proof Pack 001`
 - uploaded release ZIP asset: `HAWKINSOPERATIONS_PROOF_PACK_001.zip`
+- release ZIP SHA256: `44d8a643aa2b113c9e99be0462e699d39af707a67190823cc05bb381907dc452`
 - checksum verification for the release ZIP and payload
 
 Current ceiling remains `CONTROLLED_TEST_VALIDATED`.
@@ -23,13 +30,13 @@ Public-safe runtime proof remains `BLOCKED`.
 
 - Confirm the checkout is clean and based on `main`.
 - Confirm `RELEASE_MANIFEST.json` still names `HAWKINSOPERATIONS_PROOF_PACK_001`.
-- Confirm `release_status` remains `PUBLIC_SAFE_REVIEWER_RELEASE_CANDIDATE_NO_TAG_NO_RELEASE` until the approved release workflow runs.
-- Confirm no tag named `hawkinsoperations-proof-pack-001` exists.
-- Confirm no GitHub Release for `hawkinsoperations-proof-pack-001` exists.
+- Confirm public routing uses the exact direct release URL:
+  `https://github.com/HawkinsOperations/hawkinsoperations-proof/releases/tag/hawkinsoperations-proof-pack-001`.
+- Confirm route-only reconciliation does not edit released packet payload files or change their checksum-bound contents.
 - Confirm no generated ZIP, Sigstore bundle, signature, or signed artifact is staged or committed.
 - Confirm human GitHub review exists before merge.
 - Confirm Raylee provides `MERGE_APPROVED` before merge.
-- Confirm Raylee provides `RELEASE_APPROVED_PROOF_PACK_001` before any future release publication step.
+- Confirm Raylee provides a separate explicit approval before any future release publication step.
 
 ## Validation Commands
 
@@ -97,7 +104,7 @@ Before merge, review the PR in GitHub Files changed and confirm:
 - scripts are checkable without publication
 - blocked claims remain blocked
 - private leak scan passes
-- official release remains pending
+- no stronger public claim is introduced
 
 ## Merge Gate
 
@@ -109,9 +116,11 @@ MERGE_APPROVED
 
 Green CI/status checks are not merge authority. Codex review is AI labor, not human governance.
 
-## Release Approval Gate
+## Future Release Action Gate
 
-Do not create a tag, GitHub Release, ZIP upload, checksum publication, signature, or signed artifact until Raylee provides:
+Proof Pack 001 already has an official direct GitHub Release route. Do not create another tag, GitHub Release, ZIP upload, checksum publication, signature, or signed artifact without a separate explicit Raylee approval.
+
+The historical Proof Pack 001 release approval token was:
 
 ```text
 RELEASE_APPROVED_PROOF_PACK_001
@@ -119,7 +128,7 @@ RELEASE_APPROVED_PROOF_PACK_001
 
 ## Tag Naming
 
-Use this tag only after the release approval gate:
+The official Proof Pack 001 tag is:
 
 ```text
 hawkinsoperations-proof-pack-001
@@ -127,7 +136,7 @@ hawkinsoperations-proof-pack-001
 
 ## GitHub Release Title
 
-Use this release title only after the release approval gate:
+The official Proof Pack 001 release title is:
 
 ```text
 HawkinsOperations Proof Pack 001
