@@ -1,9 +1,12 @@
-name: Governance Gate
+﻿name: Governance Gate
 
 on:
   pull_request:
   push:
     branches: [main]
+
+permissions:
+  contents: read
 
 jobs:
   required-files:
