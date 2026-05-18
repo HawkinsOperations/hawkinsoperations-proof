@@ -1,9 +1,12 @@
-name: baseline-proof-integrity
+﻿name: baseline-proof-integrity
 
 on:
   pull_request:
   push:
     branches: [main]
+
+permissions:
+  contents: read
 
 jobs:
   baseline-hod001-proof-integrity:
