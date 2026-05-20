@@ -1,0 +1,297 @@
+schema_version: phase2d-proof-status-index-v1
+owner_repo: hawkinsoperations-proof
+truth_surface: proof_boundary_index
+human_review_required: true
+purpose: Carry detection IDs through proof-boundary truth without promoting runtime, signal, public-safe, or website proof status.
+claim_boundary:
+  allowed_status_values:
+    - SOURCE_EXISTS
+    - SOURCE_CONTRACT_ENFORCED
+    - VALIDATION_PLANNED
+    - CONTROLLED_TEST_VALIDATED
+    - PRIVATE_RUNTIME_EVIDENCE_CAPTURED
+    - NOT_PUBLIC_SAFE
+    - runtime_status=NOT_PROVEN
+    - signal_status=NOT_PROVEN
+    - human_review_required=true
+  blocked_claims:
+    - runtime-active public proof
+    - signal-observed public proof
+    - public-safe proof unless an explicit proof record supports it
+    - live IdP proof
+    - live SIEM proof
+    - live Splunk proof
+    - live Wazuh proof
+    - live Cribl proof
+    - live Security Onion proof
+    - production-ready
+    - fleet-wide
+    - autonomous SOC
+    - AI-approved disposition
+    - analyst-approved disposition
+    - website rendering as proof
+entries:
+  - detection_id: HO-DET-001
+    source_truth_owner: hawkinsoperations-detections
+    source_status: SOURCE_EXISTS
+    validation_truth_owner: hawkinsoperations-validation
+    validation_status: CONTROLLED_TEST_VALIDATED
+    platform_visibility_owner: hawkinsoperations-platform
+    platform_visibility_status: STATUS_VISIBILITY_PRESENT_NON_PROMOTIONAL
+    proof_record_path: proof/records/HO-DET-001.md
+    proof_card_path: proof/cards/HO-DET-001.md
+    proof_ceiling: CONTROLLED_TEST_VALIDATED
+    runtime_status: PRIVATE_RUNTIME_BOUNDARY_CONTEXT_ONLY
+    signal_status: NOT_PROVEN
+    public_safe_status: NOT_PUBLIC_SAFE
+    website_status: WEBSITE_UNTOUCHED_NOT_PROOF
+    blocked_claims:
+      - runtime-active public proof
+      - signal-observed public proof
+      - public-safe proof
+      - production-ready
+      - live Splunk proof
+      - live Wazuh proof
+      - live Cribl proof
+      - AI-approved disposition
+      - analyst-approved disposition
+    next_gate: proof-record-specific human review before any public-safe, runtime, or signal promotion
+    notes: Existing proof record supports CONTROLLED_TEST_VALIDATED. Private runtime wording is boundary context only and does not create public runtime proof.
+
+  - detection_id: HO-DET-011
+    source_truth_owner: hawkinsoperations-detections
+    source_status: SOURCE_EXISTS
+    validation_truth_owner: hawkinsoperations-validation
+    validation_status: CONTROLLED_TEST_VALIDATED
+    platform_visibility_owner: hawkinsoperations-platform
+    platform_visibility_status: STATUS_VISIBILITY_PRESENT_NON_PROMOTIONAL
+    proof_record_path: proof/records/HO-DET-011.md
+    proof_card_path: null
+    proof_ceiling: PRIVATE_RUNTIME_EVIDENCE_CAPTURED
+    runtime_status: PRIVATE_RUNTIME_EVIDENCE_CAPTURED
+    signal_status: NOT_PROVEN
+    public_safe_status: NOT_PUBLIC_SAFE
+    website_status: WEBSITE_UNTOUCHED_NOT_PROOF
+    blocked_claims:
+      - runtime-active public proof
+      - signal-observed public proof
+      - public-safe proof
+      - production-ready
+      - live SIEM proof
+      - live Splunk proof
+      - live Wazuh proof
+      - live Cribl proof
+      - AI-approved disposition
+      - analyst-approved disposition
+    next_gate: proof-card or public reviewer route only after separate human-approved proof scope
+    notes: Existing proof record supports private runtime evidence capture only. It does not promote public runtime, signal, or public-safe status.
+
+  - detection_id: HO-DET-012
+    source_truth_owner: hawkinsoperations-detections
+    source_status: SOURCE_EXISTS
+    validation_truth_owner: hawkinsoperations-validation
+    validation_status: CONTROLLED_TEST_VALIDATED
+    platform_visibility_owner: hawkinsoperations-platform
+    platform_visibility_status: STATUS_VISIBILITY_PRESENT_NON_PROMOTIONAL
+    proof_record_path: null
+    proof_card_path: null
+    proof_ceiling: NO_PROOF_RECORD
+    runtime_status: NOT_PROVEN
+    signal_status: NOT_PROVEN
+    public_safe_status: NOT_PUBLIC_SAFE
+    website_status: WEBSITE_UNTOUCHED_NOT_PROOF
+    blocked_claims:
+      - runtime-active public proof
+      - signal-observed public proof
+      - public-safe proof
+      - production-ready
+      - live SIEM proof
+      - live Splunk proof
+      - AI-approved disposition
+      - analyst-approved disposition
+    next_gate: create proof record only under separate proof scope
+    notes: Validation is external truth owned by hawkinsoperations-validation. Proof repo has no HO-DET-012 proof record in this phase.
+
+  - detection_id: HO-DET-013
+    source_truth_owner: hawkinsoperations-detections
+    source_status: SOURCE_EXISTS
+    validation_truth_owner: hawkinsoperations-validation
+    validation_status: VALIDATION_PLANNED
+    platform_visibility_owner: hawkinsoperations-platform
+    platform_visibility_status: NOT_PLATFORM_INDEXED
+    proof_record_path: null
+    proof_card_path: null
+    proof_ceiling: NO_PROOF_RECORD
+    runtime_status: NOT_PROVEN
+    signal_status: NOT_PROVEN
+    public_safe_status: NOT_PUBLIC_SAFE
+    website_status: WEBSITE_UNTOUCHED_NOT_PROOF
+    blocked_claims:
+      - runtime-active public proof
+      - signal-observed public proof
+      - public-safe proof
+      - production-ready
+      - live SIEM proof
+      - AI-approved disposition
+      - analyst-approved disposition
+    next_gate: validation package before proof record
+    notes: Source exists in detections. Validation and proof are not promoted by this index.
+
+  - detection_id: AWS-DET-001
+    source_truth_owner: hawkinsoperations-detections
+    source_status: SOURCE_EXISTS
+    validation_truth_owner: hawkinsoperations-validation
+    validation_status: CONTROLLED_TEST_VALIDATED
+    platform_visibility_owner: hawkinsoperations-platform
+    platform_visibility_status: NOT_PLATFORM_INDEXED
+    proof_record_path: proof/records/AWS-DET-001.md
+    proof_card_path: proof/cards/AWS-DET-001.md
+    proof_ceiling: CONTROLLED_TEST_VALIDATED
+    runtime_status: NOT_PROVEN
+    signal_status: NOT_PROVEN
+    public_safe_status: NOT_PUBLIC_SAFE
+    website_status: WEBSITE_UNTOUCHED_NOT_PROOF
+    blocked_claims:
+      - runtime-active public proof
+      - signal-observed public proof
+      - public-safe proof
+      - production-ready
+      - live IdP proof
+      - live SIEM proof
+      - AI-approved disposition
+      - analyst-approved disposition
+    next_gate: separate proof scope before any live-cloud or public route approval
+    notes: Existing proof record supports controlled fixture validation only. It does not prove live AWS runtime or signal status.
+
+  - detection_id: ID-DET-001
+    source_truth_owner: hawkinsoperations-detections
+    source_status: SOURCE_EXISTS
+    validation_truth_owner: hawkinsoperations-validation
+    validation_status: CONTROLLED_TEST_VALIDATED
+    platform_visibility_owner: hawkinsoperations-platform
+    platform_visibility_status: STATUS_VISIBILITY_PRESENT_NON_PROMOTIONAL
+    proof_record_path: null
+    proof_card_path: null
+    proof_ceiling: NO_PROOF_RECORD
+    runtime_status: NOT_PROVEN
+    signal_status: NOT_PROVEN
+    public_safe_status: NOT_PUBLIC_SAFE
+    website_status: WEBSITE_UNTOUCHED_NOT_PROOF
+    blocked_claims:
+      - runtime-active public proof
+      - signal-observed public proof
+      - public-safe proof
+      - production-ready
+      - live IdP proof
+      - live SIEM proof
+      - AI-approved disposition
+      - analyst-approved disposition
+    next_gate: proof record creation under separate proof scope
+    notes: Validation status is external validation truth. Proof repo has no ID-DET-001 proof record in this phase.
+
+  - detection_id: ID-DET-002
+    source_truth_owner: hawkinsoperations-detections
+    source_status: SOURCE_EXISTS
+    validation_truth_owner: hawkinsoperations-validation
+    validation_status: CONTROLLED_TEST_VALIDATED
+    platform_visibility_owner: hawkinsoperations-platform
+    platform_visibility_status: STATUS_VISIBILITY_PRESENT_NON_PROMOTIONAL
+    proof_record_path: null
+    proof_card_path: null
+    proof_ceiling: NO_PROOF_RECORD
+    runtime_status: NOT_PROVEN
+    signal_status: NOT_PROVEN
+    public_safe_status: NOT_PUBLIC_SAFE
+    website_status: WEBSITE_UNTOUCHED_NOT_PROOF
+    blocked_claims:
+      - runtime-active public proof
+      - signal-observed public proof
+      - public-safe proof
+      - production-ready
+      - live IdP proof
+      - live SIEM proof
+      - AI-approved disposition
+      - analyst-approved disposition
+    next_gate: proof record creation under separate proof scope
+    notes: Validation status is external validation truth. Proof repo has no ID-DET-002 proof record in this phase.
+
+  - detection_id: ID-DET-003
+    source_truth_owner: hawkinsoperations-detections
+    source_status: SOURCE_EXISTS
+    validation_truth_owner: hawkinsoperations-validation
+    validation_status: CONTROLLED_TEST_VALIDATED
+    platform_visibility_owner: hawkinsoperations-platform
+    platform_visibility_status: STATUS_VISIBILITY_PRESENT_NON_PROMOTIONAL
+    proof_record_path: null
+    proof_card_path: null
+    proof_ceiling: NO_PROOF_RECORD
+    runtime_status: NOT_PROVEN
+    signal_status: NOT_PROVEN
+    public_safe_status: NOT_PUBLIC_SAFE
+    website_status: WEBSITE_UNTOUCHED_NOT_PROOF
+    blocked_claims:
+      - runtime-active public proof
+      - signal-observed public proof
+      - public-safe proof
+      - production-ready
+      - live IdP proof
+      - live SIEM proof
+      - AI-approved disposition
+      - analyst-approved disposition
+    next_gate: proof record creation under separate proof scope
+    notes: Validation status is external validation truth. Proof repo has no ID-DET-003 proof record in this phase.
+
+  - detection_id: ID-DET-004
+    source_truth_owner: hawkinsoperations-detections
+    source_status: SOURCE_EXISTS
+    validation_truth_owner: hawkinsoperations-validation
+    validation_status: CONTROLLED_TEST_VALIDATED
+    platform_visibility_owner: hawkinsoperations-platform
+    platform_visibility_status: STATUS_VISIBILITY_PRESENT_NON_PROMOTIONAL
+    proof_record_path: null
+    proof_card_path: null
+    proof_ceiling: NO_PROOF_RECORD
+    runtime_status: NOT_PROVEN
+    signal_status: NOT_PROVEN
+    public_safe_status: NOT_PUBLIC_SAFE
+    website_status: WEBSITE_UNTOUCHED_NOT_PROOF
+    blocked_claims:
+      - runtime-active public proof
+      - signal-observed public proof
+      - public-safe proof
+      - production-ready
+      - live IdP proof
+      - live SIEM proof
+      - AI-approved disposition
+      - analyst-approved disposition
+    next_gate: proof record creation under separate proof scope
+    notes: Validation status is external validation truth. Proof repo has no ID-DET-004 proof record in this phase.
+
+  - detection_id: HO-NDR-001
+    source_truth_owner: hawkinsoperations-detections
+    source_status: EXTERNAL_BOUNDARY_CONTRACT
+    validation_truth_owner: hawkinsoperations-validation
+    validation_status: VALIDATION_CONTRACT_ENFORCED
+    platform_visibility_owner: hawkinsoperations-platform
+    platform_visibility_status: NOT_PLATFORM_INDEXED
+    proof_record_path: null
+    proof_card_path: proof/cards/HO-NDR-001.md
+    proof_ceiling: CROSS_SOURCE_CORROBORATION_CONTRACT_DEFINED
+    runtime_status: NOT_PROVEN
+    signal_status: NOT_PROVEN
+    public_safe_status: NOT_PUBLIC_SAFE
+    website_status: WEBSITE_UNTOUCHED_NOT_PROOF
+    blocked_claims:
+      - runtime-active public proof
+      - signal-observed public proof
+      - public-safe proof
+      - production-ready
+      - live Security Onion proof
+      - live SIEM proof
+      - live Splunk proof
+      - live Cribl proof
+      - autonomous SOC
+      - AI-approved disposition
+      - analyst-approved disposition
+    next_gate: captured cross-source corroboration evidence under separate proof scope
+    notes: Proof card and boundary contract exist. This index does not create captured Security Onion, Splunk, Cribl, or public-safe proof.
