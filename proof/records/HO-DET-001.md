@@ -180,6 +180,7 @@ Private/internal runtime and marker-delivery sections in this record are non-pub
 | Private marker-delivery material exists. | PRIVATE_INTERNAL_BOUNDARY_CONTEXT | Private packet retained outside this repository; marker digest retained as a private/internal receipt; status `CONTROLLED_LAB_CRIBL_TO_SPLUNK_MARKER_DELIVERY_VERIFIED` | "Private/internal marker-delivery material is recorded as non-public boundary context and does not authorize public promotion." | "HO-DET-001 is Cribl-routed."; "Cribl routed live telemetry."; "Live Splunk fired."; "HO-DET-001 is runtime-active."; "HO-DET-001 is production-ready."; "HO-DET-001 is fleet-wide."; "HO-DET-001 is public-safe." | Public evidence linkage, privacy review, stale review, wording review, and Raylee approval. |
 | AutoSOC triage packet exists. | PROVEN | `hawkinsoperations-validation/validation/successor/ho-det-001/autosoc-triage-packet.json` | "A deterministic controlled-test triage packet was generated from the validation result." | blocked: "Production AutoSOC triage occurred." | Production AutoSOC run evidence. |
 | Offline LLM support stub exists. | PROVEN | `hawkinsoperations-validation/validation/successor/ho-det-001/llm-summary.json` | "A deterministic blocked-runtime LLM support stub exists." | blocked: "A private model host was runtime-active." | Approved local model runtime evidence. |
+| SOCaaS pilot receipt candidate exists. | PROVEN | `hawkinsoperations-validation/docs/HO-DET-001_CLOSED_LOOP.md`; `hawkinsoperations-platform/contracts/examples/soar-case-packet-v0.sample.json`; `hawkinsoperations-validation/validation/successor/ho-det-001/case-packet.json`; `hawkinsoperations-validation/validation/successor/ho-det-001/autosoc-triage-packet.json` | "HO-DET-001 can be reviewed as a controlled-test SOCaaS pilot receipt candidate with endpoint process facts, deterministic validation, support-only triage, and explicit human claim boundaries." | blocked: "HO-DET-001 is SOCaaS-ready."; "HO-DET-001 is customer-deployed."; "HO-DET-001 resolved production alerts autonomously." | Separate SOCaaS implementation review, customer-safe wording review, runtime/signal evidence, privacy review, stale review, and Raylee approval. |
 | HO-DET-001 runtime-active status is proven. | BLOCKED | No deployment, enablement, schedule, or backend state evidence linked. | "Runtime-active status requires deployment evidence." | "This detection is active." | Preserve runtime deployment evidence. |
 | HO-DET-001 signal-observed status is proven. | BLOCKED | No preserved telemetry, alert, log, or search output linked. | "Signal-observed status requires preserved telemetry, alert, log, or search output." | "This catches attacks." | Preserve signal observation evidence. |
 | HO-DET-001 public-safe status is approved. | BLOCKED | No reviewed public wording, privacy review, stale review, evidence linkage, or Raylee approval. | "Public-safe status requires reviewed wording, privacy review, stale review, evidence linkage, and Raylee approval." | "HO-DET-001 is PUBLIC_SAFE." | Raylee approval after evidence and claim review. |
@@ -267,6 +268,7 @@ Private/internal runtime and marker-delivery sections in this record are non-pub
 - "HO-DET-001 is CONTROLLED_TEST_VALIDATED through a public proof-loop workflow with controlled positive and negative test cases, deterministic pass/fail output, and blocked-claim enforcement."
 - "HO-DET-001 platform runtime contract enforcement exists as a non-promotional guardrail."
 - "A deterministic controlled-test AutoSOC triage packet was generated from the HO-DET-001 validation result."
+- "HO-DET-001 can be reviewed as a controlled-test SOCaaS pilot receipt candidate with endpoint process facts, deterministic validation, support-only triage, and explicit human claim boundaries."
 - "The offline LLM support artifact is a deterministic blocked-runtime stub and does not prove private model host runtime."
 
 ## Blocked Claims
@@ -283,6 +285,9 @@ Private/internal runtime and marker-delivery sections in this record are non-pub
 - "HO-DET-001 is Wazuh-routed."
 - "HO-DET-001 is AWS-live."
 - "HO-DET-001 runs an autonomous SOC."
+- "HO-DET-001 is SOCaaS-ready."
+- "HO-DET-001 is customer-deployed."
+- "HO-DET-001 resolved production alerts autonomously."
 - "Production AutoSOC triage occurred."
 - "An analyst approved the disposition."
 - "AI approved the disposition."
