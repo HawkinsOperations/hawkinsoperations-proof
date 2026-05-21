@@ -52,6 +52,18 @@ HO-DET-001 is CONTROLLED_TEST_VALIDATED through a public proof-loop workflow wit
 
 CI-enforced controlled-test scope and verifier-backed proof record. The proof card is route/display only. It does not raise the public ceiling, and it does not turn private/internal controlled lab runtime match evidence into public proof.
 
+## Reviewer Verification Route
+
+| Reviewer question | Verify in | Boundary |
+|---|---|---|
+| What is proven? | `proof/records/HO-DET-001.md`; `proof/records/HO-DET-001-CONTROLLED-TEST-VALIDATION-001.json`; `hawkinsoperations-validation/reports/ho-det-001/validation-result.json`; `hawkinsoperations-validation/reports/ho-det-001/pipeline-proof.md`; `hawkinsoperations-validation/reports/ho-det-001/pipeline-proof.json` | Controlled positive and negative process-creation fixture validation only. |
+| What is blocked? | `proof/records/HO-DET-001.md` sections `Unsupported Claims`, `Blocked Claims`, `Proof Level Assessment`, and `Next Promotion Gate`; `proof/indexes/DETECTION_PROOF_STATUS_INDEX.yml` | Runtime-active public proof, signal-observed public proof, public-safe status, production/fleet claims, routed-telemetry claims, AI disposition authority, and analyst disposition authority remain blocked. |
+| Where is the reviewer status index? | `proof/indexes/DETECTION_PROOF_STATUS_INDEX.yml`; `scripts/verify_detection_proof_status_index.py` | The index routes proof status only. It does not promote runtime, signal, public-safe, or website proof status. |
+| What may AI do? | This card; `proof/records/README.md`; `proof/cards/README.md` | AI may generate scoped labor, reviewer routes, summaries, and deterministic support artifacts. Evidence and human review authorize claims. |
+| What does the system refuse to claim? | This card section `What This Does NOT Prove`; `proof/records/HO-DET-001.md` section `Blocked Claims` | The system does not claim runtime-active status, signal-observed status, PUBLIC_SAFE status, live Splunk public proof, Cribl-routed telemetry, Wazuh-routed telemetry, production AutoSOC, AI-approved disposition, AI-decided disposition, or analyst-approved disposition. |
+
+Reviewer acceptance rule: if this card, the proof record, and the proof status index disagree, use the source proof record and verifier-backed validation artifacts as authority until the route card is corrected.
+
 ## Current Status
 
 | Plane | Truth |
