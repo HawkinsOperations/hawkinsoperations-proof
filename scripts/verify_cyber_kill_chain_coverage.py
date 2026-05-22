@@ -92,15 +92,31 @@ NEGATIVE_CONTEXT_MARKERS = [
     "claim_boundary",
     "does not",
     "cannot",
+    "forbidden",
+    "denied",
     "no ",
+    "no-claim",
     "not ",
     "not_",
+    "not claimed",
+    "not proven",
     "without ",
     "false",
     "proof_authority: false",
 ]
 
-SUMMARY_TABLE_HEADER_RE = re.compile(r"\|\s*Cyber Kill Chain Stage\s*\|.*\|\s*Blocked Claims\s*\|", re.IGNORECASE)
+NEGATIVE_TABLE_HEADERS = [
+    "blocked claims",
+    "blocked",
+    "not claimed",
+    "not proven",
+    "no-claim",
+    "claim boundary",
+    "does not prove",
+    "does not claim",
+    "forbidden",
+    "denied",
+]
 
 
 class VerificationError(Exception):
@@ -210,10 +226,55 @@ def validate_required_mappings(stages: dict[str, dict[str, Any]]) -> None:
                 raise VerificationError(f"{stage_name} missing required mapping term: {term}")
 
 
-def line_has_negative_context(lines: list[str], index: int) -> bool:
+def has_negative_marker(value: str) -> bool:
+    return any(marker in value.lower() for marker in NEGATIVE_CONTEXT_MARKERS)
+
+
+def is_markdown_table_row(line: str) -> bool:
+    stripped = line.strip()
+    return stripped.startswith("|") and stripped.endswith("|") and stripped.count("|") >= 2
+
+
+def split_markdown_table_row(line: str) -> list[str]:
+    return [cell.strip() for cell in line.strip().strip("|").split("|")]
+
+
+def is_markdown_table_separator(cells: list[str]) -> bool:
+    return bool(cells) and all(re.fullmatch(r":?-{3,}:?", cell.strip()) for cell in cells)
+
+
+def table_header_for_row(lines: list[str], index: int) -> list[str]:
+    start = index
+    while start > 0 and is_markdown_table_row(lines[start - 1]):
+        start -= 1
+    for offset in range(start, index):
+        cells = split_markdown_table_row(lines[offset])
+        if not is_markdown_table_separator(cells):
+            return cells
+    return []
+
+
+def table_cell_has_negative_context(lines: list[str], index: int, term: str) -> bool:
+    cells = split_markdown_table_row(lines[index])
+    headers = table_header_for_row(lines, index)
+    term_pattern = re.compile(re.escape(term), flags=re.IGNORECASE)
+    for cell_index, cell in enumerate(cells):
+        if not term_pattern.search(cell):
+            continue
+        header = headers[cell_index] if cell_index < len(headers) else ""
+        if has_negative_marker(cell):
+            return True
+        if any(marker in header.lower() for marker in NEGATIVE_TABLE_HEADERS):
+            return True
+        if len(cells) == 2 and any(has_negative_marker(other) for other in cells if other != cell):
+            return True
+    return False
+
+
+def line_has_negative_context(lines: list[str], index: int, term: str) -> bool:
     line = lines[index]
-    if line.lstrip().startswith("|") and line.count("|") >= 5:
-        return True
+    if is_markdown_table_row(line):
+        return table_cell_has_negative_context(lines, index, term)
 
     start = max(index - 20, 0)
     end = min(index + 2, len(lines))
@@ -221,7 +282,7 @@ def line_has_negative_context(lines: list[str], index: int) -> bool:
     if any(marker in context for marker in NEGATIVE_CONTEXT_MARKERS):
         return True
     for offset in range(start, index + 1):
-        if SUMMARY_TABLE_HEADER_RE.search(lines[offset]) or "blocked_claims:" in lines[offset].lower():
+        if "blocked_claims:" in lines[offset].lower():
             return True
     return False
 
@@ -231,7 +292,7 @@ def validate_risky_term_context(path: Path) -> None:
     for index, line in enumerate(lines):
         for term in RISKY_TERMS:
             if re.search(re.escape(term), line, flags=re.IGNORECASE):
-                if not line_has_negative_context(lines, index):
+                if not line_has_negative_context(lines, index, term):
                     raise VerificationError(
                         f"{rel(path)}:{index + 1} uses '{term}' outside blocked/negative context"
                     )
@@ -243,8 +304,35 @@ def validate_no_stale_work_path(path: Path) -> None:
         raise VerificationError(f"{rel(path)} contains stale Work path reference")
 
 
+def run_internal_context_self_checks() -> None:
+    positive_table = [
+        "| Stage | Current State | Blocked Claims |",
+        "|---|---|---|",
+        "| Exploitation | runtime-active | signal-observed blocked |",
+    ]
+    if line_has_negative_context(positive_table, 2, "runtime-active"):
+        raise VerificationError("internal self-check failed: positive table runtime-active row passed")
+
+    blocked_table = [
+        "| Stage | Current State | Blocked Claims |",
+        "|---|---|---|",
+        "| Exploitation | CONTROLLED_TEST_VALIDATED | runtime-active is blocked / not proven |",
+    ]
+    if not line_has_negative_context(blocked_table, 2, "runtime-active"):
+        raise VerificationError("internal self-check failed: blocked table runtime-active row failed")
+
+    positive_text = ["Current state: runtime-active"]
+    if line_has_negative_context(positive_text, 0, "runtime-active"):
+        raise VerificationError("internal self-check failed: positive text runtime-active passed")
+
+    blocked_text = ["Blocked claims:", "- runtime-active"]
+    if not line_has_negative_context(blocked_text, 1, "runtime-active"):
+        raise VerificationError("internal self-check failed: blocked text runtime-active failed")
+
+
 def main() -> int:
     try:
+        run_internal_context_self_checks()
         require_files_exist()
         index = load_yaml(INDEX_PATH)
         validate_top_level(index)
