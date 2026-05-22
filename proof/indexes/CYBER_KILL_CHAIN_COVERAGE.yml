@@ -1,0 +1,350 @@
+version: 1
+artifact: CYBER_KILL_CHAIN_COVERAGE
+system: HawkinsOperations
+public_safe: true
+proof_authority: false
+claim_boundary:
+  rendering_is_not_proof: true
+  runtime_active_claimed: false
+  signal_observed_claimed: false
+  production_ready_claimed: false
+  ai_approved_claimed: false
+  analyst_approved_claimed: false
+  evidence_and_human_review_authorize_claims: true
+stages:
+  - stage: Reconnaissance
+    status: BOUNDARY_CONTRACT_ONLY
+    artifacts:
+      - ID-DET-001
+      - ID-DET-002
+      - ID-DET-003
+      - ID-DET-004
+      - HO-NDR-001
+      - HO-PIPE-001
+    behavior_family:
+      - identity session context
+      - MFA fatigue or repeated MFA failure
+      - privileged role or admin group change
+      - impossible travel or anomalous session context
+      - NDR visibility boundary
+      - pipeline route integrity concept
+    proof_state:
+      - ID-DET-001: NO_PROOF_RECORD
+      - ID-DET-002: NO_PROOF_RECORD
+      - ID-DET-003: NO_PROOF_RECORD
+      - ID-DET-004: NO_PROOF_RECORD
+      - HO-NDR-001: BOUNDARY_CONTRACT_ONLY
+      - HO-PIPE-001: SOURCE_EXISTS
+    validation_state:
+      - ID-DET-001: CONTROLLED_TEST_VALIDATED; 10 cases; 5 positive; 5 negative; 0 missed positives; 0 false-positive negatives
+      - ID-DET-002: CONTROLLED_TEST_VALIDATED; 10 cases; 5 positive; 5 negative; 0 missed positives; 0 false-positive negatives
+      - ID-DET-003: CONTROLLED_TEST_VALIDATED; 10 cases; 5 positive; 5 negative; 0 missed positives; 0 false-positive negatives
+      - ID-DET-004: CONTROLLED_TEST_VALIDATED; 10 cases; 5 positive; 5 negative; 0 missed positives; 0 false-positive negatives
+      - HO-NDR-001: BOUNDARY_CONTRACT_ONLY
+      - HO-PIPE-001: VALIDATION_PLANNED
+    automation_support:
+      - reviewer route selection
+      - validation registry display
+      - proof status index
+      - claim-boundary scanners
+    ai_support_boundary:
+      - AI may summarize sanitized identity context and identify missing fields
+      - AI cannot promote proof or decide disposition
+    blocked_claims:
+      - live IdP
+      - live SIEM/NDR
+      - complete identity coverage
+      - public-safe runtime
+      - runtime-active
+      - signal-observed
+      - autonomous SOC
+      - AI-approved
+      - analyst-approved
+    next_promotion_gate:
+      - live identity telemetry evidence
+      - proof record creation under separate scope
+      - signal-preserved case packet
+      - public-safe review
+      - human review
+    role_fit_signal: Coverage thinking, identity monitoring, gap analysis, and governed AI automation support.
+
+  - stage: Weaponization
+    status: CONTROLLED_TEST_VALIDATED
+    artifacts:
+      - detection source packages
+      - validation packages
+      - validation registry
+      - parity verifiers
+      - claim-boundary scanners
+      - proof status index
+      - proof records where present
+    behavior_family:
+      - defensive detection modeling
+      - ATT&CK-mapped detection families
+      - controlled fixture design
+      - proof-boundary enforcement
+    proof_state:
+      - proof records exist only for approved proof-record routes
+      - HO-DET-012: NO_PROOF_RECORD
+      - ID-DET-001..004: NO_PROOF_RECORD
+      - HO-DET-013: SOURCE_EXISTS
+    validation_state:
+      - CONTROLLED_TEST_VALIDATED where validation reports support it
+      - VALIDATION_PLANNED where source or registry still records planned state
+    automation_support:
+      - deterministic validators
+      - parity verifiers
+      - claim-boundary scanners
+      - proof-index verifier
+      - proof-pack verifier
+    ai_support_boundary:
+      - AI may draft summaries and reviewer questions
+      - deterministic validation and human review authorize claims
+    blocked_claims:
+      - AI-approved
+      - analyst-approved
+      - production-ready
+      - runtime-active
+      - signal-observed
+      - public-safe runtime
+      - customer-deployed
+    next_promotion_gate:
+      - reviewer packet
+      - validation report
+      - proof record where absent
+      - deterministic verifier pass
+      - human review
+    role_fit_signal: Detection engineering workflow, fixture design, and quality gates without unsupported claim promotion.
+
+  - stage: Delivery
+    status: FIXTURE_ONLY
+    artifacts:
+      - AWS-DET-001
+      - AWS-DET-001 proof record
+      - AWS-DET-001 proof card
+      - cloud/access attempt lane
+    behavior_family:
+      - cloud IAM denial behavior
+      - access attempt visibility
+    proof_state:
+      - AWS-DET-001: CONTROLLED_TEST_VALIDATED
+      - public_safe_status: NOT_PUBLIC_SAFE
+    validation_state:
+      - AWS-DET-001: CONTROLLED_TEST_VALIDATED; 6 cases; 3 positive; 3 negative; 0 missed positives; 0 false-positive negatives
+    automation_support:
+      - validation report
+      - proof card
+      - result parity verifier
+      - claim-boundary scanner
+    ai_support_boundary:
+      - AI may summarize case context
+      - AI cannot claim live AWS proof
+    blocked_claims:
+      - live AWS
+      - live CloudTrail
+      - AWS account coverage
+      - cloud runtime-active proof
+      - signal-observed
+      - production-ready
+      - AI-approved
+      - analyst-approved
+    next_promotion_gate:
+      - sanitized live CloudTrail evidence
+      - enabled cloud detection route
+      - evidence linkage
+      - public-safe review
+      - human review
+    role_fit_signal: Cloud/security monitoring relevance with fixture-only claim discipline.
+
+  - stage: Exploitation
+    status: CONTROLLED_TEST_VALIDATED
+    artifacts:
+      - HO-DET-001
+      - HO-DET-001 proof record
+      - HO-DET-001 proof card
+      - Proof Pack 001
+      - case packet
+      - AutoSOC triage packet
+    behavior_family:
+      - T1059.001 Command and Scripting Interpreter: PowerShell
+      - suspicious PowerShell EncodedCommand execution
+    proof_state:
+      - HO-DET-001: CONTROLLED_TEST_VALIDATED
+      - public_safe_status: NOT_PUBLIC_SAFE
+      - private runtime context: not public proof
+    validation_state:
+      - HO-DET-001: CONTROLLED_TEST_VALIDATED; 14 cases; 7 positive; 7 negative; 0 missed positives; 0 false-positive negatives
+    automation_support:
+      - validation script
+      - parity verifier
+      - claim-boundary scanner
+      - proof integrity verifier
+      - proof-pack verifier
+      - deterministic case packet
+    ai_support_boundary:
+      - AI may support triage summaries and questions over sanitized facts
+      - AI cannot approve or promote proof
+    blocked_claims:
+      - runtime-active
+      - signal-observed
+      - live Splunk
+      - Cribl-routed proof
+      - Wazuh-routed proof
+      - production-ready
+      - public-safe runtime
+      - autonomous SOC
+      - AI-approved
+      - analyst-approved
+    next_promotion_gate:
+      - runtime evidence promotion
+      - signal evidence
+      - public-safe evidence linkage
+      - stale review
+      - wording review
+      - human review
+    role_fit_signal: Direct detection engineering, alert quality, false-positive control, and SOC automation fit.
+
+  - stage: Installation
+    status: PRIVATE_RUNTIME_EVIDENCE_CAPTURED
+    artifacts:
+      - HO-DET-011
+      - HO-DET-011 proof record
+      - HO-DET-012
+    behavior_family:
+      - service creation or persistence behavior
+      - scheduled task or job behavior
+    proof_state:
+      - HO-DET-011: PRIVATE_RUNTIME_EVIDENCE_CAPTURED; NOT_PUBLIC_SAFE
+      - HO-DET-012: NO_PROOF_RECORD; NOT_PUBLIC_SAFE
+      - platform guardrail drift: DRIFT_REVIEW_REQUIRED where platform contract reports it
+    validation_state:
+      - HO-DET-011: CONTROLLED_TEST_VALIDATED; 17 cases; 7 positive; 10 negative; 0 missed positives; 0 false-positive negatives
+      - HO-DET-012: CONTROLLED_TEST_VALIDATED; 8 cases; 4 positive; 4 negative; 0 missed positives; 0 false-positive negatives
+    automation_support:
+      - validator scripts
+      - result parity checks
+      - claim-boundary scanners
+      - proof status index
+      - case-packet guardrails
+    ai_support_boundary:
+      - AI may summarize validation outcomes and flag drift for review
+      - AI cannot normalize drift or promote private runtime evidence
+    blocked_claims:
+      - public-safe proof
+      - signal-observed
+      - runtime-active
+      - production deployment
+      - complete service-creation coverage
+      - scheduled-task coverage completeness
+      - live Splunk
+      - Wazuh-routed proof
+      - Cribl-routed proof
+      - autonomous SOC
+      - AI-approved
+      - analyst-approved
+    next_promotion_gate:
+      - public-safe evidence review for HO-DET-011
+      - proof record creation under separate scope for HO-DET-012
+      - route correlation review
+      - stale review
+      - wording review
+      - human approval
+    role_fit_signal: Persistence-stage coverage with private/public separation and explicit proof gaps.
+
+  - stage: Command & Control
+    status: BOUNDARY_CONTRACT_ONLY
+    artifacts:
+      - HO-NDR-001
+      - HO-NDR-001 boundary contract
+      - HO-NDR-001 proof card
+      - HO-PIPE-001
+    behavior_family:
+      - C2 visibility support surface
+      - NDR corroboration boundary
+      - pipeline route contract
+    proof_state:
+      - HO-NDR-001: BOUNDARY_CONTRACT_ONLY
+      - HO-PIPE-001: SOURCE_EXISTS
+    validation_state:
+      - HO-NDR-001: BOUNDARY_CONTRACT_ONLY
+      - HO-PIPE-001: VALIDATION_PLANNED
+    automation_support:
+      - pipeline route contract
+      - cross-source corroboration contract
+      - visibility boundary
+      - proof status index
+      - verifier routes
+    ai_support_boundary:
+      - AI may explain missing telemetry and summarize route requirements
+      - AI cannot claim observed Security Onion, Splunk, Wazuh, or Cribl signal
+    blocked_claims:
+      - Security Onion observed proof
+      - Cribl-routed proof
+      - Wazuh-routed proof
+      - live Splunk
+      - signal-observed
+      - runtime-active
+      - production-ready
+      - public-safe proof
+      - autonomous SOC
+      - AI-approved
+      - analyst-approved
+    next_promotion_gate:
+      - preserved NDR evidence
+      - cross-source signal packet
+      - route verifier
+      - evidence-link review
+      - public-safe review
+      - human review
+    role_fit_signal: Telemetry architecture and automation boundary thinking without observed C2 telemetry claims.
+
+  - stage: Actions on Objectives
+    status: AI_SUPPORT_ONLY
+    artifacts:
+      - SOAR Case Packet v0
+      - AutoSOC Case Ledger v0
+      - Detection Factory Controller v0
+      - Local GPU Triage Gate
+      - Offline LLM Triage Support Contract
+      - proof records
+      - proof cards
+      - reviewer packets
+    behavior_family:
+      - investigation and response workflow layer
+      - analyst-support case structure
+      - AI-assisted triage boundary
+    proof_state:
+      - AI_SUPPORT_ONLY
+      - HUMAN_REVIEW_REQUIRED
+      - RENDERING_NOT_PROOF
+    validation_state:
+      - deterministic contract and sample validation where verifiers exist
+      - controlled-test support artifacts for HO-DET-001 case packet and AutoSOC triage packet
+    automation_support:
+      - deterministic case packet structure
+      - append-only ledger route
+      - factory controller status and plan packets
+      - verifier/check cards
+      - blocked action gates
+    ai_support_boundary:
+      - AI may summarize sanitized facts, identify missing context, draft questions, and map checklist fields
+      - AI cannot decide disposition, close cases, approve proof, suppress alerts, contain systems, execute response, or promote public claims
+    blocked_claims:
+      - autonomous SOC
+      - autonomous resolution
+      - AI-approved
+      - analyst-approved
+      - response automation
+      - containment execution
+      - closure execution
+      - suppression execution
+      - SOCaaS availability
+      - production-ready
+      - public-safe runtime
+    next_promotion_gate:
+      - case packet evidence
+      - deterministic verifier pass
+      - human review
+      - public-safe review
+      - separate promotion approval before response or closure wording
+    role_fit_signal: AI-assisted SOC workflow, SOAR support, case summarization, metrics, validation, and governed analyst support.
