@@ -12,11 +12,11 @@
 | GS-009 | Website blocked-claim scanner | `STANDING_CONTROL` | Site contract scanner tracks blocked wording such as runtime-active, signal-observed, and public-safe runtime proof; GS-008 website source evidence supports this boundary. | `HIGH_CONFIDENCE_PUBLIC` |
 | GS-010 | HO-DET-012 runtime evidence gate | `STANDING_CONTROL` | Boundary document requires approved runtime capture, telemetry evidence, verification, and human approval before promotion. | `HIGH_CONFIDENCE_PUBLIC` |
 | GS-012 | Human PR review authority | `SUPPORTING_EVIDENCE_ONLY` | Org-level and repo-level review docs require merge-readiness and `MERGE_APPROVED`; use as governance context unless enforcement is separately proven. | `HIGH_CONFIDENCE_PUBLIC` |
-| GS-014 | April dirty-tree visibility stop | `COUNTABLE_SAVE` | Public discussion is safe only as a generalized dirty-tree gate example; omit local file details and do not use as a public metric. | `HIGH_CONFIDENCE_LOCAL` |
-| GS-015 | April website promotion dirty-tree stop | `COUNTABLE_SAVE` | Public discussion is safe only as a process example with generated/unexpected file details redacted; no production-impact claim. | `HIGH_CONFIDENCE_LOCAL` |
-| GS-021 | May website branch-hygiene stop | `COUNTABLE_SAVE` | Public discussion is safe only as a generalized branch-hygiene example; omit branch lineage details and do not use as a public metric. | `HIGH_CONFIDENCE_LOCAL` |
-| GS-022 | May multi-repo package dirty-state stop | `COUNTABLE_SAVE` | Public discussion is safe as a generalized package-scope example; omit local path details and do not use as a public metric. | `HIGH_CONFIDENCE_LOCAL` |
-| GS-029 | May staged-index scope stop | `COUNTABLE_SAVE` | Public discussion is safe as a process-control story if proof and website hunk details are generalized. | `HIGH_CONFIDENCE_LOCAL` |
+| GS-014 | April dirty-tree visibility stop | `INTERNAL_COUNTABLE_LOCAL_ONLY` | Public discussion is safe only as a generalized dirty-tree gate example; omit local file details and do not use as a public metric. | `HIGH_CONFIDENCE_LOCAL` |
+| GS-015 | April website promotion dirty-tree stop | `INTERNAL_COUNTABLE_LOCAL_ONLY` | Public discussion is safe only as a process example with generated/unexpected file details redacted; no production-impact claim. | `HIGH_CONFIDENCE_LOCAL` |
+| GS-021 | May website branch-hygiene stop | `INTERNAL_COUNTABLE_LOCAL_ONLY` | Public discussion is safe only as a generalized branch-hygiene example; omit branch lineage details and do not use as a public metric. | `HIGH_CONFIDENCE_LOCAL` |
+| GS-022 | May multi-repo package dirty-state stop | `INTERNAL_COUNTABLE_LOCAL_ONLY` | Public discussion is safe as a generalized package-scope example; omit local path details and do not use as a public metric. | `HIGH_CONFIDENCE_LOCAL` |
+| GS-029 | May staged-index scope stop | `INTERNAL_COUNTABLE_LOCAL_ONLY` | Public discussion is safe as a process-control story if proof and website hunk details are generalized. | `HIGH_CONFIDENCE_LOCAL` |
 
 ## Confirmed Local / Log-Backed Candidates
 
@@ -44,7 +44,7 @@
 | GS-030 | May public route wording correction | May Week 1 log shows stale public wording and private proof routes corrected. | Yes; classification `NEEDS_PUBLIC_LINK`. |
 | GS-031 | May GitHub org profile correction | May Week 1 log shows reviewer-first profile wording and rendering boundary preserved. | Yes; classification `NEEDS_PUBLIC_LINK`. |
 | GS-032 | May homepage proof hierarchy correction | May Week 1 log shows homepage proof hierarchy kept fixture/private receipt status bounded. | Yes; classification `NEEDS_PUBLIC_LINK`. |
-| GS-034 | Live operator dirty-tree stop | Operator evidence shows HO-DET-011 discovery was blocked because unrelated untracked governance-saves docs were present. | Yes; classification `NEEDS_PUBLIC_LINK`. |
+| GS-034 | Branch mismatch blocked governance-saves edits | Governed logbook shows PR #51 governance-saves edits stopped when the proof repo was on the HO-DET-011 runtime-readiness branch instead of the assigned PR #51 branch. | Yes; classification `NEEDS_PUBLIC_LINK`. |
 
 ## Candidates Needing Public Links
 
@@ -66,7 +66,7 @@
 | GS-030 | Public PR/commit URL for front-door wording and route correction | Needed before website use or public-backed counting. |
 | GS-031 | Public profile commit/PR URL | Needed before website use or public-backed counting. |
 | GS-032 | Website PR #11 URL and final wording evidence | Needed before website use or public-backed counting. |
-| GS-034 | Public-safe evidence reference or summarized closeout reference | Needed before public-backed counting or website use. |
+| GS-034 | Public-safe PR/log reference or summarized branch-preflight closeout | Needed before public-backed counting or website use. |
 
 ## Entries Not Countable Yet
 
@@ -98,13 +98,14 @@
 | GS-031 | `NEEDS_PUBLIC_LINK` | Public profile correction is local/log-backed; public commit/PR evidence is needed. |
 | GS-032 | `NEEDS_PUBLIC_LINK` | Homepage proof hierarchy correction is local/log-backed; public PR/final wording evidence is needed. |
 | GS-033 | `PRIVATE_ONLY` | Private HO-SECONION/Zeek boundary evidence must not be public-counted. |
-| GS-034 | `NEEDS_PUBLIC_LINK` | Local operator evidence is specific, but public-safe evidence and closeout reference are needed before public-backed counting. |
+| GS-034 | `NEEDS_PUBLIC_LINK` | Local branch-preflight evidence is specific, but public-safe evidence or public PR/log reference is needed before public-backed counting. |
 
 ## Countability Summary
 
 | Classification | Entries | Commit Decision |
 |---|---|---|
-| `COUNTABLE_SAVE` | GS-001, GS-014, GS-015, GS-021, GS-022, GS-023, GS-029 | Internal review bucket only. GS-001 is public-backed; the April/May rows are local-log backed and require review/redaction before any external use. This is not a public metric. |
+| `COUNTABLE_SAVE` | GS-001 | Public-backed review bucket only. This is not a public metric until separately approved for a specific public surface. |
+| `INTERNAL_COUNTABLE_LOCAL_ONLY` | GS-014, GS-015, GS-021, GS-022, GS-023, GS-029 | Local-log-backed review bucket only. These require review/redaction before external use and must not be represented as public metrics. |
 | `NEEDS_PUBLIC_LINK` | GS-002, GS-003, GS-007, GS-013, GS-017, GS-018, GS-025, GS-026, GS-027, GS-028, GS-030, GS-031, GS-032, GS-034 | Keep marked; do not block this cleanup on adding links. |
 | `STANDING_CONTROL` | GS-004, GS-005, GS-006, GS-009, GS-010, GS-016, GS-020 | Do not represent as public save counts. |
 | `SUPPORTING_EVIDENCE_ONLY` | GS-008, GS-012 | Use only to support other entries. |
@@ -114,6 +115,7 @@
 
 - Public website metrics are not authorized from this matrix.
 - `COUNTABLE_SAVE` requires a concrete blocked, corrected, downgraded, delayed, or rejected event.
+- `INTERNAL_COUNTABLE_LOCAL_ONLY` means a concrete local/log-backed event exists, but it is not public-backed and is not a public save count.
 - Standing controls may be summarized as controls, but they are not save counts.
 - Supporting and duplicate evidence rows are not independently countable.
 - Local/log-backed saves require public-safe review and redaction before external use.
@@ -171,7 +173,8 @@
 | `GOVERNANCE-SAVES-CANDIDATES.md` GS-014 and GS-015 | Local dirty-tree details could expose paths or read like final public metrics. | Use generalized dirty-tree wording externally and keep counts blocked until reviewed. |
 | `GOVERNANCE-SAVES-CANDIDATES.md` GS-017 and GS-018 | Public stories could imply runtime-active or production-prevention impact. | Keep wording to claim downgrade and workflow hardening; do not claim production prevention or runtime-active status. |
 | `GOVERNANCE-SAVES-CANDIDATES.md` GS-019 | Private runtime evidence could be exposed as public-safe. | Keep `PRIVATE_ONLY`; do not summarize externally without separate sanitized approval. |
-| `GOVERNANCE-SAVES-CANDIDATES.md` GS-021 through GS-023 and GS-029 | Local dirty/branch/staged-index details could expose paths or read like final metrics. | Use generalized branch/dirty/scope wording externally; keep count language internal only. |
+| `GOVERNANCE-SAVES-CANDIDATES.md` GS-021 through GS-023 and GS-029 | Local dirty/branch/staged-index details could expose paths or read like final metrics. | Use generalized branch/dirty/scope wording externally; keep count language `INTERNAL_COUNTABLE_LOCAL_ONLY` only. |
+| `GOVERNANCE-SAVES-CANDIDATES.md` GS-034 | Branch-preflight evidence could expose local branch/session details or read like public proof. | Keep `NEEDS_PUBLIC_LINK`; summarize only as a wrong-branch preflight stop until public-safe evidence is attached. |
 | `GOVERNANCE-SAVES-CANDIDATES.md` GS-024 and GS-033 | Private evidence/runtime boundary details could be exposed as public-safe. | Keep `PRIVATE_ONLY`; do not summarize externally without separately approved sanitized wording. |
 | `GOVERNANCE-SAVES-CANDIDATES.md` GS-027 and GS-032 | Public examples could imply signal-observed or runtime-active status. | Keep wording to parity/blocking and proof-hierarchy correction only. |
 | `GOVERNANCE-SAVES-CANDIDATES.md` website readiness notes | Could imply final public examples. | Keep "candidate/example" wording and no totals until public-safe review. |
@@ -189,7 +192,7 @@
 
 ## April 2026 Expansion Summary
 
-Pass 2A used `C:\Raylee\Operations\Logbook\2026\04-2026\04-24_to_04-30.md` as the full April weekly source. It added GS-013 through GS-020. GS-014 and GS-015 are internally countable local-log dirty-tree saves, GS-013/GS-017/GS-018 need public links, GS-016/GS-020 are standing or supporting controls, and GS-019 is private-only.
+Pass 2A used `C:\Raylee\Operations\Logbook\2026\04-2026\04-24_to_04-30.md` as the full April weekly source. It added GS-013 through GS-020. GS-014 and GS-015 are `INTERNAL_COUNTABLE_LOCAL_ONLY` dirty-tree saves, GS-013/GS-017/GS-018 need public links, GS-016/GS-020 are standing or supporting controls, and GS-019 is private-only.
 
 No April entry is a final public metric, production-prevention claim, runtime-active claim, signal-observed claim, public-safe runtime claim, autonomous SOC claim, AI-approved disposition, or analyst-approved disposition.
 
@@ -208,7 +211,7 @@ Strongest May Week 1 rows:
 Not countable or not public-backed yet:
 
 - GS-025, GS-026, GS-027, GS-028, GS-030, GS-031, and GS-032 need public links.
-- GS-034 needs a public-safe evidence reference or summarized closeout reference.
+- GS-034 needs a public-safe evidence reference or summarized branch-preflight closeout reference.
 - GS-024 and GS-033 remain private-only.
 - May operations-only inventory, folder, GitHub board, and VM control findings were held as supporting/rejected for this backlog rather than promoted to public governance-save counts.
 
