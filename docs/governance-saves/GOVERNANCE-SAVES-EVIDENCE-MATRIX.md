@@ -20,6 +20,10 @@
 | GS-037 | Website PR #20 scope and mergeability gate | `NEEDS_PUBLIC_LINK` | Public discussion is safe as a generalized website PR scope/mergeability example after PR links are attached; do not use as a public metric. | `HIGH_CONFIDENCE_LOCAL` |
 | GS-042 | HO-NDR proof route correction | `NEEDS_PUBLIC_LINK` | Public discussion is safe as a proof-route correction after public PR/diff links are attached; correction did not publish the local proof record. | `HIGH_CONFIDENCE_LOCAL` |
 | GS-044 | Search Console verification claim boundary | `NEEDS_PUBLIC_LINK` | Public discussion is safe as a visibility-claim boundary after PR/live-route links are attached; it is not indexing, ranking, crawler-adoption, or proof evidence. | `HIGH_CONFIDENCE_LOCAL` |
+| GS-052 | Proof-pack checksum gate | `NEEDS_PUBLIC_LINK` | Public discussion is safe as a release-check verifier story after PR/check links are attached; no tag or release is claimed. | `HIGH_CONFIDENCE_LOCAL` |
+| GS-053 | Website visible human review gate | `NEEDS_PUBLIC_LINK` | Public discussion is safe as a human-governance review story after PR/comment links are attached; do not use as a public metric. | `HIGH_CONFIDENCE_LOCAL` |
+| GS-054 | ID-DET-003 proof-status correction | `NEEDS_PUBLIC_LINK` | Public discussion is safe as a proof-status correction after PR/thread links are attached; it preserves `NO_PROOF_RECORD`. | `HIGH_CONFIDENCE_LOCAL` |
+| GS-059 | Cyber Kill Chain validator hardening | `NEEDS_PUBLIC_LINK` | Public discussion is safe as validator hardening after PR/check links are attached; it is not runtime or production evidence. | `HIGH_CONFIDENCE_LOCAL` |
 
 ## Confirmed Local / Log-Backed Candidates
 
@@ -60,6 +64,19 @@
 | GS-044 | Website Search Console verification claim boundary | May Week 2 log shows verification work stayed below indexing, ranking, crawler-adoption, or proof claims. | Yes; classification `NEEDS_PUBLIC_LINK`. |
 | GS-045 | Public-safe abstract packet held private | May Week 2 log shows a private abstract packet held as review-only because it contained local paths/private planning context. | No; classification `PRIVATE_ONLY`. |
 | GS-046 | Security Onion visibility contract sanitized evidence boundary | May Week 2 log shows a sanitized validation contract created without importing private packet files or raw evidence. | Yes; classification `NEEDS_PUBLIC_LINK`. |
+| GS-047 | HO-DET-001 review ZIP dirty proof-state stop | May Week 3 log shows review ZIP manifest work stopped because unrelated claim-bearing proof-state dirt remained unresolved. | Redaction needed before public use; internally countable only. |
+| GS-048 | PR #32 mapped-field proof gap fix | May Week 3 log shows post-review hardening fixed mapped-field behavior-family detection coverage. | Yes; classification `NEEDS_PUBLIC_LINK`. |
+| GS-049 | Validation PR #30 dependency rerun gate | May Week 3 log shows dependency order, rerun state, mark-ready, and merge approval gates kept merge readiness bounded. | Yes; classification `NEEDS_PUBLIC_LINK`. |
+| GS-050 | Detections PR #18 check-name correction | May Week 3 log shows visible governance review corrected false check-name claims. | Yes; classification `NEEDS_PUBLIC_LINK`. |
+| GS-051 | AI/GPU support-only prompt correction | May Week 3 log shows broad AI prompt wording corrected by a strict support-only prompt contract. | No; classification `PRIVATE_ONLY`. |
+| GS-052 | Proof PR #43 checksum gate | May Week 3 log shows proof-pack checksum verification caught and corrected stale hash evidence before merge readiness. | Yes; classification `NEEDS_PUBLIC_LINK`. |
+| GS-053 | Website PR #38 visible human review gate | May Week 3 log shows website merge readiness delayed until visible human governance comment evidence existed. | Yes; classification `NEEDS_PUBLIC_LINK`. |
+| GS-054 | ID-DET-003 PR #50 proof-status correction | May Week 3 log shows unresolved review-thread gating forced proof status back to `NO_PROOF_RECORD`. | Yes; classification `NEEDS_PUBLIC_LINK`. |
+| GS-055 | Website refactor mixed staged/untracked stop | May Week 3 log shows website refactor commit readiness stopped on mixed staged and untracked state. | Redaction needed before public use; internally countable only. |
+| GS-056 | Telemetry generated-cache/dirty-branch stop | Current-week log shows telemetry merge work stopped on generated cache and dirty branch state. | Redaction needed before public use; internally countable only. |
+| GS-057 | HO-DET-012 runtime evidence gate | Current-week log shows runtime evidence gate work stayed proposed-route-only and below runtime/signal/public-safe runtime promotion. | Yes; classification `NEEDS_PUBLIC_LINK`; claim ceiling must stay bounded. |
+| GS-058 | Telemetry claim-boundary/schema narrowing | Current-week log shows review-thread fixes narrowed claim-boundary and validation-state semantics before merge. | Yes; classification `NEEDS_PUBLIC_LINK`. |
+| GS-059 | Cyber Kill Chain validator hardening | Current-week log shows review-driven validator hardening fixed a risky-term table-row context gap. | Yes; classification `NEEDS_PUBLIC_LINK`. |
 
 ## Candidates Needing Public Links
 
@@ -92,6 +109,15 @@
 | GS-043 | Detections PR #17 URL, validation PR #30 URL, check-log evidence, and final dependency outcome | Needed before external use. |
 | GS-044 | Website PR #21 URL and live verification file evidence | Needed before website use; indexing/ranking claims remain blocked. |
 | GS-046 | Validation PR/check evidence for the sanitized Security Onion contract | Needed before external use. |
+| GS-048 | PR #31/#32 URLs, review-thread evidence, and final check evidence | Needed before public-backed counting. |
+| GS-049 | Validation PR #30 URL, detections PR #17 URL, rerun/check evidence, and final dependency outcome | Needed before external use. |
+| GS-050 | Detections PR #18 URL and review/comment correction evidence | Needed before public-backed counting. |
+| GS-052 | Proof PR #43 URL, checksum verifier output, and final check evidence | Needed before external use. |
+| GS-053 | Website PR #38 URL, visible human comment/review evidence, and final outcome | Needed before website use or public-backed counting. |
+| GS-054 | Validation PR #50 URL, review-thread evidence, proof-status fix, and final outcome | Needed before public-backed counting. |
+| GS-057 | HO-DET-012 boundary/PR URL and route evidence | Needed before external use; runtime/signal/public-safe runtime claims remain blocked. |
+| GS-058 | Validation PR #55 and platform PR #33 URLs plus review-thread fix evidence | Needed before public-backed counting. |
+| GS-059 | Proof PR #47 URL and validator check evidence | Needed before public-backed counting. |
 
 ## Entries Not Countable Yet
 
@@ -136,17 +162,30 @@
 | GS-044 | `NEEDS_PUBLIC_LINK` | Local website visibility claim-boundary evidence is strong, but public PR/live-route evidence is not attached. |
 | GS-045 | `PRIVATE_ONLY` | Private abstract packet details must not be public-counted or treated as publish-ready. |
 | GS-046 | `NEEDS_PUBLIC_LINK` | Local sanitized-contract evidence is strong, but public PR/check evidence is not attached. |
+| GS-047 | `INTERNAL_COUNTABLE_LOCAL_ONLY` | Dirty proof-state stop is locally strong, but local packaging details need redaction and it is not a public metric. |
+| GS-048 | `NEEDS_PUBLIC_LINK` | Validator hardening evidence is local/log-backed; public PR/check evidence is not attached. |
+| GS-049 | `NEEDS_PUBLIC_LINK` | Dependency/rerun gate evidence is local/log-backed; public PR/check/final dependency evidence is not attached. |
+| GS-050 | `NEEDS_PUBLIC_LINK` | Check-name correction evidence is local/log-backed; public review/comment evidence is not attached. |
+| GS-051 | `PRIVATE_ONLY` | AI/GPU support-only prompt evidence is private/local and not publication-approved. |
+| GS-052 | `NEEDS_PUBLIC_LINK` | Checksum gate evidence is local/log-backed; public PR/check evidence is not attached. |
+| GS-053 | `NEEDS_PUBLIC_LINK` | Visible human review gate evidence is local/log-backed; public PR/comment evidence is not attached. |
+| GS-054 | `NEEDS_PUBLIC_LINK` | Proof-status correction evidence is local/log-backed; public PR/thread/fix evidence is not attached. |
+| GS-055 | `INTERNAL_COUNTABLE_LOCAL_ONLY` | Mixed staged/untracked website stop is locally strong, but local file-scope details need redaction. |
+| GS-056 | `INTERNAL_COUNTABLE_LOCAL_ONLY` | Telemetry dirty-state stop is locally strong, but generated-cache/dirty-branch details need redaction. |
+| GS-057 | `NEEDS_PUBLIC_LINK` | Runtime evidence gate evidence is local/log-backed; public boundary/PR links are not attached and claim ceilings remain active. |
+| GS-058 | `NEEDS_PUBLIC_LINK` | Claim-boundary/schema correction evidence is local/log-backed; public PR/thread evidence is not attached. |
+| GS-059 | `NEEDS_PUBLIC_LINK` | Validator hardening evidence is local/log-backed; public PR/check evidence is not attached. |
 
 ## Countability Summary
 
 | Classification | Entries | Commit Decision |
 |---|---|---|
 | `COUNTABLE_SAVE` | GS-001 | Public-backed review bucket only. This is not a public metric until separately approved for a specific public surface. |
-| `INTERNAL_COUNTABLE_LOCAL_ONLY` | GS-014, GS-015, GS-021, GS-022, GS-023, GS-029 | Local-log-backed review bucket only. These require review/redaction before external use and must not be represented as public metrics. |
-| `NEEDS_PUBLIC_LINK` | GS-002, GS-003, GS-007, GS-013, GS-017, GS-018, GS-025, GS-026, GS-027, GS-028, GS-030, GS-031, GS-032, GS-034, GS-035, GS-037, GS-038, GS-039, GS-040, GS-041, GS-042, GS-043, GS-044, GS-046 | Keep marked; do not block this cleanup on adding links. |
+| `INTERNAL_COUNTABLE_LOCAL_ONLY` | GS-014, GS-015, GS-021, GS-022, GS-023, GS-029, GS-047, GS-055, GS-056 | Local-log-backed review bucket only. These require review/redaction before external use and must not be represented as public metrics. |
+| `NEEDS_PUBLIC_LINK` | GS-002, GS-003, GS-007, GS-013, GS-017, GS-018, GS-025, GS-026, GS-027, GS-028, GS-030, GS-031, GS-032, GS-034, GS-035, GS-037, GS-038, GS-039, GS-040, GS-041, GS-042, GS-043, GS-044, GS-046, GS-048, GS-049, GS-050, GS-052, GS-053, GS-054, GS-057, GS-058, GS-059 | Keep marked; do not block this cleanup on adding links. |
 | `STANDING_CONTROL` | GS-004, GS-005, GS-006, GS-009, GS-010, GS-016, GS-020, GS-036 | Do not represent as public save counts. |
 | `SUPPORTING_EVIDENCE_ONLY` | GS-008, GS-012 | Use only to support other entries. |
-| `PRIVATE_ONLY` | GS-011, GS-019, GS-024, GS-033, GS-045 | Keep local/private unless redacted and approved later. |
+| `PRIVATE_ONLY` | GS-011, GS-019, GS-024, GS-033, GS-045, GS-051 | Keep local/private unless redacted and approved later. |
 
 ## Current Counting Boundary
 
@@ -168,6 +207,7 @@
 | GS-024 | Contains private evidence sanitizer/history and hash-only evidence index details. Public use is blocked unless a separate sanitized pattern summary is approved. |
 | GS-033 | Contains private HO-SECONION/Zeek proof-boundary evidence. Public use is blocked unless a separate sanitized summary is approved. |
 | GS-045 | Contains private/public-safe abstraction work with local path and planning context. Public use is blocked unless a sanitized summary is separately approved. |
+| GS-051 | Contains private local AI/GPU support prompt evidence. Public use is blocked unless a separate sanitized support-only summary is approved. |
 
 ## Rejected Candidates
 
@@ -181,6 +221,7 @@
 | RJ-006 | May Week 1 operations-only inventory, folder, and VM controls are supporting/private operations evidence, not public governance-save counts. |
 | RJ-007 | May Week 1 live rendering checks and route views are presentation evidence only; they do not prove proof status. |
 | RJ-008 | May Week 2 operations-only Inventory, Work artifact routing, cleanup, and runtime-private findings are supporting/private evidence for this backlog unless tied to a repo/public/proof governance-save row. |
+| RJ-009 | Week 3/current-week duplicate GS-034 branch-preflight evidence, delegated subagent logging failures, and operations-only scope controls are not new public save rows. |
 
 ## Best 5 Website-Safe Examples
 
@@ -188,9 +229,9 @@
 |---|---|---|
 | 1 | GS-001 | Passing checks did not override unresolved review findings on a runtime-truth verifier. |
 | 2 | GS-042 | Public proof-route text was corrected so it no longer implied an unpublished HO-NDR proof record existed. |
-| 3 | GS-044 | Search Console verification stayed below indexing, ranking, crawler-adoption, or proof claims. |
-| 4 | GS-032 | Homepage proof hierarchy kept fixture and private/internal receipt status from becoming public proof. |
-| 5 | GS-037 | Website PR scope and mergeability gates blocked hidden branch-carried files before merge readiness. |
+| 3 | GS-052 | Proof-pack checksum verification caught stale release-pack hashes before merge readiness. |
+| 4 | GS-054 | ID-DET-003 proof status was corrected back to `NO_PROOF_RECORD` before merge authority could act. |
+| 5 | GS-059 | Cyber Kill Chain validator hardening narrowed risky-term contexts before proof wording could drift. |
 
 ## Best 5 Interview / Story Examples
 
@@ -198,9 +239,9 @@
 |---|---|---|
 | 1 | GS-001 | "I refused to merge a verifier even though checks passed because review found fail-open contract drift." |
 | 2 | GS-040 | "Even after chat approval, I held a proof PR until visible current-head human review existed." |
-| 3 | GS-038 | "A workflow failed closed on report drift and proof parity blockers before public-report routing could merge." |
-| 4 | GS-039 | "A pipeline artifact was corrected before merge so private paths and reduction math did not overclaim." |
-| 5 | GS-041 | "A GitHub ruleset blocked an org-facing PR until a review thread was resolved." |
+| 3 | GS-052 | "A proof-pack release check caught stale checksums before merge readiness." |
+| 4 | GS-053 | "A website PR stayed delayed until visible human governance evidence existed." |
+| 5 | GS-059 | "A proof validator was hardened so risky terms no longer passed through broad table context." |
 
 ## Wording To Tighten Before Commit
 
@@ -217,6 +258,7 @@
 | `GOVERNANCE-SAVES-CANDIDATES.md` GS-024 and GS-033 | Private evidence/runtime boundary details could be exposed as public-safe. | Keep `PRIVATE_ONLY`; do not summarize externally without separately approved sanitized wording. |
 | `GOVERNANCE-SAVES-CANDIDATES.md` GS-027 and GS-032 | Public examples could imply signal-observed or runtime-active status. | Keep wording to parity/blocking and proof-hierarchy correction only. |
 | `GOVERNANCE-SAVES-CANDIDATES.md` GS-035 through GS-046 | May Week 2 rows could look like a new public count. | Keep all new rows local/log-backed, non-metric, and link-gated or private as classified. |
+| `GOVERNANCE-SAVES-CANDIDATES.md` GS-047 through GS-059 | Week 3/current-week rows could look like a new public count or runtime claim. | Keep all new rows local/log-backed, non-metric, link-gated/internal/private as classified, and keep runtime/signal/public-safe runtime wording blocked. |
 | `GOVERNANCE-SAVES-CANDIDATES.md` website readiness notes | Could imply final public examples. | Keep "candidate/example" wording and no totals until public-safe review. |
 | Any future summary | Production, runtime-active, public-safe runtime, autonomous SOC, AI-approved, analyst-approved, and final public metric wording remain blocked. | Use lower claim wording and route through review before publication. |
 
@@ -227,8 +269,8 @@
 | 1 | GS-001 | After PR #34 is fixed, record final commit, resolved thread URLs, and whether the verifier gained fail-closed tests. |
 | 2 | GS-038 | Attach PR #28 workflow failure/pass links and proof parity PR evidence. |
 | 3 | GS-042 | Attach PR #30 URL, final diff, and merge evidence. |
-| 4 | GS-043 | Attach PR #17 / PR #30 dependency evidence and final outcome. |
-| 5 | GS-020 / GS-026 / GS-035 / GS-041 | Capture current branch-protection/ruleset readback to separate soft governance from blocking enforcement. |
+| 4 | GS-052 | Attach proof PR #43 URL, checksum verifier evidence, and final check outcome. |
+| 5 | GS-059 | Attach proof PR #47 URL and validator check evidence. |
 
 ## April 2026 Expansion Summary
 
@@ -281,6 +323,46 @@ Not countable or not public-backed yet:
 - Operations-only Inventory, Work artifact routing, cleanup, and runtime-private scanner findings were held as supporting/private evidence rather than promoted to public governance-save counts.
 
 No May Week 2 entry is a final public metric, production-prevention claim, runtime-active claim, signal-observed claim, public-safe runtime claim, autonomous SOC claim, AI-approved disposition, or analyst-approved disposition.
+
+## May 15-21 2026 Expansion Summary
+
+This pass used `C:\Raylee\Operations\Logbook\2026\05-2026\05-15_to_05-21.md` as the May Week 3 source. Read-only scanner roles were attempted, but several stopped on delegated logging despite parent logging, so the primary agent completed local scanner consolidation. The consolidated backlog added GS-047 through GS-055.
+
+Strongest May Week 3 rows:
+
+- GS-047: HO-DET-001 review ZIP manifest work stopped on unrelated claim-bearing proof-state dirt.
+- GS-048: PR #32 fixed a mapped-field proof gap found after PR #31 review.
+- GS-049: validation PR #30 remained gated by dependency order, rerun status, and merge approval.
+- GS-052: proof PR #43 checksum verification caught stale release-pack hashes before merge readiness.
+- GS-053: website PR #38 stayed delayed until visible human governance comment evidence existed.
+- GS-054: validation PR #50 review-thread gating forced ID-DET-003 proof status back to `NO_PROOF_RECORD`.
+
+Not countable or not public-backed yet:
+
+- GS-048, GS-049, GS-050, GS-052, GS-053, and GS-054 need public links.
+- GS-047 and GS-055 are internal/local-only dirty-state stops.
+- GS-051 is private-only.
+
+No May Week 3 entry is a final public metric, production-prevention claim, runtime-active claim, signal-observed claim, public-safe runtime claim, autonomous SOC claim, AI-approved disposition, or analyst-approved disposition.
+
+## May 22-28 2026 Current-Week Expansion Summary
+
+This pass used `C:\Raylee\Operations\Logbook\2026\05-2026\05-22_to_05-28.md` as the current-week source. The consolidated backlog added GS-056 through GS-059 and merged duplicate GS-034 branch-preflight evidence into the existing branch-mismatch candidate instead of creating a duplicate.
+
+Strongest current-week rows:
+
+- GS-056: telemetry merge work stopped on generated cache and dirty branch state.
+- GS-057: HO-DET-012 runtime evidence gate preserved proposed-route-only status and blocked runtime/signal/public-safe runtime promotion.
+- GS-058: telemetry PR review narrowed claim-boundary/schema allowances before merge.
+- GS-059: Cyber Kill Chain validator hardening fixed a risky-term context gap.
+
+Not countable or not public-backed yet:
+
+- GS-057, GS-058, and GS-059 need public PR/boundary/check links.
+- GS-056 is internal/local-only.
+- GS-034 duplicate current-week evidence was held as supporting context.
+
+No current-week entry is a final public metric, production-prevention claim, runtime-active claim, signal-observed claim, public-safe runtime claim, autonomous SOC claim, AI-approved disposition, or analyst-approved disposition.
 
 ## Matrix Warning
 
