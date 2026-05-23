@@ -308,12 +308,14 @@ def validate_ho_det_001_runtime_truth_spine(entry: dict[str, Any]) -> None:
     if missing:
         raise VerificationError(f"HO-DET-001.runtime_truth_spine missing truth planes: {missing}")
 
-    if spine["source_truth"].get("state") != "SOURCE_EXISTS":
+    source_truth = require_mapping(spine["source_truth"], "HO-DET-001.source_truth")
+    if source_truth.get("state") != "SOURCE_EXISTS":
         raise VerificationError("HO-DET-001.source_truth.state must be SOURCE_EXISTS")
-    if spine["validation_truth"].get("state") != "CONTROLLED_TEST_VALIDATED":
+    validation_truth = require_mapping(spine["validation_truth"], "HO-DET-001.validation_truth")
+    if validation_truth.get("state") != "CONTROLLED_TEST_VALIDATED":
         raise VerificationError("HO-DET-001.validation_truth.state must be CONTROLLED_TEST_VALIDATED")
-    require_ref_list(spine["source_truth"].get("refs"), "HO-DET-001.source_truth.refs")
-    require_ref_list(spine["validation_truth"].get("refs"), "HO-DET-001.validation_truth.refs")
+    require_ref_list(source_truth.get("refs"), "HO-DET-001.source_truth.refs")
+    require_ref_list(validation_truth.get("refs"), "HO-DET-001.validation_truth.refs")
 
     runtime_truth = require_mapping(spine["runtime_truth"], "HO-DET-001.runtime_truth")
     if runtime_truth.get("state") != "RUNTIME_EVIDENCE_VERIFIED_PRIVATE":
