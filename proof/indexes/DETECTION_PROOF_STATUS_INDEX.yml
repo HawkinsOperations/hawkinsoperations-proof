@@ -45,6 +45,50 @@ entries:
     signal_status: NOT_PROVEN
     public_safe_status: NOT_PUBLIC_SAFE
     website_status: WEBSITE_UNTOUCHED_NOT_PROOF
+    runtime_truth_spine:
+      source_truth:
+        state: SOURCE_EXISTS
+        owner: hawkinsoperations-detections
+        refs:
+          - hawkinsoperations-detections/detections/successor/ho-det-001/rule.yml
+          - hawkinsoperations-detections/detections/successor/ho-det-001/splunk.spl
+      validation_truth:
+        state: CONTROLLED_TEST_VALIDATED
+        owner: hawkinsoperations-validation
+        refs:
+          - hawkinsoperations-validation/reports/ho-det-001/validation-result.json
+          - hawkinsoperations-validation/reports/ho-det-001/pipeline-proof.json
+      runtime_truth:
+        state: RUNTIME_EVIDENCE_VERIFIED_PRIVATE
+        public_runtime_claim_status: PUBLIC_RUNTIME_BLOCKED
+        verified_runtime_evidence_refs:
+          - HawkinsOperations/hawkinsoperations-validation#22
+          - hawkinsoperations-validation/scripts/verify-ho-det-001-runtime-packet.py
+      signal_truth:
+        state: SIGNAL_OBSERVED_PRIVATE
+        public_signal_claim_status: PUBLIC_RUNTIME_BLOCKED
+        verified_signal_record_refs:
+          - HawkinsOperations/hawkinsoperations-validation#22
+          - proof/records/HO-DET-001.md#controlled-runtime-signal-packet-001
+      evidence_truth:
+        state: RUNTIME_EVIDENCE_VERIFIED_PRIVATE
+        raw_private_evidence_public_safe: false
+        repo_contains_raw_private_evidence: false
+        hash_only_private_refs: true
+      ai_triage_truth:
+        support_state: AI_SUPPORT_ONLY
+        triage_output_state: AI_TRIAGE_OUTPUT_PRIVATE
+        authority_state: AI_NOT_AUTHORITY
+        ai_decided_disposition: false
+        human_review_required: true
+      public_proof_truth:
+        state: PUBLIC_RUNTIME_BLOCKED
+        proof_ceiling: CONTROLLED_TEST_VALIDATED
+        public_safe_status: NOT_PUBLIC_SAFE
+      human_review_truth:
+        state: HUMAN_REVIEW_REQUIRED
+        public_runtime_summary_state: PUBLIC_RUNTIME_BLOCKED
+        approval_required_for_public_summary: true
     blocked_claims:
       - runtime-active public proof
       - signal-observed public proof

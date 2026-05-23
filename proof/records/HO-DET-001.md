@@ -146,6 +146,21 @@ Related HOD-001 encoded-command artifacts may inform review, but they are not HO
 
 Private/internal runtime and marker-delivery sections in this record are non-public boundary context only. They do not add public supported claims, do not authorize public-safe wording, and do not raise the public ceiling beyond CONTROLLED_TEST_VALIDATED.
 
+## Runtime Truth Spine v0
+
+This spine tracks runtime, signal, evidence, GPU/LLM triage, public proof, and human review as separate truth planes. It does not promote the public proof ceiling.
+
+| Truth plane | Current state | Evidence/reference | Public/runtime claim effect |
+|---|---|---|---|
+| source_truth | SOURCE_EXISTS | `hawkinsoperations-detections/detections/successor/ho-det-001/rule.yml`; `hawkinsoperations-detections/detections/successor/ho-det-001/splunk.spl` | Source truth only; not runtime truth. |
+| validation_truth | CONTROLLED_TEST_VALIDATED | `hawkinsoperations-validation/reports/ho-det-001/validation-result.json`; `hawkinsoperations-validation/reports/ho-det-001/pipeline-proof.json` | Preserves controlled-test validation only. |
+| runtime_truth | RUNTIME_EVIDENCE_VERIFIED_PRIVATE | `HawkinsOperations/hawkinsoperations-validation#22`; `hawkinsoperations-validation/scripts/verify-ho-det-001-runtime-packet.py` | PUBLIC_RUNTIME_BLOCKED. Private runtime context does not authorize public runtime wording. |
+| signal_truth | SIGNAL_OBSERVED_PRIVATE | `HawkinsOperations/hawkinsoperations-validation#22`; this record section `Controlled Runtime Signal Packet 001` | PUBLIC_RUNTIME_BLOCKED. Private signal context does not authorize public signal wording. |
+| evidence_truth | RUNTIME_EVIDENCE_VERIFIED_PRIVATE | Hash-only private references and verifier-backed private packet metadata | Raw private evidence remains NOT_PUBLIC_SAFE and is not committed in this repo. |
+| ai_triage_truth | AI_SUPPORT_ONLY / AI_TRIAGE_OUTPUT_PRIVATE / AI_NOT_AUTHORITY | validation private GPU support index; `autosoc-triage-packet.json`; `llm-summary.json` | AI cannot decide disposition, approve proof, approve closure, or promote public wording. |
+| public_proof_truth | PUBLIC_RUNTIME_BLOCKED | This proof record, proof card, and proof status index | Public proof ceiling remains CONTROLLED_TEST_VALIDATED; public-safe status remains NOT_PUBLIC_SAFE. |
+| human_review_truth | HUMAN_REVIEW_REQUIRED | Proof/publication governance and Raylee approval gate | Public runtime summary remains blocked until review, wording, privacy, stale, evidence-link, and approval gates pass. |
+
 ## Unsupported Claims
 
 - blocked: runtime-active

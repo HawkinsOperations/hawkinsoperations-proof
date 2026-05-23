@@ -75,6 +75,21 @@ Reviewer acceptance rule: if this card, the proof record, and the proof status i
 | Signal truth | BLOCKED for public signal-observed proof. |
 | Evidence truth | Ledger-backed for controlled-test validation and platform guardrail records; private/internal runtime evidence is not public-safe proof. |
 | Public proof | CONTROLLED_TEST_VALIDATED only; NOT_PUBLIC_SAFE for public promotion. |
+| AI triage truth | AI_SUPPORT_ONLY / AI_TRIAGE_OUTPUT_PRIVATE / AI_NOT_AUTHORITY; AI-decided disposition remains false. |
+| Human review truth | HUMAN_REVIEW_REQUIRED before any public runtime summary, public-safe wording, or stronger proof claim. |
+
+## Runtime Truth Spine v0
+
+| Truth plane | Current state | Public/runtime claim status |
+|---|---|---|
+| source_truth | SOURCE_EXISTS | source truth only |
+| validation_truth | CONTROLLED_TEST_VALIDATED | controlled-test only |
+| runtime_truth | RUNTIME_EVIDENCE_VERIFIED_PRIVATE | PUBLIC_RUNTIME_BLOCKED |
+| signal_truth | SIGNAL_OBSERVED_PRIVATE | PUBLIC_RUNTIME_BLOCKED |
+| evidence_truth | RUNTIME_EVIDENCE_VERIFIED_PRIVATE | raw private evidence remains NOT_PUBLIC_SAFE |
+| ai_triage_truth | AI_SUPPORT_ONLY / AI_TRIAGE_OUTPUT_PRIVATE / AI_NOT_AUTHORITY | no AI disposition authority |
+| public_proof_truth | PUBLIC_RUNTIME_BLOCKED | proof ceiling remains CONTROLLED_TEST_VALIDATED |
+| human_review_truth | HUMAN_REVIEW_REQUIRED | approval required before any public runtime summary |
 
 ## Next Promotion Gate
 
