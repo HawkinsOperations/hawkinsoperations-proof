@@ -40,6 +40,16 @@ REQUIRED_ENTRY_FIELDS = {
     "next_gate",
     "notes",
 }
+REQUIRED_HO_DET_001_TRUTH_PLANES = {
+    "source_truth",
+    "validation_truth",
+    "runtime_truth",
+    "signal_truth",
+    "evidence_truth",
+    "ai_triage_truth",
+    "public_proof_truth",
+    "human_review_truth",
+}
 
 ALLOWED_PROOF_CEILINGS = {
     "NO_PROOF_RECORD",
@@ -282,6 +292,78 @@ def validate_claim_boundary_text(entry: dict[str, Any], detection_id: str) -> No
                 raise VerificationError(f"{detection_id} blocked term outside boundary context: {line}")
 
 
+def require_ref_list(value: Any, label: str, minimum: int = 2) -> None:
+    if not isinstance(value, list) or len(value) < minimum:
+        raise VerificationError(f"{label} must include at least {minimum} references")
+    for item in value:
+        if not isinstance(item, str) or not item.strip():
+            raise VerificationError(f"{label} entries must be non-empty strings")
+
+
+def validate_ho_det_001_runtime_truth_spine(entry: dict[str, Any]) -> None:
+    spine = entry.get("runtime_truth_spine")
+    if not isinstance(spine, dict):
+        raise VerificationError("HO-DET-001.runtime_truth_spine must be present")
+    missing = sorted(REQUIRED_HO_DET_001_TRUTH_PLANES - set(spine))
+    if missing:
+        raise VerificationError(f"HO-DET-001.runtime_truth_spine missing truth planes: {missing}")
+
+    source_truth = require_mapping(spine["source_truth"], "HO-DET-001.source_truth")
+    if source_truth.get("state") != "SOURCE_EXISTS":
+        raise VerificationError("HO-DET-001.source_truth.state must be SOURCE_EXISTS")
+    validation_truth = require_mapping(spine["validation_truth"], "HO-DET-001.validation_truth")
+    if validation_truth.get("state") != "CONTROLLED_TEST_VALIDATED":
+        raise VerificationError("HO-DET-001.validation_truth.state must be CONTROLLED_TEST_VALIDATED")
+    require_ref_list(source_truth.get("refs"), "HO-DET-001.source_truth.refs")
+    require_ref_list(validation_truth.get("refs"), "HO-DET-001.validation_truth.refs")
+
+    runtime_truth = require_mapping(spine["runtime_truth"], "HO-DET-001.runtime_truth")
+    if runtime_truth.get("state") != "RUNTIME_EVIDENCE_VERIFIED_PRIVATE":
+        raise VerificationError("HO-DET-001.runtime_truth.state must remain RUNTIME_EVIDENCE_VERIFIED_PRIVATE")
+    if runtime_truth.get("public_runtime_claim_status") != "PUBLIC_RUNTIME_BLOCKED":
+        raise VerificationError("HO-DET-001.runtime_truth.public_runtime_claim_status must remain PUBLIC_RUNTIME_BLOCKED")
+    require_ref_list(runtime_truth.get("verified_runtime_evidence_refs"), "HO-DET-001.runtime_truth.verified_runtime_evidence_refs")
+
+    signal_truth = require_mapping(spine["signal_truth"], "HO-DET-001.signal_truth")
+    if signal_truth.get("state") != "SIGNAL_OBSERVED_PRIVATE":
+        raise VerificationError("HO-DET-001.signal_truth.state must remain SIGNAL_OBSERVED_PRIVATE")
+    if signal_truth.get("public_signal_claim_status") != "PUBLIC_RUNTIME_BLOCKED":
+        raise VerificationError("HO-DET-001.signal_truth.public_signal_claim_status must remain PUBLIC_RUNTIME_BLOCKED")
+    require_ref_list(signal_truth.get("verified_signal_record_refs"), "HO-DET-001.signal_truth.verified_signal_record_refs")
+
+    evidence_truth = require_mapping(spine["evidence_truth"], "HO-DET-001.evidence_truth")
+    if evidence_truth.get("state") != "RUNTIME_EVIDENCE_VERIFIED_PRIVATE":
+        raise VerificationError("HO-DET-001.evidence_truth.state must remain RUNTIME_EVIDENCE_VERIFIED_PRIVATE")
+    if evidence_truth.get("raw_private_evidence_public_safe") is not False:
+        raise VerificationError("HO-DET-001.evidence_truth.raw_private_evidence_public_safe must remain false")
+    if evidence_truth.get("repo_contains_raw_private_evidence") is not False:
+        raise VerificationError("HO-DET-001.evidence_truth.repo_contains_raw_private_evidence must remain false")
+
+    ai_truth = require_mapping(spine["ai_triage_truth"], "HO-DET-001.ai_triage_truth")
+    if ai_truth.get("support_state") != "AI_SUPPORT_ONLY":
+        raise VerificationError("HO-DET-001.ai_triage_truth.support_state must remain AI_SUPPORT_ONLY")
+    if ai_truth.get("triage_output_state") != "AI_TRIAGE_OUTPUT_PRIVATE":
+        raise VerificationError("HO-DET-001.ai_triage_truth.triage_output_state must remain AI_TRIAGE_OUTPUT_PRIVATE")
+    if ai_truth.get("authority_state") != "AI_NOT_AUTHORITY":
+        raise VerificationError("HO-DET-001.ai_triage_truth.authority_state must remain AI_NOT_AUTHORITY")
+    if ai_truth.get("ai_decided_disposition") is not False:
+        raise VerificationError("HO-DET-001.ai_triage_truth.ai_decided_disposition must remain false")
+
+    public_truth = require_mapping(spine["public_proof_truth"], "HO-DET-001.public_proof_truth")
+    if public_truth.get("state") != "PUBLIC_RUNTIME_BLOCKED":
+        raise VerificationError("HO-DET-001.public_proof_truth.state must remain PUBLIC_RUNTIME_BLOCKED")
+    if public_truth.get("proof_ceiling") != "CONTROLLED_TEST_VALIDATED":
+        raise VerificationError("HO-DET-001.public_proof_truth.proof_ceiling must remain CONTROLLED_TEST_VALIDATED")
+    if public_truth.get("public_safe_status") != PUBLIC_SAFE_REQUIRED:
+        raise VerificationError("HO-DET-001.public_proof_truth.public_safe_status must remain NOT_PUBLIC_SAFE")
+
+    human_truth = require_mapping(spine["human_review_truth"], "HO-DET-001.human_review_truth")
+    if human_truth.get("public_runtime_summary_state") != "PUBLIC_RUNTIME_BLOCKED":
+        raise VerificationError("HO-DET-001.human_review_truth.public_runtime_summary_state must remain PUBLIC_RUNTIME_BLOCKED")
+    if human_truth.get("approval_required_for_public_summary") is not True:
+        raise VerificationError("HO-DET-001.human_review_truth.approval_required_for_public_summary must remain true")
+
+
 def validate_entry(
     entry: dict[str, Any],
     detections: dict[str, dict[str, Any]],
@@ -336,6 +418,8 @@ def validate_entry(
     validate_proof_ceiling(entry, record_path, card_path, detection_id)
     validate_private_runtime_status(entry, record_path, detection_id)
     validate_claim_boundary_text(entry, detection_id)
+    if detection_id == "HO-DET-001":
+        validate_ho_det_001_runtime_truth_spine(entry)
 
     detection_entry = detections.get(detection_id)
     if detection_entry is None:
