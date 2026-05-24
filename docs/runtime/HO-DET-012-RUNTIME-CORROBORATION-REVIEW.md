@@ -15,7 +15,7 @@ This review packet evaluates whether the private HO-DET-012 runtime receipt can 
 - AI decided disposition: false.
 - Human review required: true.
 
-HO-DET-012 should not move to `PUBLIC_SAFE_CANDIDATE` from this packet alone. The packet defines bounded candidate wording for review, but the current receipt remains private evidence and the proof index must stay at `PRIVATE_RUNTIME_EVIDENCE_CAPTURED` / `NOT_PUBLIC_SAFE`.
+HO-DET-012 should not move to `PUBLIC_SAFE_CANDIDATE` from this packet alone. The packet defines bounded candidate wording for review, but the current receipt remains private evidence and the proof index must not be promoted from `CONTROLLED_TEST_VALIDATED` / `NOT_PROVEN` / `NOT_PUBLIC_SAFE` by this packet.
 
 ## What Evidence Exists
 
@@ -91,7 +91,7 @@ Reason:
 - stale review and wording review remain pending;
 - human approval for public-safe runtime or signal publication has not been recorded.
 
-The strongest current proof state remains private runtime evidence captured with public-safe publication blocked.
+The strongest current private runtime result is private runtime evidence captured with public-safe publication blocked. The public proof record and index remain unpromoted until a separate approval changes them.
 
 ## Website Decision
 
