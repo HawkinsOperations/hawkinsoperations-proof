@@ -55,7 +55,7 @@ The following must not be published in repo prose, website copy, reviewer-facing
 - user identifiers;
 - private storage paths;
 - internal IP addresses or URLs;
-- tokens, secrets, credentials, or private configuration values;
+- sensitive authentication material or private configuration values;
 - the exact service marker or service name;
 - the exact correlation marker;
 - raw telemetry counts used as proof claims;
@@ -69,16 +69,14 @@ Use this exact candidate wording only with the review boundary intact:
 
 > HO-DET-011 produced a private lab runtime receipt from a controlled Windows service-creation test. The run produced local Windows telemetry and private Wazuh observation, with raw evidence retained outside public repos. Public-safe runtime publication remains under review.
 
-Do not strengthen it to:
-
-- public runtime proof closed;
-- public signal-observed proof;
-- Splunk observed;
-- production-ready;
-- fleet-wide;
-- autonomous SOC;
-- AI-approved disposition;
-- analyst-approved disposition.
+Do not claim public runtime proof closed.
+Do not claim public signal-observed proof.
+Do not claim Splunk observed.
+Do not claim production-ready status.
+Do not claim fleet-wide status.
+Do not claim autonomous SOC operation.
+Do not claim AI-approved disposition.
+Do not claim analyst-approved disposition.
 
 ## Public-Safe Candidate Decision
 
@@ -114,15 +112,13 @@ This packet supports only:
 - deterministic receipt-verifier support exists;
 - public-safe runtime publication remains under review.
 
-This packet does not prove:
-
-- runtime-active public proof;
-- signal-observed public proof;
-- Splunk observation;
-- production deployment;
-- fleet-wide coverage;
-- service-creation coverage completeness;
-- autonomous SOC operation;
-- AI-approved disposition;
-- AI-decided disposition;
-- analyst-approved disposition.
+This packet does not prove runtime-active public proof.
+This packet does not prove signal-observed public proof.
+This packet does not prove Splunk observation.
+This packet does not prove production deployment.
+This packet does not prove fleet-wide coverage.
+This packet does not prove service-creation coverage completeness.
+This packet does not prove autonomous SOC operation.
+This packet does not prove AI-approved disposition.
+This packet does not prove AI-decided disposition.
+This packet does not prove analyst-approved disposition.
