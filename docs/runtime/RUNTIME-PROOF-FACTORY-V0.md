@@ -8,13 +8,16 @@ This document is a public-safe summary surface. It is not raw evidence, not a pu
 
 ## Publication Basis
 
-- Public-safe approval: `PUBLIC_SAFE_APPROVED`.
-- Source authority: merged HO-DET-011 and HO-DET-012 public-safe decision gates.
+- Later operator approval: `PUBLIC_SAFE_APPROVED` for this bounded summary wording only.
+- Decision-gate state: the merged HO-DET-011 and HO-DET-012 decision-gate documents remain historical gate records and are not rewritten by this summary.
+- Source authority: merged HO-DET-011 and HO-DET-012 review and decision artifacts constrain the allowed wording.
 - Publication lane: bounded public-safe summary only.
 - Raw evidence location: retained outside public repositories.
 - Splunk status: `NOT_VERIFIED`.
 - AI disposition authority: not claimed.
 - Human review requirement: preserved.
+
+`PUBLIC_SAFE_APPROVED` is the later human/operator approval for this bounded summary surface. It does not retroactively change the decision-gate documents, mutate proof index status, expose raw evidence, or authorize public runtime proof, public signal-observed proof, Splunk observation, production, fleet-wide, autonomous SOC, AI-approved, or analyst-approved claims.
 
 ## Published Summary
 
