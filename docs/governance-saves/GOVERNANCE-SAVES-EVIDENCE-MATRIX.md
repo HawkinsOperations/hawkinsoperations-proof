@@ -30,6 +30,86 @@
 | GS-078 | 2026-05-26 | Website route separation | Website dirty state blocked website-dependent SOCaaS/proof work from being mixed into proof or packet work. | Governed operator logbook entries for the SOCaaS Friday packet blocker and subsequent proof/platform-only packet pass. | `REAL_CONTROL` | website route / publication | Website work stayed separated from proof and SOCaaS packet work until dirty website state was classified. | In SOCaaS, this maps to preventing website presentation drift from becoming detection-governance truth. | Internal/local-only evidence; public summary should stay generalized and should not cite local filenames. |
 | GS-079 | 2026-05-23 to 2026-05-26 | AI support / human authority | AI support stayed support-only instead of becoming autonomous triage, alert-resolution, or disposition authority. | `proof/indexes/DETECTION_PROOF_STATUS_INDEX.yml` support-only fields plus existing verifier-backed GS-006 / case-study boundaries. | `REAL_CONTROL` | runtime claim / disposition claim | Human review remains authority; AI output can assist review but cannot approve disposition, close alerts, or promote proof. | In SOCaaS, this maps to requiring human approval before AI-supported triage becomes disposition or customer-facing status. | Public-safe as a control-boundary summary only; no autonomous SOC, autonomous alert resolution, AI-approved disposition, or analyst-approved disposition claim is made. |
 | GS-080 | 2026-05-22 to 2026-05-27 | Claim ceiling / promotion gate | Unsupported runtime-active, signal-observed, production, customer, fleet, public-safe, and disposition claims stayed blocked across proof, issue, website, and packet review loops. | README proof boundary, proof records/cards, PR #59/#60 governance packets, RS003 boundary doc, and governed operator logbook closeouts. | `REPORT_ONLY` | runtime claim / public proof / publication | Current proof records remain below runtime/signal/public-safe promotion unless a separate evidence, review, stale-review, wording-review, and human approval gate supports a scoped change. | In SOCaaS, this maps to blocking customer-facing detection claims until validation, route, public-safety, and approval evidence exists. | Aggregate boundary row only; it is not a countable production save or public metric. |
+| GS-081 | 2026-05-27 | Stale branch / public wording gate | SOCaaS-related stale branches were classified as private discussion source only, with public-safe reviewer and release-candidate wording held above the approved boundary. | Governed operator logbook SOCaaS branch triage closeout. | `PROOF_BOUNDARY_SAVE` / stale branch triage | private discussion / publication | Branch material may inform private review only after claim-boundary rewrite; public, release, website, and proof-record promotion remain blocked. | In SOCaaS, this maps to blocking stale branch text from becoming customer-facing proof or release language. | Public summary must stay generalized; branch material is not public-safe proof and does not establish deployment, customer, or runtime claims. |
+| GS-082 | 2026-05-27 | Dirty-state packet gate | A private Friday packet was not created when the website repo had unresolved untracked planning state, preventing ambiguous website material from entering the packet. | Governed operator logbook SOCaaS Friday packet blocked closeout. | `DIRTY_TREE_STOP` / packet source control | private packet creation / publication | Packet generation stopped until the dirty website state could be classified or excluded. | In SOCaaS, this maps to refusing to package customer-facing or reviewer-facing material from unresolved public-surface state. | Internal/local-only process evidence; public summary must not expose local filenames or imply a production save. |
+| GS-083 | 2026-05-27 | Private packet claim ceiling | A follow-up private packet used only prior branch triage plus clean proof/platform context, intentionally excluded website inspection, and kept the output private with forbidden-claim and local-path scans passing. | Governed operator logbook SOCaaS Friday packet closeout, no website inspection. | `PUBLIC_PROOF_CEILING_ENFORCED` / private packet boundary | public-safe promotion / runtime claim | The packet remained private discussion material only; website, GitHub, proof-record, runtime, production, customer, autonomous, AI-approved, and analyst-approved promotion stayed blocked. | In SOCaaS, this maps to separating private discussion support from public or customer-facing proof. | Public summary can say governance preserved the claim ceiling, but the packet itself remains private and not public-safe proof. |
+
+## Structured Ledger Entries Added 2026-05-27
+
+### GS-081
+
+- save_id: `GS-081`
+- title: Stale SOCaaS branch material held below public/release proof
+- date_detected: `2026-05-27`
+- repo_scope: `HawkinsOperations/hawkinsoperations-proof`; `HawkinsOperations/hawkinsoperations-platform`; `HawkinsOperations/hawkinsoperations-website`
+- lane: `GOVERNANCE-SAVES LEDGER ONLY`
+- save_category: `PUBLIC_PROOF_CEILING_ENFORCED`; `UNSAFE_WORDING_BLOCKED`; `RELEASE_GATE_SAVED_STATE`
+- risk_detected: Stale branch material contained useful private-discussion context, but public-safe reviewer and release-candidate wording was above the approved boundary.
+- governance_action: Branch material was classified as private discussion source only, with public use blocked until claim-boundary rewrite and later review.
+- evidence_basis: Governed operator logbook SOCaaS branch triage closeout recorded `DO_NOT_USE_PUBLICLY`, `NEEDS_CLAIM_BOUNDARY_REWRITE`, and `REBASE_AND_UPDATE_LATER` classifications, with current truth boundary preserved as `NOT_PUBLIC_SAFE` / `BLOCKED_PENDING_REVIEW`.
+- evidence_type: `GOVERNED_LOG`; `STATUS_DOC`
+- affected_surface: proof reviewer packet branch, proof receipt branch, platform receipt branch, website receipt branch
+- claim_boundary_before: Stale branch wording could be mistaken for public-safe reviewer or release-candidate proof.
+- claim_boundary_after: Branch material is private discussion source only; public, release, website, and proof-record promotion remain blocked.
+- public_safe_summary: Governance blocked stale branch material from becoming public or release proof without claim-boundary rewrite.
+- internal_notes_allowed: Yes, but no raw private evidence, local paths, or branch-private wording should be exposed externally.
+- public_status: `NEEDS_REVIEW`
+- proof_ceiling_after_save: `NOT_PUBLIC_SAFE` / `BLOCKED_PENDING_REVIEW`
+- human_authority_required: `true`
+- final_outcome: Private discussion reuse only; public use remains blocked.
+- do_not_claim: Do not claim production deployment, customer deployment, release readiness, public-safe runtime proof, runtime-active detection, signal-observed detection, broad Cribl route proof, autonomous SOC authority, AI-approved disposition, or analyst-approved disposition.
+- downstream_use: Use as an internal governance-save example for stale branch and release-wording containment.
+- confidence: `HIGH`
+
+### GS-082
+
+- save_id: `GS-082`
+- title: Dirty website state blocked private packet creation
+- date_detected: `2026-05-27`
+- repo_scope: `HawkinsOperations/hawkinsoperations-website`; `HawkinsOperations/hawkinsoperations-proof`; `HawkinsOperations/hawkinsoperations-platform`
+- lane: `GOVERNANCE-SAVES LEDGER ONLY`
+- save_category: `CROSS_REPO_DRIFT_CAUGHT`; `PRIVATE_EVIDENCE_LEAK_PREVENTED`; `PR_CI_RULE_SAVED_STATE`
+- risk_detected: A private discussion packet would have been generated while the website repo had unresolved untracked planning state.
+- governance_action: Packet creation stopped before output was created, and the website dirty state was kept out of the packet path.
+- evidence_basis: Governed operator logbook SOCaaS Friday packet blocked closeout recorded clean proof/platform repos, unresolved untracked website planning state, no output file creation, and no unsupported public-safe/runtime/production/customer/autonomous/disposition claim promotion.
+- evidence_type: `GOVERNED_LOG`; `STATUS_DOC`
+- affected_surface: private discussion packet; website public-surface planning state
+- claim_boundary_before: Unresolved website planning state could have contaminated private packet creation or made packet readiness look clearer than it was.
+- claim_boundary_after: Packet output stayed uncreated until the dirty website state could be classified or excluded.
+- public_safe_summary: Governance stopped packet creation when unresolved website state made the source boundary unsafe.
+- internal_notes_allowed: Yes, but public wording must generalize local filenames and avoid treating this as production impact.
+- public_status: `PRIVATE_ONLY`
+- proof_ceiling_after_save: `NOT_PUBLIC_SAFE` / `BLOCKED_PENDING_REVIEW`
+- human_authority_required: `true`
+- final_outcome: Packet creation blocked; no public proof, website update, or private packet promotion occurred.
+- do_not_claim: Do not claim customer impact, production prevention, production readiness, public-safe proof, runtime-active detection, signal-observed detection, autonomous SOC authority, AI-approved disposition, or analyst-approved disposition.
+- downstream_use: Use as an internal governance-save example for dirty-state containment before packaging.
+- confidence: `HIGH`
+
+### GS-083
+
+- save_id: `GS-083`
+- title: Private packet path preserved claim ceiling by excluding website inspection
+- date_detected: `2026-05-27`
+- repo_scope: `HawkinsOperations/hawkinsoperations-proof`; `HawkinsOperations/hawkinsoperations-platform`
+- lane: `GOVERNANCE-SAVES LEDGER ONLY`
+- save_category: `PUBLIC_PROOF_CEILING_ENFORCED`; `PRIVATE_EVIDENCE_LEAK_PREVENTED`; `RUNTIME_CLAIM_BLOCKED`
+- risk_detected: A private packet could have been mistaken for public-safe, runtime, production, customer, or website proof if source boundaries were widened after the dirty-state stop.
+- governance_action: The follow-up packet run excluded website inspection, used only prior branch triage and clean proof/platform context, and validated that forbidden achieved-claim phrases and local path strings were absent from the private artifact.
+- evidence_basis: Governed operator logbook SOCaaS Friday packet closeout, no website inspection, recorded the output as private discussion material only, with local-path scan passing and no public-safe, runtime, production, customer, autonomous, AI-approved, analyst-approved, fleet, broad Cribl route, website, GitHub, or proof-record promotion.
+- evidence_type: `GOVERNED_LOG`; `STATUS_DOC`
+- affected_surface: private discussion packet; proof/platform source context
+- claim_boundary_before: A packet generated after the dirty-state blocker could overread private source context as public or runtime proof.
+- claim_boundary_after: Packet remained private discussion material only; public, website, GitHub, proof-record, runtime, production, customer, autonomous, AI-approved, and analyst-approved promotion stayed blocked.
+- public_safe_summary: Governance preserved the proof ceiling by separating private discussion material from public-safe proof.
+- internal_notes_allowed: Yes, within private Operations artifact handling; do not expose the private packet text as public proof.
+- public_status: `PRIVATE_ONLY`
+- proof_ceiling_after_save: `NOT_PUBLIC_SAFE` / `BLOCKED_PENDING_REVIEW`
+- human_authority_required: `true`
+- final_outcome: Private packet created without website inspection or proof/public-safe promotion.
+- do_not_claim: Do not claim public-safe runtime proof, production deployment, customer deployment, fleet-wide deployment, runtime-active detection, signal-observed detection, broad Cribl route proof, autonomous SOC authority, AI-approved disposition, or analyst-approved disposition.
+- downstream_use: Use as an internal governance-save example for private packet boundary control and claim-ceiling preservation.
+- confidence: `HIGH`
 
 ## Public-Safe Candidate Evidence
 
