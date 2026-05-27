@@ -290,13 +290,13 @@
 
 ## April 2026 Expansion Summary
 
-Pass 2A used `C:\Raylee\Operations\Logbook\2026\04-2026\04-24_to_04-30.md` as the full April weekly source. It added GS-013 through GS-020. GS-014 and GS-015 are `INTERNAL_COUNTABLE_LOCAL_ONLY` dirty-tree saves, GS-013/GS-017/GS-018 need public links, GS-016/GS-020 are standing or supporting controls, and GS-019 is private-only.
+Pass 2A used an internal governed Operations logbook reference as the full April weekly source. It added GS-013 through GS-020. GS-014 and GS-015 are `INTERNAL_COUNTABLE_LOCAL_ONLY` dirty-tree saves, GS-013/GS-017/GS-018 need public links, GS-016/GS-020 are standing or supporting controls, and GS-019 is private-only.
 
 No April entry is a final public metric, production-prevention claim, runtime-active claim, signal-observed claim, public-safe runtime claim, autonomous SOC claim, AI-approved disposition, or analyst-approved disposition.
 
 ## May 1-7 2026 Expansion Summary
 
-Pass 2B used `C:\Raylee\Operations\Logbook\2026\05-2026\05-01_to_05-07.md` as the May Week 1 source. Eight read-only scanner roles returned findings. The consolidated backlog added GS-021 through GS-033.
+Pass 2B used an internal governed Operations logbook reference as the May Week 1 source. Eight read-only scanner roles returned findings. The consolidated backlog added GS-021 through GS-033.
 
 Strongest May Week 1 rows:
 
@@ -317,7 +317,7 @@ No May Week 1 entry is a final public metric, production-prevention claim, runti
 
 ## May 8-14 2026 Expansion Summary
 
-Pass 2C used `C:\Raylee\Operations\Logbook\2026\05-2026\05-08_to_05-14.md` as the May Week 2 source. Eight read-only scanner roles returned findings. The consolidated backlog added GS-035 through GS-046.
+Pass 2C used an internal governed Operations logbook reference as the May Week 2 source. Eight read-only scanner roles returned findings. The consolidated backlog added GS-035 through GS-046.
 
 Strongest May Week 2 rows:
 
@@ -342,7 +342,7 @@ No May Week 2 entry is a final public metric, production-prevention claim, runti
 
 ## May 15-21 2026 Expansion Summary
 
-This pass used `C:\Raylee\Operations\Logbook\2026\05-2026\05-15_to_05-21.md` as the May Week 3 source. Read-only scanner roles were attempted, but several stopped on delegated logging despite parent logging, so the primary agent completed local scanner consolidation. The consolidated backlog added GS-047 through GS-055.
+This pass used an internal governed Operations logbook reference as the May Week 3 source. Read-only scanner roles were attempted, but several stopped on delegated logging despite parent logging, so the primary agent completed local scanner consolidation. The consolidated backlog added GS-047 through GS-055.
 
 Strongest May Week 3 rows:
 
@@ -363,7 +363,7 @@ No May Week 3 entry is a final public metric, production-prevention claim, runti
 
 ## May 22-28 2026 Current-Week Expansion Summary
 
-This pass used `C:\Raylee\Operations\Logbook\2026\05-2026\05-22_to_05-28.md` as the current-week source. The consolidated backlog added GS-056 through GS-059 and merged duplicate GS-034 branch-preflight evidence into the existing branch-mismatch candidate instead of creating a duplicate.
+This pass used an internal governed Operations logbook reference as the current-week source. The consolidated backlog added GS-056 through GS-059 and merged duplicate GS-034 branch-preflight evidence into the existing branch-mismatch candidate instead of creating a duplicate.
 
 Strongest current-week rows:
 
