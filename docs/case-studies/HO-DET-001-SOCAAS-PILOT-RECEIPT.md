@@ -56,6 +56,41 @@ The HO-DET-001 SOCaaS Pilot Receipt Pack landed as five squash merges on 2026-05
 | `hawkinsoperations-proof` | [#62](https://github.com/HawkinsOperations/hawkinsoperations-proof/pull/62) | `317c207fac10be766fc2616f05283705f3ff2c07` | `20cf39e6a7e6433531970ea0adc73e487c2411c4` | `2026-05-30T04:28:11Z` | Proof-authority case-study route merged with the nonexistent platform route removed. | Proof route only; ceiling remains `CONTROLLED_TEST_VALIDATED`; public-safe status remains blocked. |
 | `hawkinsoperations-website` | [#52](https://github.com/HawkinsOperations/hawkinsoperations-website/pull/52) | `0264d439ab0e979e260baf8c9e32b57ad3b35154` | `62bbb5336e4e09ae5904c08a5b4d86210772d066` | `2026-05-30T04:28:17Z` | Website receipt rendering/data and blocked-term scanner enforcement merged. | Website rendering is not proof and cannot raise the claim ceiling. |
 
+## Public-Safe Reviewer Walkthrough
+
+Use this walkthrough as a sanitized reviewer handoff. It routes to source-controlled artifacts and deterministic validators only. It does not expose raw private evidence, local runtime captures, non-source context, or any stronger proof claim than `CONTROLLED_TEST_VALIDATED`.
+
+### Claims To Review
+
+- HO-DET-001 has merged source artifacts, validation receipts, platform contract shape, proof surfaces, and website routing for a bounded SOCaaS pilot receipt chain.
+- The current reviewer-facing ceiling is `CONTROLLED_TEST_VALIDATED`.
+- The accepted wording is controlled-test validation and bounded reviewer inspection, not runtime-active, signal-observed, public-safe runtime, production, customer deployment, SOCaaS deployment, SOCaaS availability, FortiSIEM-proven, autonomous, AI-approved, or analyst-approved status.
+
+### Evidence Chain To Follow
+
+1. Start with this case study and the final merge ledger above.
+2. Inspect the proof authority routes: `proof/records/HO-DET-001.md`, `proof/cards/HO-DET-001.md`, `proof/indexes/DETECTION_PROOF_STATUS_INDEX.yml`, and `evidence/evidence-ledger.json`.
+3. Inspect the validation routes named in the evidence chain: `hawkinsoperations-validation/reports/ho-det-001/validation-result.json`, `hawkinsoperations-validation/reports/ho-det-001/pipeline-proof.md`, and `hawkinsoperations-validation/reports/ho-det-001/pipeline-proof.json`.
+4. Inspect the source and contract routes: `hawkinsoperations-detections/detections/successor/ho-det-001/rule.yml`, `hawkinsoperations-detections/detections/successor/ho-det-001/splunk.spl`, and `hawkinsoperations-platform/contracts/examples/soar-case-packet-v0.sample.json`.
+5. Inspect website routing only as navigation: `hawkinsoperations-website/src/data/proofRecords.ts`. Website rendering remains non-proof.
+
+### Demo Path
+
+The reviewer demo path is a repository walkthrough, not a live SIEM or production demonstration: open the proof record/card, trace the validation report and pipeline proof, compare the detection source and platform contract shape, then confirm the website data only routes to the bounded proof state. Do not present this path as live SOCaaS operation or live FortiSIEM/Splunk/Wazuh/Cribl proof.
+
+### Validation Commands
+
+Run these from the `hawkinsoperations-proof` repository root:
+
+```powershell
+python -B scripts\verify_detection_proof_status_index.py
+python -B scripts\verify_proof_integrity.py
+python -B scripts\verify-ho-det-001-proof-integrity.py
+python -B scripts\verify-proof-pack-001-release.py
+```
+
+Expected reviewer result: the commands pass, HO-DET-001 remains `CONTROLLED_TEST_VALIDATED`, public-safe status remains `NOT_PUBLIC_SAFE`, runtime status remains private boundary context only, and signal status remains `NOT_PROVEN`.
+
 ## Allowed Claims
 
 - "HO-DET-001 has merged source artifacts in the detections repository."
