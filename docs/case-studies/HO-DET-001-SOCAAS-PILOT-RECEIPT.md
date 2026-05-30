@@ -44,6 +44,18 @@ This case study does not create a new proof level. It explains the existing rece
 | Governance saves route | `docs/governance-saves/GOVERNANCE-SAVES-CANDIDATES.md`; `docs/governance-saves/GOVERNANCE-SAVES-EVIDENCE-MATRIX.md` | Governance-saves material documents controls that blocked or corrected unsafe claim, merge, publication, or authority drift. | Candidate/save evidence does not raise the HO-DET-001 proof ceiling. |
 | Website route | `hawkinsoperations-website/src/data/proofRecords.ts` | Website data may route reviewers to bounded proof status. | Website rendering is not proof and cannot promote runtime, signal, public-safe, production, or SOCaaS claims. |
 
+## Final Merge Ledger
+
+The HO-DET-001 SOCaaS Pilot Receipt Pack landed as five squash merges on 2026-05-30 after review-thread remediation, green checks, and claim-boundary recheck. These merge records prove GitHub source-control integration only. They do not prove runtime, signal, production, public-safe, SOCaaS deployment, FortiSIEM integration, autonomous SOC, AI disposition authority, or analyst disposition authority.
+
+| Repo | PR | Final head SHA | Merge SHA | Merged at | Ledger meaning | Boundary |
+|---|---|---|---|---|---|---|
+| `hawkinsoperations-detections` | [#39](https://github.com/HawkinsOperations/hawkinsoperations-detections/pull/39) | `c5cfb04d88355e81e71b23a262d17bda91f86ddc` | `c072d082b6c59c8556355a598b169a18897c6f8f` | `2026-05-30T04:26:26Z` | Detection source boundary merged. | Source truth only; not runtime, signal, production, or public-safe proof. |
+| `hawkinsoperations-validation` | [#61](https://github.com/HawkinsOperations/hawkinsoperations-validation/pull/61) | `c850fc7a3b7ecc1bd5988cccf8ca83790db96180` | `9a187017db970317035704dfa8e5e8010aefce25` | `2026-05-30T04:27:58Z` | Receipt artifacts and claim-boundary scanner remediation merged. | Controlled validation truth only; proof ceiling remains `CONTROLLED_TEST_VALIDATED`. |
+| `hawkinsoperations-platform` | [#37](https://github.com/HawkinsOperations/hawkinsoperations-platform/pull/37) | `f6a41f83da64e586beb90fb1739471cd7b657daf` | `e6978f92d3d8f067bd61c4ec98ecc5eb28fa8bec` | `2026-05-30T04:28:04Z` | Receipt contract/sample/verifier and empty proof/privacy map hardening merged. | Contract/verifier truth only; not production SOAR, response execution, or SOCaaS operation. |
+| `hawkinsoperations-proof` | [#62](https://github.com/HawkinsOperations/hawkinsoperations-proof/pull/62) | `317c207fac10be766fc2616f05283705f3ff2c07` | `20cf39e6a7e6433531970ea0adc73e487c2411c4` | `2026-05-30T04:28:11Z` | Proof-authority case-study route merged with the nonexistent platform route removed. | Proof route only; ceiling remains `CONTROLLED_TEST_VALIDATED`; public-safe status remains blocked. |
+| `hawkinsoperations-website` | [#52](https://github.com/HawkinsOperations/hawkinsoperations-website/pull/52) | `0264d439ab0e979e260baf8c9e32b57ad3b35154` | `62bbb5336e4e09ae5904c08a5b4d86210772d066` | `2026-05-30T04:28:17Z` | Website receipt rendering/data and blocked-term scanner enforcement merged. | Website rendering is not proof and cannot raise the claim ceiling. |
+
 ## Allowed Claims
 
 - "HO-DET-001 has merged source artifacts in the detections repository."
