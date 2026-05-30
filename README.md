@@ -42,6 +42,27 @@ Use the exact tag release URL above for public routing. Do not rely on GitHub's 
 
 Website and GitHub rendering route reviewers; rendering is not proof. The release package does not prove runtime-active deployment, signal-observed proof, production readiness, Cribl/Wazuh/Splunk/AWS live proof, autonomous SOC operation, or public-safe runtime proof.
 
+## Proof Pack 001 90-Second Reviewer Check
+
+Use this quick path to verify the released artifact without raising the claim ceiling:
+
+1. Open the direct release route: [HawkinsOperations Proof Pack 001](https://github.com/HawkinsOperations/hawkinsoperations-proof/releases/tag/hawkinsoperations-proof-pack-001).
+2. Confirm the release tag is `hawkinsoperations-proof-pack-001` and the asset is `HAWKINSOPERATIONS_PROOF_PACK_001.zip`.
+3. Download the ZIP and compare its SHA256 to `44d8a643aa2b113c9e99be0462e699d39af707a67190823cc05bb381907dc452`.
+4. If using PowerShell, verify the downloaded ZIP with:
+
+```powershell
+Get-FileHash .\HAWKINSOPERATIONS_PROOF_PACK_001.zip -Algorithm SHA256
+```
+
+5. If using a local checkout of this repo, verify the ZIP payload with:
+
+```powershell
+python -B scripts/verify-proof-pack-001-zip.py .\HAWKINSOPERATIONS_PROOF_PACK_001.zip
+```
+
+Passing the checksum and ZIP verifier supports only this bounded reviewer claim: Proof Pack 001 is a real release artifact for `HO-DET-001` under `CONTROLLED_TEST_VALIDATED`. It does not prove runtime-active public proof, public signal proof, production readiness, SOCaaS readiness, autonomous SOC operation, AI-approved disposition, analyst-approved disposition, or public-safe runtime proof.
+
 ## What This Repository Proves
 
 | Proof surface | What it can support |
