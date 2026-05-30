@@ -83,6 +83,7 @@ Website and GitHub rendering route reviewers; rendering is not proof. The releas
 
 ## Case Studies
 
+- [HO-DET-001 SOCaaS Pilot Receipt Pack](docs/case-studies/HO-DET-001-SOCAAS-PILOT-RECEIPT.md)
 - [Operations Accomplishment Ledger](docs/case-studies/OPERATIONS-ACCOMPLISHMENT-LEDGER.md)
 - [HO-DET-001: AI Authority Boundary Case Study](docs/case-studies/HO-DET-001-AI-AUTHORITY-BOUNDARY.md)
 - [Purple Team Closed Loop 001](docs/case-studies/PURPLE-TEAM-CLOSED-LOOP-001.md)
