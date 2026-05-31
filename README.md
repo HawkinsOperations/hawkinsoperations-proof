@@ -63,6 +63,20 @@ python -B scripts/verify-proof-pack-001-zip.py .\HAWKINSOPERATIONS_PROOF_PACK_00
 
 Passing the checksum and ZIP verifier supports only this bounded reviewer claim: Proof Pack 001 is a real release artifact for `HO-DET-001` under `CONTROLLED_TEST_VALIDATED`. It does not prove runtime-active public proof, public signal proof, production readiness, SOCaaS readiness, autonomous SOC operation, AI-approved disposition, analyst-approved disposition, or public-safe runtime proof.
 
+## Lifetime Case Ledger Verification Badges
+
+[![Ledger summary verifier](https://github.com/HawkinsOperations/hawkinsoperations-proof/actions/workflows/governance-gate.yml/badge.svg?branch=main&event=push)](https://github.com/HawkinsOperations/hawkinsoperations-proof/actions/workflows/governance-gate.yml?query=branch%3Amain)
+[![Ledger proof bundle verifier](https://github.com/HawkinsOperations/hawkinsoperations-proof/actions/workflows/governance-gate.yml/badge.svg?branch=main&event=push)](https://github.com/HawkinsOperations/hawkinsoperations-proof/actions/workflows/governance-gate.yml?query=branch%3Amain)
+
+These badges route to the `Governance Gate` workflow. The workflow contains the `lifetime-ledger-public-summary` and `lifetime-ledger-proof-bundle` jobs, which verify the source-controlled Lifetime Case Ledger summary and proof bundle against the pinned platform manifest.
+
+Badges report GitHub Actions workflow check status only. They do not prove runtime activity, signal observation, public proof, public-safe runtime proof, SOCaaS deployment, production deployment, autonomous SOC authority, AI-approved disposition, analyst-approved disposition, or case closure.
+
+| Badge | Verifier job | What it verifies | Boundary |
+|---|---|---|---|
+| Ledger summary verifier | `lifetime-ledger-public-summary` | `proof/records/lifetime-case-ledger-v1-public-summary.json` matches the pinned platform manifest counts, proof ceiling, six-repo anchors, and blocked-claim boundaries. | Ledger status remains `NOT_PUBLIC_SAFE`; proof ceiling remains `SCHEMA_CONTRACT_VERIFIER_EXISTS_ONLY`. |
+| Ledger proof bundle verifier | `lifetime-ledger-proof-bundle` | `proof/records/lifetime-case-ledger-v1-proof-bundle.json` packages the summary, pinned platform manifest reference, six-repo anchors, verifier commands, and reviewer steps without importing private evidence. | Ledger status remains `NOT_PUBLIC_SAFE`; proof ceiling remains `SCHEMA_CONTRACT_VERIFIER_EXISTS_ONLY`. |
+
 ## What This Repository Proves
 
 | Proof surface | What it can support |
