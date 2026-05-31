@@ -62,7 +62,7 @@ class DetectionProofStatusIndexTests(unittest.TestCase):
             if entry["detection_id"] == "HO-DET-012":
                 entry["runtime_status"] = "PRIVATE_RUNTIME_EVIDENCE_CAPTURED"
                 break
-        self.assert_verification_fails(data, "promotes private runtime status without a proof record")
+        self.assert_verification_fails(data, "HO-DET-012 proof record does not support runtime_status")
 
     def test_signal_promotion_fails(self) -> None:
         data = self.load_index()
