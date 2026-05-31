@@ -76,7 +76,7 @@ BLOCKED_CLAIMS = {
     "evidence-linked public proof",
     "live Splunk firing",
     "production triage",
-    "LOCAL_GPU_SUPPORT_NODE runtime-active",
+    "local GPU support node runtime-active",
     "Cribl-routed proof",
     "Wazuh-routed proof",
     "AWS-live",
