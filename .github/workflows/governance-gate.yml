@@ -21,6 +21,7 @@ jobs:
             "SCOPE.md",
             "GOVERNANCE.md",
             "STATUS.md",
+            "proof/indexes/lifetime-case-ledger-v1-evidence-map.json",
             "proof/records/lifetime-case-ledger-v1-proof-bundle.json",
             "proof/records/lifetime-case-ledger-v1-public-summary.json",
             "evidence/EVIDENCE_LEDGER_SCHEMA.json",
@@ -70,3 +71,40 @@ jobs:
       - name: Verify Lifetime Case Ledger badge references
         run: |
           python scripts/verify-lifetime-ledger-badges.py
+
+  lifetime-ledger-evidence-map:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Check out platform ledger source
+        uses: actions/checkout@v4
+        with:
+          repository: HawkinsOperations/hawkinsoperations-platform
+          ref: e0580fc8d0b141cbdd71c1b95e3d7885a1d708e0
+          path: hawkinsoperations-platform
+      - name: Check out detections relationship source
+        uses: actions/checkout@v4
+        with:
+          repository: HawkinsOperations/hawkinsoperations-detections
+          ref: c072d082b6c59c8556355a598b169a18897c6f8f
+          path: hawkinsoperations-detections
+      - name: Check out validation relationship source
+        uses: actions/checkout@v4
+        with:
+          repository: HawkinsOperations/hawkinsoperations-validation
+          ref: 9a187017db970317035704dfa8e5e8010aefce25
+          path: hawkinsoperations-validation
+      - name: Check out website render route source
+        uses: actions/checkout@v4
+        with:
+          repository: HawkinsOperations/hawkinsoperations-website
+          ref: 6b9cafeb16ff511273f32ac5bea3f70a03f15faf
+          path: hawkinsoperations-website
+      - name: Verify Lifetime Case Ledger evidence preservation map
+        run: |
+          python scripts/verify-lifetime-ledger-evidence-map.py \
+            --platform-root hawkinsoperations-platform \
+            --detections-root hawkinsoperations-detections \
+            --validation-root hawkinsoperations-validation \
+            --website-root hawkinsoperations-website \
+            --format json >/dev/null
