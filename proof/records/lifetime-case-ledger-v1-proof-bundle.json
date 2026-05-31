@@ -1,0 +1,164 @@
+{
+  "bundle_id": "LIFETIME_CASE_LEDGER_V1_PHASE_10_PROOF_BUNDLE",
+  "bundle_version": "phase_10_six_repo_ledger_proof_bundle_v1",
+  "owner_repo": "hawkinsoperations-proof",
+  "bundle_status": "REVIEWER_PACKET_SOURCE_ONLY_NO_TAG_NO_RELEASE",
+  "bundle_purpose": "reviewer verification packet for the proof-owned Lifetime Case Ledger v1 bounded summary and the Phase 8 platform state manifest",
+  "ledger_boundary": "tracked platform seed bridge, not runtime truth, not signal truth, not public proof",
+  "source_proof_summary": {
+    "repo_name": "hawkinsoperations-proof",
+    "repo_relative_path": "proof/records/lifetime-case-ledger-v1-public-summary.json",
+    "summary_id": "LIFETIME_CASE_LEDGER_V1_PHASE_9_PUBLIC_SUMMARY",
+    "summary_version": "phase_9_proof_owned_public_summary_v1"
+  },
+  "source_platform_manifest": {
+    "repo_name": "hawkinsoperations-platform",
+    "repo_relative_path": "contracts/lifetime-case-ledger-v1-state-manifest.json",
+    "pinned_commit_sha": "e0580fc8d0b141cbdd71c1b95e3d7885a1d708e0",
+    "manifest_id": "LIFETIME_CASE_LEDGER_V1_PHASE_8_STATE_MANIFEST",
+    "manifest_version": "phase_8_ledger_state_manifest_v1",
+    "platform_commit_sha_from_manifest": "eff2f8ea6c79c8b63aeaefc151d70539ba199eee"
+  },
+  "ledger_counts": {
+    "total_ledger_events": 4,
+    "total_cases": 4,
+    "public_safe_count": 0,
+    "closed_case_count": 0,
+    "correction_event_count": 0,
+    "superseding_event_count": 0
+  },
+  "appended_detection_ids": [
+    "HO-DET-001",
+    "HO-DET-011",
+    "HO-DET-012"
+  ],
+  "proof_ceiling": "SCHEMA_CONTRACT_VERIFIER_EXISTS_ONLY",
+  "public_safe_boundary": {
+    "summary_surface": "PUBLIC_SUMMARY_SAFE_FOR_BOUNDED_LEDGER_COUNTS",
+    "ledger_public_safe_status": "NOT_PUBLIC_SAFE",
+    "public_runtime_proof": false,
+    "public_signal_proof": false,
+    "public_proof_promotion": false,
+    "case_closure_authority": false,
+    "ai_or_analyst_disposition_authority": false,
+    "publication_scope": "bounded count and boundary summary only"
+  },
+  "does_not_prove": [
+    "live runtime activity",
+    "signal observation",
+    "production deployment",
+    "SOCaaS availability",
+    "public-safe runtime proof",
+    "public proof",
+    "autonomous SOC authority",
+    "AI-approved final disposition",
+    "analyst-approved final disposition",
+    "case closure authority"
+  ],
+  "blocked_claims": [
+    "production deployment",
+    "public raw runtime evidence",
+    "runtime-active public status",
+    "signal-observed public status",
+    "public-safe runtime proof",
+    "SOCaaS deployment",
+    "autonomous SOC",
+    "AI-approved final disposition",
+    "analyst-approved final disposition",
+    "case closure without explicit human-approved closure artifact",
+    "evidence-linked public proof",
+    "live Splunk firing",
+    "production triage",
+    "local GPU support node runtime-active",
+    "Cribl-routed proof",
+    "Wazuh-routed proof",
+    "AWS-live",
+    "fleet-wide deployment",
+    "production-ready SOC",
+    "public-safe status"
+  ],
+  "six_repo_sha_reference": [
+    {
+      "repo_name": ".github",
+      "role": "organization policy and shared GitHub defaults",
+      "branch": "main",
+      "commit_sha": "c0e8505c9ebd342bb180c37e8a45284c61bc1e44",
+      "authority_boundary": "organization repository metadata only; not runtime truth, signal truth, or public proof"
+    },
+    {
+      "repo_name": "hawkinsoperations-detections",
+      "role": "detection source rules and queries",
+      "branch": "main",
+      "commit_sha": "c072d082b6c59c8556355a598b169a18897c6f8f",
+      "authority_boundary": "detection source truth only; not runtime truth, signal truth, or public proof"
+    },
+    {
+      "repo_name": "hawkinsoperations-validation",
+      "role": "validation reports, fixtures, and controlled-test evidence",
+      "branch": "main",
+      "commit_sha": "9a187017db970317035704dfa8e5e8010aefce25",
+      "authority_boundary": "validation truth within controlled scope only; not runtime truth, signal truth, or public proof"
+    },
+    {
+      "repo_name": "hawkinsoperations-platform",
+      "role": "platform controller, ledger seed bridge, and governance gate",
+      "branch": "main",
+      "commit_sha": "eff2f8ea6c79c8b63aeaefc151d70539ba199eee",
+      "authority_boundary": "platform source truth and tracked seed bridge only; not runtime truth, signal truth, or public proof"
+    },
+    {
+      "repo_name": "hawkinsoperations-proof",
+      "role": "proof records and proof cards",
+      "branch": "main",
+      "commit_sha": "a5a59822d16f79332ecd674ced77621dc1a662c5",
+      "authority_boundary": "proof source records only; public proof and public-safe use still require separate approval"
+    },
+    {
+      "repo_name": "hawkinsoperations-website",
+      "role": "public website presentation surface",
+      "branch": "main",
+      "commit_sha": "62bbb5336e4e09ae5904c08a5b4d86210772d066",
+      "authority_boundary": "presentation source only; website rendering does not create runtime truth, signal truth, or public proof"
+    }
+  ],
+  "verifier_commands": [
+    "python scripts/verify-lifetime-ledger-proof-bundle.py --platform-manifest ../hawkinsoperations-platform/contracts/lifetime-case-ledger-v1-state-manifest.json",
+    "python scripts/verify-lifetime-ledger-public-summary.py --platform-manifest ../hawkinsoperations-platform/contracts/lifetime-case-ledger-v1-state-manifest.json",
+    "python scripts/verify_detection_proof_status_index.py",
+    "python scripts/verify_proof_integrity.py"
+  ],
+  "reviewer_verification_steps": [
+    "Read proof/records/lifetime-case-ledger-v1-proof-bundle.json.",
+    "Confirm the bundle source_proof_summary path is proof/records/lifetime-case-ledger-v1-public-summary.json.",
+    "Confirm the bundle source_platform_manifest pinned commit is e0580fc8d0b141cbdd71c1b95e3d7885a1d708e0.",
+    "Run python scripts/verify-lifetime-ledger-proof-bundle.py --platform-manifest ../hawkinsoperations-platform/contracts/lifetime-case-ledger-v1-state-manifest.json.",
+    "Run python scripts/verify-lifetime-ledger-public-summary.py --platform-manifest ../hawkinsoperations-platform/contracts/lifetime-case-ledger-v1-state-manifest.json.",
+    "Treat blocked claims and does_not_prove entries as reviewer boundaries, not proof of runtime, signal, public-proof, SOCaaS, production, disposition, or closure status."
+  ],
+  "included_source_files": [
+    "proof/records/lifetime-case-ledger-v1-proof-bundle.json",
+    "proof/records/lifetime-case-ledger-v1-public-summary.json",
+    "scripts/verify-lifetime-ledger-proof-bundle.py",
+    "scripts/verify-lifetime-ledger-public-summary.py",
+    ".github/workflows/governance-gate.yml"
+  ],
+  "excluded_material": [
+    "non-source runtime evidence artifacts",
+    "visual capture artifacts",
+    "local-environment identifiers",
+    "sensitive auth material",
+    "private artifact names",
+    "model transcript artifacts",
+    "case closure artifacts",
+    "runtime ledger write artifacts",
+    "ledger database mutation artifacts"
+  ],
+  "downstream_preparation": {
+    "proof_bundle_input": true,
+    "badge_pipeline_input": true,
+    "website_summary_input": true,
+    "requires_separate_publication_approval_for_display": true,
+    "requires_separate_release_or_tag_approval": true,
+    "requires_separate_proof_pack_zip_implementation": true
+  }
+}
