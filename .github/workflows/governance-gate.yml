@@ -21,6 +21,7 @@ jobs:
             "SCOPE.md",
             "GOVERNANCE.md",
             "STATUS.md",
+            "proof/indexes/hawkinsoperations-branch-cleanup-map.json",
             "proof/indexes/lifetime-case-ledger-v1-evidence-map.json",
             "proof/records/lifetime-case-ledger-v1-proof-bundle.json",
             "proof/records/lifetime-case-ledger-v1-public-summary.json",
@@ -108,3 +109,11 @@ jobs:
             --validation-root hawkinsoperations-validation \
             --website-root hawkinsoperations-website \
             --format json >/dev/null
+
+  branch-cleanup-map:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Verify HawkinsOperations branch cleanup governance map
+        run: |
+          python scripts/verify-hawkinsoperations-branch-cleanup-map.py --format json >/dev/null
