@@ -62,3 +62,11 @@ jobs:
       - name: Verify Lifetime Case Ledger proof bundle
         run: |
           python scripts/verify-lifetime-ledger-proof-bundle.py --platform-manifest hawkinsoperations-platform/contracts/lifetime-case-ledger-v1-state-manifest.json --format json >/dev/null
+
+  lifetime-ledger-badges:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Verify Lifetime Case Ledger badge references
+        run: |
+          python scripts/verify-lifetime-ledger-badges.py
