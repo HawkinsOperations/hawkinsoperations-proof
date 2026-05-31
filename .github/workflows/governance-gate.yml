@@ -21,6 +21,7 @@ jobs:
             "SCOPE.md",
             "GOVERNANCE.md",
             "STATUS.md",
+            "proof/records/lifetime-case-ledger-v1-public-summary.json",
             "evidence/EVIDENCE_LEDGER_SCHEMA.json",
             "evidence/evidence-ledger.json"
           )
@@ -32,3 +33,16 @@ jobs:
             Write-Error ("Missing required files: " + ($missing -join ", "))
             exit 1
           }
+
+  lifetime-ledger-public-summary:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Check out platform manifest source
+        uses: actions/checkout@v4
+        with:
+          repository: HawkinsOperations/hawkinsoperations-platform
+          path: hawkinsoperations-platform
+      - name: Verify Lifetime Case Ledger proof summary
+        run: |
+          python scripts/verify-lifetime-ledger-public-summary.py --platform-manifest hawkinsoperations-platform/contracts/lifetime-case-ledger-v1-state-manifest.json --format json >/dev/null
