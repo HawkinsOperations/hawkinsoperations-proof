@@ -1,0 +1,94 @@
+{
+  "summary_id": "REVIEWER_METRICS_PIPELINE_V1_SUMMARY",
+  "summary_version": "reviewer_metrics_pipeline_v1_proof_summary",
+  "owner_repo": "hawkinsoperations-proof",
+  "artifact_class": "proof_owned_reviewer_metrics_summary",
+  "summary_boundary": "Reviewer-safe source summary for bounded counts only. This does not promote runtime, signal, production, public-safe, disposition, or closure claims.",
+  "source_platform_state": {
+    "repo_name": "hawkinsoperations-platform",
+    "repo_relative_path": "contracts/reviewer-metrics-pipeline-v1-state.json"
+  },
+  "source_artifacts": {
+    "lifetime_case_ledger_summary": "proof/records/lifetime-case-ledger-v1-public-summary.json",
+    "reviewer_proof_map": "proof/indexes/reviewer-proof-map.json",
+    "validation_activity_ledger": "../hawkinsoperations-validation/activity/detection-activity-ledger-v1.json",
+    "platform_metrics_state": "../hawkinsoperations-platform/contracts/reviewer-metrics-pipeline-v1-state.json",
+    "detections_promotion_matrix": "../hawkinsoperations-detections/detections/DETECTION_PROMOTION_MATRIX.yml",
+    "github_control_receipts": "../.github/governance/ISSUE_FACTORY_CONTROL_RECEIPTS.md"
+  },
+  "metrics": {
+    "lifetime_governed_cases": 4,
+    "lifetime_ledger_events": 4,
+    "detection_activity_count": 49,
+    "controlled_validation_fire_count": 49,
+    "validation_case_count": 106,
+    "proof_record_count": 8,
+    "blocked_claim_count": 31,
+    "runtime_public_safe_count": 0,
+    "public_safe_count": 0,
+    "detection_family_count": 6,
+    "controlled_negative_test_count": 57
+  },
+  "project_board_reconciliation_status": {
+    "status": "REPO_BACKED_RECONCILIATION_PLAN_NO_PROJECT_MUTATION",
+    "detections_ledger_eligibility": "REPO_BACKED_BY_DETECTIONS_PR_40",
+    "branch_pr_cleanup": "REPO_BACKED_BY_PROOF_PR_71",
+    "public_safe_blocked_claims": "STANDING_CONTROL_BACKED_BY_GITHUB_ISSUE_10",
+    "reviewer_demo_path": "ACTIVE_ROUTE_BACKED_BY_GITHUB_PR_40_AND_PROOF_PR_72",
+    "github_repo_projects_tab_explanation": "DONE_PROJECT_ROUTING_DOC",
+    "project_metadata_is_proof_authority": false,
+    "github_project_mutation_performed": false
+  },
+  "authority_boundaries": {
+    "validation_owns_activity_counts": true,
+    "platform_owns_lifetime_case_ledger_counts": true,
+    "proof_owns_reviewer_safe_summary": true,
+    "github_owns_reviewer_routing": true,
+    "website_is_proof_authority": false,
+    "github_project_metadata_is_proof_authority": false,
+    "detection_activity_is_governed_case_count": false
+  },
+  "proof_ceiling": "SCHEMA_CONTRACT_VERIFIER_EXISTS_ONLY",
+  "public_safe_status": "NOT_PUBLIC_SAFE",
+  "does_not_prove": [
+    "public runtime fires",
+    "signal observation",
+    "public-safe runtime proof",
+    "production deployment",
+    "SOCaaS deployment",
+    "autonomous SOC",
+    "AI-approved disposition",
+    "analyst-approved disposition",
+    "case closure",
+    "GitHub Project proof authority",
+    "website proof authority"
+  ],
+  "blocked_claims": [
+    "runtime-active public proof",
+    "signal-observed public proof",
+    "evidence-linked public proof",
+    "public-safe proof",
+    "public-safe runtime proof",
+    "production-ready",
+    "production deployment",
+    "SOCaaS deployment",
+    "production triage",
+    "fleet-wide deployment",
+    "live Splunk firing",
+    "Cribl-routed",
+    "Wazuh-routed",
+    "AWS-live",
+    "autonomous SOC",
+    "AI-approved disposition",
+    "AI-decided disposition",
+    "analyst-approved disposition",
+    "case closure"
+  ],
+  "reviewer_demo_path": [
+    "Read this summary for the bounded metrics.",
+    "Check platform state at ../hawkinsoperations-platform/contracts/reviewer-metrics-pipeline-v1-state.json.",
+    "Check validation activity at ../hawkinsoperations-validation/activity/detection-activity-ledger-v1.json.",
+    "Check Lifetime Case Ledger summary at proof/records/lifetime-case-ledger-v1-public-summary.json.",
+    "Treat Project board reconciliation as routing/status only, not proof authority."
+  ]
+}
