@@ -19,6 +19,7 @@ REQUIRED_METRICS = {
     "lifetime_ledger_events",
     "detection_activity_count",
     "controlled_validation_fire_count",
+    "controlled_negative_test_count",
     "validation_case_count",
     "proof_record_count",
     "blocked_claim_count",
@@ -91,7 +92,10 @@ def platform_metrics_from_summary(summary_path: Path = SUMMARY_PATH, repo_root: 
     if not isinstance(summary_metrics, dict):
         fail("summary metrics must be present")
 
-    comparable_keys = sorted(set(summary_metrics).intersection(platform_metrics))
+    missing_platform_keys = sorted(set(summary_metrics) - set(platform_metrics))
+    if missing_platform_keys:
+        fail(f"platform metrics missing summarized keys: {missing_platform_keys}")
+    comparable_keys = sorted(summary_metrics)
     expected: dict[str, int] = {}
     for key in comparable_keys:
         value = platform_metrics[key]
