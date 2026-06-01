@@ -42,6 +42,26 @@ Use the exact tag release URL above for public routing. Do not rely on GitHub's 
 
 Website and GitHub rendering route reviewers; rendering is not proof. The release package does not prove runtime-active deployment, signal-observed proof, production readiness, Cribl/Wazuh/Splunk/AWS live proof, autonomous SOC operation, or public-safe runtime proof.
 
+## Runtime Route Proof v1 Private Candidate Reviewer Route
+
+Runtime Route Proof v1 has a private-candidate prerelease for the Wazuh -> Cribl -> Splunk route:
+
+[Runtime Route Proof v1 Private Candidate](https://github.com/HawkinsOperations/hawkinsoperations-proof/releases/tag/runtime-route-proof-v1-private-candidate-2026-06-01)
+
+Start with [proof/maps/RUNTIME-ROUTE-PROOF-V1-REVIEWER-MAP.md](proof/maps/RUNTIME-ROUTE-PROOF-V1-REVIEWER-MAP.md) for the two-minute reviewer path. It connects the prerelease, proof record, machine-readable map, reviewer-safe ZIP SHA, and platform verifier/schema/sample.
+
+| Item | Current state |
+|---|---|
+| Marker | `HO-RUNTIME-V1-20260601T120922Z-BATCH764` |
+| Route | Wazuh -> Cribl -> Splunk |
+| Verifier | `PASS_ROUTE_RECEIPTS` |
+| Release type | Private-candidate prerelease |
+| Proof ceiling | `PRIVATE_RUNTIME_ROUTE_PROOF_V1_CANDIDATE_PRESERVED` |
+| Public-safe status | `NOT_PUBLIC_SAFE` |
+| ZIP SHA256 | `3a1d4472bffcce68cff6e101c54e06b5a67528338bda174e6fef209fa9b1b278` |
+
+This private-candidate release does not prove public-safe runtime proof, production SOC operation, autonomous SOC behavior, broad ingestion, AI-decided disposition, public publication approval, or Lifetime Governed Case mutation.
+
 ## Proof Pack 001 90-Second Reviewer Check
 
 Use this quick path to verify the released artifact without raising the claim ceiling:
