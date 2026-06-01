@@ -36,6 +36,16 @@ class ReviewerMetricsSummaryTests(unittest.TestCase):
         for key, expected in platform_metrics.items():
             self.assertEqual(summary_metrics[key], expected)
 
+    def test_project_reconciliation_is_backed_by_github_receipt_source(self) -> None:
+        reconciliation = verifier.project_reconciliation_from_summary(SUMMARY_PATH, ROOT)
+
+        self.assertTrue(reconciliation["standing_issue_8_present"])
+        self.assertTrue(reconciliation["standing_issue_10_present"])
+        self.assertTrue(reconciliation["project_2_route_present"])
+        self.assertTrue(reconciliation["report_only_boundary_present"])
+        self.assertFalse(reconciliation["project_metadata_is_proof_authority"])
+        self.assertFalse(reconciliation["github_project_mutation_performed"])
+
     def test_summary_blocks_website_or_project_board_proof_authority(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
             path = Path(tmp) / "summary.json"
