@@ -72,7 +72,9 @@ PROMOTED_CLAIMS = [
     "public-safe runtime proof",
     "production SOC operation",
     "production operation",
+    "signal observation",
     "autonomous SOC",
+    "AI authority",
     "AI-approved disposition",
     "AI-decided disposition",
     "analyst-approved disposition",
@@ -111,15 +113,22 @@ def boundary_context(line: str) -> bool:
     return any(
         marker in lowered
         for marker in (
+            "remains blocked",
+            "remains not approved",
             "does not prove",
+            "does not claim",
+            "not claimed",
             "not proof authority",
+            "not public-safe",
+            "not approved",
             "blocked",
-            "remains",
-            "without",
+            "no public-safe",
+            "no runtime",
+            "no production",
+            "not production",
             "coordination-only",
             "not public",
             "not_public_safe",
-            "no public-safe",
         )
     )
 
@@ -141,6 +150,40 @@ def boundary_path(path: str) -> bool:
             "$.does_not_prove",
         )
     )
+
+
+def run_boundary_context_self_tests() -> dict[str, str]:
+    rejected = [
+        "public-safe runtime " + "proof remains approved",
+        "production SOC " + "operation remains active",
+        "signal " + "observation remains proven",
+        "AI " + "authority remains enabled",
+    ]
+    allowed = [
+        "public-safe runtime proof remains blocked",
+        "production SOC operation is not approved",
+        "this does not prove signal observation",
+        "AI authority is not claimed",
+    ]
+
+    for line in rejected:
+        try:
+            scan_claim_text(line, "boundary self-test rejected case")
+        except VerificationError:
+            continue
+        fail(f"boundary self-test accepted promoted wording: {line}")
+
+    for line in allowed:
+        try:
+            scan_claim_text(line, "boundary self-test allowed case")
+        except VerificationError as exc:
+            fail(f"boundary self-test rejected explicit boundary wording: {line}: {exc}")
+
+    return {
+        "status": "pass",
+        "positive_promoted_phrases_rejected": str(len(rejected)),
+        "explicit_boundary_phrases_allowed": str(len(allowed)),
+    }
 
 
 def scan_json_strings(value: Any, path: str = "$") -> None:
@@ -241,6 +284,71 @@ def verify_map_json(data: dict[str, Any]) -> dict[str, int | str]:
     return {name: by_name[name]["value"] for name in EXPECTED_METRICS}
 
 
+def normalize_markdown_cell(value: str) -> str:
+    value = value.strip()
+    if value.startswith("`") and value.endswith("`") and len(value) >= 2:
+        value = value[1:-1]
+    return value.strip()
+
+
+def markdown_section(text: str, heading: str) -> str:
+    marker = f"## {heading}"
+    start = text.find(marker)
+    if start == -1:
+        fail(f"missing Markdown section: {marker}")
+    body_start = start + len(marker)
+    next_heading = text.find("\n## ", body_start)
+    if next_heading == -1:
+        return text[body_start:]
+    return text[body_start:next_heading]
+
+
+def parse_markdown_table(section: str, label: str) -> list[dict[str, str]]:
+    lines = [line.strip() for line in section.splitlines() if line.strip().startswith("|")]
+    if len(lines) < 3:
+        fail(f"{label} table must include header, separator, and rows")
+    headers = [normalize_markdown_cell(cell) for cell in lines[0].strip("|").split("|")]
+    if headers != ["Metric", "Value", "Authority repo"]:
+        fail(f"{label} table header mismatch: {headers}")
+
+    separator_cells = [cell.strip() for cell in lines[1].strip("|").split("|")]
+    if len(separator_cells) != len(headers) or not all(set(cell) <= {"-", ":"} and "-" in cell for cell in separator_cells):
+        fail(f"{label} table separator is invalid")
+
+    rows: list[dict[str, str]] = []
+    for line in lines[2:]:
+        cells = [normalize_markdown_cell(cell) for cell in line.strip("|").split("|")]
+        if len(cells) != len(headers):
+            fail(f"{label} table row has wrong column count: {line}")
+        rows.append(dict(zip(headers, cells)))
+    return rows
+
+
+def verify_closeout_metrics_table(text: str) -> dict[str, str]:
+    rows = parse_markdown_table(markdown_section(text, "Final Metrics"), "Final Metrics")
+    actual: dict[str, str] = {}
+    for row in rows:
+        metric = row["Metric"]
+        if metric in actual:
+            fail(f"Final Metrics table repeats metric: {metric}")
+        actual[metric] = row["Value"]
+
+    expected_names = set(EXPECTED_METRICS)
+    actual_names = set(actual)
+    missing = sorted(expected_names - actual_names)
+    extra = sorted(actual_names - expected_names)
+    if missing:
+        fail(f"Final Metrics table missing metric: {missing[0]}")
+    if extra:
+        fail(f"Final Metrics table contains unexpected metric: {extra[0]}")
+
+    for metric, expected in EXPECTED_METRICS.items():
+        expected_value = str(expected)
+        if actual[metric] != expected_value:
+            fail(f"Final Metrics table value mismatch for {metric}: expected {expected_value!r}, found {actual[metric]!r}")
+    return actual
+
+
 def verify_markdown(path: Path, required: list[str]) -> None:
     if not path.exists():
         fail(f"missing Markdown file: {path.relative_to(ROOT).as_posix()}")
@@ -253,6 +361,7 @@ def verify_markdown(path: Path, required: list[str]) -> None:
 
 
 def verify() -> dict[str, Any]:
+    boundary_self_test = run_boundary_context_self_tests()
     data = load_json(MAP_JSON)
     metrics = verify_map_json(data)
     markdown_needles = [
@@ -277,12 +386,15 @@ def verify() -> dict[str, Any]:
             "## Project Board Boundary",
         ],
     )
+    closeout_metrics = verify_closeout_metrics_table(CLOSEOUT_MD.read_text(encoding="utf-8"))
     return {
         "status": "pass",
         "map_json": MAP_JSON.relative_to(ROOT).as_posix(),
         "map_markdown": MAP_MD.relative_to(ROOT).as_posix(),
         "closeout_record": CLOSEOUT_MD.relative_to(ROOT).as_posix(),
         "metrics": metrics,
+        "closeout_markdown_metrics": closeout_metrics,
+        "boundary_context_self_test": boundary_self_test,
         "proof_ceiling": "REVIEWER_METRICS_PIPELINE_V1_CLOSED_REVIEWER_VISIBLE",
     }
 
