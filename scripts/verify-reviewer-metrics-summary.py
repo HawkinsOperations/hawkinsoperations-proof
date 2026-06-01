@@ -41,15 +41,15 @@ def fail(message: str) -> None:
     raise VerificationError(message)
 
 
-def load_json(path: Path) -> dict[str, Any]:
+def load_json(path: Path, label: str = "reviewer metrics summary") -> dict[str, Any]:
     if not path.exists():
-        fail(f"missing reviewer metrics summary: {path}")
+        fail(f"missing {label}: {path}")
     try:
         data = json.loads(path.read_text(encoding="utf-8"))
     except json.JSONDecodeError as exc:
-        fail(f"malformed reviewer metrics summary: {exc}")
+        fail(f"malformed {label}: {exc}")
     if not isinstance(data, dict):
-        fail("reviewer metrics summary root must be an object")
+        fail(f"{label} root must be an object")
     return data
 
 
@@ -65,6 +65,40 @@ def scan_value(value: Any, label: str) -> None:
         for name, pattern in DENIED_TEXT:
             if pattern.search(value):
                 fail(f"{label} contains blocked text: {name}")
+
+
+def _source_artifact_path(summary: dict[str, Any], key: str, repo_root: Path) -> Path:
+    source_artifacts = summary.get("source_artifacts")
+    if not isinstance(source_artifacts, dict) or not source_artifacts:
+        fail("source_artifacts must be a non-empty object")
+    value = source_artifacts.get(key)
+    if not isinstance(value, str) or not value:
+        fail(f"source artifact {key} must be a string")
+    path = Path(value)
+    if path.is_absolute():
+        fail(f"source artifact {key} must be repo-relative or sibling-relative")
+    return (repo_root / path).resolve()
+
+
+def platform_metrics_from_summary(summary_path: Path = SUMMARY_PATH, repo_root: Path = ROOT) -> dict[str, int]:
+    summary = load_json(summary_path)
+    platform_state_path = _source_artifact_path(summary, "platform_metrics_state", repo_root)
+    platform_state = load_json(platform_state_path, "platform reviewer metrics state")
+    platform_metrics = platform_state.get("metrics")
+    summary_metrics = summary.get("metrics")
+    if not isinstance(platform_metrics, dict):
+        fail("platform reviewer metrics state metrics must be present")
+    if not isinstance(summary_metrics, dict):
+        fail("summary metrics must be present")
+
+    comparable_keys = sorted(set(summary_metrics).intersection(platform_metrics))
+    expected: dict[str, int] = {}
+    for key in comparable_keys:
+        value = platform_metrics[key]
+        if not isinstance(value, int) or value < 0:
+            fail(f"platform metric {key} must be a non-negative integer")
+        expected[key] = value
+    return expected
 
 
 def verify_summary(summary_path: Path = SUMMARY_PATH, repo_root: Path = ROOT) -> dict[str, Any]:
@@ -111,6 +145,9 @@ def verify_summary(summary_path: Path = SUMMARY_PATH, repo_root: Path = ROOT) ->
         fail("summary must not mutate GitHub Projects")
     if not summary.get("does_not_prove") or not summary.get("blocked_claims"):
         fail("does_not_prove and blocked_claims must be populated")
+    for key, expected in platform_metrics_from_summary(summary_path, repo_root).items():
+        if metrics.get(key) != expected:
+            fail(f"{key} platform metric mismatch: expected {expected}, found {metrics.get(key)}")
 
     return {
         "status": "pass",

@@ -29,6 +29,13 @@ class ReviewerMetricsSummaryTests(unittest.TestCase):
         self.assertGreater(metrics["detection_activity_count"], metrics["lifetime_governed_cases"])
         self.assertEqual(result["public_safe_status"], "NOT_PUBLIC_SAFE")
 
+    def test_summary_metrics_match_platform_state(self) -> None:
+        platform_metrics = verifier.platform_metrics_from_summary(SUMMARY_PATH, ROOT)
+        summary_metrics = json.loads(SUMMARY_PATH.read_text(encoding="utf-8"))["metrics"]
+
+        for key, expected in platform_metrics.items():
+            self.assertEqual(summary_metrics[key], expected)
+
     def test_summary_blocks_website_or_project_board_proof_authority(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
             path = Path(tmp) / "summary.json"
