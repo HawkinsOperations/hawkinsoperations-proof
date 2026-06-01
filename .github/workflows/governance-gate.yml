@@ -117,3 +117,11 @@ jobs:
       - name: Verify HawkinsOperations branch cleanup governance map
         run: |
           python scripts/verify-hawkinsoperations-branch-cleanup-map.py --format json >/dev/null
+
+  runtime-route-proof-v1-private-candidate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Verify Runtime Route Proof v1 private candidate map
+        run: |
+          python scripts/verify-runtime-route-proof-v1-private-candidate-map.py >/dev/null
