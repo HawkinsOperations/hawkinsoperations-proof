@@ -101,23 +101,23 @@ DENIED_TEXT_PATTERNS = [
 ]
 
 PROMOTED_CLAIM_PATTERNS = [
-    ("runtime-active public proof", re.compile(r"(?i)\bruntime-active public proof\b(?!.*(?:blocked|not prove|does not prove|not claimed))")),
-    ("signal-observed public proof", re.compile(r"(?i)\bsignal-observed public proof\b(?!.*(?:blocked|not prove|does not prove|not claimed))")),
-    ("public-safe runtime proof", re.compile(r"(?i)\bpublic-safe runtime proof\b(?!.*(?:blocked|not prove|does not prove|not claimed))")),
-    ("production deployment", re.compile(r"(?i)\bproduction deployment\b(?!.*(?:blocked|not prove|does not prove|not claimed))")),
-    ("SOCaaS deployment", re.compile(r"(?i)\bSOCaaS deployment\b(?!.*(?:blocked|not prove|does not prove|not claimed))")),
-    ("autonomous SOC", re.compile(r"(?i)\bautonomous SOC\b(?!.*(?:blocked|not prove|does not prove|not claimed))")),
-    ("AI-approved disposition", re.compile(r"(?i)\bAI-approved disposition\b(?!.*(?:blocked|not prove|does not prove|not claimed))")),
-    ("analyst-approved disposition", re.compile(r"(?i)\banalyst-approved disposition\b(?!.*(?:blocked|not prove|does not prove|not claimed))")),
-    ("case closure", re.compile(r"(?i)\bcase closure\b(?!.*(?:blocked|not prove|does not prove|not claimed|without))")),
-    ("Cribl-routed", re.compile(r"(?i)\bCribl-routed\b(?!.*(?:blocked|not prove|does not prove|not claimed))")),
-    ("Wazuh-routed", re.compile(r"(?i)\bWazuh-routed\b(?!.*(?:blocked|not prove|does not prove|not claimed))")),
-    ("AWS-live", re.compile(r"(?i)\bAWS-live\b(?!.*(?:blocked|not prove|does not prove|not claimed))")),
-    ("fleet-wide", re.compile(r"(?i)\bfleet-wide\b(?!.*(?:blocked|not prove|does not prove|not claimed))")),
-    ("live Splunk firing", re.compile(r"(?i)\blive Splunk firing\b(?!.*(?:blocked|not prove|does not prove|not claimed))")),
-    ("website proof authority", re.compile(r"(?i)\bwebsite as proof authority\b(?!.*(?:blocked|not prove|does not prove|not claimed))")),
-    ("badge proof authority", re.compile(r"(?i)\bbadge as proof authority\b(?!.*(?:blocked|not prove|does not prove|not claimed))")),
-    ("Project proof authority", re.compile(r"(?i)\bProject #1 as proof authority\b(?!.*(?:blocked|not prove|does not prove|not claimed))")),
+    ("runtime-active public proof", re.compile(r"(?i)\bruntime-active public proof\b")),
+    ("signal-observed public proof", re.compile(r"(?i)\bsignal-observed public proof\b")),
+    ("public-safe runtime proof", re.compile(r"(?i)\bpublic-safe runtime proof\b")),
+    ("production deployment", re.compile(r"(?i)\bproduction deployment\b")),
+    ("SOCaaS deployment", re.compile(r"(?i)\bSOCaaS deployment\b")),
+    ("autonomous SOC", re.compile(r"(?i)\bautonomous SOC\b")),
+    ("AI-approved disposition", re.compile(r"(?i)\bAI-approved disposition\b")),
+    ("analyst-approved disposition", re.compile(r"(?i)\banalyst-approved disposition\b")),
+    ("case closure", re.compile(r"(?i)\bcase closure\b")),
+    ("Cribl-routed", re.compile(r"(?i)\bCribl-routed\b")),
+    ("Wazuh-routed", re.compile(r"(?i)\bWazuh-routed\b")),
+    ("AWS-live", re.compile(r"(?i)\bAWS-live\b")),
+    ("fleet-wide", re.compile(r"(?i)\bfleet-wide\b")),
+    ("live Splunk firing", re.compile(r"(?i)\blive Splunk firing\b")),
+    ("website proof authority", re.compile(r"(?i)\bwebsite as proof authority\b")),
+    ("badge proof authority", re.compile(r"(?i)\bbadge as proof authority\b")),
+    ("Project proof authority", re.compile(r"(?i)\bProject #1 as proof authority\b")),
     ("public safe approved", re.compile(r"(?i)\bPUBLIC_SAFE_APPROVED\b")),
     ("public proof safe", re.compile(r"(?i)\bPUBLIC_PROOF_SAFE\b")),
 ]
@@ -143,7 +143,57 @@ def load_json(path: Path) -> dict[str, Any]:
     return data
 
 
-def scan_text(text: str, label: str) -> None:
+PathPart = str | int
+
+
+def json_path(path: tuple[PathPart, ...]) -> str:
+    label = "$"
+    for part in path:
+        if isinstance(part, int):
+            label += f"[{part}]"
+        else:
+            label += f".{part}"
+    return label
+
+
+def promoted_claim_scan_mode(path: tuple[PathPart, ...]) -> str:
+    string_parts = [part for part in path if isinstance(part, str)]
+    last = string_parts[-1] if string_parts else ""
+    first = string_parts[0] if string_parts else ""
+
+    if first == "blocked_claims" and last == "claim":
+        return "blocked_claim_name"
+    if first == "blocked_claims" and last == "reason":
+        return "boundary_text"
+    if first == "does_not_prove":
+        return "boundary_text"
+    if last in {"what_it_does_not_prove", "summary_boundary"}:
+        return "boundary_text"
+    if first == "reviewer_click_path" and last == "reviewer_value":
+        return "boundary_text"
+    if first == "trust_backup_checklist" and last == "evidence":
+        return "boundary_text"
+    return "strict"
+
+
+def has_boundary_context(line: str) -> bool:
+    lowered = line.lower()
+    return any(
+        boundary in lowered
+        for boundary in (
+            "blocked",
+            "does not prove",
+            "not proof authority",
+            "not claimed",
+            "status-only",
+            "render-only",
+            "operating control only",
+            "without explicit human-approved closure artifact",
+        )
+    )
+
+
+def scan_text(text: str, label: str, *, promoted_claim_mode: str = "strict") -> None:
     for token in STALE_PLATFORM_MANIFEST_TOKENS:
         if token in text:
             fail(f"{label} contains stale platform manifest reference: {token}")
@@ -154,21 +204,68 @@ def scan_text(text: str, label: str) -> None:
         for line in text.splitlines() or [text]:
             if not pattern.search(line):
                 continue
-            lowered = line.lower()
-            if any(
-                boundary in lowered
-                for boundary in (
-                    "blocked",
-                    "does not prove",
-                    "not proof authority",
-                    "not claimed",
-                    "status-only",
-                    "render-only",
-                    "operating control only",
-                )
-            ):
+            if promoted_claim_mode == "blocked_claim_name":
+                continue
+            if promoted_claim_mode == "boundary_text" and has_boundary_context(line):
                 continue
             fail(f"{label} contains promoted claim wording: {name}")
+
+
+def scan_json_strings(value: Any, path: tuple[PathPart, ...] = ()) -> None:
+    if isinstance(value, dict):
+        for key, nested in value.items():
+            if not isinstance(key, str):
+                fail(f"{json_path(path)} contains non-string object key")
+            scan_json_strings(nested, (*path, key))
+        return
+    if isinstance(value, list):
+        for index, nested in enumerate(value):
+            scan_json_strings(nested, (*path, index))
+        return
+    if isinstance(value, str):
+        scan_text(value, json_path(path), promoted_claim_mode=promoted_claim_scan_mode(path))
+
+
+def run_structural_scan_self_test() -> dict[str, str]:
+    allowed_boundary = {
+        "blocked_claims": [
+            {
+                "claim": "production deployment",
+                "status": "BLOCKED",
+                "reason": "This map does not prove production deployment.",
+            }
+        ],
+        "does_not_prove": [
+            "production deployment is blocked; this map does not prove deployment."
+        ],
+    }
+    scan_json_strings(allowed_boundary)
+
+    bypass_candidate = {
+        "aaa_promoted_claim": "production deployment",
+        "blocked_claims": [
+            {
+                "claim": "production deployment",
+                "status": "BLOCKED",
+                "reason": "This map does not prove production deployment.",
+            }
+        ],
+        "does_not_prove": [
+            "production deployment is blocked; this map does not prove deployment."
+        ],
+    }
+    try:
+        scan_json_strings(bypass_candidate)
+    except VerificationError as exc:
+        message = str(exc)
+        if "$.aaa_promoted_claim" not in message:
+            fail(f"structural scan regression failed at unexpected path: {message}")
+        return {
+            "status": "pass",
+            "negative_case": "arbitrary aaa_promoted_claim production deployment fails closed",
+            "allowed_case": "blocked_claims and does_not_prove boundary wording remains allowed",
+        }
+    fail("structural scan regression did not fail closed for $.aaa_promoted_claim")
 
 
 def require_bool_false(value: Any, label: str) -> None:
@@ -205,7 +302,11 @@ def verify_chain(stages: list[Any]) -> None:
             value = stage.get(field)
             if not isinstance(value, str) or not value.strip():
                 fail(f"proof_chain stage {stage.get('id', index)} missing {field}")
-            scan_text(value, f"proof_chain stage {stage.get('id', index)} {field}")
+            scan_text(
+                value,
+                f"proof_chain stage {stage.get('id', index)} {field}",
+                promoted_claim_mode="boundary_text" if field == "what_it_does_not_prove" else "strict",
+            )
         if stage["proof_ceiling"] != PROOF_CEILING:
             fail(f"proof_chain stage {stage['id']} must keep {PROOF_CEILING}")
 
@@ -226,7 +327,7 @@ def verify_checklist(items: list[Any]) -> None:
         evidence = item.get("evidence")
         if not isinstance(evidence, str) or not evidence.strip():
             fail(f"trust_backup_checklist {item_id} missing evidence")
-        scan_text(evidence, f"trust_backup_checklist {item_id} evidence")
+        scan_text(evidence, f"trust_backup_checklist {item_id} evidence", promoted_claim_mode="boundary_text")
     missing = sorted(set(REQUIRED_CHECKLIST) - set(by_id))
     if missing:
         fail(f"trust_backup_checklist missing required item: {missing[0]}")
@@ -245,7 +346,11 @@ def verify_reviewer_click_path(items: list[Any]) -> None:
             value = item.get(field)
             if not isinstance(value, str) or not value.strip():
                 fail(f"reviewer_click_path {item.get('id', '<unknown>')} missing {field}")
-            scan_text(value, f"reviewer_click_path {item.get('id', '<unknown>')} {field}")
+            scan_text(
+                value,
+                f"reviewer_click_path {item.get('id', '<unknown>')} {field}",
+                promoted_claim_mode="boundary_text" if field == "reviewer_value" else "strict",
+            )
 
 
 def verify_blocked_claims(claims: list[Any]) -> None:
@@ -339,13 +444,13 @@ def verify(data: dict[str, Any], *, platform_root: Path | None, github_root: Pat
         if claim not in joined_does_not_prove:
             fail(f"does_not_prove missing required boundary: {claim}")
 
-    map_text = json.dumps(data, sort_keys=True)
-    scan_text(map_text, "reviewer proof map")
+    run_structural_scan_self_test()
+    scan_json_strings(data)
 
     if not README_PATH.exists():
         fail(f"missing reviewer proof map markdown: {README_PATH.relative_to(ROOT).as_posix()}")
     markdown = README_PATH.read_text(encoding="utf-8")
-    scan_text(markdown, README_PATH.relative_to(ROOT).as_posix())
+    scan_text(markdown, README_PATH.relative_to(ROOT).as_posix(), promoted_claim_mode="boundary_text")
     for required in (
         "4 events",
         "4 cases",
@@ -377,6 +482,7 @@ def parse_args(argv: list[str]) -> argparse.Namespace:
     parser.add_argument("--map", default=str(MAP_PATH))
     parser.add_argument("--platform-root")
     parser.add_argument("--github-root")
+    parser.add_argument("--self-test", action="store_true")
     parser.add_argument("--format", choices=("text", "json"), default="text")
     return parser.parse_args(argv)
 
@@ -384,6 +490,15 @@ def parse_args(argv: list[str]) -> argparse.Namespace:
 def main(argv: list[str] | None = None) -> int:
     args = parse_args(argv or sys.argv[1:])
     try:
+        if args.self_test:
+            result = run_structural_scan_self_test()
+            if args.format == "json":
+                print(json.dumps(result, indent=2, sort_keys=True))
+            else:
+                print("Reviewer proof map structural scan self-test passed.")
+                print(f"negative_case={result['negative_case']}")
+                print(f"allowed_case={result['allowed_case']}")
+            return 0
         data = load_json(Path(args.map).resolve())
         result = verify(
             data,
