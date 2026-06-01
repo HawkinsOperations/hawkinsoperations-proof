@@ -293,6 +293,19 @@ def has_boundary_context(line: str) -> bool:
     return any(marker in lowered for marker in BOUNDARY_MARKERS)
 
 
+def markdown_table_cells(line: str) -> list[str] | None:
+    stripped = line.strip()
+    if not stripped.startswith("|") or not stripped.endswith("|"):
+        return None
+    return [cell.strip() for cell in stripped.strip("|").split("|")]
+
+
+def scan_forbidden_claim_in_text(path: Path, text: str, line_number: int, claim: str) -> None:
+    lowered = text.lower()
+    if claim.lower() in lowered and not has_boundary_context(lowered):
+        fail(f"forbidden positive claim in {rel(path)}:{line_number}: {claim}")
+
+
 def scan_private_text(path: Path, text: str) -> None:
     lowered = text.lower()
     for term in ALWAYS_PRIVATE_TERMS:
@@ -308,10 +321,27 @@ def scan_private_text(path: Path, text: str) -> None:
 
 def scan_forbidden_positive_claims(path: Path, text: str) -> None:
     for line_number, line in enumerate(text.splitlines(), start=1):
-        lowered = line.lower()
+        cells = markdown_table_cells(line)
         for claim in FORBIDDEN_POSITIVE_CLAIMS:
-            if claim.lower() in lowered and not has_boundary_context(lowered):
-                fail(f"forbidden positive claim in {rel(path)}:{line_number}: {claim}")
+            if cells is None:
+                scan_forbidden_claim_in_text(path, line, line_number, claim)
+                continue
+            for cell in cells:
+                scan_forbidden_claim_in_text(path, cell, line_number, claim)
+
+
+def verify_forbidden_claim_scanner_examples() -> None:
+    regression_path = PACKET_DIR / "__scanner_regression__.md"
+    must_fail = "| Website | SOCaaS availability | Does not prove live signal |"
+    try:
+        scan_forbidden_positive_claims(regression_path, must_fail)
+    except VerificationError:
+        pass
+    else:
+        fail("forbidden-claim scanner must fail closed on positive table cells")
+
+    may_allow = "| Website | Reviewer navigation | Does not prove SOCaaS availability |"
+    scan_forbidden_positive_claims(regression_path, may_allow)
 
 
 def verify_markdown_tables(text: str, path: Path) -> None:
@@ -525,6 +555,8 @@ def verify_checksums() -> None:
 
 def main() -> int:
     try:
+        verify_forbidden_claim_scanner_examples()
+
         for name in PACKET_FILES:
             path = PACKET_DIR / name
             text = read(path)
