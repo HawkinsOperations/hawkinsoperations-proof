@@ -1,0 +1,101 @@
+{
+  "packet": "what-the-system-refused-to-claim",
+  "created_date": "2026-06-01",
+  "entries": [
+    {
+      "artifact": "Detection Source",
+      "proves": [
+        "Detection source exists.",
+        "Source can be reviewed.",
+        "Source can point to validation and proof routes."
+      ],
+      "does_not_prove": [
+        "Does not prove runtime behavior.",
+        "Does not prove live signal.",
+        "Does not prove production deployment.",
+        "Does not prove public-safe runtime proof."
+      ],
+      "source_repo": "HawkinsOperations/hawkinsoperations-detections",
+      "source_route": "detections/successor/ho-det-001/",
+      "proof_ceiling": "CONTROLLED_TEST_VALIDATED",
+      "public_safe_status": "NOT_PUBLIC_SAFE_FOR_RUNTIME_OR_PUBLIC_SAFE_PROOF",
+      "notes": "Source truth only. Reviewable source does not promote runtime, signal, production, or public-safe runtime claims."
+    },
+    {
+      "artifact": "Validation",
+      "proves": [
+        "Controlled validation boundary.",
+        "Test result or validation contract under scoped conditions."
+      ],
+      "does_not_prove": [
+        "Does not prove live signal.",
+        "Does not prove runtime route.",
+        "Does not prove production deployment.",
+        "Does not prove public-safe runtime proof."
+      ],
+      "source_repo": "HawkinsOperations/hawkinsoperations-validation",
+      "source_route": "reports/ho-det-001/",
+      "proof_ceiling": "CONTROLLED_TEST_VALIDATED",
+      "public_safe_status": "NOT_PUBLIC_SAFE_FOR_RUNTIME_OR_PUBLIC_SAFE_PROOF",
+      "notes": "Validation truth only for controlled fixture scope."
+    },
+    {
+      "artifact": "Website",
+      "proves": [
+        "Reviewer navigation.",
+        "Public explanation and route rendering."
+      ],
+      "does_not_prove": [
+        "Does not prove proof authority.",
+        "Does not prove runtime truth.",
+        "Does not prove signal truth.",
+        "Does not prove evidence truth.",
+        "Does not prove external-use authorization."
+      ],
+      "source_repo": "HawkinsOperations/hawkinsoperations-website",
+      "source_route": "https://hawkinsoperations.com/proof/ho-det-001/",
+      "proof_ceiling": "REVIEWER_NAVIGATION_ONLY",
+      "public_safe_status": "ROUTE_ONLY_NOT_PROOF_AUTHORITY_NOT_PUBLIC_SAFE_FOR_RUNTIME_OR_PUBLIC_SAFE_PROOF",
+      "notes": "Website rendering routes reviewers. Rendering is not proof."
+    },
+    {
+      "artifact": "Proof Pack 001",
+      "proves": [
+        "Bounded reviewer release for HO-DET-001.",
+        "CONTROLLED_TEST_VALIDATED proof ceiling.",
+        "Reviewable proof packet exists."
+      ],
+      "does_not_prove": [
+        "Does not prove public-safe runtime proof.",
+        "Does not prove production deployment.",
+        "Does not prove SOCaaS availability.",
+        "Does not prove autonomous SOC.",
+        "Does not prove AI-approved disposition."
+      ],
+      "source_repo": "HawkinsOperations/hawkinsoperations-proof",
+      "source_route": "releases/tag/hawkinsoperations-proof-pack-001",
+      "proof_ceiling": "CONTROLLED_TEST_VALIDATED",
+      "public_safe_status": "NOT_PUBLIC_SAFE_FOR_RUNTIME_OR_PUBLIC_SAFE_PROOF",
+      "notes": "Bounded reviewer package route. It does not raise the public proof ceiling."
+    },
+    {
+      "artifact": "AI Support",
+      "proves": [
+        "AI can support drafting.",
+        "AI can support reviewer prep.",
+        "AI can support triage scaffolding and summarization."
+      ],
+      "does_not_prove": [
+        "Does not prove final security disposition authority.",
+        "Does not prove analyst-approved disposition.",
+        "Does not prove autonomous SOC operation.",
+        "Does not prove human approval replacement."
+      ],
+      "source_repo": "HawkinsOperations/hawkinsoperations-platform",
+      "source_route": "docs/autosoc/OFFLINE_LLM_TRIAGE_SUPPORT_CONTRACT.md",
+      "proof_ceiling": "AI_SUPPORT_ONLY",
+      "public_safe_status": "SUPPORT_ONLY_NOT_AUTHORITY",
+      "notes": "AI is labor. Governance remains authority."
+    }
+  ]
+}

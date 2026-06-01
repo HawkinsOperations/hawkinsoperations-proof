@@ -1,0 +1,7 @@
+# SHA256 checksums for the LinkedIn proof-boundary artifact packet.
+# Generated for source-controlled packet files only.
+# This is not a release checksum file.
+b2ce857fb177eb9a9017dc727951bbbbfabe1930c365b02efe18b56a5970824d  README.md
+2d491863ad2cc073e48c77d4b66eaeb744acd6109bb0d38127167050764e8986  WHAT_THE_SYSTEM_REFUSED_TO_CLAIM.md
+870e710d4252634d1c3b15366cd2ffeb7b70c657630bfd80fb1db6e8f2f349d9  proof-boundary-map.json
+3d913253a148445086a7e0102429e124d3a406f7547daccb1d3496f2b5af7010  ARTIFACT_MANIFEST.json

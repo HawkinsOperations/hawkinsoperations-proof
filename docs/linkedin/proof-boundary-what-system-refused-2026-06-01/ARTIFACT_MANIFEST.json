@@ -1,0 +1,51 @@
+{
+  "packet_name": "HAWKINSOPERATIONS_LINKEDIN_PROOF_BOUNDARY_WHAT_SYSTEM_REFUSED_2026-06-01",
+  "created_date": "2026-06-01",
+  "repo": "HawkinsOperations/hawkinsoperations-proof",
+  "claim_ceiling": "PUBLIC_SUMMARY_SAFE_CANDIDATE_WITH_CONTROLLED_TEST_VALIDATED_REFERENCES",
+  "public_safe_status": "NOT_PUBLIC_SAFE_PUBLICATION_REQUIRES_REVIEW",
+  "files": [
+    "README.md",
+    "WHAT_THE_SYSTEM_REFUSED_TO_CLAIM.md",
+    "proof-boundary-map.json",
+    "ARTIFACT_MANIFEST.json",
+    "CHECKSUMS.sha256"
+  ],
+  "source_repos_checked": [
+    "HawkinsOperations/.github",
+    "HawkinsOperations/hawkinsoperations-detections",
+    "HawkinsOperations/hawkinsoperations-validation",
+    "HawkinsOperations/hawkinsoperations-platform",
+    "HawkinsOperations/hawkinsoperations-proof",
+    "HawkinsOperations/hawkinsoperations-website"
+  ],
+  "forbidden_claims": [
+    "blocked: production deployment",
+    "blocked: customer deployment",
+    "blocked: SOCaaS availability",
+    "blocked: runtime-active public proof",
+    "blocked: signal-observed public proof",
+    "blocked: public-safe runtime proof",
+    "blocked: autonomous SOC",
+    "blocked: AI-approved disposition",
+    "blocked: AI-decided disposition",
+    "blocked: analyst-approved disposition",
+    "blocked: live Wazuh",
+    "blocked: live Splunk",
+    "blocked: Cribl-routed",
+    "blocked: AWS-live",
+    "blocked: fleet-wide"
+  ],
+  "verification_commands": [
+    "git diff --check",
+    "python scripts/verify_proof_integrity.py",
+    "python scripts/verify-ho-det-001-proof-integrity.py",
+    "python scripts/verify-proof-pack-001-release.py",
+    "python scripts/verify-linkedin-proof-boundary-artifact.py"
+  ],
+  "zip_status": "ZIP_COMMIT_BLOCKED_BY_REPO_PATTERN",
+  "notes": [
+    "This is a proof-boundary and reviewer-routing packet.",
+    "It does not create runtime proof, signal proof, public-safe runtime proof, production proof, SOCaaS availability, customer deployment proof, autonomous SOC proof, AI-approved disposition, analyst-approved disposition, or website-as-proof authority."
+  ]
+}
