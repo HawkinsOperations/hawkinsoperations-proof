@@ -77,6 +77,20 @@ Badges report GitHub Actions workflow check status only. They do not prove runti
 | Ledger summary verifier | `lifetime-ledger-public-summary` | `proof/records/lifetime-case-ledger-v1-public-summary.json` matches the pinned platform manifest counts, proof ceiling, six-repo anchors, and blocked-claim boundaries. | Ledger status remains `NOT_PUBLIC_SAFE`; proof ceiling remains `SCHEMA_CONTRACT_VERIFIER_EXISTS_ONLY`. |
 | Ledger proof bundle verifier | `lifetime-ledger-proof-bundle` | `proof/records/lifetime-case-ledger-v1-proof-bundle.json` packages the summary, pinned platform manifest reference, six-repo anchors, verifier commands, and reviewer steps without importing private evidence. | Ledger status remains `NOT_PUBLIC_SAFE`; proof ceiling remains `SCHEMA_CONTRACT_VERIFIER_EXISTS_ONLY`. |
 
+## Reviewer Proof Map
+
+Use [proof/indexes/reviewer-proof-map.md](proof/indexes/reviewer-proof-map.md) as the proof-owned reviewer map for the Lifetime Case Ledger chain.
+
+The map ties together the ledger public summary, proof bundle, badge/status checks, evidence preservation map, branch cleanup map, blocked claims, and proof authority boundaries. It keeps the ledger at 4 events / 4 cases, `NOT_PUBLIC_SAFE`, and `SCHEMA_CONTRACT_VERIFIER_EXISTS_ONLY`.
+
+The companion machine-readable map lives at [proof/indexes/reviewer-proof-map.json](proof/indexes/reviewer-proof-map.json) and is checked by:
+
+```powershell
+python scripts/verify-reviewer-proof-map.py --platform-root ../hawkinsoperations-platform --github-root ../.github
+```
+
+The reviewer proof map does not prove runtime-active public proof, signal-observed public proof, public-safe runtime proof, production deployment, SOCaaS deployment, autonomous SOC, AI-approved disposition, analyst-approved disposition, case closure, Cribl-routed telemetry, Wazuh-routed telemetry, AWS-live evidence, fleet-wide coverage, live Splunk firing, website as proof authority, badge as proof authority, or Project #1 as proof authority.
+
 ## What This Repository Proves
 
 | Proof surface | What it can support |
