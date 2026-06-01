@@ -1,0 +1,287 @@
+{
+  "map_id": "REVIEWER_PROOF_MAP_V1",
+  "map_version": "proof_trust_backup_reviewer_map_v1",
+  "artifact_class": "proof_owned_reviewer_map",
+  "owner_repo": "hawkinsoperations-proof",
+  "classification_only": true,
+  "ledger_status": "NOT_PUBLIC_SAFE",
+  "proof_ceiling": "SCHEMA_CONTRACT_VERIFIER_EXISTS_ONLY",
+  "corrected_platform_manifest_path": "../hawkinsoperations-platform/contracts/lifetime-case-ledger-v1-state-manifest.json",
+  "ledger_summary": {
+    "summary_artifact": "proof/records/lifetime-case-ledger-v1-public-summary.json",
+    "bundle_artifact": "proof/records/lifetime-case-ledger-v1-proof-bundle.json",
+    "total_ledger_events": 4,
+    "total_cases": 4,
+    "ledger_public_safe_status": "NOT_PUBLIC_SAFE",
+    "case_closure_authority": false,
+    "summary_boundary": "Bounded ledger counts and reviewer navigation only."
+  },
+  "authority_boundaries": {
+    "proof_repo_is_reviewer_map_owner": true,
+    "platform_owns_ledger_factory_and_verifier_mechanics": true,
+    "github_owns_reviewer_routing_governance": true,
+    "website_render_surfaces_are_proof_authority": false,
+    "badges_are_proof_authority": false,
+    "project_one_is_proof_authority": false,
+    "github_project_mutation_performed": false,
+    "proof_promotion_performed": false
+  },
+  "required_proof_artifacts": [
+    "proof/records/lifetime-case-ledger-v1-public-summary.json",
+    "proof/records/lifetime-case-ledger-v1-proof-bundle.json",
+    "proof/indexes/lifetime-case-ledger-v1-evidence-map.json",
+    "proof/indexes/hawkinsoperations-branch-cleanup-map.json",
+    "scripts/verify-lifetime-ledger-public-summary.py",
+    "scripts/verify-lifetime-ledger-proof-bundle.py",
+    "scripts/verify-lifetime-ledger-badges.py",
+    "scripts/verify-lifetime-ledger-evidence-map.py",
+    "scripts/verify-hawkinsoperations-branch-cleanup-map.py",
+    "scripts/verify-reviewer-proof-map.py"
+  ],
+  "read_only_platform_artifacts": [
+    "contracts/lifetime-case-ledger-v1-state-manifest.json"
+  ],
+  "read_only_github_artifacts": [
+    "profile/README.md"
+  ],
+  "proof_chain": {
+    "visual": "platform ledger -> platform state manifest -> proof public summary -> proof bundle -> badge/status checks -> render-only downstream surfaces",
+    "stages": [
+      {
+        "id": "platform_ledger",
+        "owner": "hawkinsoperations-platform",
+        "artifact_path": "evidence/autosoc-case-ledger-v0.sqlite",
+        "what_it_proves": "A platform ledger seed bridge exists for the 4 events / 4 cases count spine.",
+        "what_it_does_not_prove": "Runtime, signal, public proof, deployment, disposition, and closure claims remain blocked.",
+        "current_status": "tracked platform seed bridge; ledger remains NOT_PUBLIC_SAFE",
+        "proof_ceiling": "SCHEMA_CONTRACT_VERIFIER_EXISTS_ONLY"
+      },
+      {
+        "id": "platform_state_manifest",
+        "owner": "hawkinsoperations-platform",
+        "artifact_path": "contracts/lifetime-case-ledger-v1-state-manifest.json",
+        "what_it_proves": "A pinned source manifest records the ledger count state, repo anchors, and proof boundary inputs.",
+        "what_it_does_not_prove": "A manifest is source truth only and does not establish runtime, signal, public-safe, or closure authority.",
+        "current_status": "pinned read-only verifier input",
+        "proof_ceiling": "SCHEMA_CONTRACT_VERIFIER_EXISTS_ONLY"
+      },
+      {
+        "id": "proof_public_summary",
+        "owner": "hawkinsoperations-proof",
+        "artifact_path": "proof/records/lifetime-case-ledger-v1-public-summary.json",
+        "what_it_proves": "The proof repo owns a bounded public summary for 4 events / 4 cases, zero public-safe cases, and zero closed cases.",
+        "what_it_does_not_prove": "The summary is not runtime evidence and does not approve public proof or case disposition.",
+        "current_status": "source-controlled summary; NOT_PUBLIC_SAFE",
+        "proof_ceiling": "SCHEMA_CONTRACT_VERIFIER_EXISTS_ONLY"
+      },
+      {
+        "id": "proof_bundle",
+        "owner": "hawkinsoperations-proof",
+        "artifact_path": "proof/records/lifetime-case-ledger-v1-proof-bundle.json",
+        "what_it_proves": "The proof repo packages the summary, pinned manifest reference, verifier commands, reviewer steps, and exclusions.",
+        "what_it_does_not_prove": "The bundle is not a release, tag, live evidence export, or public-safe promotion.",
+        "current_status": "reviewer packet source only; no release authority",
+        "proof_ceiling": "SCHEMA_CONTRACT_VERIFIER_EXISTS_ONLY"
+      },
+      {
+        "id": "badge_status_checks",
+        "owner": "hawkinsoperations-proof",
+        "artifact_path": "README.md and Governance Gate workflow status",
+        "what_it_proves": "Badge routes expose workflow status for the ledger summary and proof bundle verifier jobs.",
+        "what_it_does_not_prove": "Badges are status-only and cannot authorize proof, publication, deployment, or disposition claims.",
+        "current_status": "badge/status references only; not proof authority",
+        "proof_ceiling": "SCHEMA_CONTRACT_VERIFIER_EXISTS_ONLY"
+      },
+      {
+        "id": "render_only_downstream_surfaces",
+        "owner": "hawkinsoperations-website and .github",
+        "artifact_path": "website render routes and GitHub reviewer routing",
+        "what_it_proves": "Downstream surfaces can route reviewers to proof-owned artifacts when separately reviewed.",
+        "what_it_does_not_prove": "Render-only and routing surfaces are not proof authority and cannot raise claim ceilings.",
+        "current_status": "render-only or operating-control route; not proof authority",
+        "proof_ceiling": "SCHEMA_CONTRACT_VERIFIER_EXISTS_ONLY"
+      }
+    ]
+  },
+  "trust_backup_checklist": [
+    {
+      "id": "summary_verifiable",
+      "status": "PASS_REVIEWABLE",
+      "evidence": "Summary verifier exists at scripts/verify-lifetime-ledger-public-summary.py and the summary records 4 events / 4 cases."
+    },
+    {
+      "id": "bundle_verifiable",
+      "status": "PASS_REVIEWABLE",
+      "evidence": "Bundle verifier exists at scripts/verify-lifetime-ledger-proof-bundle.py and checks the proof bundle against the pinned platform manifest."
+    },
+    {
+      "id": "badges_status_only",
+      "status": "PASS_REVIEWABLE",
+      "evidence": "Badge verifier exists at scripts/verify-lifetime-ledger-badges.py; badges remain status-only indicators."
+    },
+    {
+      "id": "evidence_maps_present",
+      "status": "PASS_REVIEWABLE",
+      "evidence": "Evidence map and branch cleanup map exist under proof/indexes/ and are verifier-backed."
+    },
+    {
+      "id": "cleanup_candidates_classification_only",
+      "status": "PASS_REVIEWABLE",
+      "evidence": "Branch cleanup map is classification-only; branch_deletion_performed remains false."
+    },
+    {
+      "id": "blocked_claims_explicit",
+      "status": "PASS_REVIEWABLE",
+      "evidence": "Blocked claims are explicitly listed in this reviewer proof map."
+    },
+    {
+      "id": "website_render_authority_blocked",
+      "status": "PASS_REVIEWABLE",
+      "evidence": "Website/render surfaces are render-only and not proof authority."
+    },
+    {
+      "id": "project_one_proof_authority_blocked",
+      "status": "PASS_REVIEWABLE",
+      "evidence": "Project #1 is operating control only and not proof authority."
+    }
+  ],
+  "reviewer_click_path": [
+    {
+      "id": "start_reviewer_map",
+      "label": "Start with this map",
+      "artifact_path": "proof/indexes/reviewer-proof-map.md",
+      "reviewer_value": "Read the proof chain, artifact map, blocked claims, and verifier command from one proof-owned reviewer surface."
+    },
+    {
+      "id": "check_public_summary",
+      "label": "Check the ledger summary",
+      "artifact_path": "proof/records/lifetime-case-ledger-v1-public-summary.json",
+      "reviewer_value": "Confirm the 4 events / 4 cases count spine, NOT_PUBLIC_SAFE boundary, and SCHEMA_CONTRACT_VERIFIER_EXISTS_ONLY ceiling."
+    },
+    {
+      "id": "check_proof_bundle",
+      "label": "Check the proof bundle",
+      "artifact_path": "proof/records/lifetime-case-ledger-v1-proof-bundle.json",
+      "reviewer_value": "Confirm the summary, corrected platform manifest path, verifier commands, reviewer steps, and excluded material."
+    },
+    {
+      "id": "check_verifier",
+      "label": "Run the verifier",
+      "artifact_path": "scripts/verify-reviewer-proof-map.py",
+      "reviewer_value": "Run the deterministic verifier against the proof map and read-only sibling authority roots."
+    },
+    {
+      "id": "check_blocked_claims",
+      "label": "Review blocked claims",
+      "artifact_path": "proof/indexes/reviewer-proof-map.md#blocked-claims",
+      "reviewer_value": "Confirm runtime, signal, public-safe, production, disposition, case closure, website-authority, badge-authority, and Project #1 authority claims remain blocked."
+    }
+  ],
+  "blocked_claims": [
+    {
+      "claim": "runtime-active public proof",
+      "status": "BLOCKED",
+      "reason": "This map does not prove runtime-active public proof; runtime authority requires separate approved evidence."
+    },
+    {
+      "claim": "signal-observed public proof",
+      "status": "BLOCKED",
+      "reason": "This map does not prove signal-observed public proof; signal truth requires separate approved evidence."
+    },
+    {
+      "claim": "public-safe runtime proof",
+      "status": "BLOCKED",
+      "reason": "This map does not prove public-safe runtime proof; ledger status remains NOT_PUBLIC_SAFE."
+    },
+    {
+      "claim": "production deployment",
+      "status": "BLOCKED",
+      "reason": "This map does not prove production deployment."
+    },
+    {
+      "claim": "SOCaaS deployment",
+      "status": "BLOCKED",
+      "reason": "This map does not prove SOCaaS deployment."
+    },
+    {
+      "claim": "autonomous SOC",
+      "status": "BLOCKED",
+      "reason": "This map does not prove autonomous SOC authority."
+    },
+    {
+      "claim": "AI-approved disposition",
+      "status": "BLOCKED",
+      "reason": "This map does not prove AI-approved disposition."
+    },
+    {
+      "claim": "analyst-approved disposition",
+      "status": "BLOCKED",
+      "reason": "This map does not prove analyst-approved disposition."
+    },
+    {
+      "claim": "case closure",
+      "status": "BLOCKED",
+      "reason": "This map does not prove case closure; closed_case_count remains 0."
+    },
+    {
+      "claim": "Cribl-routed",
+      "status": "BLOCKED",
+      "reason": "This map does not prove Cribl-routed telemetry or public proof."
+    },
+    {
+      "claim": "Wazuh-routed",
+      "status": "BLOCKED",
+      "reason": "This map does not prove Wazuh-routed telemetry or public proof."
+    },
+    {
+      "claim": "AWS-live",
+      "status": "BLOCKED",
+      "reason": "This map does not prove AWS-live runtime state."
+    },
+    {
+      "claim": "fleet-wide",
+      "status": "BLOCKED",
+      "reason": "This map does not prove fleet-wide coverage."
+    },
+    {
+      "claim": "live Splunk firing",
+      "status": "BLOCKED",
+      "reason": "This map does not prove live Splunk firing."
+    },
+    {
+      "claim": "website as proof authority",
+      "status": "BLOCKED",
+      "reason": "Website/render surfaces are not proof authority."
+    },
+    {
+      "claim": "badge as proof authority",
+      "status": "BLOCKED",
+      "reason": "Badges are status-only and not proof authority."
+    },
+    {
+      "claim": "Project #1 as proof authority",
+      "status": "BLOCKED",
+      "reason": "Project #1 is operating control only and not proof authority."
+    }
+  ],
+  "does_not_prove": [
+    "runtime-active public proof is blocked; this map does not prove runtime activity.",
+    "signal-observed public proof is blocked; this map does not prove signal observation.",
+    "public-safe runtime proof is blocked; this map does not prove public-safe runtime evidence.",
+    "production deployment is blocked; this map does not prove deployment.",
+    "SOCaaS deployment is blocked; this map does not prove service availability.",
+    "autonomous SOC is blocked; this map does not prove autonomous authority.",
+    "AI-approved disposition is blocked; this map does not prove AI disposition authority.",
+    "analyst-approved disposition is blocked; this map does not prove analyst disposition authority.",
+    "case closure is blocked; this map does not prove closure.",
+    "Cribl-routed is blocked; this map does not prove Cribl routing.",
+    "Wazuh-routed is blocked; this map does not prove Wazuh routing.",
+    "AWS-live is blocked; this map does not prove live AWS evidence.",
+    "fleet-wide is blocked; this map does not prove fleet coverage.",
+    "live Splunk firing is blocked; this map does not prove live Splunk evidence.",
+    "website as proof authority is blocked; this map treats website surfaces as render-only.",
+    "badge as proof authority is blocked; this map treats badges as status-only.",
+    "Project #1 as proof authority is blocked; this map treats Project #1 as operating control only."
+  ],
+  "verifier_command": "python scripts/verify-reviewer-proof-map.py --platform-root ../hawkinsoperations-platform --github-root ../.github"
+}
