@@ -1,335 +1,324 @@
 {
-  "packet": "what-the-system-refused-to-claim",
+  "packet_name": "what-the-system-refused-to-claim-june-1-scale",
   "created_date": "2026-06-01",
-  "entries": [
+  "scale_snapshot": {
+    "summary": "June 1 advanced many HawkinsOperations proof and control surfaces while preserving separate claim ceilings.",
+    "public_summary_safe": true,
+    "public_safe_publication_approved": false,
+    "workstream_count": 10,
+    "metric_counts": {
+      "lifetime_governed_cases": 4,
+      "controlled_validation_fires": 49,
+      "validation_cases": 106,
+      "proof_records": 8,
+      "blocked_claims": 31,
+      "public_safe_count": 0
+    }
+  },
+  "artifact_boundaries": [
     {
       "artifact": "Detection Source",
       "proves": [
-        "Detection source exists.",
-        "Source can be reviewed.",
-        "Source can point reviewers toward validation and proof records."
+        "Source exists and can be reviewed."
       ],
       "does_not_prove": [
         "Does not prove runtime behavior.",
-        "Does not prove live signal.",
-        "Does not prove production deployment.",
-        "Does not prove public-safe runtime proof."
+        "Does not prove live signal."
       ],
-      "why_it_matters": "Source review is necessary, but source review cannot stand in for observed behavior.",
-      "source_repo": "HawkinsOperations/hawkinsoperations-detections",
-      "source_route": "detections/successor/ho-det-001/",
-      "supporting_public_routes": [
-        "HawkinsOperations/hawkinsoperations-detections",
-        "HawkinsOperations/hawkinsoperations-proof/proof/records/HO-DET-001.md"
-      ],
-      "proof_ceiling": "CONTROLLED_TEST_VALIDATED",
-      "public_safe_status": "NOT_PUBLIC_SAFE_FOR_RUNTIME_OR_PUBLIC_SAFE_PROOF",
-      "blocked_claims": [
-        "blocked: runtime behavior",
-        "blocked: live signal",
-        "blocked: production deployment",
-        "blocked: public-safe runtime proof"
-      ],
-      "linkedin_visual_row": true,
-      "notes": "Source truth only. Reviewable source does not promote runtime, signal, production, or public-safe runtime claims."
+      "public_safe_status": "NOT_PUBLIC_SAFE_FOR_RUNTIME_OR_PUBLIC_SAFE_PROOF"
     },
     {
       "artifact": "Validation",
       "proves": [
-        "Controlled validation boundary.",
-        "Scoped fixture or contract behavior.",
-        "Positive and negative validation can be checked inside controlled scope."
+        "Controlled validation boundary under scoped test conditions."
       ],
       "does_not_prove": [
         "Does not prove live signal.",
-        "Does not prove runtime route.",
-        "Does not prove production deployment.",
-        "Does not prove public-safe runtime proof."
+        "Does not prove runtime route."
       ],
-      "why_it_matters": "Controlled validation is real engineering evidence, but it remains scoped to the checked fixture or contract.",
-      "source_repo": "HawkinsOperations/hawkinsoperations-validation",
-      "source_route": "reports/ho-det-001/",
-      "supporting_public_routes": [
-        "HawkinsOperations/hawkinsoperations-validation",
-        "HawkinsOperations/hawkinsoperations-proof/proof/records/HO-DET-001.md"
-      ],
-      "proof_ceiling": "CONTROLLED_TEST_VALIDATED",
-      "public_safe_status": "NOT_PUBLIC_SAFE_FOR_RUNTIME_OR_PUBLIC_SAFE_PROOF",
-      "blocked_claims": [
-        "blocked: live signal",
-        "blocked: runtime route",
-        "blocked: production deployment",
-        "blocked: public-safe runtime proof"
-      ],
-      "linkedin_visual_row": true,
-      "notes": "Validation truth only for controlled fixture scope."
-    },
-    {
-      "artifact": "Wazuh CI",
-      "proves": [
-        "Wazuh source/static validation can check rule and source structure.",
-        "CI can enforce source contract boundaries."
-      ],
-      "does_not_prove": [
-        "Does not prove live Wazuh routing.",
-        "Does not prove runtime behavior.",
-        "Does not prove production deployment.",
-        "Does not prove public-safe runtime proof."
-      ],
-      "why_it_matters": "The source/static Wazuh control is useful precisely because it refuses to become a live-route claim.",
-      "source_repo": "HawkinsOperations/hawkinsoperations-validation",
-      "source_route": "HawkinsOperations/hawkinsoperations-validation",
-      "supporting_public_routes": [
-        "HawkinsOperations/hawkinsoperations-detections",
-        "HawkinsOperations/hawkinsoperations-validation",
-        "HawkinsOperations/.github/governance/ISSUE_FACTORY_CONTROL_RECEIPTS.md"
-      ],
-      "proof_ceiling": "SOURCE_STATIC_AND_CONTROLLED_VALIDATION_ONLY",
-      "public_safe_status": "NOT_PUBLIC_SAFE_FOR_RUNTIME_OR_PUBLIC_SAFE_PROOF",
-      "blocked_claims": [
-        "blocked: live Wazuh",
-        "blocked: runtime behavior",
-        "blocked: production deployment",
-        "blocked: public-safe runtime proof"
-      ],
-      "linkedin_visual_row": false,
-      "notes": "Wazuh source/static checks stay bounded to source and validation contracts."
-    },
-    {
-      "artifact": "Reviewer Metrics",
-      "proves": [
-        "Reviewer Metrics Pipeline v1 separates activity from proof.",
-        "4 governed cases.",
-        "49 controlled validation fires.",
-        "106 validation cases.",
-        "8 proof records.",
-        "31 blocked claims.",
-        "public-safe count 0."
-      ],
-      "does_not_prove": [
-        "Does not prove public-safe runtime proof.",
-        "Does not prove runtime behavior.",
-        "Does not prove GitHub Project metadata proof authority.",
-        "Does not prove activity counts are proof claims."
-      ],
-      "why_it_matters": "The metrics route shows work volume without turning volume into stronger proof.",
-      "source_repo": "HawkinsOperations/hawkinsoperations-proof",
-      "source_route": "proof/records/reviewer-metrics-pipeline-v1-summary.md",
-      "supporting_public_routes": [
-        "HawkinsOperations/hawkinsoperations-proof/proof/records/reviewer-metrics-pipeline-v1-summary.md",
-        "HawkinsOperations/hawkinsoperations-proof/proof/indexes/reviewer-metrics-pipeline-v1-map.json",
-        "HawkinsOperations/hawkinsoperations-proof/proof/records/REVIEWER-METRICS-PIPELINE-V1-CLOSEOUT.md"
-      ],
-      "proof_ceiling": "METRICS_SUMMARY_NOT_PROOF_AUTHORITY",
-      "public_safe_status": "NOT_PUBLIC_SAFE_FOR_RUNTIME_OR_PUBLIC_SAFE_PROOF",
-      "blocked_claims": [
-        "blocked: public-safe runtime proof",
-        "blocked: runtime behavior",
-        "blocked: Project metadata proof authority",
-        "blocked: metrics inflation"
-      ],
-      "linkedin_visual_row": false,
-      "notes": "Numbers remain evidence-routing context, not claim promotion."
+      "public_safe_status": "NOT_PUBLIC_SAFE_FOR_RUNTIME_OR_PUBLIC_SAFE_PROOF"
     },
     {
       "artifact": "Website",
       "proves": [
-        "Reviewer navigation.",
-        "Public explanation and route rendering.",
-        "Readers can be routed toward proof authority."
+        "Reviewer navigation and public route rendering."
       ],
       "does_not_prove": [
-        "Does not prove proof authority.",
-        "Does not prove runtime truth.",
-        "Does not prove signal truth.",
-        "Does not prove evidence truth.",
-        "Does not prove external-use authorization."
+        "Does not prove proof authority."
       ],
-      "why_it_matters": "Website rendering can reduce reviewer friction, but it is not proof.",
-      "source_repo": "HawkinsOperations/hawkinsoperations-website",
-      "source_route": "https://hawkinsoperations.com/proof/ho-det-001/",
-      "supporting_public_routes": [
-        "https://hawkinsoperations.com/proof/ho-det-001/",
-        "HawkinsOperations/hawkinsoperations-website",
-        "HawkinsOperations/hawkinsoperations-proof/proof/records/HO-DET-001.md"
-      ],
-      "proof_ceiling": "REVIEWER_NAVIGATION_ONLY",
-      "public_safe_status": "ROUTE_ONLY_NOT_PROOF_AUTHORITY_NOT_PUBLIC_SAFE_FOR_RUNTIME_OR_PUBLIC_SAFE_PROOF",
-      "blocked_claims": [
-        "blocked: website-as-proof authority",
-        "blocked: runtime truth",
-        "blocked: signal truth",
-        "blocked: public-safe runtime proof"
-      ],
-      "linkedin_visual_row": true,
-      "notes": "Website rendering routes reviewers. Rendering is not proof."
+      "public_safe_status": "ROUTE_ONLY_NOT_PROOF_AUTHORITY"
     },
     {
       "artifact": "Proof Pack 001",
       "proves": [
-        "Bounded reviewer release for HO-DET-001.",
-        "CONTROLLED_TEST_VALIDATED proof ceiling.",
-        "Reviewable proof packet exists."
+        "Bounded reviewer release route for HO-DET-001."
       ],
       "does_not_prove": [
-        "Does not prove public-safe runtime proof.",
-        "Does not prove production deployment.",
-        "Does not prove SOCaaS availability.",
-        "Does not prove autonomous SOC.",
-        "Does not prove AI-approved disposition.",
-        "Does not prove analyst-approved disposition."
-      ],
-      "why_it_matters": "Proof Pack 001 makes the reviewer route inspectable without raising the claim ceiling.",
-      "source_repo": "HawkinsOperations/hawkinsoperations-proof",
-      "source_route": "releases/tag/hawkinsoperations-proof-pack-001",
-      "supporting_public_routes": [
-        "https://github.com/HawkinsOperations/hawkinsoperations-proof/releases/tag/hawkinsoperations-proof-pack-001",
-        "HawkinsOperations/hawkinsoperations-proof/RELEASE_MANIFEST.json",
-        "HawkinsOperations/hawkinsoperations-proof/SHA256SUMS.txt",
-        "HawkinsOperations/hawkinsoperations-proof/scripts/verify-proof-pack-001-release.py"
-      ],
-      "proof_ceiling": "CONTROLLED_TEST_VALIDATED",
-      "public_safe_status": "NOT_PUBLIC_SAFE_FOR_RUNTIME_OR_PUBLIC_SAFE_PROOF",
-      "blocked_claims": [
-        "blocked: public-safe runtime proof",
-        "blocked: production deployment",
-        "blocked: SOCaaS availability",
-        "blocked: autonomous SOC",
-        "blocked: AI-approved disposition",
-        "blocked: analyst-approved disposition"
-      ],
-      "linkedin_visual_row": true,
-      "notes": "Bounded reviewer package route. It does not raise the public proof ceiling."
-    },
-    {
-      "artifact": "Runtime Route Proof v1",
-      "proves": [
-        "A reviewer-safe private-candidate route exists.",
-        "Public repo can preserve summary facts, maps, hashes, and verifiers.",
-        "Private categories remain excluded from public proof promotion."
-      ],
-      "does_not_prove": [
-        "Does not prove public-safe runtime proof.",
-        "Does not prove production SOC operation.",
-        "Does not prove autonomous SOC operation.",
-        "Does not prove customer deployment.",
-        "Does not prove broad ingestion proof."
-      ],
-      "why_it_matters": "Private-candidate preservation is useful only if it does not become public-safe proof by implication.",
-      "source_repo": "HawkinsOperations/hawkinsoperations-proof",
-      "source_route": "proof/records/RUNTIME-ROUTE-PROOF-V1-PRIVATE-CANDIDATE.md",
-      "supporting_public_routes": [
-        "HawkinsOperations/hawkinsoperations-proof/proof/records/RUNTIME-ROUTE-PROOF-V1-PRIVATE-CANDIDATE.md",
-        "HawkinsOperations/hawkinsoperations-proof/proof/maps/RUNTIME-ROUTE-PROOF-V1-REVIEWER-MAP.md",
-        "HawkinsOperations/hawkinsoperations-platform/contracts/examples/runtime-route-proof-v1-private-candidate.sample.json"
-      ],
-      "proof_ceiling": "PRIVATE_REVIEW_CANDIDATE_ONLY",
-      "public_safe_status": "NOT_PUBLIC_SAFE_FOR_RUNTIME_OR_PUBLIC_SAFE_PROOF",
-      "blocked_claims": [
-        "blocked: public-safe runtime proof",
-        "blocked: production SOC operation",
-        "blocked: autonomous SOC operation",
-        "blocked: customer deployment",
-        "blocked: broad ingestion proof"
-      ],
-      "linkedin_visual_row": false,
-      "notes": "Private candidate material remains boundary-only for public use."
-    },
-    {
-      "artifact": "Runner Trust Split",
-      "proves": [
-        "Public PR validation and trusted proof-loop boundaries are separated.",
-        "Verifier logic can check public PR workflows for runner trust exposure."
-      ],
-      "does_not_prove": [
-        "Does not prove self-hosted proof execution.",
-        "Does not prove production runner security.",
-        "Does not prove runtime proof.",
         "Does not prove public-safe runtime proof."
       ],
-      "why_it_matters": "The trust split keeps untrusted PR code from being treated as trusted runtime proof.",
-      "source_repo": "HawkinsOperations/hawkinsoperations-validation",
-      "source_route": "scripts/verify-trusted-runner-workflows.py",
-      "supporting_public_routes": [
-        "HawkinsOperations/hawkinsoperations-validation/scripts/verify-trusted-runner-workflows.py",
-        "HawkinsOperations/hawkinsoperations-validation",
-        "HawkinsOperations/.github/governance/ORG_CI_CD_AUTHORITY_CONTRACT.md"
-      ],
-      "proof_ceiling": "CI_TRUST_BOUNDARY_ONLY",
-      "public_safe_status": "NOT_PUBLIC_SAFE_FOR_RUNTIME_OR_PUBLIC_SAFE_PROOF",
-      "blocked_claims": [
-        "blocked: self-hosted proof execution",
-        "blocked: production runner security",
-        "blocked: runtime proof",
-        "blocked: public-safe runtime proof"
-      ],
-      "linkedin_visual_row": false,
-      "notes": "Runner trust evidence supports CI separation only."
-    },
-    {
-      "artifact": "Green CI / Merge Authority",
-      "proves": [
-        "Checks can provide validation evidence.",
-        "Governance records can preserve merge-readiness boundaries."
-      ],
-      "does_not_prove": [
-        "Does not prove merge authority.",
-        "Does not prove proof promotion authority.",
-        "Does not prove human approval.",
-        "Does not prove public-safe runtime proof."
-      ],
-      "why_it_matters": "Checks are evidence, not authority; green automation cannot authorize claim promotion by itself.",
-      "source_repo": "HawkinsOperations/hawkinsoperations-proof",
-      "source_route": "docs/governance-saves/GOVERNANCE-SAVES-EVIDENCE-MATRIX.md",
-      "supporting_public_routes": [
-        "HawkinsOperations/hawkinsoperations-proof/docs/governance-saves/GOVERNANCE-SAVES-EVIDENCE-MATRIX.md",
-        "HawkinsOperations/hawkinsoperations-proof/docs/governance-saves/GOVERNANCE-SAVES-CANDIDATES.md",
-        "HawkinsOperations/hawkinsoperations-proof/docs/releases/PROOF_PACK_001_RELEASE_RUNBOOK.md"
-      ],
-      "proof_ceiling": "CHECK_EVIDENCE_NOT_MERGE_AUTHORITY",
-      "public_safe_status": "NOT_PUBLIC_SAFE_FOR_RUNTIME_OR_PUBLIC_SAFE_PROOF",
-      "blocked_claims": [
-        "blocked: merge authority",
-        "blocked: proof promotion authority",
-        "blocked: human approval",
-        "blocked: public-safe runtime proof"
-      ],
-      "linkedin_visual_row": false,
-      "notes": "Green checks remain evidence and do not replace governance."
+      "public_safe_status": "NOT_PUBLIC_SAFE_FOR_RUNTIME_OR_PUBLIC_SAFE_PROOF"
     },
     {
       "artifact": "AI Support",
       "proves": [
-        "AI can support drafting.",
-        "AI can support reviewer prep.",
-        "AI can support triage scaffolding and summarization."
+        "Drafting and reviewer prep support."
       ],
       "does_not_prove": [
-        "Does not prove final security disposition authority.",
-        "Does not prove analyst-approved disposition.",
-        "Does not prove autonomous SOC operation.",
-        "Does not prove human approval replacement.",
-        "Does not prove proof promotion authority."
+        "Does not prove final authority."
       ],
-      "why_it_matters": "AI support can organize work, but governance remains final authority.",
-      "source_repo": "HawkinsOperations/hawkinsoperations-platform",
-      "source_route": "docs/autosoc/OFFLINE_LLM_TRIAGE_SUPPORT_CONTRACT.md",
-      "supporting_public_routes": [
-        "HawkinsOperations/hawkinsoperations-proof/docs/case-studies/HO-DET-001-AI-AUTHORITY-BOUNDARY.md",
-        "HawkinsOperations/hawkinsoperations-platform/docs/autosoc/OFFLINE_LLM_TRIAGE_SUPPORT_CONTRACT.md",
-        "HawkinsOperations/hawkinsoperations-proof/proof/records/HO-DET-001.md"
-      ],
-      "proof_ceiling": "AI_SUPPORT_ONLY",
-      "public_safe_status": "SUPPORT_ONLY_NOT_AUTHORITY",
-      "blocked_claims": [
-        "blocked: final security disposition authority",
-        "blocked: analyst-approved disposition",
-        "blocked: autonomous SOC operation",
-        "blocked: human approval replacement",
-        "blocked: proof promotion authority"
-      ],
-      "linkedin_visual_row": true,
-      "notes": "AI is labor. Governance remains authority."
+      "public_safe_status": "SUPPORT_ONLY_NOT_AUTHORITY"
     }
-  ]
+  ],
+  "june_1_workstreams": [
+    {
+      "workstream": "reviewer_metrics_pipeline_v1",
+      "status": "REPO_BACKED_REVIEWER_VISIBLE_SUMMARY",
+      "what_changed": [
+        "Separated 4 governed cases from 49 controlled validation fires.",
+        "Preserved 106 validation cases, 8 proof records, 31 blocked claims, and public-safe count 0.",
+        "Recorded Project Board reconciliation as REPO_BACKED_RECONCILIATION_PLAN_NO_PROJECT_MUTATION."
+      ],
+      "public_safe_summary": "Reviewer metrics show scale while keeping activity counts separate from proof claims; public-safe count 0 remains explicit.",
+      "proof_ceiling": "METRICS_SUMMARY_NOT_PROOF_AUTHORITY",
+      "public_safe_status": "NOT_PUBLIC_SAFE",
+      "blocked_claims": [
+        "blocked: activity-as-proof",
+        "blocked: public-safe runtime proof",
+        "blocked: Project metadata proof authority"
+      ],
+      "source_routes": [
+        "proof/records/reviewer-metrics-pipeline-v1-summary.json",
+        "proof/records/reviewer-metrics-pipeline-v1-summary.md"
+      ],
+      "notes": "The scale claim is that the counts were separated and bounded, not that counts became proof."
+    },
+    {
+      "workstream": "runtime_route_proof_v1_private_candidate",
+      "status": "PRIVATE_CANDIDATE_PRESERVED_AS_NOT_PUBLIC_SAFE",
+      "what_changed": [
+        "Preserved a private candidate route with reviewer-safe summary facts.",
+        "Published a prerelease, not a stable release.",
+        "Kept public-safe count 0 and AI_DECIDED_DISPOSITION=false."
+      ],
+      "public_safe_summary": "Runtime Route Proof v1 is a private candidate preserved for reviewer routing with NOT_PUBLIC_SAFE still explicit.",
+      "proof_ceiling": "PRIVATE_RUNTIME_ROUTE_PROOF_V1_CANDIDATE_PRESERVED",
+      "public_safe_status": "NOT_PUBLIC_SAFE",
+      "blocked_claims": [
+        "blocked: public-safe runtime proof",
+        "blocked: production operation",
+        "blocked: broad ingestion",
+        "blocked: AI_DECIDED_DISPOSITION=true"
+      ],
+      "source_routes": [
+        "proof/records/RUNTIME-ROUTE-PROOF-V1-PRIVATE-CANDIDATE.md",
+        "proof/maps/RUNTIME-ROUTE-PROOF-V1-REVIEWER-MAP.md",
+        "https://github.com/HawkinsOperations/hawkinsoperations-proof/releases/tag/runtime-route-proof-v1-private-candidate-2026-06-01"
+      ],
+      "notes": "The public route preserves summaries, maps, hashes, and verifier references while excluding raw private material."
+    },
+    {
+      "workstream": "runtime_route_proof_v1_guardrails",
+      "status": "PRIVATE_GUARDRAILS_CREATED",
+      "what_changed": [
+        "Created wording gate material for future summaries.",
+        "Created what-to-say and what-not-to-say guardrails.",
+        "Created custody/hash map and reviewer demo readiness material."
+      ],
+      "public_safe_summary": "Guardrails protect public wording after private candidate preservation; they are not public-safe runtime proof.",
+      "proof_ceiling": "GUARDRAIL_PACKET_ONLY",
+      "public_safe_status": "NOT_PUBLIC_SAFE",
+      "blocked_claims": [
+        "blocked: public-safe runtime proof",
+        "blocked: raw private publication",
+        "blocked: stronger LinkedIn claim approval"
+      ],
+      "source_routes": [
+        "proof/records/RUNTIME-ROUTE-PROOF-V1-PRIVATE-CANDIDATE.md",
+        "proof/maps/RUNTIME-ROUTE-PROOF-V1-REVIEWER-MAP.md"
+      ],
+      "notes": "The guardrail work is summarized only; private packet internals are not included."
+    },
+    {
+      "workstream": "wazuh_ci_static_validation",
+      "status": "SOURCE_STATIC_VALIDATION_CONTROL",
+      "what_changed": [
+        "Advanced Wazuh rule-source validation controls.",
+        "Advanced logtest/static registry validation controls.",
+        "Fixed duplicate rule and parent group parsing behavior inside source/static validation lanes."
+      ],
+      "public_safe_summary": "Wazuh CI supports source/static validation only and does not prove runtime proof or deployment proof.",
+      "proof_ceiling": "SOURCE_STATIC_AND_CONTROLLED_VALIDATION_ONLY",
+      "public_safe_status": "NOT_PUBLIC_SAFE_FOR_RUNTIME_OR_PUBLIC_SAFE_PROOF",
+      "blocked_claims": [
+        "blocked: live Wazuh proof",
+        "blocked: deployment",
+        "blocked: runtime proof",
+        "blocked: public-safe runtime proof"
+      ],
+      "source_routes": [
+        "HawkinsOperations/hawkinsoperations-detections",
+        "HawkinsOperations/hawkinsoperations-validation"
+      ],
+      "notes": "Source/static validation controls remain separate from live route claims."
+    },
+    {
+      "workstream": "runner_trust_split",
+      "status": "CI_TRUST_BOUNDARY_SOURCE_CONTROL",
+      "what_changed": [
+        "Separated public PR validation from trusted manual/private proof-loop paths.",
+        "Added verifier coverage for public PR workflow runner exposure."
+      ],
+      "public_safe_summary": "Runner trust separation keeps public PR checks distinct from trusted manual/private workflows.",
+      "proof_ceiling": "CI_TRUST_BOUNDARY_ONLY",
+      "public_safe_status": "NOT_PUBLIC_SAFE_FOR_RUNTIME_OR_PUBLIC_SAFE_PROOF",
+      "blocked_claims": [
+        "blocked: self-hosted proof execution",
+        "blocked: runtime proof",
+        "blocked: production runner security"
+      ],
+      "source_routes": [
+        "HawkinsOperations/hawkinsoperations-validation/scripts/verify-trusted-runner-workflows.py",
+        "HawkinsOperations/.github"
+      ],
+      "notes": "This is source and validation control, not public runtime evidence."
+    },
+    {
+      "workstream": "runtime_wrapper_access_bridge",
+      "status": "READ_ONLY_PREFLIGHT_BOUNDARY",
+      "what_changed": [
+        "Advanced read-only wrapper/access baseline validation for Splunk, Wazuh, and Cribl lanes.",
+        "Validated fail-closed status behavior and route-visibility preflight boundaries."
+      ],
+      "public_safe_summary": "Wrapper/access bridge work is read-only preflight and source/static control; it does not prove runtime route success.",
+      "proof_ceiling": "SOURCE_STATIC_PREFLIGHT_ONLY",
+      "public_safe_status": "NOT_PUBLIC_SAFE_FOR_RUNTIME_OR_PUBLIC_SAFE_PROOF",
+      "blocked_claims": [
+        "blocked: wrapper proves runtime",
+        "blocked: credential exposure",
+        "blocked: public-safe runtime proof",
+        "blocked: marker proof"
+      ],
+      "source_routes": [
+        "HawkinsOperations/hawkinsoperations-platform",
+        "HawkinsOperations/hawkinsoperations-proof/proof/records/RUNTIME-ROUTE-PROOF-V1-PRIVATE-CANDIDATE.md"
+      ],
+      "notes": "No credential material or private tool details are included in the public packet."
+    },
+    {
+      "workstream": "github_front_door_reviewer_routing",
+      "status": "REVIEWER_ROUTING_IMPROVED",
+      "what_changed": [
+        "Improved organization front-door and reviewer routing surfaces.",
+        "Preserved GitHub and website rendering as reviewer navigation, not proof authority."
+      ],
+      "public_safe_summary": "Front-door work helps reviewers find proof routes while saying rendering is not proof.",
+      "proof_ceiling": "REVIEWER_NAVIGATION_ONLY",
+      "public_safe_status": "ROUTE_ONLY_NOT_PROOF_AUTHORITY",
+      "blocked_claims": [
+        "blocked: website-as-proof authority",
+        "blocked: GitHub rendering as proof",
+        "blocked: green CI as merge authority"
+      ],
+      "source_routes": [
+        "https://github.com/HawkinsOperations",
+        "https://hawkinsoperations.com/proof/ho-det-001/"
+      ],
+      "notes": "Navigation improved without proof promotion."
+    },
+    {
+      "workstream": "hawkinsops_v1_legacy_routing",
+      "status": "LEGACY_HISTORICAL_ROUTING_ONLY",
+      "what_changed": [
+        "Separated historical V1 routing from current HawkinsOperations proof routing.",
+        "Kept V1 metrics as historical context only."
+      ],
+      "public_safe_summary": "Legacy HawkinsOps V1 material can route readers, but it is historical and not current HawkinsOperations proof.",
+      "proof_ceiling": "LEGACY_ROUTING_ONLY",
+      "public_safe_status": "NOT_CURRENT_PROOF_AUTHORITY",
+      "blocked_claims": [
+        "blocked: V1 metrics as current proof",
+        "blocked: current runtime proof from legacy material",
+        "blocked: current public-safe proof from legacy material"
+      ],
+      "source_routes": [
+        "raylee-hawkins/hawkinsops-v1-archive",
+        "https://hawkinsops.com/"
+      ],
+      "notes": "Historical context remains separated from current proof authority."
+    },
+    {
+      "workstream": "governance_saves_system_saves",
+      "status": "PRIVATE_GOVERNANCE_SAVE_REVIEW_SUMMARIZED",
+      "what_changed": [
+        "Private governance-save review identified prevented drift and blocked overclaims.",
+        "Public use remains generalized and summary-level."
+      ],
+      "public_safe_summary": "Governance-save work shows that the system records what it prevented, but private ledger details stay out of the public packet.",
+      "proof_ceiling": "PRIVATE_GOVERNANCE_REVIEW_SUMMARY_ONLY",
+      "public_safe_status": "NOT_PUBLIC_SAFE_FOR_LEDGER_DETAILS",
+      "blocked_claims": [
+        "blocked: private ledger publication",
+        "blocked: unreviewed public metrics",
+        "blocked: prevented drift as proof promotion"
+      ],
+      "source_routes": [
+        "docs/governance-saves/GOVERNANCE-SAVES-EVIDENCE-MATRIX.md",
+        "docs/governance-saves/GOVERNANCE-SAVES-CANDIDATES.md"
+      ],
+      "notes": "Only generalized claim-control value is used here."
+    },
+    {
+      "workstream": "linkedin_proof_boundary_packet",
+      "status": "PR78_PUBLIC_SUMMARY_SAFE_CANDIDATE",
+      "what_changed": [
+        "Created a LinkedIn proof-boundary packet with Markdown, JSON, checksums, manifest, and verifier.",
+        "Added June 1 scale layer while preserving blocked claims and NOT_PUBLIC_SAFE boundaries."
+      ],
+      "public_safe_summary": "PR #78 is a public-summary-safe candidate packet and verifier route, not proof promotion.",
+      "proof_ceiling": "PUBLIC_SUMMARY_SAFE_CANDIDATE_WITH_CONTROLLED_TEST_VALIDATED_REFERENCES",
+      "public_safe_status": "NOT_PUBLIC_SAFE_PUBLICATION_REQUIRES_REVIEW",
+      "blocked_claims": [
+        "blocked: proof promotion",
+        "blocked: public-safe release approval",
+        "blocked: private evidence publication"
+      ],
+      "source_routes": [
+        "docs/linkedin/proof-boundary-what-system-refused-2026-06-01/",
+        "scripts/verify-linkedin-proof-boundary-artifact.py"
+      ],
+      "notes": "The packet is source-controlled review material until Raylee approves publication."
+    }
+  ],
+  "blocked_claims": [
+    "blocked: runtime proof",
+    "blocked: live signal proof",
+    "blocked: public-safe runtime proof",
+    "blocked: production deployment",
+    "blocked: customer deployment",
+    "blocked: SOCaaS availability",
+    "blocked: autonomous SOC",
+    "blocked: AI-approved disposition",
+    "blocked: analyst-approved disposition",
+    "blocked: website-as-proof authority",
+    "blocked: GitHub Project-as-proof authority",
+    "blocked: green CI-as-merge authority",
+    "blocked: broad Wazuh, Cribl, or Splunk proof",
+    "blocked: private candidate evidence is public proof"
+  ],
+  "linkedin_usage": {
+    "post_hook": "The best thing my security system did this week was tell me no.",
+    "first_comment_link": "https://hawkinsoperations.com/proof/ho-det-001/",
+    "after_merge_artifact_link": "https://github.com/HawkinsOperations/hawkinsoperations-proof/tree/main/docs/linkedin/proof-boundary-what-system-refused-2026-06-01",
+    "boundary": "Public-summary-safe candidate only; no proof promotion."
+  },
+  "public_routes": [
+    "https://github.com/HawkinsOperations",
+    "https://github.com/HawkinsOperations/hawkinsoperations-proof",
+    "https://github.com/HawkinsOperations/hawkinsoperations-proof/pull/78",
+    "https://hawkinsoperations.com/proof/ho-det-001/",
+    "https://github.com/HawkinsOperations/hawkinsoperations-proof/releases/tag/hawkinsoperations-proof-pack-001",
+    "https://github.com/HawkinsOperations/hawkinsoperations-proof/releases/tag/runtime-route-proof-v1-private-candidate-2026-06-01"
+  ],
+  "claim_ceiling": "PUBLIC_SUMMARY_SAFE_CANDIDATE_WITH_CONTROLLED_TEST_VALIDATED_REFERENCES",
+  "public_safe_status": "NOT_PUBLIC_SAFE_PUBLICATION_REQUIRES_REVIEW"
 }

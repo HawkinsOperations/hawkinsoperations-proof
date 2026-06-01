@@ -1,17 +1,23 @@
 {
-  "packet_name": "HAWKINSOPERATIONS_LINKEDIN_PROOF_BOUNDARY_WHAT_SYSTEM_REFUSED_2026-06-01",
-  "packet_purpose": "Public-summary-safe candidate packet for a LinkedIn post about claim-control boundaries behind HawkinsOperations proof surfaces.",
+  "packet_name": "HAWKINSOPERATIONS_LINKEDIN_PROOF_BOUNDARY_JUNE_1_SCALE_2026-06-01",
+  "packet_purpose": "Public-summary-safe candidate packet for a LinkedIn post about the scale of June 1 HawkinsOperations claim-control work.",
   "linkedin_post_hook": "The best thing my security system did this week was tell me no.",
   "created_date": "2026-06-01",
   "repo": "HawkinsOperations/hawkinsoperations-proof",
   "claim_ceiling": "PUBLIC_SUMMARY_SAFE_CANDIDATE_WITH_CONTROLLED_TEST_VALIDATED_REFERENCES",
   "public_safe_status": "NOT_PUBLIC_SAFE_PUBLICATION_REQUIRES_REVIEW",
-  "files": [
-    "README.md",
-    "WHAT_THE_SYSTEM_REFUSED_TO_CLAIM.md",
-    "proof-boundary-map.json",
-    "ARTIFACT_MANIFEST.json",
-    "CHECKSUMS.sha256"
+  "june_1_scale_categories": [
+    "reviewer metrics",
+    "private runtime candidate preservation",
+    "runtime candidate guardrails",
+    "Wazuh source/static CI",
+    "runner trust split",
+    "wrapper/access bridge preflight",
+    "reviewer routing",
+    "legacy routing",
+    "governance-save review",
+    "career translation",
+    "LinkedIn proof-boundary packaging"
   ],
   "source_repos_checked": [
     "HawkinsOperations/.github",
@@ -21,18 +27,45 @@
     "HawkinsOperations/hawkinsoperations-proof",
     "HawkinsOperations/hawkinsoperations-website"
   ],
-  "public_routes_checked": [
-    "https://hawkinsoperations.com/proof/ho-det-001/",
-    "HawkinsOperations/hawkinsoperations-proof/proof/records/HO-DET-001.md",
-    "HawkinsOperations/hawkinsoperations-proof/releases/tag/hawkinsoperations-proof-pack-001",
-    "HawkinsOperations/hawkinsoperations-proof/proof/records/reviewer-metrics-pipeline-v1-summary.md",
-    "HawkinsOperations/hawkinsoperations-proof/proof/records/RUNTIME-ROUTE-PROOF-V1-PRIVATE-CANDIDATE.md",
-    "HawkinsOperations/hawkinsoperations-validation/scripts/verify-trusted-runner-workflows.py",
-    "HawkinsOperations/.github/governance/ORG_CI_CD_AUTHORITY_CONTRACT.md",
-    "HawkinsOperations/hawkinsoperations-proof/docs/governance-saves/GOVERNANCE-SAVES-EVIDENCE-MATRIX.md",
-    "HawkinsOperations/hawkinsoperations-platform/docs/autosoc/OFFLINE_LLM_TRIAGE_SUPPORT_CONTRACT.md"
+  "source_log_classes_checked": [
+    "Operations June 1 logbook entries",
+    "read-only GitHub PR/release metadata",
+    "proof-owned reviewer metrics summary",
+    "runtime-route proof record and reviewer map",
+    "LinkedIn profile reference inventory"
   ],
-  "forbidden_claims": [
+  "public_routes_checked": [
+    "https://github.com/HawkinsOperations",
+    "https://github.com/HawkinsOperations/hawkinsoperations-proof",
+    "https://github.com/HawkinsOperations/hawkinsoperations-proof/pull/78",
+    "https://hawkinsoperations.com/proof/ho-det-001/",
+    "https://github.com/HawkinsOperations/hawkinsoperations-proof/blob/main/proof/records/HO-DET-001.md",
+    "https://github.com/HawkinsOperations/hawkinsoperations-proof/releases/tag/hawkinsoperations-proof-pack-001",
+    "https://github.com/HawkinsOperations/hawkinsoperations-proof/releases/tag/runtime-route-proof-v1-private-candidate-2026-06-01",
+    "https://github.com/HawkinsOperations/hawkinsoperations-proof/blob/main/proof/records/RUNTIME-ROUTE-PROOF-V1-PRIVATE-CANDIDATE.md"
+  ],
+  "files": [
+    "README.md",
+    "WHAT_THE_SYSTEM_REFUSED_TO_CLAIM.md",
+    "proof-boundary-map.json",
+    "ARTIFACT_MANIFEST.json",
+    "CHECKSUMS.sha256"
+  ],
+  "verifier_command": "python scripts/verify-linkedin-proof-boundary-artifact.py",
+  "verification_commands": [
+    "git diff --check",
+    "python scripts/verify_proof_integrity.py",
+    "python scripts/verify-ho-det-001-proof-integrity.py",
+    "python scripts/verify-proof-pack-001-release.py",
+    "python scripts/verify-linkedin-proof-boundary-artifact.py",
+    "JSON parse check for proof-boundary-map.json",
+    "JSON parse check for ARTIFACT_MANIFEST.json",
+    "private leak scan",
+    "forbidden claim scan"
+  ],
+  "blocked_claims": [
+    "blocked: runtime proof",
+    "blocked: live signal proof",
     "blocked: production deployment",
     "blocked: customer deployment",
     "blocked: SOCaaS availability",
@@ -48,9 +81,28 @@
     "blocked: case closure approved",
     "blocked: live Wazuh",
     "blocked: live Splunk",
-    "blocked: Cribl-routed",
+    "blocked: Wazuh-routed proof",
+    "blocked: Cribl-routed public proof",
+    "blocked: Splunk-indexed public proof",
+    "blocked: website proves",
+    "blocked: green CI authorizes merge",
+    "blocked: Project board proves",
+    "blocked: wrapper proves runtime",
+    "blocked: private evidence is public proof",
     "blocked: AWS-live",
     "blocked: fleet-wide"
+  ],
+  "supported_workstreams": [
+    "reviewer_metrics_pipeline_v1",
+    "runtime_route_proof_v1_private_candidate",
+    "runtime_route_proof_v1_guardrails",
+    "wazuh_ci_static_validation",
+    "runner_trust_split",
+    "runtime_wrapper_access_bridge",
+    "github_front_door_reviewer_routing",
+    "hawkinsops_v1_legacy_routing",
+    "governance_saves_system_saves",
+    "linkedin_proof_boundary_packet"
   ],
   "supported_artifact_categories": [
     "Detection Source",
@@ -64,28 +116,29 @@
     "Green CI / Merge Authority",
     "AI Support"
   ],
+  "excluded_private_only_workstreams": [
+    "private runtime captures",
+    "host identifiers",
+    "internal addresses",
+    "credential material",
+    "private opportunity details",
+    "private career-contact context",
+    "non-public reviewer messages",
+    "private visual captures"
+  ],
   "excluded_private_categories": [
     "private runtime captures",
     "host identifiers",
     "internal addresses",
     "credential material",
     "private opportunity details",
-    "non-public reviewer messages"
+    "private career-contact context",
+    "non-public reviewer messages",
+    "private visual captures"
   ],
   "no_zip_reason": "ZIP_COMMIT_BLOCKED_BY_REPO_PATTERN",
-  "verification_commands": [
-    "git diff --check",
-    "python scripts/verify_proof_integrity.py",
-    "python scripts/verify-ho-det-001-proof-integrity.py",
-    "python scripts/verify-proof-pack-001-release.py",
-    "python scripts/verify-linkedin-proof-boundary-artifact.py",
-    "JSON parse check for proof-boundary-map.json",
-    "JSON parse check for ARTIFACT_MANIFEST.json",
-    "private leak scan",
-    "forbidden claim scan"
-  ],
   "notes": [
     "This packet is a proof-boundary and reviewer-routing artifact.",
-    "It does not create runtime proof, signal proof, public-safe runtime proof, production proof, SOCaaS availability, customer deployment proof, autonomous SOC proof, AI-approved disposition, analyst-approved disposition, green-CI merge authority, Project metadata proof authority, or website-as-proof authority."
+    "It shows June 1 scale without creating runtime proof, signal proof, public-safe runtime proof, production proof, SOCaaS availability, customer deployment proof, autonomous SOC proof, AI-approved disposition, analyst-approved disposition, green-CI merge authority, Project metadata proof authority, or website-as-proof authority."
   ]
 }
