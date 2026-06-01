@@ -1,31 +1,57 @@
 # HawkinsOperations Proof
-## Evidence and Claim Ceiling Plane
 
-This repository stores reviewed evidence records and defines what HawkinsOperations can safely claim.
+Canonical claim-ceiling and proof-pack verification README.
 
-Proof is the claim boundary: evidence can support a claim only within its recorded scope, public-safe status, and review state.
+This repository owns HawkinsOperations proof records, reviewer proof routes, and claim ceilings. It does not raise claims automatically. A proof record, release, verifier, badge, README, website page, or GitHub rendering can support only the claim ceiling stated here and in the linked proof records.
 
-## Current Public Claim Ceiling
+## 10-Second Reviewer Path
+
+1. Open the official release: [HawkinsOperations Proof Pack 001](https://github.com/HawkinsOperations/hawkinsoperations-proof/releases/tag/hawkinsoperations-proof-pack-001).
+2. Confirm the tag is `hawkinsoperations-proof-pack-001` and the asset is `HAWKINSOPERATIONS_PROOF_PACK_001.zip`.
+3. Verify the ZIP SHA256:
+
+```powershell
+Get-FileHash .\HAWKINSOPERATIONS_PROOF_PACK_001.zip -Algorithm SHA256
+```
+
+Expected SHA256:
+
+```text
+44d8a643aa2b113c9e99be0462e699d39af707a67190823cc05bb381907dc452
+```
+
+4. From a local checkout, verify the ZIP payload:
+
+```powershell
+python -B scripts/verify-proof-pack-001-zip.py .\HAWKINSOPERATIONS_PROOF_PACK_001.zip
+```
+
+Passing the checksum and ZIP verifier supports only this bounded claim: Proof Pack 001 is a real reviewer release artifact for `HO-DET-001` under `CONTROLLED_TEST_VALIDATED`.
+
+It does not prove runtime-active public proof, public signal-observed proof, production readiness, SOCaaS readiness, autonomous SOC operation, AI-approved disposition, analyst-approved disposition, or public-safe runtime proof.
+
+## Current Claim Ceiling
 
 | Boundary | Current state |
 |---|---|
-| Flagship proof path | HO-DET-001 |
-| Public proof ceiling | CONTROLLED_TEST_VALIDATED |
-| Public-safe status | NOT_PUBLIC_SAFE |
-| Private/internal runtime status | CONTROLLED_LAB_RUNTIME_MATCH_VERIFIED |
-| Runtime-active public proof | BLOCKED |
-| Public signal-observed proof | BLOCKED |
-| Public-safe runtime proof | BLOCKED |
+| Canonical proof path | `HO-DET-001` |
+| Public proof ceiling | `CONTROLLED_TEST_VALIDATED` |
+| Proof Pack 001 reviewer package status | `PUBLIC_SAFE_REVIEWER_RELEASE_CANDIDATE` |
+| Raw/private runtime evidence | `NOT_PUBLIC_SAFE` |
+| Private/internal runtime status | `CONTROLLED_LAB_RUNTIME_MATCH_VERIFIED` |
+| Runtime-active public proof | `BLOCKED` |
+| Public signal-observed proof | `BLOCKED` |
+| Public-safe runtime proof | `BLOCKED` |
 
-Private/internal runtime match evidence is not public-safe proof. Public claims require reviewed wording, evidence linkage, privacy review, stale review, and Raylee approval.
+Reviewer package candidate status means the bounded release packet can be reviewed through the public release route. It does not make raw runtime evidence public-safe, and it does not promote private/internal runtime evidence into public proof.
 
-## Proof Pack 001 Official Release Route
+`NOT_PUBLIC_SAFE` runtime evidence may support internal review only. Public claims require evidence linkage, claim ceiling support, privacy review, stale review, wording review, and Raylee approval.
+
+## Proof Pack 001 Release Contract
 
 Proof Pack 001 has an official direct GitHub Release route in `hawkinsoperations-proof`:
 
 [HawkinsOperations Proof Pack 001](https://github.com/HawkinsOperations/hawkinsoperations-proof/releases/tag/hawkinsoperations-proof-pack-001)
-
-The release package is a bounded reviewer packet for `HO-DET-001` and does not raise the public proof ceiling.
 
 | Item | Current state |
 |---|---|
@@ -40,35 +66,14 @@ The release package is a bounded reviewer packet for `HO-DET-001` and does not r
 
 Use the exact tag release URL above for public routing. Do not rely on GitHub's generic `/releases` index if it renders inconsistently.
 
-Website and GitHub rendering route reviewers; rendering is not proof. The release package does not prove runtime-active deployment, signal-observed proof, production readiness, Cribl/Wazuh/Splunk/AWS live proof, autonomous SOC operation, or public-safe runtime proof.
-
-## Proof Pack 001 90-Second Reviewer Check
-
-Use this quick path to verify the released artifact without raising the claim ceiling:
-
-1. Open the direct release route: [HawkinsOperations Proof Pack 001](https://github.com/HawkinsOperations/hawkinsoperations-proof/releases/tag/hawkinsoperations-proof-pack-001).
-2. Confirm the release tag is `hawkinsoperations-proof-pack-001` and the asset is `HAWKINSOPERATIONS_PROOF_PACK_001.zip`.
-3. Download the ZIP and compare its SHA256 to `44d8a643aa2b113c9e99be0462e699d39af707a67190823cc05bb381907dc452`.
-4. If using PowerShell, verify the downloaded ZIP with:
-
-```powershell
-Get-FileHash .\HAWKINSOPERATIONS_PROOF_PACK_001.zip -Algorithm SHA256
-```
-
-5. If using a local checkout of this repo, verify the ZIP payload with:
-
-```powershell
-python -B scripts/verify-proof-pack-001-zip.py .\HAWKINSOPERATIONS_PROOF_PACK_001.zip
-```
-
-Passing the checksum and ZIP verifier supports only this bounded reviewer claim: Proof Pack 001 is a real release artifact for `HO-DET-001` under `CONTROLLED_TEST_VALIDATED`. It does not prove runtime-active public proof, public signal proof, production readiness, SOCaaS readiness, autonomous SOC operation, AI-approved disposition, analyst-approved disposition, or public-safe runtime proof.
+The release package does not prove runtime-active deployment, signal-observed proof, production readiness, Cribl/Wazuh/Splunk/AWS live proof, autonomous SOC operation, public-safe runtime proof, AI-approved disposition, analyst-approved disposition, or case closure.
 
 ## Lifetime Case Ledger Verification Badges
 
 [![Ledger summary verifier](https://github.com/HawkinsOperations/hawkinsoperations-proof/actions/workflows/governance-gate.yml/badge.svg?branch=main&event=push)](https://github.com/HawkinsOperations/hawkinsoperations-proof/actions/workflows/governance-gate.yml?query=branch%3Amain)
 [![Ledger proof bundle verifier](https://github.com/HawkinsOperations/hawkinsoperations-proof/actions/workflows/governance-gate.yml/badge.svg?branch=main&event=push)](https://github.com/HawkinsOperations/hawkinsoperations-proof/actions/workflows/governance-gate.yml?query=branch%3Amain)
 
-These badges route to the `Governance Gate` workflow. The workflow contains the `lifetime-ledger-public-summary` and `lifetime-ledger-proof-bundle` jobs, which verify the source-controlled Lifetime Case Ledger summary and proof bundle against the pinned platform manifest.
+These badges route to the `Governance Gate` workflow. The workflow contains the `lifetime-ledger-public-summary` and `lifetime-ledger-proof-bundle` jobs, which verify source-controlled Lifetime Case Ledger records against the pinned platform manifest.
 
 Badges report GitHub Actions workflow check status only. They do not prove runtime activity, signal observation, public proof, public-safe runtime proof, SOCaaS deployment, production deployment, autonomous SOC authority, AI-approved disposition, analyst-approved disposition, or case closure.
 
@@ -91,39 +96,27 @@ python scripts/verify-reviewer-proof-map.py --platform-root ../hawkinsoperations
 
 The reviewer proof map does not prove runtime-active public proof, signal-observed public proof, public-safe runtime proof, production deployment, SOCaaS deployment, autonomous SOC, AI-approved disposition, analyst-approved disposition, case closure, Cribl-routed telemetry, Wazuh-routed telemetry, AWS-live evidence, fleet-wide coverage, live Splunk firing, website as proof authority, badge as proof authority, or Project #1 as proof authority.
 
-## What This Repository Proves
+## What This Repository Can Prove
 
 | Proof surface | What it can support |
 |---|---|
-| Proof records | Claim ceilings and evidence links |
-| Evidence bundles | Reviewed support for bounded claims |
-| Validation summaries | What was tested and under what scope |
-| Case studies | Public-safe explanation of bounded evidence |
+| Proof records | Claim ceilings, evidence links, blocked claims, and review state |
+| Evidence bundles | Reviewed support for bounded claims within their recorded scope |
+| Validation summaries | What was tested and under what validation scope |
+| Case studies | Public-safe or reviewer-safe explanation only when their own text says so |
 | Claim mapping | Which claims are supported, blocked, or not yet reviewed |
 
 ## What This Repository Does Not Prove
 
 | Not proven by this repo alone | Why |
 |---|---|
-| Source correctness | Source truth belongs in detections |
-| Test behavior | Validation truth belongs in validation |
-| Live runtime state | Runtime evidence needs separate review |
-| Public signal proof | Signal-observed public proof is blocked until approved |
-| Website truth | Website is rendering only |
-| Production readiness | Requires separate scoped evidence and approval |
-
-## HO-DET-001 Current Boundary
-
-| Item | Current state |
-|---|---|
-| Proof record | [proof/records/HO-DET-001.md](proof/records/HO-DET-001.md) |
-| Public ceiling | CONTROLLED_TEST_VALIDATED |
-| Public-safe status | NOT_PUBLIC_SAFE |
-| Private/internal runtime status | CONTROLLED_LAB_RUNTIME_MATCH_VERIFIED |
-| Platform contract guardrail | Non-promotional guardrail |
-| Runtime-active public proof | BLOCKED |
-| Public signal-observed proof | BLOCKED |
-| Public-safe runtime proof | BLOCKED |
+| Source correctness | Source truth belongs in detections and code review. |
+| Test behavior beyond recorded validation | Validation truth belongs in validation records and verifier scope. |
+| Live runtime state | Runtime evidence needs separate private review and promotion. |
+| Public signal proof | Signal-observed public proof is blocked until approved. |
+| Website truth | Website and GitHub pages are rendering and routing only. |
+| Badge-as-proof authority | Badges show workflow status only. |
+| Production readiness | Requires separately scoped evidence, review, and approval. |
 
 ## Proof Record Routes
 
@@ -145,6 +138,7 @@ The reviewer proof map does not prove runtime-active public proof, signal-observ
 - Public-facing claims must map to proof records.
 - Raw private evidence is not automatically public-safe evidence.
 - A proof record does not promote claims beyond its stated ceiling.
+- A reviewer candidate packet does not make private/runtime evidence public-safe.
 
 ## Promotion Rule
 
@@ -163,22 +157,21 @@ The left column lists what the current proof record can support. The right colum
 
 | Supported within current public ceiling | Explicitly not claimed |
 |---|---|
-| HO-DET-001 has merged source artifacts | Not claimed: runtime-active public proof |
-| HO-DET-001 has merged controlled-test validation artifacts | Not claimed: public signal-observed proof |
-| HO-DET-001 passed controlled-test validation | Not claimed: evidence-linked public proof |
-| Internal platform contract guardrail exists as a non-promotional guardrail | Not claimed: public-safe runtime proof |
-| Private/internal runtime match status is scoped private/internal | Not claimed: production-ready claim, fleet-wide claim, enterprise deployed claim |
-| AI can support work, but cannot approve claims | Not claimed: live Splunk fired as public proof, Cribl-routed claim, Wazuh-routed claim, AWS-live claim |
-| Human review is required before public promotion | Not claimed: autonomous SOC claim, AI-approved disposition, AI-decided disposition, analyst-approved disposition, production AutoSOC claim |
+| `HO-DET-001` has merged source artifacts. | Not claimed: runtime-active public proof. |
+| `HO-DET-001` has merged controlled-test validation artifacts. | Not claimed: public signal-observed proof. |
+| `HO-DET-001` passed controlled-test validation within recorded scope. | Not claimed: evidence-linked public proof beyond the stated ceiling. |
+| Internal platform contract guardrail exists as a non-promotional guardrail. | Not claimed: public-safe runtime proof. |
+| Private/internal runtime match status is scoped private/internal. | Not claimed: production-ready, fleet-wide, or enterprise-deployed status. |
+| AI can support work but cannot approve claims. | Not claimed: live Splunk fired as public proof, Cribl-routed claim, Wazuh-routed claim, or AWS-live claim. |
+| Human review is required before public promotion. | Not claimed: autonomous SOC, AI-approved disposition, AI-decided disposition, analyst-approved disposition, production AutoSOC, or case closure. |
 
 ## Real Controls Rule
 
-Docs, READMEs, proof records, diagrams, and websites are not real controls by themselves.
+Docs, READMEs, proof records, diagrams, websites, and badges are not real controls by themselves.
 
 A control becomes real only when it blocks, fails, or forces correction through required review, branch protection, rulesets, blocking CI, deterministic verifiers, typed claim gates, or another enforceable mechanism.
 
-Green CI/status checks are not merge authority.
-Codex review is AI labor, not human governance.
+Green CI/status checks are not merge authority. Codex review is AI labor, not human governance.
 
 ## Related Repositories
 
