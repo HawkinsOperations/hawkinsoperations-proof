@@ -13,6 +13,14 @@ ROOT = Path(__file__).resolve().parents[1]
 MAP_JSON = ROOT / "proof" / "indexes" / "runtime-route-proof-v1-private-candidate-map.json"
 MAP_MD = ROOT / "proof" / "indexes" / "runtime-route-proof-v1-private-candidate-map.md"
 RECORD_MD = ROOT / "proof" / "records" / "RUNTIME-ROUTE-PROOF-V1-PRIVATE-CANDIDATE.md"
+REVIEWER_MAP_MD = ROOT / "proof" / "maps" / "RUNTIME-ROUTE-PROOF-V1-REVIEWER-MAP.md"
+RELEASE_URL = "https://github.com/HawkinsOperations/hawkinsoperations-proof/releases/tag/runtime-route-proof-v1-private-candidate-2026-06-01"
+RELEASE_TAG = "runtime-route-proof-v1-private-candidate-2026-06-01"
+PLATFORM_CONTRACT = {
+    "schema": "https://github.com/HawkinsOperations/hawkinsoperations-platform/blob/main/contracts/schemas/runtime-route-proof-v1-private-candidate.schema.json",
+    "sample": "https://github.com/HawkinsOperations/hawkinsoperations-platform/blob/main/contracts/examples/runtime-route-proof-v1-private-candidate.sample.json",
+    "verifier": "https://github.com/HawkinsOperations/hawkinsoperations-platform/blob/main/scripts/verify-runtime-route-proof-v1-private-candidate.py",
+}
 
 EXPECTED = {
     "schema_version": "runtime-route-proof-v1-private-candidate-map-v1",
@@ -63,6 +71,35 @@ REQUIRED_MARKDOWN = (
     "AI-decided disposition",
     "does not prove public-safe runtime proof",
     "does not mutate Lifetime Governed Cases",
+)
+
+REQUIRED_REVIEWER_MAP_MARKDOWN = (
+    "Runtime Route Proof v1 Reviewer Map",
+    "Open This First",
+    RELEASE_URL,
+    "Executive Meaning",
+    "Wazuh -> Cribl -> Splunk",
+    "Route Map",
+    "Proof State Ladder",
+    "What This Proves",
+    "What This Does Not Prove",
+    "Why It Matters",
+    "Reviewer Walkthrough In 90 Seconds",
+    "Next Promotion Gate",
+    "HO-RUNTIME-V1-20260601T120922Z-BATCH764",
+    "PASS_ROUTE_RECEIPTS",
+    "manifest_verified=true",
+    "NOT_PUBLIC_SAFE",
+    "public_safe_count=0",
+    "Lifetime Governed Cases=4",
+    "AI_DECIDED_DISPOSITION=false",
+    "3a1d4472bffcce68cff6e101c54e06b5a67528338bda174e6fef209fa9b1b278",
+    "verify-runtime-route-proof-v1-private-candidate.py",
+    "public-safe",
+    "production",
+    "autonomous SOC",
+    "broad ingestion",
+    "Lifetime Governed Case mutation",
 )
 
 LEAK_PATTERNS = {
@@ -120,8 +157,16 @@ def verify_markdown(path: Path) -> None:
             fail(f"{path.relative_to(ROOT)} missing required boundary text: {required}")
 
 
+def verify_reviewer_map(path: Path) -> None:
+    text = path.read_text(encoding="utf-8")
+    normalized = text.lower()
+    for required in REQUIRED_REVIEWER_MAP_MARKDOWN:
+        if required.lower() not in normalized:
+            fail(f"{path.relative_to(ROOT)} missing required reviewer-map text: {required}")
+
+
 def verify() -> dict:
-    for path in (MAP_JSON, MAP_MD, RECORD_MD):
+    for path in (MAP_JSON, MAP_MD, RECORD_MD, REVIEWER_MAP_MD):
         if not path.exists():
             fail(f"missing required file: {path.relative_to(ROOT)}")
         scan_text(path)
@@ -133,6 +178,10 @@ def verify() -> dict:
     assert_equal(data.get("receipts"), EXPECTED_RECEIPTS, "receipts")
     assert_equal(data.get("reviewer_safe_packet"), EXPECTED_PACKET, "reviewer_safe_packet")
     assert_equal(data.get("claim_boundary"), EXPECTED_BOUNDARY, "claim_boundary")
+    assert_equal(data.get("reviewer_map_path"), "proof/maps/RUNTIME-ROUTE-PROOF-V1-REVIEWER-MAP.md", "reviewer_map_path")
+    assert_equal(data.get("release_url"), RELEASE_URL, "release_url")
+    assert_equal(data.get("release_tag"), RELEASE_TAG, "release_tag")
+    assert_equal(data.get("platform_contract"), PLATFORM_CONTRACT, "platform_contract")
 
     record_path = ROOT / data["record_path"]
     if record_path != RECORD_MD:
@@ -140,6 +189,7 @@ def verify() -> dict:
 
     verify_markdown(MAP_MD)
     verify_markdown(RECORD_MD)
+    verify_reviewer_map(REVIEWER_MAP_MD)
 
     blocked_claims = data.get("blocked_claims")
     if not isinstance(blocked_claims, list) or "public-safe runtime proof" not in blocked_claims:
@@ -148,7 +198,9 @@ def verify() -> dict:
     return {
         "status": "PASS",
         "map": str(MAP_JSON.relative_to(ROOT)),
+        "reviewer_map": str(REVIEWER_MAP_MD.relative_to(ROOT)),
         "record": str(RECORD_MD.relative_to(ROOT)),
+        "release_url": data["release_url"],
         "marker_id": data["marker_id"],
         "deterministic_verifier_status": data["deterministic_verifier_status"],
         "manifest_verified": data["manifest_verified"],
