@@ -1,5 +1,7 @@
 {
   "packet_name": "HAWKINSOPERATIONS_LINKEDIN_PROOF_BOUNDARY_WHAT_SYSTEM_REFUSED_2026-06-01",
+  "packet_purpose": "Public-summary-safe candidate packet for a LinkedIn post about claim-control boundaries behind HawkinsOperations proof surfaces.",
+  "linkedin_post_hook": "The best thing my security system did this week was tell me no.",
   "created_date": "2026-06-01",
   "repo": "HawkinsOperations/hawkinsoperations-proof",
   "claim_ceiling": "PUBLIC_SUMMARY_SAFE_CANDIDATE_WITH_CONTROLLED_TEST_VALIDATED_REFERENCES",
@@ -19,6 +21,17 @@
     "HawkinsOperations/hawkinsoperations-proof",
     "HawkinsOperations/hawkinsoperations-website"
   ],
+  "public_routes_checked": [
+    "https://hawkinsoperations.com/proof/ho-det-001/",
+    "HawkinsOperations/hawkinsoperations-proof/proof/records/HO-DET-001.md",
+    "HawkinsOperations/hawkinsoperations-proof/releases/tag/hawkinsoperations-proof-pack-001",
+    "HawkinsOperations/hawkinsoperations-proof/proof/records/reviewer-metrics-pipeline-v1-summary.md",
+    "HawkinsOperations/hawkinsoperations-proof/proof/records/RUNTIME-ROUTE-PROOF-V1-PRIVATE-CANDIDATE.md",
+    "HawkinsOperations/hawkinsoperations-validation/scripts/verify-trusted-runner-workflows.py",
+    "HawkinsOperations/.github/governance/ORG_CI_CD_AUTHORITY_CONTRACT.md",
+    "HawkinsOperations/hawkinsoperations-proof/docs/governance-saves/GOVERNANCE-SAVES-EVIDENCE-MATRIX.md",
+    "HawkinsOperations/hawkinsoperations-platform/docs/autosoc/OFFLINE_LLM_TRIAGE_SUPPORT_CONTRACT.md"
+  ],
   "forbidden_claims": [
     "blocked: production deployment",
     "blocked: customer deployment",
@@ -30,22 +43,49 @@
     "blocked: AI-approved disposition",
     "blocked: AI-decided disposition",
     "blocked: analyst-approved disposition",
+    "blocked: recommended disposition",
+    "blocked: containment approved",
+    "blocked: case closure approved",
     "blocked: live Wazuh",
     "blocked: live Splunk",
     "blocked: Cribl-routed",
     "blocked: AWS-live",
     "blocked: fleet-wide"
   ],
+  "supported_artifact_categories": [
+    "Detection Source",
+    "Validation",
+    "Wazuh CI",
+    "Reviewer Metrics",
+    "Website",
+    "Proof Pack 001",
+    "Runtime Route Proof v1",
+    "Runner Trust Split",
+    "Green CI / Merge Authority",
+    "AI Support"
+  ],
+  "excluded_private_categories": [
+    "private runtime captures",
+    "host identifiers",
+    "internal addresses",
+    "credential material",
+    "private opportunity details",
+    "non-public reviewer messages"
+  ],
+  "no_zip_reason": "ZIP_COMMIT_BLOCKED_BY_REPO_PATTERN",
   "verification_commands": [
     "git diff --check",
     "python scripts/verify_proof_integrity.py",
     "python scripts/verify-ho-det-001-proof-integrity.py",
     "python scripts/verify-proof-pack-001-release.py",
-    "python scripts/verify-linkedin-proof-boundary-artifact.py"
+    "python scripts/verify-linkedin-proof-boundary-artifact.py",
+    "JSON parse check for proof-boundary-map.json",
+    "JSON parse check for ARTIFACT_MANIFEST.json",
+    "private leak scan",
+    "forbidden claim scan"
   ],
-  "zip_status": "ZIP_COMMIT_BLOCKED_BY_REPO_PATTERN",
   "notes": [
-    "This is a proof-boundary and reviewer-routing packet.",
-    "It does not create runtime proof, signal proof, public-safe runtime proof, production proof, SOCaaS availability, customer deployment proof, autonomous SOC proof, AI-approved disposition, analyst-approved disposition, or website-as-proof authority."
+    "This packet is a proof-boundary and reviewer-routing artifact.",
+    "It does not create runtime proof, signal proof, public-safe runtime proof, production proof, SOCaaS availability, customer deployment proof, autonomous SOC proof, AI-approved disposition, analyst-approved disposition, green-CI merge authority, Project metadata proof authority, or website-as-proof authority."
   ]
 }

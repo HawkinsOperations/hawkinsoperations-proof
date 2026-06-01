@@ -24,9 +24,77 @@ PACKET_FILES = [
 REQUIRED_ARTIFACTS = [
     "Detection Source",
     "Validation",
+    "Wazuh CI",
+    "Reviewer Metrics",
+    "Website",
+    "Proof Pack 001",
+    "Runtime Route Proof v1",
+    "Runner Trust Split",
+    "Green CI / Merge Authority",
+    "AI Support",
+]
+
+VISUAL_TABLE_ARTIFACTS = [
+    "Detection Source",
+    "Validation",
     "Website",
     "Proof Pack 001",
     "AI Support",
+]
+
+README_REQUIRED_SECTIONS = [
+    "## Executive Summary",
+    "## The Problem",
+    "## The Control Pattern",
+    "## The Public-Safe Boundary Matrix",
+    "## Deeper Evidence Threads",
+    "### 1. Detection Source Is Source Truth",
+    "### 2. Validation Is Controlled Validation Truth",
+    "### 3. Wazuh CI Refused Runtime Overclaim",
+    "### 4. Reviewer Metrics Refused Metric Inflation",
+    "### 5. Website Rendering Refused Proof Authority",
+    "### 6. Proof Pack 001 Preserved Claim Ceiling",
+    "### 7. Runtime Route Proof v1 Stayed Private / Blocked",
+    "### 8. Runner Trust Split Refused Public PR Self-Hosted Exposure",
+    "### 9. Green CI Refused Merge Authority",
+    "### 10. AI Support Refused Final Authority",
+    "## What This Packet Proves",
+    "## What This Packet Does Not Prove",
+    "## LinkedIn Usage",
+    "## Reviewer Links",
+    "## Verification",
+]
+
+WHAT_REQUIRED_SECTIONS = [
+    "## Final Table",
+    "## Why This Is Deeper Than a Table",
+    "## Control Pattern Behind the Post",
+    "## Deeper Evidence Threads",
+    "## Final LinkedIn Caption",
+    "## First Comment Text",
+    "## Do Not Claim",
+]
+
+DEEP_THREAD_HEADINGS = [
+    "Detection Source Is Source Truth",
+    "Validation Is Controlled Validation Truth",
+    "Wazuh CI Refused Runtime Overclaim",
+    "Reviewer Metrics Refused Metric Inflation",
+    "Website Rendering Refused Proof Authority",
+    "Proof Pack 001 Preserved Claim Ceiling",
+    "Runtime Route Proof v1 Stayed Private / Blocked",
+    "Runner Trust Split Refused Public PR Self-Hosted Exposure",
+    "Green CI Refused Merge Authority",
+    "AI Support Refused Final Authority",
+]
+
+REVIEWER_METRIC_TOKENS = [
+    "4 governed cases",
+    "49 controlled validation fires",
+    "106 validation cases",
+    "8 proof records",
+    "31 blocked claims",
+    "public-safe count 0",
 ]
 
 REQUIRED_CEILING = "CONTROLLED_TEST_VALIDATED"
@@ -79,6 +147,9 @@ FORBIDDEN_POSITIVE_CLAIMS = [
     "AI-approved disposition",
     "AI-decided disposition",
     "analyst-approved disposition",
+    "recommended disposition",
+    "containment approved",
+    "case closure approved",
     "fleet-wide",
     "live Wazuh",
     "live Splunk",
@@ -157,7 +228,7 @@ def scan_forbidden_positive_claims(path: Path, text: str) -> None:
 
 
 def verify_markdown_tables(text: str, path: Path) -> None:
-    for artifact in REQUIRED_ARTIFACTS:
+    for artifact in VISUAL_TABLE_ARTIFACTS:
         if artifact not in text:
             fail(f"missing required artifact row in {rel(path)}: {artifact}")
     required_headers = ["Artifact", "What it proves", "What it does not prove"]
@@ -166,11 +237,36 @@ def verify_markdown_tables(text: str, path: Path) -> None:
             fail(f"missing table header in {rel(path)}: {header}")
 
 
+def require_sections(text: str, path: Path, sections: list[str]) -> None:
+    for section in sections:
+        if section not in text:
+            fail(f"missing required section in {rel(path)}: {section}")
+
+
+def verify_deep_content(readme: str, what_file: str) -> None:
+    for heading in DEEP_THREAD_HEADINGS:
+        if heading not in readme:
+            fail(f"README missing deeper evidence thread: {heading}")
+        if heading not in what_file:
+            fail(f"WHAT_THE_SYSTEM_REFUSED_TO_CLAIM missing deeper evidence thread: {heading}")
+    for token in REVIEWER_METRIC_TOKENS:
+        if token not in readme:
+            fail(f"README missing reviewer metric token: {token}")
+    if "Website rendering is not proof" not in readme:
+        fail("README must explicitly say website rendering is not proof")
+    if "Checks are evidence, not authority" not in readme:
+        fail("README must explicitly say checks are evidence, not authority")
+    if "AI is labor" not in readme or "governance" not in readme.lower():
+        fail("README must preserve AI labor / governance authority boundary")
+
+
 def verify_map(data: dict[str, Any]) -> None:
     entries = data.get("entries")
     if not isinstance(entries, list):
         fail("proof-boundary-map.json entries must be a list")
     seen = {entry.get("artifact") for entry in entries if isinstance(entry, dict)}
+    if seen != set(REQUIRED_ARTIFACTS) or len(entries) != len(REQUIRED_ARTIFACTS):
+        fail("proof-boundary-map.json must contain exactly the expanded required entries")
     for artifact in REQUIRED_ARTIFACTS:
         if artifact not in seen:
             fail(f"proof-boundary-map.json missing artifact: {artifact}")
@@ -181,32 +277,63 @@ def verify_map(data: dict[str, Any]) -> None:
             "artifact",
             "proves",
             "does_not_prove",
+            "why_it_matters",
             "source_repo",
             "source_route",
+            "supporting_public_routes",
             "proof_ceiling",
             "public_safe_status",
+            "blocked_claims",
+            "linkedin_visual_row",
             "notes",
         ]:
             if key not in entry:
                 fail(f"proof-boundary-map.json entry missing key: {key}")
+        for array_key in ["proves", "does_not_prove", "supporting_public_routes", "blocked_claims"]:
+            value = entry.get(array_key)
+            if not isinstance(value, list) or not value:
+                fail(f"proof-boundary-map.json {entry['artifact']} {array_key} must be a non-empty list")
+        if not isinstance(entry.get("linkedin_visual_row"), bool):
+            fail(f"proof-boundary-map.json {entry['artifact']} linkedin_visual_row must be boolean")
         if entry["artifact"] in {"Detection Source", "Validation", "Proof Pack 001"}:
             if entry["proof_ceiling"] != REQUIRED_CEILING:
                 fail(f"{entry['artifact']} proof ceiling must remain {REQUIRED_CEILING}")
         if "runtime" in " ".join(entry.get("does_not_prove", [])).lower():
             if REQUIRED_RUNTIME_STATUS not in entry["public_safe_status"]:
                 fail(f"{entry['artifact']} public_safe_status must preserve {REQUIRED_RUNTIME_STATUS}")
+        if entry["artifact"] == "Reviewer Metrics":
+            joined = json.dumps(entry, sort_keys=True)
+            for token in REVIEWER_METRIC_TOKENS:
+                if token not in joined:
+                    fail(f"Reviewer Metrics map entry missing token: {token}")
+            if "public-safe runtime proof" not in " ".join(entry.get("blocked_claims", [])).lower():
+                fail("Reviewer Metrics must block public-safe runtime proof")
+        if entry["artifact"] == "Website":
+            joined = json.dumps(entry, sort_keys=True).lower()
+            if "navigation" not in joined or "not proof" not in joined:
+                fail("Website map entry must remain navigation/rendering only, not proof authority")
+        if entry["artifact"] == "AI Support":
+            joined = json.dumps(entry, sort_keys=True).lower()
+            if "support" not in joined or "authority" not in joined:
+                fail("AI Support map entry must preserve support/labor only, not final authority")
 
 
 def verify_manifest(data: dict[str, Any]) -> None:
     required = [
         "packet_name",
+        "packet_purpose",
+        "linkedin_post_hook",
         "created_date",
         "repo",
         "claim_ceiling",
         "public_safe_status",
         "files",
         "source_repos_checked",
+        "public_routes_checked",
         "forbidden_claims",
+        "supported_artifact_categories",
+        "excluded_private_categories",
+        "no_zip_reason",
         "verification_commands",
     ]
     for key in required:
@@ -222,6 +349,20 @@ def verify_manifest(data: dict[str, Any]) -> None:
     source_repos = data.get("source_repos_checked")
     if not isinstance(source_repos, list) or len(source_repos) < 6:
         fail("manifest must list the six source repos checked")
+    categories = data.get("supported_artifact_categories")
+    if not isinstance(categories, list):
+        fail("manifest supported_artifact_categories must be a list")
+    for artifact in REQUIRED_ARTIFACTS:
+        if artifact not in categories:
+            fail(f"manifest missing supported artifact category: {artifact}")
+    if data.get("no_zip_reason") != "ZIP_COMMIT_BLOCKED_BY_REPO_PATTERN":
+        fail("manifest must preserve no-zip reason")
+    public_routes = data.get("public_routes_checked")
+    if not isinstance(public_routes, list) or len(public_routes) < 5:
+        fail("manifest public_routes_checked must list public routes")
+    excluded = data.get("excluded_private_categories")
+    if not isinstance(excluded, list) or not excluded:
+        fail("manifest excluded_private_categories must be a non-empty list")
 
 
 def sha256(path: Path) -> str:
@@ -251,6 +392,9 @@ def verify_checksums() -> None:
         actual = sha256(path)
         if actual != expected:
             fail(f"checksum mismatch for {name}: expected {expected}, got {actual}")
+    extras = sorted(set(parsed) - {name for name in PACKET_FILES if name != "CHECKSUMS.sha256"})
+    if extras:
+        fail(f"CHECKSUMS.sha256 contains extra entries: {', '.join(extras)}")
 
 
 def main() -> int:
@@ -261,11 +405,13 @@ def main() -> int:
             scan_private_text(path, text)
             scan_forbidden_positive_claims(path, text)
 
-        verify_markdown_tables(read(PACKET_DIR / "README.md"), PACKET_DIR / "README.md")
-        verify_markdown_tables(
-            read(PACKET_DIR / "WHAT_THE_SYSTEM_REFUSED_TO_CLAIM.md"),
-            PACKET_DIR / "WHAT_THE_SYSTEM_REFUSED_TO_CLAIM.md",
-        )
+        readme = read(PACKET_DIR / "README.md")
+        what_file = read(PACKET_DIR / "WHAT_THE_SYSTEM_REFUSED_TO_CLAIM.md")
+        require_sections(readme, PACKET_DIR / "README.md", README_REQUIRED_SECTIONS)
+        require_sections(what_file, PACKET_DIR / "WHAT_THE_SYSTEM_REFUSED_TO_CLAIM.md", WHAT_REQUIRED_SECTIONS)
+        verify_markdown_tables(readme, PACKET_DIR / "README.md")
+        verify_markdown_tables(what_file, PACKET_DIR / "WHAT_THE_SYSTEM_REFUSED_TO_CLAIM.md")
+        verify_deep_content(readme, what_file)
         verify_map(load_json(PACKET_DIR / "proof-boundary-map.json"))
         verify_manifest(load_json(PACKET_DIR / "ARTIFACT_MANIFEST.json"))
         verify_checksums()

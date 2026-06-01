@@ -12,38 +12,92 @@ AI can draft. CI can check. Proof still needs boundaries.
 | Proof Pack 001 | Bounded reviewer release. | Does not prove public-safe runtime proof. |
 | AI Support | Drafting and reviewer prep. | Does not prove final disposition authority. |
 
-## Row Explanations
+## Why This Is Deeper Than a Table
 
-### Detection Source
+The image is the front door, not the evidence. The deeper work is that HawkinsOperations repeatedly separates proof surfaces so one surface cannot authorize another.
 
-Detection source is source truth. It can show that source exists, can be reviewed, and can route reviewers toward validation and proof records. It does not prove runtime behavior, live signal, production deployment, or public-safe runtime proof.
+The same pattern appears across source truth, controlled validation, Wazuh CI, reviewer metrics, website rendering, Proof Pack 001, Runtime Route Proof v1, runner trust, green CI, and AI support. Each surface can support a bounded claim. Each surface also has claims it must refuse.
 
-### Validation
+## Control Pattern Behind the Post
 
-Validation is controlled validation truth. It can show a scoped test boundary and controlled positive and negative fixture behavior. It does not prove live signal, runtime routing, production deployment, or public-safe runtime proof.
+- Source can exist without proving runtime behavior.
+- Controlled validation can pass without proving live signal.
+- Wazuh CI can check source/static structure without proving live Wazuh routing.
+- Reviewer metrics can show work volume without turning activity into proof.
+- Website rendering can route reviewers without becoming proof authority.
+- Proof Pack 001 can package a reviewer route without raising the proof ceiling.
+- Runtime Route Proof v1 can be preserved as a private candidate without becoming public-safe proof.
+- Runner trust split can protect CI boundaries without proving runtime status.
+- Green CI can pass without authorizing merge or promotion.
+- AI can support work without becoming final authority.
 
-### Website
+## Deeper Evidence Threads
 
-The website is reviewer navigation. It can render public explanation and route readers toward the proof record. It does not create proof authority, runtime truth, signal truth, evidence truth, or external-use authorization.
+### Detection Source Is Source Truth
 
-### Proof Pack 001
+Detection source proves reviewable source exists. It does not prove runtime behavior, live signal, production deployment, or public-safe runtime proof.
 
-Proof Pack 001 is a bounded reviewer release route for HO-DET-001 under CONTROLLED_TEST_VALIDATED. It does not prove public-safe runtime proof, production deployment, SOCaaS availability, autonomous SOC, AI-approved disposition, or analyst-approved disposition.
+### Validation Is Controlled Validation Truth
 
-### AI Support
+Controlled validation proves scoped fixture or contract behavior. It does not prove live signal, runtime route, production deployment, or public-safe runtime proof.
 
-AI support can help with drafting, reviewer prep, triage scaffolding, and summarization. It does not approve final security disposition, analyst-approved disposition, autonomous SOC operation, public-safe status, or claim promotion.
+### Wazuh CI Refused Runtime Overclaim
 
-## Public-Safe LinkedIn First Comment
+Wazuh CI/source/static validation can verify rule/source structure. It must not become live Wazuh proof or public-safe runtime proof.
+
+### Reviewer Metrics Refused Metric Inflation
+
+The proof-owned reviewer metrics route separates 4 governed cases, 49 controlled validation fires, 106 validation cases, 8 proof records, 31 blocked claims, and public-safe count 0. Activity does not become proof.
+
+### Website Rendering Refused Proof Authority
+
+The website routes reviewers to the HO-DET-001 proof boundary. Website rendering is not proof and does not approve public-safe status.
+
+### Proof Pack 001 Preserved Claim Ceiling
+
+Proof Pack 001 is a bounded reviewer release route under CONTROLLED_TEST_VALIDATED. It does not prove production deployment, SOCaaS availability, autonomous SOC, AI-approved disposition, analyst-approved disposition, or public-safe runtime proof.
+
+### Runtime Route Proof v1 Stayed Private / Blocked
+
+Runtime Route Proof v1 is preserved as a private-candidate route with reviewer-safe summaries and raw private material excluded. Public-safe count remains 0.
+
+### Runner Trust Split Refused Public PR Self-Hosted Exposure
+
+Public PR validation and trusted self-hosted proof loops are separated so untrusted PR code is not treated as trusted runtime proof.
+
+### Green CI Refused Merge Authority
+
+Checks are evidence, not authority. Merge and promotion still require review state, scoped files, proof boundaries, and human approval.
+
+### AI Support Refused Final Authority
+
+AI is labor. Governance is authority. AI can draft and summarize, but it does not approve disposition, public claims, containment, closure, or proof promotion.
+
+## Final LinkedIn Caption
+
+The best thing my security system did this week was tell me no.
+
+Not because the work failed.
+
+Because the system refused to let source files, validation results, website rendering, proof packets, CI checks, private runtime candidates, or AI summaries claim more than they could actually support.
+
+## First Comment Text
 
 Proof-boundary route for the HO-DET-001 receipt: https://hawkinsoperations.com/proof/ho-det-001/
 
 Boundary: controlled-test validation only. Website rendering is not proof; proof authority remains in the GitHub proof record and validation artifacts. No runtime-active, signal-observed, production, autonomous SOC, or public-safe runtime proof claim is made.
 
-## Recommended Public Link
+## Do Not Claim
 
-Use `https://hawkinsoperations.com/proof/ho-det-001/` as the first-comment route.
-
-Reason: it is the cleanest public reader path. It opens on the HO-DET-001 boundary page, names CONTROLLED_TEST_VALIDATED, preserves NOT_PUBLIC_SAFE boundaries, and routes readers onward to proof authority without treating website rendering as proof.
-
-Use the GitHub artifact packet as the reviewer/source route after the PR is merged.
+- Do not claim runtime proof.
+- Do not claim signal proof.
+- Do not claim public-safe runtime proof.
+- Do not claim production deployment.
+- Do not claim SOCaaS availability.
+- Do not claim customer deployment.
+- Do not claim autonomous SOC.
+- Do not claim AI-approved disposition.
+- Do not claim analyst-approved disposition.
+- Do not claim website-as-proof authority.
+- Do not claim GitHub Project-as-proof authority.
+- Do not claim green CI-as-merge authority.
