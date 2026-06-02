@@ -1,0 +1,146 @@
+{
+  "map_id": "REVIEWER_METRICS_PIPELINE_V1_MAP",
+  "version": "v1",
+  "owner_repo": "hawkinsoperations-proof",
+  "artifact_class": "proof_owned_reviewer_metrics_source_map",
+  "proof_ceiling": "REVIEWER_METRICS_PIPELINE_V1_CLOSED_REVIEWER_VISIBLE",
+  "public_safe_status": "NOT_PUBLIC_SAFE",
+  "pipeline_status": "REVIEWER_VISIBLE_CLOSED",
+  "metrics": [
+    {
+      "name": "Lifetime Governed Cases",
+      "value": 4,
+      "authority_repo": "hawkinsoperations-platform",
+      "source_surface": "contracts/lifetime-case-ledger-v1-state-manifest.json",
+      "verifier_command": "python -B scripts/ho_factory.py lifetime-ledger-state-manifest-verify --repo-root .. --format json",
+      "proof_boundary": "Strict governed accepted case records only.",
+      "reviewer_explanation": "This is the small strict number. It stays tied to the governed Lifetime Case Ledger route.",
+      "does_not_prove": [
+        "every detection fire",
+        "validation activity volume",
+        "runtime operation",
+        "public-safe approval"
+      ]
+    },
+    {
+      "name": "Detection Activity / Fire Count",
+      "value": 49,
+      "authority_repo": "hawkinsoperations-validation",
+      "source_surface": "activity/detection-activity-ledger-v1.json",
+      "verifier_command": "python -B scripts/verify-detection-activity-ledger.py --format json",
+      "proof_boundary": "Controlled validation-backed activity/fire count only.",
+      "reviewer_explanation": "This is the big activity number without counting it as governed cases.",
+      "does_not_prove": [
+        "governed case count",
+        "public runtime proof",
+        "signal observation",
+        "production operation"
+      ]
+    },
+    {
+      "name": "Validation Case Count",
+      "value": 106,
+      "authority_repo": "hawkinsoperations-validation",
+      "source_surface": "activity/detection-activity-ledger-v1.json",
+      "verifier_command": "python -B scripts/verify-detection-activity-ledger.py --format json",
+      "proof_boundary": "Controlled validation case volume only.",
+      "reviewer_explanation": "This records the broader controlled validation volume behind the reviewer metrics layer.",
+      "does_not_prove": [
+        "production telemetry",
+        "runtime deployment",
+        "public-safe proof"
+      ]
+    },
+    {
+      "name": "Proof Record Count",
+      "value": 8,
+      "authority_repo": "hawkinsoperations-proof",
+      "source_surface": "proof/records/reviewer-metrics-pipeline-v1-summary.json",
+      "verifier_command": "python -B scripts/verify-reviewer-metrics-summary.py --format json",
+      "proof_boundary": "Reviewer-safe proof surface count only.",
+      "reviewer_explanation": "This counts proof-owned reviewer surfaces without using proof presence to promote claims.",
+      "does_not_prove": [
+        "public-safe runtime approval",
+        "new runtime evidence",
+        "production readiness"
+      ]
+    },
+    {
+      "name": "Blocked Claims / Prevented Promotions",
+      "value": 31,
+      "authority_repo": "hawkinsoperations-proof",
+      "source_surface": "proof/records/reviewer-metrics-pipeline-v1-summary.json",
+      "verifier_command": "python -B scripts/verify-reviewer-metrics-summary.py --format json",
+      "proof_boundary": "Unsupported claims intentionally blocked from promotion.",
+      "reviewer_explanation": "This shows the claim firewall working. It is not a failure count.",
+      "does_not_prove": [
+        "failed detections",
+        "operational incidents",
+        "runtime status"
+      ]
+    },
+    {
+      "name": "Public-safe Count",
+      "value": 0,
+      "authority_repo": "hawkinsoperations-proof",
+      "source_surface": "proof/records/reviewer-metrics-pipeline-v1-summary.json",
+      "verifier_command": "python -B scripts/verify-reviewer-metrics-summary.py --format json",
+      "proof_boundary": "No public-safe runtime proof has been approved.",
+      "reviewer_explanation": "This keeps public-safe status at zero while still exposing validated engineering activity.",
+      "does_not_prove": [
+        "absence of engineering work",
+        "public-safe approval",
+        "runtime proof"
+      ]
+    },
+    {
+      "name": "Reviewer Demo Path / Project Board Reconciliation",
+      "value": "REPO_BACKED_RECONCILIATION_PLAN_NO_PROJECT_MUTATION",
+      "authority_repo": ".github",
+      "source_surface": "profile/START_HERE.md",
+      "verifier_command": "python -B scripts/verify-command-center-invariants.py",
+      "proof_boundary": "Repo-backed reviewer routing and Project Board reconciliation status only.",
+      "reviewer_explanation": "The route tells reviewers where to look while keeping Project metadata coordination-only.",
+      "does_not_prove": [
+        "GitHub Project mutation",
+        "Project Board proof authority",
+        "merge authority",
+        "runtime proof"
+      ]
+    }
+  ],
+  "authority_boundaries": {
+    "validation_owns_detection_activity_and_validation_case_count": true,
+    "platform_owns_lifetime_governed_cases_and_state_contract": true,
+    "proof_owns_reviewer_safe_rollup_records_and_blocked_claims": true,
+    "github_owns_command_center_routing": true,
+    "website_is_render_only": true,
+    "project_board_is_coordination_only": true,
+    "detection_activity_is_governed_case_count": false,
+    "github_project_mutation_performed": false,
+    "proof_promotion_performed": false,
+    "public_safe_approval_performed": false
+  },
+  "required_reviewer_path": [
+    "Start here",
+    "Strict number",
+    "Big activity number",
+    "Validation volume",
+    "Proof surfaces",
+    "Blocked claims",
+    "Board status",
+    "What remains blocked"
+  ],
+  "does_not_prove": [
+    "live Wazuh telemetry",
+    "Cribl routing",
+    "Splunk indexing",
+    "HO-GPU-01 triage",
+    "production SOC operation",
+    "public-safe runtime proof",
+    "signal observation",
+    "AI authority",
+    "analyst disposition authority",
+    "GitHub Project board proof authority"
+  ]
+}

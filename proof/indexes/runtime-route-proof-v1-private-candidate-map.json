@@ -1,0 +1,55 @@
+{
+  "schema_version": "runtime-route-proof-v1-private-candidate-map-v1",
+  "map_id": "runtime-route-proof-v1-private-candidate-map",
+  "reviewer_map_path": "proof/maps/RUNTIME-ROUTE-PROOF-V1-REVIEWER-MAP.md",
+  "release_url": "https://github.com/HawkinsOperations/hawkinsoperations-proof/releases/tag/runtime-route-proof-v1-private-candidate-2026-06-01",
+  "release_tag": "runtime-route-proof-v1-private-candidate-2026-06-01",
+  "record_path": "proof/records/RUNTIME-ROUTE-PROOF-V1-PRIVATE-CANDIDATE.md",
+  "marker_id": "HO-RUNTIME-V1-20260601T120922Z-BATCH764",
+  "private_route": [
+    "Wazuh",
+    "Cribl",
+    "Splunk"
+  ],
+  "receipts": {
+    "wazuh": "PASS",
+    "cribl": "PASS",
+    "splunk": "PASS"
+  },
+  "deterministic_verifier_status": "PASS_ROUTE_RECEIPTS",
+  "manifest_verified": true,
+  "lifetime_governed_cases": 4,
+  "public_safe_count": 0,
+  "public_safe_status": "NOT_PUBLIC_SAFE",
+  "proof_ceiling": "PRIVATE_RUNTIME_ROUTE_PROOF_V1_CANDIDATE",
+  "preservation_ceiling": "PRIVATE_RUNTIME_ROUTE_PROOF_V1_CANDIDATE_PRESERVED",
+  "reviewer_safe_packet": {
+    "filename": "HO-RUNTIME-ROUTE-PROOF-V1-PRIVATE-REVIEWER-SAFE-2026-06-01.zip",
+    "sha256": "3a1d4472bffcce68cff6e101c54e06b5a67528338bda174e6fef209fa9b1b278",
+    "raw_private_evidence_in_repo": false
+  },
+  "platform_contract": {
+    "schema": "https://github.com/HawkinsOperations/hawkinsoperations-platform/blob/main/contracts/schemas/runtime-route-proof-v1-private-candidate.schema.json",
+    "sample": "https://github.com/HawkinsOperations/hawkinsoperations-platform/blob/main/contracts/examples/runtime-route-proof-v1-private-candidate.sample.json",
+    "verifier": "https://github.com/HawkinsOperations/hawkinsoperations-platform/blob/main/scripts/verify-runtime-route-proof-v1-private-candidate.py"
+  },
+  "claim_boundary": {
+    "public_safe_runtime_proof": false,
+    "production_soc_operation": false,
+    "autonomous_soc_operation": false,
+    "ai_decided_disposition": false,
+    "lifetime_governed_case_mutation": false,
+    "public_publication_approved": false,
+    "human_review_required": true
+  },
+  "blocked_claims": [
+    "public-safe runtime proof",
+    "production SOC operation",
+    "autonomous SOC operation",
+    "AI-decided disposition",
+    "analyst-approved disposition",
+    "Lifetime Governed Case mutation",
+    "broad ingestion",
+    "public publication approval"
+  ]
+}

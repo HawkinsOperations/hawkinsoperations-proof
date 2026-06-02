@@ -66,7 +66,48 @@ Proof Pack 001 has an official direct GitHub Release route in `hawkinsoperations
 
 Use the exact tag release URL above for public routing. Do not rely on GitHub's generic `/releases` index if it renders inconsistently.
 
-The release package does not prove runtime-active deployment, signal-observed proof, production readiness, Cribl/Wazuh/Splunk/AWS live proof, autonomous SOC operation, public-safe runtime proof, AI-approved disposition, analyst-approved disposition, or case closure.
+Website and GitHub rendering route reviewers; rendering is not proof. The release package does not prove runtime-active deployment, signal-observed proof, production readiness, Cribl/Wazuh/Splunk/AWS live proof, autonomous SOC operation, public-safe runtime proof, AI-approved disposition, analyst-approved disposition, or case closure.
+
+## Runtime Route Proof v1 Private Candidate Reviewer Route
+
+Runtime Route Proof v1 has a private-candidate prerelease for the Wazuh -> Cribl -> Splunk route:
+
+[Runtime Route Proof v1 Private Candidate](https://github.com/HawkinsOperations/hawkinsoperations-proof/releases/tag/runtime-route-proof-v1-private-candidate-2026-06-01)
+
+Start with [proof/maps/RUNTIME-ROUTE-PROOF-V1-REVIEWER-MAP.md](proof/maps/RUNTIME-ROUTE-PROOF-V1-REVIEWER-MAP.md) for the two-minute reviewer path. It connects the prerelease, proof record, machine-readable map, reviewer-safe ZIP SHA, and platform verifier/schema/sample.
+
+| Item | Current state |
+|---|---|
+| Marker | `HO-RUNTIME-V1-20260601T120922Z-BATCH764` |
+| Route | Wazuh -> Cribl -> Splunk |
+| Verifier | `PASS_ROUTE_RECEIPTS` |
+| Release type | Private-candidate prerelease |
+| Proof ceiling | `PRIVATE_RUNTIME_ROUTE_PROOF_V1_CANDIDATE_PRESERVED` |
+| Public-safe status | `NOT_PUBLIC_SAFE` |
+| ZIP SHA256 | `3a1d4472bffcce68cff6e101c54e06b5a67528338bda174e6fef209fa9b1b278` |
+
+This private-candidate release does not prove public-safe runtime proof, production SOC operation, autonomous SOC behavior, broad ingestion, AI-decided disposition, public publication approval, or Lifetime Governed Case mutation.
+
+## Proof Pack 001 90-Second Reviewer Check
+
+Use this quick path to verify the released artifact without raising the claim ceiling:
+
+1. Open the direct release route: [HawkinsOperations Proof Pack 001](https://github.com/HawkinsOperations/hawkinsoperations-proof/releases/tag/hawkinsoperations-proof-pack-001).
+2. Confirm the release tag is `hawkinsoperations-proof-pack-001` and the asset is `HAWKINSOPERATIONS_PROOF_PACK_001.zip`.
+3. Download the ZIP and compare its SHA256 to `44d8a643aa2b113c9e99be0462e699d39af707a67190823cc05bb381907dc452`.
+4. If using PowerShell, verify the downloaded ZIP with:
+
+```powershell
+Get-FileHash .\HAWKINSOPERATIONS_PROOF_PACK_001.zip -Algorithm SHA256
+```
+
+5. If using a local checkout of this repo, verify the ZIP payload with:
+
+```powershell
+python -B scripts/verify-proof-pack-001-zip.py .\HAWKINSOPERATIONS_PROOF_PACK_001.zip
+```
+
+Passing the checksum and ZIP verifier supports only this bounded reviewer claim: Proof Pack 001 is a real release artifact for `HO-DET-001` under `CONTROLLED_TEST_VALIDATED`. It does not prove runtime-active public proof, public signal proof, production readiness, SOCaaS readiness, autonomous SOC operation, AI-approved disposition, analyst-approved disposition, or public-safe runtime proof.
 
 ## Lifetime Case Ledger Verification Badges
 
