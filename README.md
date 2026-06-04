@@ -44,6 +44,20 @@ Use these numbers as separate truth surfaces. Do not add candidates, validation 
 
 Proof does not own ledger mechanics. Proof owns the claim boundary around proof-facing summaries and reviewer routes.
 
+## Lifetime Case Ledger Verification Badges
+
+[![Ledger summary verifier](https://github.com/HawkinsOperations/hawkinsoperations-proof/actions/workflows/governance-gate.yml/badge.svg?branch=main&event=push)](https://github.com/HawkinsOperations/hawkinsoperations-proof/actions/workflows/governance-gate.yml?query=branch%3Amain)
+[![Ledger proof bundle verifier](https://github.com/HawkinsOperations/hawkinsoperations-proof/actions/workflows/governance-gate.yml/badge.svg?branch=main&event=push)](https://github.com/HawkinsOperations/hawkinsoperations-proof/actions/workflows/governance-gate.yml?query=branch%3Amain)
+
+These badges route to the `Governance Gate` workflow. The workflow contains the `lifetime-ledger-public-summary` and `lifetime-ledger-proof-bundle` jobs, which verify source-controlled Lifetime Case Ledger records against the pinned platform manifest.
+
+| Badge | Verifier job | What it verifies | Boundary |
+|---|---|---|---|
+| Ledger summary verifier | `lifetime-ledger-public-summary` | Proof-owned summary route and platform-manifest reference. | Ledger status remains `NOT_PUBLIC_SAFE`; proof ceiling remains `SCHEMA_CONTRACT_VERIFIER_EXISTS_ONLY`. |
+| Ledger proof bundle verifier | `lifetime-ledger-proof-bundle` | Proof-owned reviewer bundle route and verifier command references. | Ledger status remains `NOT_PUBLIC_SAFE`; proof ceiling remains `SCHEMA_CONTRACT_VERIFIER_EXISTS_ONLY`. |
+
+Badges report GitHub Actions workflow check status only. They do not prove runtime activity, signal observation, public proof, public-safe runtime proof, SOCaaS deployment, production deployment, autonomous SOC authority, AI-approved disposition, analyst-approved disposition, or case closure.
+
 ## What Proof Owns
 
 - Proof records and proof cards.
