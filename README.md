@@ -1,10 +1,34 @@
 # HawkinsOperations Proof
 
-Canonical claim-ceiling and proof-pack verification README.
+Claim-control authority for HawkinsOperations proof.
 
-This repository owns HawkinsOperations proof records, reviewer proof routes, and claim ceilings. It does not raise claims automatically. A proof record, release, verifier, badge, README, website page, or GitHub rendering can support only the claim ceiling stated here and in the linked proof records.
+This repository turns detection, validation, platform, evidence, and reviewer work into bounded proof records, reviewer packages, claim ceilings, verifier routes, and promotion gates. It is the place a reviewer should use to see what HawkinsOperations can prove, how to verify it, and which security claims remain blocked.
 
-## 10-Second Reviewer Path
+AI can generate work. Evidence, deterministic checks, and human review authorize claims.
+
+## 10-Second Proof Route
+
+| Start here | What it shows | Verify with | Claim ceiling |
+|---|---|---|---|
+| [Proof Pack 001 release](https://github.com/HawkinsOperations/hawkinsoperations-proof/releases/tag/hawkinsoperations-proof-pack-001) | A real bounded reviewer release artifact for `HO-DET-001`. | ZIP SHA256 plus `scripts/verify-proof-pack-001-zip.py`. | `CONTROLLED_TEST_VALIDATED` |
+| [HO-DET-001 proof record](proof/records/HO-DET-001.md) | The flagship detection proof route: source, Splunk source, controlled validation, proof-loop CI, private runtime context, blocked claims, and human review gates. | `scripts/verify-ho-det-001-proof-integrity.py` and `scripts/verify_proof_integrity.py`. | `CONTROLLED_TEST_VALIDATED`; private runtime context remains `NOT_PUBLIC_SAFE` |
+| [Runtime Route Proof v1 reviewer map](proof/maps/RUNTIME-ROUTE-PROOF-V1-REVIEWER-MAP.md) | A private-candidate Wazuh -> Cribl -> Splunk route receipt for one controlled marker. | `scripts/verify-runtime-route-proof-v1-private-candidate-map.py`. | `PRIVATE_RUNTIME_ROUTE_PROOF_V1_CANDIDATE_PRESERVED`; `NOT_PUBLIC_SAFE` |
+| [Reviewer Proof Map](proof/indexes/reviewer-proof-map.md) | Lifetime Case Ledger proof chain, 4 events / 4 cases, status-only badges, and render-only boundaries. | `scripts/verify-reviewer-proof-map.py`. | `SCHEMA_CONTRACT_VERIFIER_EXISTS_ONLY`; `NOT_PUBLIC_SAFE` |
+| [Reviewer Metrics Pipeline v1 map](proof/indexes/reviewer-metrics-pipeline-v1-map.md) | Strict governed cases, validation activity, proof record count, and blocked promotions separated instead of inflated. | `scripts/verify-reviewer-metrics-summary.py`. | `REVIEWER_METRICS_PIPELINE_V1_CLOSED_REVIEWER_VISIBLE`; `NOT_PUBLIC_SAFE` |
+
+## Strongest Current Receipts
+
+| Receipt | Why it matters | What it proves | What it does not prove |
+|---|---|---|---|
+| Proof Pack 001 | A reviewer can verify a release artifact, SHA, manifest, and package boundary instead of reading claims on trust. | `HAWKINSOPERATIONS_PROOF_PACK_001.zip` exists as a bounded reviewer release route for `HO-DET-001`. | Runtime-active public proof, public signal proof, production readiness, public-safe runtime proof, autonomous SOC, AI-approved disposition, or analyst-approved disposition. |
+| `HO-DET-001` proof record | The flagship proof route ties detection source, Splunk source, controlled validation, proof-loop enforcement, AI support boundary, and blocked claims together. | `HO-DET-001` is `CONTROLLED_TEST_VALIDATED` within controlled positive and negative process-creation fixture scope. | Live Splunk firing, Cribl-routed or Wazuh-routed public proof, AWS-live proof, production operation, fleet-wide coverage, or public-safe runtime proof. |
+| Runtime Route Proof v1 | Shows route-proof discipline without promoting private runtime material into public proof. | One private controlled marker has reviewer-safe Wazuh, Cribl, and Splunk receipt summaries with verifier result `PASS_ROUTE_RECEIPTS`. | Public-safe proof, broad ingestion, production SOC operation, autonomous SOC behavior, AI-decided disposition, or public publication approval. |
+| Lifetime Case Ledger / Reviewer Proof Map | Keeps count claims reviewable and bounded instead of turning metrics into proof. | The proof repo owns a reviewable 4 events / 4 cases summary and proof bundle route against a pinned platform manifest. | Runtime, signal, public-safe, deployment, disposition, case closure, badge-as-proof, website-as-proof, or Project-as-proof authority. |
+| Reviewer Metrics Pipeline v1 | Gives reviewers the big numbers without collapsing strict case count, validation activity, and blocked claims into one unsafe claim. | 4 strict governed cases, 49 validation-backed activity/fire count, 106 validation cases, 8 proof records, 31 blocked/prevented promotions, and 0 public-safe runtime proofs are separated by authority surface. | Production volume, live telemetry, public runtime proof, public-safe status, GitHub Project proof authority, or AI/analyst disposition authority. |
+| HO-DET-001 SOCaaS Pilot Receipt Pack | Shows the operating model for a security-operations reviewer: source -> validation -> case packet -> proof record -> reviewer route. | A bounded controlled-test receipt chain exists for reviewer inspection. | SOCaaS deployment, customer deployment, production readiness, FortiSIEM proof, autonomous response, or public-safe runtime proof. |
+| AI Authority Boundary / Purple Team Closed Loop | Shows the rule that makes AI-assisted SOC work safe enough to inspect: AI supports, verifiers and humans govern. | AI support stayed support-only; deterministic checks preserved `AI_DECIDED_DISPOSITION=false`, `HUMAN_REVIEW_REQUIRED=true`, and `PUBLIC_SAFE_STATUS=NOT_PUBLIC_SAFE`. | AI authority, case closure, autonomous SOC, analyst-approved disposition, production AutoSOC, or public model-runtime proof. |
+
+## Proof Pack 001 Quick Verification
 
 1. Open the official release: [HawkinsOperations Proof Pack 001](https://github.com/HawkinsOperations/hawkinsoperations-proof/releases/tag/hawkinsoperations-proof-pack-001).
 2. Confirm the tag is `hawkinsoperations-proof-pack-001` and the asset is `HAWKINSOPERATIONS_PROOF_PACK_001.zip`.
@@ -26,9 +50,7 @@ Expected SHA256:
 python -B scripts/verify-proof-pack-001-zip.py .\HAWKINSOPERATIONS_PROOF_PACK_001.zip
 ```
 
-Passing the checksum and ZIP verifier supports only this bounded claim: Proof Pack 001 is a real reviewer release artifact for `HO-DET-001` under `CONTROLLED_TEST_VALIDATED`.
-
-It does not prove runtime-active public proof, public signal-observed proof, production readiness, SOCaaS readiness, autonomous SOC operation, AI-approved disposition, analyst-approved disposition, or public-safe runtime proof.
+Passing the checksum and ZIP verifier supports only this bounded claim: Proof Pack 001 is a real reviewer release artifact for `HO-DET-001` under `CONTROLLED_TEST_VALIDATED`. It does not prove runtime-active public proof, public signal-observed proof, production readiness, SOCaaS readiness, autonomous SOC operation, AI-approved disposition, analyst-approved disposition, or public-safe runtime proof.
 
 ## Current Claim Ceiling
 
@@ -88,27 +110,6 @@ Start with [proof/maps/RUNTIME-ROUTE-PROOF-V1-REVIEWER-MAP.md](proof/maps/RUNTIM
 
 This private-candidate release does not prove public-safe runtime proof, production SOC operation, autonomous SOC behavior, broad ingestion, AI-decided disposition, public publication approval, or Lifetime Governed Case mutation.
 
-## Proof Pack 001 90-Second Reviewer Check
-
-Use this quick path to verify the released artifact without raising the claim ceiling:
-
-1. Open the direct release route: [HawkinsOperations Proof Pack 001](https://github.com/HawkinsOperations/hawkinsoperations-proof/releases/tag/hawkinsoperations-proof-pack-001).
-2. Confirm the release tag is `hawkinsoperations-proof-pack-001` and the asset is `HAWKINSOPERATIONS_PROOF_PACK_001.zip`.
-3. Download the ZIP and compare its SHA256 to `44d8a643aa2b113c9e99be0462e699d39af707a67190823cc05bb381907dc452`.
-4. If using PowerShell, verify the downloaded ZIP with:
-
-```powershell
-Get-FileHash .\HAWKINSOPERATIONS_PROOF_PACK_001.zip -Algorithm SHA256
-```
-
-5. If using a local checkout of this repo, verify the ZIP payload with:
-
-```powershell
-python -B scripts/verify-proof-pack-001-zip.py .\HAWKINSOPERATIONS_PROOF_PACK_001.zip
-```
-
-Passing the checksum and ZIP verifier supports only this bounded reviewer claim: Proof Pack 001 is a real release artifact for `HO-DET-001` under `CONTROLLED_TEST_VALIDATED`. It does not prove runtime-active public proof, public signal proof, production readiness, SOCaaS readiness, autonomous SOC operation, AI-approved disposition, analyst-approved disposition, or public-safe runtime proof.
-
 ## Lifetime Case Ledger Verification Badges
 
 [![Ledger summary verifier](https://github.com/HawkinsOperations/hawkinsoperations-proof/actions/workflows/governance-gate.yml/badge.svg?branch=main&event=push)](https://github.com/HawkinsOperations/hawkinsoperations-proof/actions/workflows/governance-gate.yml?query=branch%3Amain)
@@ -137,6 +138,27 @@ python scripts/verify-reviewer-proof-map.py --platform-root ../hawkinsoperations
 
 The reviewer proof map does not prove runtime-active public proof, signal-observed public proof, public-safe runtime proof, production deployment, SOCaaS deployment, autonomous SOC, AI-approved disposition, analyst-approved disposition, case closure, Cribl-routed telemetry, Wazuh-routed telemetry, AWS-live evidence, fleet-wide coverage, live Splunk firing, website as proof authority, badge as proof authority, or Project #1 as proof authority.
 
+## Reviewer Metrics Pipeline v1
+
+Use [proof/indexes/reviewer-metrics-pipeline-v1-map.md](proof/indexes/reviewer-metrics-pipeline-v1-map.md) for the proof-owned metrics route. It keeps strict governed cases separate from validation volume and proof-surface counts.
+
+| Metric | Current value | Boundary |
+|---|---:|---|
+| Lifetime Governed Cases | 4 | Strict governed accepted case records only. |
+| Detection Activity / Fire Count | 49 | Controlled validation-backed activity; not production telemetry. |
+| Validation Case Count | 106 | Controlled validation case volume only. |
+| Proof Record Count | 8 | Reviewer-safe proof surface count. |
+| Blocked Claims / Prevented Promotions | 31 | Claim firewall count, not a failure or incident count. |
+| Public-safe Count | 0 | No public-safe runtime proof has been approved. |
+
+The metrics route is checked by:
+
+```powershell
+python scripts/verify-reviewer-metrics-summary.py
+```
+
+The metrics route does not prove live Wazuh telemetry, Cribl routing, Splunk indexing, production SOC operation, public-safe runtime proof, signal observation, AI authority, analyst disposition authority, or GitHub Project board proof authority.
+
 ## What This Repository Can Prove
 
 | Proof surface | What it can support |
@@ -161,15 +183,22 @@ The reviewer proof map does not prove runtime-active public proof, signal-observ
 
 ## Proof Record Routes
 
-- [AWS-DET-001](proof/records/AWS-DET-001.md)
 - [HO-DET-001](proof/records/HO-DET-001.md)
+- [RUNTIME-ROUTE-PROOF-V1-PRIVATE-CANDIDATE](proof/records/RUNTIME-ROUTE-PROOF-V1-PRIVATE-CANDIDATE.md)
+- [HO-DET-011](proof/records/HO-DET-011.md)
+- [HO-DET-012](proof/records/HO-DET-012.md)
+- [AWS-DET-001](proof/records/AWS-DET-001.md)
+
+Use [proof/records/README.md](proof/records/README.md) for the current proof-record route table and per-record blocked promotion gates. `HO-DET-011`, `HO-DET-012`, `AWS-DET-001`, identity detections, Cyber Kill Chain maps, and ATT&CK maps should be treated according to their own stated proof records or index rows; do not let their presence imply runtime, signal, public-safe, production, cloud-live, or fleet-wide proof.
 
 ## Case Studies
 
 - [HO-DET-001 SOCaaS Pilot Receipt Pack](docs/case-studies/HO-DET-001-SOCAAS-PILOT-RECEIPT.md)
-- [Operations Accomplishment Ledger](docs/case-studies/OPERATIONS-ACCOMPLISHMENT-LEDGER.md)
 - [HO-DET-001: AI Authority Boundary Case Study](docs/case-studies/HO-DET-001-AI-AUTHORITY-BOUNDARY.md)
 - [Purple Team Closed Loop 001](docs/case-studies/PURPLE-TEAM-CLOSED-LOOP-001.md)
+- [Operations Accomplishment Ledger](docs/case-studies/OPERATIONS-ACCOMPLISHMENT-LEDGER.md)
+
+Case studies explain the operating model and proof boundary. They do not create production deployment, public-safe runtime proof, customer deployment, autonomous SOC, AI-approved disposition, or analyst-approved disposition.
 
 ## Evidence Contract
 
