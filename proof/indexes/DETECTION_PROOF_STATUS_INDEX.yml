@@ -40,11 +40,26 @@ entries:
     platform_visibility_status: STATUS_VISIBILITY_PRESENT_NON_PROMOTIONAL
     proof_record_path: proof/records/HO-DET-001.md
     proof_card_path: proof/cards/HO-DET-001.md
+    candidate_review_packet_path: proof/records/HO-DET-001-PUBLIC-SAFE-CANDIDATE-REVIEW-V1.md
+    review_lane: PUBLIC_SAFE_CANDIDATE_REVIEW_V1
+    review_type: public-safe candidate review
     proof_ceiling: CONTROLLED_TEST_VALIDATED
     runtime_status: PRIVATE_RUNTIME_BOUNDARY_CONTEXT_ONLY
     signal_status: NOT_PROVEN
     public_safe_status: NOT_PUBLIC_SAFE
     website_status: WEBSITE_UNTOUCHED_NOT_PROOF
+    candidate_review_state:
+      public_safe_status: NOT_PUBLIC_SAFE
+      runtime_active: false
+      signal_observed: false
+      human_review_required: true
+      privacy_review: PENDING
+      stale_review: PENDING
+      evidence_linkage_review: PENDING
+      wording_approval: PENDING
+      proof_ceiling: CONTROLLED_TEST_VALIDATED
+      case_status: NOT_CLOSED
+      claim_authority: BLOCK_STRONGER_RUNTIME_SIGNAL_PUBLIC_SAFE_CLAIMS
     runtime_truth_spine:
       source_truth:
         state: SOURCE_EXISTS
@@ -99,6 +114,9 @@ entries:
       - live Cribl proof
       - AI-approved disposition
       - analyst-approved disposition
+      - website rendering as proof
+      - GitHub rendering as proof
+      - green CI as approval
     next_gate: proof-record-specific human review before any public-safe, runtime, or signal promotion
     notes: Existing proof record supports CONTROLLED_TEST_VALIDATED. Private runtime wording is boundary context only and does not create public runtime proof.
 

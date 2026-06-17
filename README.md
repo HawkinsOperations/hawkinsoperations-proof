@@ -13,7 +13,7 @@ AI can generate work. Evidence, deterministic checks, proof records, and human r
 | Proof signal | Route | What exists | Boundary |
 |---|---|---|---|
 | Proof Pack 001 | [GitHub release](https://github.com/HawkinsOperations/hawkinsoperations-proof/releases/tag/hawkinsoperations-proof-pack-001) | Bounded `HO-DET-001` reviewer ZIP, SHA256, release route, and verifier path. | `CONTROLLED_TEST_VALIDATED`; not public-safe runtime proof. |
-| `HO-DET-001` proof route | [record](proof/records/HO-DET-001.md) / [card](proof/cards/HO-DET-001.md) | Flagship detection proof route for source, Splunk source, controlled validation, proof-loop checks, and blocked claims. | Runtime, signal, production, and public-safe claims remain blocked. |
+| `HO-DET-001` proof route | [record](proof/records/HO-DET-001.md) / [candidate review](proof/records/HO-DET-001-PUBLIC-SAFE-CANDIDATE-REVIEW-V1.md) / [card](proof/cards/HO-DET-001.md) | Flagship detection proof route for source, Splunk source, controlled validation, proof-loop checks, public-safe candidate review, and blocked claims. | Runtime, signal, production, and public-safe claims remain blocked. |
 | Reviewer Metrics Pipeline v1 | [map](proof/indexes/reviewer-metrics-pipeline-v1-map.md) / [summary](proof/records/reviewer-metrics-pipeline-v1-summary.json) | Reviewer-scale activity snapshot: validation activity, validation cases, proof records, blocked claims, and public-safe count. | The older `4/4` value in this snapshot is historical, not current governed ledger truth. |
 | Runtime Route Proof v1 | [reviewer map](proof/maps/RUNTIME-ROUTE-PROOF-V1-REVIEWER-MAP.md) | Private-candidate Wazuh -> Cribl -> Splunk route summary for one controlled marker, plus prerelease route. | `NOT_PUBLIC_SAFE`; not broad ingestion, production, or public runtime proof. |
 | Lifetime Case Ledger / Reviewer Proof Map | [reviewer map](proof/indexes/reviewer-proof-map.md) | Proof-owned ledger summary and proof-bundle route. | Current governed ledger truth comes from platform `6/6`; proof map `4/4` material is point-in-time proof-route context. |
@@ -99,7 +99,7 @@ Badges report GitHub Actions workflow check status only. They do not prove runti
 ## 60-Second Reviewer Path
 
 1. Open [Proof Pack 001](https://github.com/HawkinsOperations/hawkinsoperations-proof/releases/tag/hawkinsoperations-proof-pack-001) and verify the release route, ZIP name, and SHA256.
-2. Open the [`HO-DET-001` proof record](proof/records/HO-DET-001.md) and [proof card](proof/cards/HO-DET-001.md).
+2. Open the [`HO-DET-001` proof record](proof/records/HO-DET-001.md), [public-safe candidate review](proof/records/HO-DET-001-PUBLIC-SAFE-CANDIDATE-REVIEW-V1.md), and [proof card](proof/cards/HO-DET-001.md).
 3. Open the [Reviewer Metrics Pipeline v1 map](proof/indexes/reviewer-metrics-pipeline-v1-map.md), then treat its `4/4` ledger fields as historical and use platform for current `6/6`.
 4. Open the [Runtime Route Proof v1 reviewer map](proof/maps/RUNTIME-ROUTE-PROOF-V1-REVIEWER-MAP.md).
 5. Open the [`HO-DET-001` SOCaaS Pilot Receipt Pack](docs/case-studies/HO-DET-001-SOCAAS-PILOT-RECEIPT.md).
@@ -111,6 +111,7 @@ These commands exist in this repository. They are PowerShell-friendly and should
 
 ```powershell
 python -B scripts\verify-ho-det-001-proof-integrity.py
+python -B scripts\verify-ho-det-001-public-safe-candidate-review.py
 python -B scripts\verify_proof_integrity.py
 python -B scripts\verify-proof-pack-001-release.py
 python -B scripts\verify-reviewer-proof-map.py --platform-root ..\hawkinsoperations-platform --github-root ..\.github
