@@ -94,7 +94,7 @@ class HoxlineGauntletProofBridgeTests(unittest.TestCase):
 
     def test_map_primary_v1_path_must_agree(self) -> None:
         proof_map = copy.deepcopy(self.good_map())
-        proof_map["hoxline_primary_v1_run_path"] = "HawkinsOperations/aevumguard/" + verifier.EXPECTED_V0_RUN
+        proof_map["hoxline_primary_v1_run_path"] = "HawkinsOperations/hoxline/" + verifier.EXPECTED_V0_RUN
         with self.assertRaisesRegex(verifier.VerificationError, "proof map primary v1 run"):
             verifier.validate_bridge(self.good_bridge(), proof_map)
 

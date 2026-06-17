@@ -19,10 +19,12 @@
 
 ## Hoxline Source Manifest
 
-- Hoxline source repo: `HawkinsOperations/aevumguard`
+- Hoxline source repo: `HawkinsOperations/hoxline`
 - Remote: `https://github.com/HawkinsOperations/hoxline.git`
 - Branch: `feature/hoxline-gauntlet-v1-engine`
-- Source manifest: `examples/gauntlet/ho-det-001-gauntlet-v1-source-manifest.json`
+- Primary source manifest: `HawkinsOperations/hoxline/examples/gauntlet/ho-det-001-gauntlet-v1-source-manifest.json`
+- Local checkout compatibility name: `aevumguard`
+- Repo-relative manifest path: `examples/gauntlet/ho-det-001-gauntlet-v1-source-manifest.json`
 - Manifest status: present and primary for this bridge.
 
 ## Primary Hoxline v1 Source Paths
@@ -60,8 +62,9 @@ The validation repo owns the validation bridge:
 
 ## Hoxline Gauntlet Reference
 
-- Repo: `HawkinsOperations/aevumguard`
-- Source manifest: `examples/gauntlet/ho-det-001-gauntlet-v1-source-manifest.json`
+- Repo: `HawkinsOperations/hoxline`
+- Primary source manifest: `HawkinsOperations/hoxline/examples/gauntlet/ho-det-001-gauntlet-v1-source-manifest.json`
+- Repo-relative manifest path: `examples/gauntlet/ho-det-001-gauntlet-v1-source-manifest.json`
 - Output: `examples/gauntlet/ho-det-001-gauntlet-run-v1.json`
 - Schema: `schemas/gauntlet-run-v1.schema.json`
 - Overclaim fixture: `examples/gauntlet/ho-det-001-gauntlet-run-v1-overclaim.json`

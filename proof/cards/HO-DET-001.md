@@ -70,7 +70,7 @@ Reviewer acceptance rule: if this card, the proof record, and the proof status i
 
 The Hoxline Gauntlet bridge route is `proof/records/HO-DET-001_HOXLINE_GAUNTLET_BRIDGE_V1.md` with machine map `proof/indexes/hoxline-gauntlet-proof-map-v1.json`.
 
-Allowed bridge wording: "HO-DET-001 has Hoxline Gauntlet reviewer evidence and validation-bridge references under stated controlled scope."
+Allowed bridge wording: "HO-DET-001 has Hoxline Gauntlet v1 reviewer evidence and validation-bridge references under stated controlled scope."
 
 This bridge does not prove runtime, signal, production, customer deployment, SOCaaS deployment, public-safe runtime proof, AI approval, analyst approval, final authorization, or case closure. It keeps Hoxline and website material as reviewer routing only; proof authority remains in source-owned proof records and verifier-backed validation artifacts.
 

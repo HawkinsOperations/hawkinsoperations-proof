@@ -7,8 +7,8 @@
 | Proof bridge | `proof/records/HO-DET-001_HOXLINE_GAUNTLET_BRIDGE_V1.md` |
 | Machine record | `proof/records/ho-det-001-hoxline-gauntlet-bridge-v1.json` |
 | Validation bridge | `hawkinsoperations-validation/validation/hoxline/ho-det-001-hoxline-gauntlet-validation-bridge-v1.json` |
-| Hoxline source manifest | `HawkinsOperations/aevumguard/examples/gauntlet/ho-det-001-gauntlet-v1-source-manifest.json` |
-| Hoxline Gauntlet v1 output | `HawkinsOperations/aevumguard/examples/gauntlet/ho-det-001-gauntlet-run-v1.json` |
+| Hoxline source manifest | `HawkinsOperations/hoxline/examples/gauntlet/ho-det-001-gauntlet-v1-source-manifest.json` |
+| Hoxline Gauntlet v1 output | `HawkinsOperations/hoxline/examples/gauntlet/ho-det-001-gauntlet-run-v1.json` |
 | Hoxline Gauntlet v1 schema | `schemas/gauntlet-run-v1.schema.json` |
 | ProofCard | `proof/cards/HO-DET-001.md` |
 | Proof ceiling | `CONTROLLED_TEST_VALIDATED` |

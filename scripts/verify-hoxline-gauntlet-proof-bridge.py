@@ -23,6 +23,7 @@ EXPECTED_ALLOWED_CLAIM = (
 )
 EXPECTED_VALIDATION_ALLOWED_CLAIM = "HO-DET-001 has Hoxline Gauntlet v1 reviewer-path validation under controlled scope."
 EXPECTED_MANIFEST = "examples/gauntlet/ho-det-001-gauntlet-v1-source-manifest.json"
+EXPECTED_PRIMARY_MANIFEST = "HawkinsOperations/hoxline/" + EXPECTED_MANIFEST
 EXPECTED_V1_RUN = "examples/gauntlet/ho-det-001-gauntlet-run-v1.json"
 EXPECTED_V1_SCHEMA = "schemas/gauntlet-run-v1.schema.json"
 EXPECTED_V0_RUN = "examples/gauntlet/ho-det-001-full-loop-run-v0.json"
@@ -236,11 +237,13 @@ def validate_bridge(
 def _validate_source_paths(paths: Any) -> None:
     if not isinstance(paths, dict):
         fail("source_paths must be an object")
-    if paths.get("hoxline_repo") != "HawkinsOperations/aevumguard":
-        fail("source_paths.hoxline_repo must be HawkinsOperations/aevumguard")
+    if paths.get("hoxline_repo") != "HawkinsOperations/hoxline":
+        fail("source_paths.hoxline_repo must be HawkinsOperations/hoxline")
+    if paths.get("hoxline_primary_source_manifest") != EXPECTED_PRIMARY_MANIFEST:
+        fail("primary Hoxline source manifest must use HawkinsOperations/hoxline")
     if paths.get("source_manifest_path") != EXPECTED_MANIFEST:
         fail("source manifest path absent")
-    if paths.get("hoxline_primary_v1_run_path") != "HawkinsOperations/aevumguard/" + EXPECTED_V1_RUN:
+    if paths.get("hoxline_primary_v1_run_path") != "HawkinsOperations/hoxline/" + EXPECTED_V1_RUN:
         fail("primary Hoxline v1 run path absent")
     for field, expected in REQUIRED_V1_SOURCE_PATHS.items():
         if paths.get(field) != expected:
@@ -283,6 +286,10 @@ def _validate_hoxline_reference(reference: Any) -> None:
     for field, value in expected.items():
         if reference.get(field) != value:
             fail(f"hoxline_gauntlet_reference.{field} must be {value}")
+    if reference.get("repo") != "HawkinsOperations/hoxline":
+        fail("hoxline_gauntlet_reference.repo must be HawkinsOperations/hoxline")
+    if reference.get("primary_source_manifest") != EXPECTED_PRIMARY_MANIFEST:
+        fail("hoxline_gauntlet_reference primary source manifest mismatch")
     if "ho-det-001-gauntlet-run-v1.json" not in reference.get("cli_verifier_command", ""):
         fail("v1 CLI verifier command missing")
 
@@ -294,9 +301,9 @@ def _validate_map(proof_map: dict[str, Any], bridge: dict[str, Any]) -> None:
         fail("proof map detection_id must match bridge")
     if proof_map.get("allowed_claim") != EXPECTED_ALLOWED_CLAIM:
         fail("proof map allowed claim changed or broadened")
-    if proof_map.get("hoxline_source_manifest") != "HawkinsOperations/aevumguard/" + EXPECTED_MANIFEST:
+    if proof_map.get("hoxline_source_manifest") != EXPECTED_PRIMARY_MANIFEST:
         fail("proof map source manifest mismatch")
-    if proof_map.get("hoxline_primary_v1_run_path") != "HawkinsOperations/aevumguard/" + EXPECTED_V1_RUN:
+    if proof_map.get("hoxline_primary_v1_run_path") != "HawkinsOperations/hoxline/" + EXPECTED_V1_RUN:
         fail("proof map primary v1 run path mismatch")
     if proof_map.get("hoxline_primary_v1_schema_path") != EXPECTED_V1_SCHEMA:
         fail("proof map primary v1 schema path mismatch")
@@ -324,7 +331,8 @@ def _validate_cross_repo(cross: Any) -> None:
     expected = {
         "artifact_id": "HO-DET-001",
         "detection_id": "HO-DET-001",
-        "hoxline_primary_v1_run_path": "HawkinsOperations/aevumguard/" + EXPECTED_V1_RUN,
+        "hoxline_primary_source_manifest": EXPECTED_PRIMARY_MANIFEST,
+        "hoxline_primary_v1_run_path": "HawkinsOperations/hoxline/" + EXPECTED_V1_RUN,
         "hoxline_primary_v1_schema_path": EXPECTED_V1_SCHEMA,
         "source_manifest_path": EXPECTED_MANIFEST,
         "proof_ceiling": "CONTROLLED_TEST_VALIDATED",
