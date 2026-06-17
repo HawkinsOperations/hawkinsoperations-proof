@@ -1,0 +1,30 @@
+{
+  "map_id": "hoxline-gauntlet-proof-map-v1",
+  "detection_id": "HO-DET-001",
+  "artifact_id": "HO-DET-001",
+  "bridge_record_id": "HO-DET-001_HOXLINE_GAUNTLET_PROOF_BRIDGE_V1",
+  "proof_bridge_record": "proof/records/ho-det-001-hoxline-gauntlet-bridge-v1.json",
+  "proof_bridge_markdown": "proof/records/HO-DET-001_HOXLINE_GAUNTLET_BRIDGE_V1.md",
+  "validation_bridge_reference": "hawkinsoperations-validation/validation/hoxline/ho-det-001-hoxline-gauntlet-validation-bridge-v1.json",
+  "hoxline_gauntlet_reference": "HawkinsOperations/aevumguard/examples/gauntlet/ho-det-001-full-loop-run-v0.json",
+  "proofcard_reference": "proof/cards/HO-DET-001.md",
+  "allowed_claim": "HO-DET-001 has Hoxline Gauntlet reviewer evidence and validation-bridge references under stated controlled scope.",
+  "blocked_claims": [
+    "production ready",
+    "runtime proven",
+    "signal observed",
+    "customer deployed",
+    "SOCaaS deployed",
+    "public-safe runtime proof",
+    "AI approved",
+    "analyst approved",
+    "final authorization",
+    "case closure"
+  ],
+  "proof_ceiling": "CONTROLLED_TEST_VALIDATED",
+  "public_safe": false,
+  "public_safe_status": "BLOCKED",
+  "human_review_required": true,
+  "website_is_proof_authority": false,
+  "next_gate": "Human approval and evidence linkage before stronger wording."
+}

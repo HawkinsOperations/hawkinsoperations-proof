@@ -1,0 +1,110 @@
+{
+  "artifact_id": "HO-DET-001",
+  "bridge_record_id": "HO-DET-001_HOXLINE_GAUNTLET_PROOF_BRIDGE_V1",
+  "detection_id": "HO-DET-001",
+  "proof_bridge_kind": "hoxline_gauntlet_proof_bridge",
+  "bridge_owner": "hawkinsoperations-proof",
+  "supported_bounded_claim": "HO-DET-001 has Hoxline Gauntlet reviewer evidence and validation-bridge references under stated controlled scope.",
+  "allowed_claim_wording": "HO-DET-001 has Hoxline Gauntlet reviewer evidence and validation-bridge references under stated controlled scope.",
+  "blocked_claim_wording": [
+    "production ready",
+    "runtime proven",
+    "signal observed",
+    "customer deployed",
+    "SOCaaS deployed",
+    "public-safe runtime proof",
+    "AI approved",
+    "analyst approved",
+    "final authorization",
+    "case closure"
+  ],
+  "source_paths": {
+    "hoxline_repo": "HawkinsOperations/aevumguard",
+    "hoxline_path": "HawkinsOperations/aevumguard/examples/gauntlet/ho-det-001-full-loop-run-v0.json",
+    "hoxline_gauntlet_output": "examples/gauntlet/ho-det-001-full-loop-run-v0.json",
+    "hoxline_gauntlet_markdown": "examples/gauntlet/ho-det-001-full-loop-run-v0.md",
+    "hoxline_gauntlet_schema": "schemas/gauntlet-full-loop-run-v0.schema.json",
+    "hoxline_proofcard_example": "examples/gauntlet/ho-det-001-proofcard-v0.json",
+    "validation_bridge_json": "hawkinsoperations-validation/validation/hoxline/ho-det-001-hoxline-gauntlet-validation-bridge-v1.json",
+    "validation_bridge_markdown": "hawkinsoperations-validation/validation/hoxline/HO-DET-001_HOXLINE_GAUNTLET_VALIDATION_BRIDGE_V1.md",
+    "proof_record": "proof/records/HO-DET-001_HOXLINE_GAUNTLET_BRIDGE_V1.md",
+    "proof_map_json": "proof/indexes/hoxline-gauntlet-proof-map-v1.json",
+    "proof_map_markdown": "proof/indexes/hoxline-gauntlet-proof-map-v1.md"
+  },
+  "validation_bridge_reference": {
+    "repo": "HawkinsOperations/hawkinsoperations-validation",
+    "artifact_id": "HO-DET-001_HOXLINE_GAUNTLET_VALIDATION_BRIDGE_V1",
+    "path": "validation/hoxline/ho-det-001-hoxline-gauntlet-validation-bridge-v1.json",
+    "status": "VALIDATION_BRIDGE_REVIEWER_PATH_RECORDED"
+  },
+  "hoxline_gauntlet_reference": {
+    "repo": "HawkinsOperations/aevumguard",
+    "path": "examples/gauntlet/ho-det-001-full-loop-run-v0.json",
+    "schema": "schemas/gauntlet-full-loop-run-v0.schema.json",
+    "cli_verifier_command": "python -B -m hoxline gauntlet verify --input examples/gauntlet/ho-det-001-full-loop-run-v0.json --schema schemas/gauntlet-full-loop-run-v0.schema.json"
+  },
+  "proof_ceiling": "CONTROLLED_TEST_VALIDATED",
+  "proof_ceiling_statement": "This sprint adds source-owned validation/proof bridge records only. It does not create runtime truth, signal truth, public-safe status, customer deployment, SOCaaS deployment, production readiness, AI-approved disposition, analyst-approved disposition, final authorization, or case closure.",
+  "cross_repo_consistency": {
+    "artifact_id": "HO-DET-001",
+    "detection_id": "HO-DET-001",
+    "hoxline_path": "HawkinsOperations/aevumguard/examples/gauntlet/ho-det-001-full-loop-run-v0.json",
+    "proof_ceiling": "CONTROLLED_TEST_VALIDATED",
+    "validation_allowed_claim": "HO-DET-001 has Hoxline Gauntlet reviewer-path validation under controlled scope.",
+    "proof_allowed_claim": "HO-DET-001 has Hoxline Gauntlet reviewer evidence and validation-bridge references under stated controlled scope.",
+    "blocked_claims": [
+      "runtime proven",
+      "signal observed",
+      "production ready",
+      "customer deployed",
+      "SOCaaS deployed",
+      "public-safe runtime proof",
+      "AI approved",
+      "analyst approved",
+      "final authorization",
+      "case closure"
+    ],
+    "missing_evidence": [
+      "runtime_evidence",
+      "signal_observation_evidence",
+      "public_safe_authorization",
+      "human_review_gate_complete",
+      "analyst_review_record",
+      "customer_deployment_evidence",
+      "service_deployment_evidence",
+      "final_authorization_record",
+      "case_closure_record"
+    ],
+    "public_safe": false,
+    "public_safe_status": "BLOCKED",
+    "human_review_required": true
+  },
+  "public_safe": false,
+  "public_safe_status": "BLOCKED",
+  "human_review_required": true,
+  "missing_evidence": [
+    "runtime_evidence",
+    "signal_observation_evidence",
+    "public_safe_authorization",
+    "human_review_gate_complete",
+    "analyst_review_record",
+    "customer_deployment_evidence",
+    "service_deployment_evidence",
+    "final_authorization_record",
+    "case_closure_record"
+  ],
+  "reviewer_commands": [
+    "python -B scripts/verify-hoxline-gauntlet-proof-bridge.py --format json",
+    "python -B scripts/verify_proof_integrity.py",
+    "python -B scripts/verify-reviewer-metrics-summary.py --format json",
+    "python -B scripts/verify-reviewer-metrics-pipeline-closeout.py --format json",
+    "cd ..\\aevumguard",
+    "python -B -m hoxline gauntlet verify --input examples/gauntlet/ho-det-001-full-loop-run-v0.json --schema schemas/gauntlet-full-loop-run-v0.schema.json"
+  ],
+  "website_rendering_boundary": {
+    "website_is_proof_authority": false,
+    "website_role": "render_only_if_referenced_later",
+    "website_edits_required": false
+  },
+  "next_gate": "Cross-repo reviewer review, privacy/stale/wording review, and explicit human approval before any stronger runtime, signal, public-safe, production, customer, SOCaaS, AI, analyst, authorization, or closure wording."
+}
