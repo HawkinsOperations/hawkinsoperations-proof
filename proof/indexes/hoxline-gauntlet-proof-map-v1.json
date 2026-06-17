@@ -6,9 +6,19 @@
   "proof_bridge_record": "proof/records/ho-det-001-hoxline-gauntlet-bridge-v1.json",
   "proof_bridge_markdown": "proof/records/HO-DET-001_HOXLINE_GAUNTLET_BRIDGE_V1.md",
   "validation_bridge_reference": "hawkinsoperations-validation/validation/hoxline/ho-det-001-hoxline-gauntlet-validation-bridge-v1.json",
-  "hoxline_gauntlet_reference": "HawkinsOperations/aevumguard/examples/gauntlet/ho-det-001-full-loop-run-v0.json",
+  "hoxline_source_manifest": "HawkinsOperations/aevumguard/examples/gauntlet/ho-det-001-gauntlet-v1-source-manifest.json",
+  "hoxline_primary_v1_run_path": "HawkinsOperations/aevumguard/examples/gauntlet/ho-det-001-gauntlet-run-v1.json",
+  "hoxline_primary_v1_schema_path": "schemas/gauntlet-run-v1.schema.json",
+  "hoxline_overclaim_fixture_v1": "examples/gauntlet/ho-det-001-gauntlet-run-v1-overclaim.json",
+  "hoxline_proofcard_v1": "examples/gauntlet/ho-det-001-proofcard-v1.json",
+  "hoxline_claim_decision_v1": "examples/gauntlet/ho-det-001-claim-decision-v1.json",
+  "v0_compatibility_reference": {
+    "compatibility_only": true,
+    "run_path": "examples/gauntlet/ho-det-001-full-loop-run-v0.json",
+    "schema_path": "schemas/gauntlet-full-loop-run-v0.schema.json"
+  },
   "proofcard_reference": "proof/cards/HO-DET-001.md",
-  "allowed_claim": "HO-DET-001 has Hoxline Gauntlet reviewer evidence and validation-bridge references under stated controlled scope.",
+  "allowed_claim": "HO-DET-001 has Hoxline Gauntlet v1 reviewer evidence and validation-bridge references under stated controlled scope.",
   "blocked_claims": [
     "production ready",
     "runtime proven",
@@ -21,10 +31,23 @@
     "final authorization",
     "case closure"
   ],
+  "missing_evidence": [
+    "analyst_review_record",
+    "case_closure_record",
+    "customer_deployment_evidence",
+    "deployment_evidence",
+    "final_authorization_record",
+    "human_review_gate_complete",
+    "public_safe_authorization",
+    "runtime_evidence",
+    "service_deployment_evidence",
+    "signal_observation_evidence"
+  ],
   "proof_ceiling": "CONTROLLED_TEST_VALIDATED",
   "public_safe": false,
   "public_safe_status": "BLOCKED",
   "human_review_required": true,
   "website_is_proof_authority": false,
-  "next_gate": "Human approval and evidence linkage before stronger wording."
+  "website_boundary": "rendering-only",
+  "next_gate": "human_review_gate"
 }
