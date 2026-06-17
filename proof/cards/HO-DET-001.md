@@ -42,6 +42,7 @@ HO-DET-001 is CONTROLLED_TEST_VALIDATED through a public proof-loop workflow wit
 | Route | Path |
 |---|---|
 | Source record | `proof/records/HO-DET-001.md` |
+| Hoxline Gauntlet bridge | `proof/records/HO-DET-001_HOXLINE_GAUNTLET_BRIDGE_V1.md`; `proof/indexes/hoxline-gauntlet-proof-map-v1.md` |
 | Validation | `hawkinsoperations-validation/reports/ho-det-001/validation-result.json` |
 | Workflow | `hawkinsoperations-validation/.github/workflows/ho-det-001-proof-loop.yml`; `.github/workflows/ho-det-001-proof-integrity.yml` |
 | Verifier | `scripts/verify-ho-det-001-proof-integrity.py`; `hawkinsoperations-validation/scripts/verify-ho-det-001-reproducible-proof-pack.py`; `hawkinsoperations-validation/scripts/verify-ho-det-001-runtime-packet.py` |
@@ -64,6 +65,14 @@ CI-enforced controlled-test scope and verifier-backed proof record. The proof ca
 | What does the system refuse to claim? | This card section `What This Does NOT Prove`; `proof/records/HO-DET-001.md` section `Blocked Claims` | The system does not claim runtime-active status, signal-observed status, PUBLIC_SAFE status, live Splunk public proof, Cribl-routed telemetry, Wazuh-routed telemetry, production AutoSOC, AI-approved disposition, AI-decided disposition, or analyst-approved disposition. |
 
 Reviewer acceptance rule: if this card, the proof record, and the proof status index disagree, use the source proof record and verifier-backed validation artifacts as authority until the route card is corrected.
+
+## Hoxline Gauntlet Bridge
+
+The Hoxline Gauntlet bridge route is `proof/records/HO-DET-001_HOXLINE_GAUNTLET_BRIDGE_V1.md` with machine map `proof/indexes/hoxline-gauntlet-proof-map-v1.json`.
+
+Allowed bridge wording: "HO-DET-001 has Hoxline Gauntlet v1 reviewer evidence and validation-bridge references under stated controlled scope."
+
+This bridge does not prove runtime, signal, production, customer deployment, SOCaaS deployment, public-safe runtime proof, AI approval, analyst approval, final authorization, or case closure. It keeps Hoxline and website material as reviewer routing only; proof authority remains in source-owned proof records and verifier-backed validation artifacts.
 
 ## Current Status
 
