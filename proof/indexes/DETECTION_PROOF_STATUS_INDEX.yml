@@ -182,7 +182,7 @@ entries:
     source_truth_owner: hawkinsoperations-detections
     source_status: SOURCE_EXISTS
     validation_truth_owner: hawkinsoperations-validation
-    validation_status: VALIDATION_PLANNED
+    validation_status: CONTROLLED_TEST_VALIDATED
     platform_visibility_owner: hawkinsoperations-platform
     platform_visibility_status: NOT_PLATFORM_INDEXED
     proof_record_path: null
@@ -200,8 +200,8 @@ entries:
       - live SIEM proof
       - AI-approved disposition
       - analyst-approved disposition
-    next_gate: validation package before proof record
-    notes: Source exists in detections. Validation and proof are not promoted by this index.
+    next_gate: separate proof record or runtime/signal review before any public proof promotion
+    notes: Source and controlled validation exist in their owning repos. This index does not create a proof record, runtime proof, signal proof, public-safe status, or promotion authority.
 
   - detection_id: AWS-DET-001
     source_truth_owner: hawkinsoperations-detections
