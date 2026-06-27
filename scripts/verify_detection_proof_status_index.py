@@ -76,8 +76,11 @@ PRIVATE_RUNTIME_RECORD_MARKERS = {
 
 PLATFORM_VISIBLE_IDS = {
     "HO-DET-001",
+    "HO-DET-009",
+    "HO-DET-010",
     "HO-DET-011",
     "HO-DET-012",
+    "HO-DET-013",
     "ID-DET-001",
     "ID-DET-002",
     "ID-DET-003",

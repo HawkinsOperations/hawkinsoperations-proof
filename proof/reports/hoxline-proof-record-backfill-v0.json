@@ -1,0 +1,170 @@
+{
+  "generated_at": "2026-06-27T06:01:49-05:00",
+  "input_case_growth_index_path": "C:\\Raylee\\Repo\\HawkinsOperations\\hoxline\\examples\\case-growth\\current-case-growth-index.json",
+  "proof_ceiling": "PROOF_RECORD_BACKFILL_CONTROLLED_REPO_EVIDENCE_ONLY",
+  "counts_before_after": {
+    "cases_total": 27,
+    "proof_records_before": 4,
+    "missing_proof_records_before": 23,
+    "proof_records_created": 7,
+    "proof_records_after_estimated": 11,
+    "missing_proof_records_after_estimated": 16,
+    "public_safe_cases_created": 0,
+    "closed_cases_created": 0,
+    "runtime_proof_created": 0,
+    "signal_proof_created": 0,
+    "production_claims_created": 0,
+    "customer_claims_created": 0,
+    "approval_claims_created": 0
+  },
+  "eligible_cases": [
+    "HO-DET-009",
+    "HO-DET-010",
+    "HO-DET-013",
+    "ID-DET-001",
+    "ID-DET-002",
+    "ID-DET-003",
+    "ID-DET-004"
+  ],
+  "created_records": [
+    {
+      "case_id": "HO-DET-009",
+      "proof_record_path": "proof/records/HO-DET-009.md",
+      "proof_ceiling": "CONTROLLED_TEST_VALIDATED",
+      "public_safe_status": "NOT_PUBLIC_SAFE",
+      "case_status": "NOT_CLOSED"
+    },
+    {
+      "case_id": "HO-DET-010",
+      "proof_record_path": "proof/records/HO-DET-010.md",
+      "proof_ceiling": "CONTROLLED_TEST_VALIDATED",
+      "public_safe_status": "NOT_PUBLIC_SAFE",
+      "case_status": "NOT_CLOSED"
+    },
+    {
+      "case_id": "HO-DET-013",
+      "proof_record_path": "proof/records/HO-DET-013.md",
+      "proof_ceiling": "CONTROLLED_TEST_VALIDATED",
+      "public_safe_status": "NOT_PUBLIC_SAFE",
+      "case_status": "NOT_CLOSED"
+    },
+    {
+      "case_id": "ID-DET-001",
+      "proof_record_path": "proof/records/ID-DET-001.md",
+      "proof_ceiling": "CONTROLLED_TEST_VALIDATED",
+      "public_safe_status": "NOT_PUBLIC_SAFE",
+      "case_status": "NOT_CLOSED"
+    },
+    {
+      "case_id": "ID-DET-002",
+      "proof_record_path": "proof/records/ID-DET-002.md",
+      "proof_ceiling": "CONTROLLED_TEST_VALIDATED",
+      "public_safe_status": "NOT_PUBLIC_SAFE",
+      "case_status": "NOT_CLOSED"
+    },
+    {
+      "case_id": "ID-DET-003",
+      "proof_record_path": "proof/records/ID-DET-003.md",
+      "proof_ceiling": "CONTROLLED_TEST_VALIDATED",
+      "public_safe_status": "NOT_PUBLIC_SAFE",
+      "case_status": "NOT_CLOSED"
+    },
+    {
+      "case_id": "ID-DET-004",
+      "proof_record_path": "proof/records/ID-DET-004.md",
+      "proof_ceiling": "CONTROLLED_TEST_VALIDATED",
+      "public_safe_status": "NOT_PUBLIC_SAFE",
+      "case_status": "NOT_CLOSED"
+    }
+  ],
+  "deferred_cases": [
+    {
+      "case_id": "HO-DET-002",
+      "reason": "source-only or planned successor case without controlled validation evidence in the Case Growth Index"
+    },
+    {
+      "case_id": "HO-DET-003",
+      "reason": "source-only or planned successor case without controlled validation evidence in the Case Growth Index"
+    },
+    {
+      "case_id": "HO-DET-004",
+      "reason": "source-only or planned successor case without controlled validation evidence in the Case Growth Index"
+    },
+    {
+      "case_id": "HO-DET-005",
+      "reason": "source-only or planned successor case without controlled validation evidence in the Case Growth Index"
+    },
+    {
+      "case_id": "HO-DET-006",
+      "reason": "source-only or planned successor case without controlled validation evidence in the Case Growth Index"
+    },
+    {
+      "case_id": "HO-DET-007",
+      "reason": "source-only or planned successor case without controlled validation evidence in the Case Growth Index"
+    },
+    {
+      "case_id": "HO-DET-008",
+      "reason": "source-only or planned successor case without controlled validation evidence in the Case Growth Index"
+    },
+    {
+      "case_id": "HO-DET-014",
+      "reason": "source-only or planned successor case without controlled validation evidence in the Case Growth Index"
+    },
+    {
+      "case_id": "HO-DET-015",
+      "reason": "source-only or planned successor case without controlled validation evidence in the Case Growth Index"
+    },
+    {
+      "case_id": "HO-DET-016",
+      "reason": "source-only or planned successor case without controlled validation evidence in the Case Growth Index"
+    },
+    {
+      "case_id": "HO-NDR-001",
+      "reason": "external boundary and cross-source contract scope with existing ProofCard; proof-record backfill requires separate proof scope"
+    },
+    {
+      "case_id": "HO-NDR-002",
+      "reason": "external boundary or source-only NDR scope requires separate proof ownership review"
+    },
+    {
+      "case_id": "HO-PIPE-001",
+      "reason": "pipeline telemetry contract case requires separate contract proof scope"
+    },
+    {
+      "case_id": "HOD-001",
+      "reason": "legacy or archival case requires separate archival review"
+    },
+    {
+      "case_id": "HOX-GAUNTLET-001",
+      "reason": "product-demo case belongs in Hoxline product proof rather than detection proof-record backfill"
+    }
+  ],
+  "blocked_cases": [
+    {
+      "case_id": "HO-DET-999",
+      "reason": "no source truth or controlled validation evidence supports a proof record; creating one would imply unsupported proof"
+    }
+  ],
+  "updated_index_path": "proof/indexes/DETECTION_PROOF_STATUS_INDEX.yml",
+  "created_public_safe_cases": [],
+  "created_closed_cases": [],
+  "created_runtime_proof_cases": [],
+  "created_signal_proof_cases": [],
+  "created_production_claim_cases": [],
+  "created_customer_claim_cases": [],
+  "created_approval_claim_cases": [],
+  "boundary": {
+    "runtime_public_proof_created": false,
+    "signal_public_proof_created": false,
+    "customer_deployment_claimed": false,
+    "production_readiness_claimed": false,
+    "public_safe_runtime_proof_claimed": false,
+    "ai_approval_claimed": false,
+    "analyst_approval_claimed": false,
+    "final_authorization_claimed": false,
+    "case_closure_claimed": false,
+    "website_rendering_treated_as_proof": false,
+    "github_rendering_treated_as_proof": false,
+    "green_ci_treated_as_approval": false
+  }
+}
