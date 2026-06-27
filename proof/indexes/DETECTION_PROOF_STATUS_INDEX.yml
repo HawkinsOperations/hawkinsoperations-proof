@@ -120,6 +120,78 @@ entries:
     next_gate: proof-record-specific human review before any public-safe, runtime, or signal promotion
     notes: Existing proof record supports CONTROLLED_TEST_VALIDATED. Private runtime wording is boundary context only and does not create public runtime proof.
 
+  - detection_id: HO-DET-009
+    source_truth_owner: hawkinsoperations-detections
+    source_status: SOURCE_EXISTS
+    validation_truth_owner: hawkinsoperations-validation
+    validation_status: CONTROLLED_TEST_VALIDATED
+    platform_visibility_owner: hawkinsoperations-platform
+    platform_visibility_status: STATUS_VISIBILITY_PRESENT_NON_PROMOTIONAL
+    proof_record_path: proof/records/HO-DET-009.md
+    proof_card_path: null
+    proof_ceiling: CONTROLLED_TEST_VALIDATED
+    runtime_status: NOT_PROVEN
+    signal_status: NOT_PROVEN
+    public_safe_status: NOT_PUBLIC_SAFE
+    website_status: WEBSITE_UNTOUCHED_NOT_PROOF
+    blocked_claims:
+      - runtime-active public proof
+      - signal-observed public proof
+      - public-safe proof
+      - production-ready
+      - customer deployment
+      - SOCaaS deployment
+      - autonomous SOC
+      - live SIEM proof
+      - live Splunk proof
+      - live Wazuh proof
+      - live Cribl proof
+      - AI-approved disposition
+      - analyst-approved disposition
+      - final authorization
+      - case closure
+      - website rendering as proof
+      - GitHub rendering as proof
+      - green CI as approval
+    next_gate: separate runtime receipt and proof review before any runtime, signal, public-safe, production, or approval wording
+    notes: Proof-record backfill from repo-visible source and controlled validation evidence only. Platform scheduled-collector context remains non-promotional and does not create runtime, signal, public_safe, customer, production, approval, or closure claims.
+
+  - detection_id: HO-DET-010
+    source_truth_owner: hawkinsoperations-detections
+    source_status: SOURCE_EXISTS
+    validation_truth_owner: hawkinsoperations-validation
+    validation_status: CONTROLLED_TEST_VALIDATED
+    platform_visibility_owner: hawkinsoperations-platform
+    platform_visibility_status: STATUS_VISIBILITY_PRESENT_NON_PROMOTIONAL
+    proof_record_path: proof/records/HO-DET-010.md
+    proof_card_path: null
+    proof_ceiling: CONTROLLED_TEST_VALIDATED
+    runtime_status: NOT_PROVEN
+    signal_status: NOT_PROVEN
+    public_safe_status: NOT_PUBLIC_SAFE
+    website_status: WEBSITE_UNTOUCHED_NOT_PROOF
+    blocked_claims:
+      - runtime-active public proof
+      - signal-observed public proof
+      - public-safe proof
+      - production-ready
+      - customer deployment
+      - SOCaaS deployment
+      - autonomous SOC
+      - live SIEM proof
+      - live Splunk proof
+      - live Wazuh proof
+      - live Cribl proof
+      - AI-approved disposition
+      - analyst-approved disposition
+      - final authorization
+      - case closure
+      - website rendering as proof
+      - GitHub rendering as proof
+      - green CI as approval
+    next_gate: reviewer validates source and controlled-test validation before any separately approved private runtime gate
+    notes: Proof-record backfill from repo-visible source and controlled validation evidence only. Platform private-runtime candidate context remains non-promotional and does not create runtime, signal, public_safe, customer, production, approval, or closure claims.
+
   - detection_id: HO-DET-011
     source_truth_owner: hawkinsoperations-detections
     source_status: SOURCE_EXISTS
@@ -184,10 +256,10 @@ entries:
     validation_truth_owner: hawkinsoperations-validation
     validation_status: CONTROLLED_TEST_VALIDATED
     platform_visibility_owner: hawkinsoperations-platform
-    platform_visibility_status: NOT_PLATFORM_INDEXED
-    proof_record_path: null
+    platform_visibility_status: STATUS_VISIBILITY_PRESENT_NON_PROMOTIONAL
+    proof_record_path: proof/records/HO-DET-013.md
     proof_card_path: null
-    proof_ceiling: NO_PROOF_RECORD
+    proof_ceiling: CONTROLLED_TEST_VALIDATED
     runtime_status: NOT_PROVEN
     signal_status: NOT_PROVEN
     public_safe_status: NOT_PUBLIC_SAFE
@@ -197,11 +269,19 @@ entries:
       - signal-observed public proof
       - public-safe proof
       - production-ready
+      - customer deployment
+      - SOCaaS deployment
+      - autonomous SOC
       - live SIEM proof
       - AI-approved disposition
       - analyst-approved disposition
-    next_gate: separate proof record or runtime/signal review before any public proof promotion
-    notes: Source and controlled validation exist in their owning repos. This index does not create a proof record, runtime proof, signal proof, public-safe status, or promotion authority.
+      - final authorization
+      - case closure
+      - website rendering as proof
+      - GitHub rendering as proof
+      - green CI as approval
+    next_gate: reviewer validates source and controlled-test validation before any separately approved private runtime gate
+    notes: Proof-record backfill from repo-visible source and controlled validation evidence only. Platform private-runtime candidate context remains non-promotional and does not create runtime, signal, public_safe, customer, production, approval, or closure claims.
 
   - detection_id: AWS-DET-001
     source_truth_owner: hawkinsoperations-detections
@@ -236,9 +316,9 @@ entries:
     validation_status: CONTROLLED_TEST_VALIDATED
     platform_visibility_owner: hawkinsoperations-platform
     platform_visibility_status: STATUS_VISIBILITY_PRESENT_NON_PROMOTIONAL
-    proof_record_path: null
+    proof_record_path: proof/records/ID-DET-001.md
     proof_card_path: null
-    proof_ceiling: NO_PROOF_RECORD
+    proof_ceiling: CONTROLLED_TEST_VALIDATED
     runtime_status: NOT_PROVEN
     signal_status: NOT_PROVEN
     public_safe_status: NOT_PUBLIC_SAFE
@@ -248,12 +328,20 @@ entries:
       - signal-observed public proof
       - public-safe proof
       - production-ready
+      - customer deployment
+      - SOCaaS deployment
+      - autonomous SOC
       - live IdP proof
       - live SIEM proof
       - AI-approved disposition
       - analyst-approved disposition
-    next_gate: proof record creation under separate proof scope
-    notes: Validation status is external validation truth. Proof repo has no ID-DET-001 proof record in this phase.
+      - final authorization
+      - case closure
+      - website rendering as proof
+      - GitHub rendering as proof
+      - green CI as approval
+    next_gate: reviewer validates source and controlled-test validation before any separately approved identity runtime gate
+    notes: Proof-record backfill from repo-visible source and controlled validation evidence only. Platform identity-lane context remains non-promotional and does not create runtime, signal, public_safe, customer, production, approval, or closure claims.
 
   - detection_id: ID-DET-002
     source_truth_owner: hawkinsoperations-detections
@@ -262,9 +350,9 @@ entries:
     validation_status: CONTROLLED_TEST_VALIDATED
     platform_visibility_owner: hawkinsoperations-platform
     platform_visibility_status: STATUS_VISIBILITY_PRESENT_NON_PROMOTIONAL
-    proof_record_path: null
+    proof_record_path: proof/records/ID-DET-002.md
     proof_card_path: null
-    proof_ceiling: NO_PROOF_RECORD
+    proof_ceiling: CONTROLLED_TEST_VALIDATED
     runtime_status: NOT_PROVEN
     signal_status: NOT_PROVEN
     public_safe_status: NOT_PUBLIC_SAFE
@@ -274,12 +362,20 @@ entries:
       - signal-observed public proof
       - public-safe proof
       - production-ready
+      - customer deployment
+      - SOCaaS deployment
+      - autonomous SOC
       - live IdP proof
       - live SIEM proof
       - AI-approved disposition
       - analyst-approved disposition
-    next_gate: proof record creation under separate proof scope
-    notes: Validation status is external validation truth. Proof repo has no ID-DET-002 proof record in this phase.
+      - final authorization
+      - case closure
+      - website rendering as proof
+      - GitHub rendering as proof
+      - green CI as approval
+    next_gate: reviewer validates source and controlled-test validation before any separately approved identity runtime gate
+    notes: Proof-record backfill from repo-visible source and controlled validation evidence only. Platform identity-lane context remains non-promotional and does not create runtime, signal, public_safe, customer, production, approval, or closure claims.
 
   - detection_id: ID-DET-003
     source_truth_owner: hawkinsoperations-detections
@@ -288,9 +384,9 @@ entries:
     validation_status: CONTROLLED_TEST_VALIDATED
     platform_visibility_owner: hawkinsoperations-platform
     platform_visibility_status: STATUS_VISIBILITY_PRESENT_NON_PROMOTIONAL
-    proof_record_path: null
+    proof_record_path: proof/records/ID-DET-003.md
     proof_card_path: null
-    proof_ceiling: NO_PROOF_RECORD
+    proof_ceiling: CONTROLLED_TEST_VALIDATED
     runtime_status: NOT_PROVEN
     signal_status: NOT_PROVEN
     public_safe_status: NOT_PUBLIC_SAFE
@@ -300,12 +396,20 @@ entries:
       - signal-observed public proof
       - public-safe proof
       - production-ready
+      - customer deployment
+      - SOCaaS deployment
+      - autonomous SOC
       - live IdP proof
       - live SIEM proof
       - AI-approved disposition
       - analyst-approved disposition
-    next_gate: proof record creation under separate proof scope
-    notes: Validation status is external validation truth. Proof repo has no ID-DET-003 proof record in this phase.
+      - final authorization
+      - case closure
+      - website rendering as proof
+      - GitHub rendering as proof
+      - green CI as approval
+    next_gate: reviewer validates source and controlled-test validation before any separately approved identity runtime gate
+    notes: Proof-record backfill from repo-visible source and controlled validation evidence only. Platform identity-lane context remains non-promotional and does not create runtime, signal, public_safe, customer, production, approval, or closure claims.
 
   - detection_id: ID-DET-004
     source_truth_owner: hawkinsoperations-detections
@@ -314,9 +418,9 @@ entries:
     validation_status: CONTROLLED_TEST_VALIDATED
     platform_visibility_owner: hawkinsoperations-platform
     platform_visibility_status: STATUS_VISIBILITY_PRESENT_NON_PROMOTIONAL
-    proof_record_path: null
+    proof_record_path: proof/records/ID-DET-004.md
     proof_card_path: null
-    proof_ceiling: NO_PROOF_RECORD
+    proof_ceiling: CONTROLLED_TEST_VALIDATED
     runtime_status: NOT_PROVEN
     signal_status: NOT_PROVEN
     public_safe_status: NOT_PUBLIC_SAFE
@@ -326,12 +430,20 @@ entries:
       - signal-observed public proof
       - public-safe proof
       - production-ready
+      - customer deployment
+      - SOCaaS deployment
+      - autonomous SOC
       - live IdP proof
       - live SIEM proof
       - AI-approved disposition
       - analyst-approved disposition
-    next_gate: proof record creation under separate proof scope
-    notes: Validation status is external validation truth. Proof repo has no ID-DET-004 proof record in this phase.
+      - final authorization
+      - case closure
+      - website rendering as proof
+      - GitHub rendering as proof
+      - green CI as approval
+    next_gate: reviewer validates source and controlled-test validation before any separately approved identity runtime gate
+    notes: Proof-record backfill from repo-visible source and controlled validation evidence only. Platform identity-lane context remains non-promotional and does not create runtime, signal, public_safe, customer, production, approval, or closure claims.
 
   - detection_id: HO-NDR-001
     source_truth_owner: hawkinsoperations-detections
