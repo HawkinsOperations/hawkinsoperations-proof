@@ -1,0 +1,124 @@
+{
+  "generated_at": "2026-06-27T07:28:23-05:00",
+  "input_proof_index_path": "proof/indexes/DETECTION_PROOF_STATUS_INDEX.yml",
+  "input_proof_record_backfill_report_path": "proof/reports/hoxline-proof-record-backfill-v0.json",
+  "input_case_growth_index_path": "C:\\Raylee\\Repo\\HawkinsOperations\\hoxline\\examples\\case-growth\\current-case-growth-index.json",
+  "proof_ceiling": "PROOFCARD_BACKFILL_CONTROLLED_REPO_EVIDENCE_ONLY",
+  "counts_before_after": {
+    "proof_records_total_indexed": 11,
+    "proofcards_before": 3,
+    "proofcards_missing_before": 8,
+    "proofcards_created": 8,
+    "proofcards_after_estimated": 11,
+    "proofcards_missing_after_estimated": 0,
+    "public_safe_cases_created": 0,
+    "closed_cases_created": 0,
+    "runtime_proof_created": 0,
+    "signal_proof_created": 0,
+    "production_claims_created": 0,
+    "customer_claims_created": 0,
+    "approval_claims_created": 0
+  },
+  "eligible_cases": [
+    "HO-DET-009",
+    "HO-DET-010",
+    "HO-DET-011",
+    "HO-DET-013",
+    "ID-DET-001",
+    "ID-DET-002",
+    "ID-DET-003",
+    "ID-DET-004"
+  ],
+  "created_proofcards": [
+    {
+      "case_id": "HO-DET-009",
+      "proof_record_path": "proof/records/HO-DET-009.md",
+      "proof_card_path": "proof/cards/HO-DET-009.md",
+      "proof_ceiling": "CONTROLLED_TEST_VALIDATED",
+      "public_safe_status": "NOT_PUBLIC_SAFE",
+      "case_status": "NOT_CLOSED"
+    },
+    {
+      "case_id": "HO-DET-010",
+      "proof_record_path": "proof/records/HO-DET-010.md",
+      "proof_card_path": "proof/cards/HO-DET-010.md",
+      "proof_ceiling": "CONTROLLED_TEST_VALIDATED",
+      "public_safe_status": "NOT_PUBLIC_SAFE",
+      "case_status": "NOT_CLOSED"
+    },
+    {
+      "case_id": "HO-DET-011",
+      "proof_record_path": "proof/records/HO-DET-011.md",
+      "proof_card_path": "proof/cards/HO-DET-011.md",
+      "proof_ceiling": "PRIVATE_RUNTIME_EVIDENCE_CAPTURED",
+      "public_safe_status": "NOT_PUBLIC_SAFE",
+      "case_status": "NOT_CLOSED"
+    },
+    {
+      "case_id": "HO-DET-013",
+      "proof_record_path": "proof/records/HO-DET-013.md",
+      "proof_card_path": "proof/cards/HO-DET-013.md",
+      "proof_ceiling": "CONTROLLED_TEST_VALIDATED",
+      "public_safe_status": "NOT_PUBLIC_SAFE",
+      "case_status": "NOT_CLOSED"
+    },
+    {
+      "case_id": "ID-DET-001",
+      "proof_record_path": "proof/records/ID-DET-001.md",
+      "proof_card_path": "proof/cards/ID-DET-001.md",
+      "proof_ceiling": "CONTROLLED_TEST_VALIDATED",
+      "public_safe_status": "NOT_PUBLIC_SAFE",
+      "case_status": "NOT_CLOSED"
+    },
+    {
+      "case_id": "ID-DET-002",
+      "proof_record_path": "proof/records/ID-DET-002.md",
+      "proof_card_path": "proof/cards/ID-DET-002.md",
+      "proof_ceiling": "CONTROLLED_TEST_VALIDATED",
+      "public_safe_status": "NOT_PUBLIC_SAFE",
+      "case_status": "NOT_CLOSED"
+    },
+    {
+      "case_id": "ID-DET-003",
+      "proof_record_path": "proof/records/ID-DET-003.md",
+      "proof_card_path": "proof/cards/ID-DET-003.md",
+      "proof_ceiling": "CONTROLLED_TEST_VALIDATED",
+      "public_safe_status": "NOT_PUBLIC_SAFE",
+      "case_status": "NOT_CLOSED"
+    },
+    {
+      "case_id": "ID-DET-004",
+      "proof_record_path": "proof/records/ID-DET-004.md",
+      "proof_card_path": "proof/cards/ID-DET-004.md",
+      "proof_ceiling": "CONTROLLED_TEST_VALIDATED",
+      "public_safe_status": "NOT_PUBLIC_SAFE",
+      "case_status": "NOT_CLOSED"
+    }
+  ],
+  "deferred_cases": [],
+  "blocked_cases": [],
+  "updated_index_path": "proof/indexes/DETECTION_PROOF_STATUS_INDEX.yml",
+  "created_public_safe_cases": [],
+  "created_closed_cases": [],
+  "created_runtime_proof_cases": [],
+  "created_signal_proof_cases": [],
+  "created_production_claim_cases": [],
+  "created_customer_claim_cases": [],
+  "created_approval_claim_cases": [],
+  "boundary": {
+    "runtime_public_proof_created": false,
+    "signal_public_proof_created": false,
+    "customer_deployment_claimed": false,
+    "production_readiness_claimed": false,
+    "public_safe_runtime_proof_claimed": false,
+    "ai_approval_claimed": false,
+    "analyst_approval_claimed": false,
+    "final_authorization_claimed": false,
+    "case_closure_claimed": false,
+    "product_market_fit_claimed": false,
+    "customer_adoption_claimed": false,
+    "website_rendering_treated_as_proof": false,
+    "github_rendering_treated_as_proof": false,
+    "green_ci_treated_as_approval": false
+  }
+}

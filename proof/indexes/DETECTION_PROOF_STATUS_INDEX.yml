@@ -128,7 +128,7 @@ entries:
     platform_visibility_owner: hawkinsoperations-platform
     platform_visibility_status: STATUS_VISIBILITY_PRESENT_NON_PROMOTIONAL
     proof_record_path: proof/records/HO-DET-009.md
-    proof_card_path: null
+    proof_card_path: proof/cards/HO-DET-009.md
     proof_ceiling: CONTROLLED_TEST_VALIDATED
     runtime_status: NOT_PROVEN
     signal_status: NOT_PROVEN
@@ -154,7 +154,7 @@ entries:
       - GitHub rendering as proof
       - green CI as approval
     next_gate: separate runtime receipt and proof review before any runtime, signal, public-safe, production, or approval wording
-    notes: Proof-record backfill from repo-visible source and controlled validation evidence only. Platform scheduled-collector context remains non-promotional and does not create runtime, signal, public_safe, customer, production, approval, or closure claims.
+    notes: ProofCard backfill from an existing proof record and repo-visible evidence only. Platform scheduled-collector context remains non-promotional and this card does not create runtime, signal, public_safe, customer, production, approval, or closure claims.
 
   - detection_id: HO-DET-010
     source_truth_owner: hawkinsoperations-detections
@@ -164,7 +164,7 @@ entries:
     platform_visibility_owner: hawkinsoperations-platform
     platform_visibility_status: STATUS_VISIBILITY_PRESENT_NON_PROMOTIONAL
     proof_record_path: proof/records/HO-DET-010.md
-    proof_card_path: null
+    proof_card_path: proof/cards/HO-DET-010.md
     proof_ceiling: CONTROLLED_TEST_VALIDATED
     runtime_status: NOT_PROVEN
     signal_status: NOT_PROVEN
@@ -190,7 +190,7 @@ entries:
       - GitHub rendering as proof
       - green CI as approval
     next_gate: reviewer validates source and controlled-test validation before any separately approved private runtime gate
-    notes: Proof-record backfill from repo-visible source and controlled validation evidence only. Platform private-runtime candidate context remains non-promotional and does not create runtime, signal, public_safe, customer, production, approval, or closure claims.
+    notes: ProofCard backfill from an existing proof record and repo-visible evidence only. Platform private-runtime candidate context remains non-promotional and this card does not create runtime, signal, public_safe, customer, production, approval, or closure claims.
 
   - detection_id: HO-DET-011
     source_truth_owner: hawkinsoperations-detections
@@ -200,7 +200,7 @@ entries:
     platform_visibility_owner: hawkinsoperations-platform
     platform_visibility_status: STATUS_VISIBILITY_PRESENT_NON_PROMOTIONAL
     proof_record_path: proof/records/HO-DET-011.md
-    proof_card_path: null
+    proof_card_path: proof/cards/HO-DET-011.md
     proof_ceiling: PRIVATE_RUNTIME_EVIDENCE_CAPTURED
     runtime_status: PRIVATE_RUNTIME_EVIDENCE_CAPTURED
     signal_status: NOT_PROVEN
@@ -218,7 +218,7 @@ entries:
       - AI-approved disposition
       - analyst-approved disposition
     next_gate: proof-card or public reviewer route only after separate human-approved proof scope
-    notes: Existing proof record supports private runtime evidence capture only. It does not promote public runtime, signal, or public-safe status.
+    notes: ProofCard backfill from an existing proof record and repo-visible evidence only. Private runtime evidence capture remains non-public and this card does not create public runtime, signal, public_safe, customer, production, approval, or closure claims.
 
   - detection_id: HO-DET-012
     source_truth_owner: hawkinsoperations-detections
@@ -258,7 +258,7 @@ entries:
     platform_visibility_owner: hawkinsoperations-platform
     platform_visibility_status: STATUS_VISIBILITY_PRESENT_NON_PROMOTIONAL
     proof_record_path: proof/records/HO-DET-013.md
-    proof_card_path: null
+    proof_card_path: proof/cards/HO-DET-013.md
     proof_ceiling: CONTROLLED_TEST_VALIDATED
     runtime_status: NOT_PROVEN
     signal_status: NOT_PROVEN
@@ -281,7 +281,7 @@ entries:
       - GitHub rendering as proof
       - green CI as approval
     next_gate: reviewer validates source and controlled-test validation before any separately approved private runtime gate
-    notes: Proof-record backfill from repo-visible source and controlled validation evidence only. Platform private-runtime candidate context remains non-promotional and does not create runtime, signal, public_safe, customer, production, approval, or closure claims.
+    notes: ProofCard backfill from an existing proof record and repo-visible evidence only. Platform private-runtime candidate context remains non-promotional and this card does not create runtime, signal, public_safe, customer, production, approval, or closure claims.
 
   - detection_id: AWS-DET-001
     source_truth_owner: hawkinsoperations-detections
@@ -317,7 +317,7 @@ entries:
     platform_visibility_owner: hawkinsoperations-platform
     platform_visibility_status: STATUS_VISIBILITY_PRESENT_NON_PROMOTIONAL
     proof_record_path: proof/records/ID-DET-001.md
-    proof_card_path: null
+    proof_card_path: proof/cards/ID-DET-001.md
     proof_ceiling: CONTROLLED_TEST_VALIDATED
     runtime_status: NOT_PROVEN
     signal_status: NOT_PROVEN
@@ -341,7 +341,7 @@ entries:
       - GitHub rendering as proof
       - green CI as approval
     next_gate: reviewer validates source and controlled-test validation before any separately approved identity runtime gate
-    notes: Proof-record backfill from repo-visible source and controlled validation evidence only. Platform identity-lane context remains non-promotional and does not create runtime, signal, public_safe, customer, production, approval, or closure claims.
+    notes: ProofCard backfill from an existing proof record and repo-visible evidence only. Platform identity-lane context remains non-promotional and this card does not create runtime, signal, public_safe, customer, production, approval, or closure claims.
 
   - detection_id: ID-DET-002
     source_truth_owner: hawkinsoperations-detections
@@ -351,7 +351,7 @@ entries:
     platform_visibility_owner: hawkinsoperations-platform
     platform_visibility_status: STATUS_VISIBILITY_PRESENT_NON_PROMOTIONAL
     proof_record_path: proof/records/ID-DET-002.md
-    proof_card_path: null
+    proof_card_path: proof/cards/ID-DET-002.md
     proof_ceiling: CONTROLLED_TEST_VALIDATED
     runtime_status: NOT_PROVEN
     signal_status: NOT_PROVEN
@@ -375,7 +375,7 @@ entries:
       - GitHub rendering as proof
       - green CI as approval
     next_gate: reviewer validates source and controlled-test validation before any separately approved identity runtime gate
-    notes: Proof-record backfill from repo-visible source and controlled validation evidence only. Platform identity-lane context remains non-promotional and does not create runtime, signal, public_safe, customer, production, approval, or closure claims.
+    notes: ProofCard backfill from an existing proof record and repo-visible evidence only. Platform identity-lane context remains non-promotional and this card does not create runtime, signal, public_safe, customer, production, approval, or closure claims.
 
   - detection_id: ID-DET-003
     source_truth_owner: hawkinsoperations-detections
@@ -385,7 +385,7 @@ entries:
     platform_visibility_owner: hawkinsoperations-platform
     platform_visibility_status: STATUS_VISIBILITY_PRESENT_NON_PROMOTIONAL
     proof_record_path: proof/records/ID-DET-003.md
-    proof_card_path: null
+    proof_card_path: proof/cards/ID-DET-003.md
     proof_ceiling: CONTROLLED_TEST_VALIDATED
     runtime_status: NOT_PROVEN
     signal_status: NOT_PROVEN
@@ -409,7 +409,7 @@ entries:
       - GitHub rendering as proof
       - green CI as approval
     next_gate: reviewer validates source and controlled-test validation before any separately approved identity runtime gate
-    notes: Proof-record backfill from repo-visible source and controlled validation evidence only. Platform identity-lane context remains non-promotional and does not create runtime, signal, public_safe, customer, production, approval, or closure claims.
+    notes: ProofCard backfill from an existing proof record and repo-visible evidence only. Platform identity-lane context remains non-promotional and this card does not create runtime, signal, public_safe, customer, production, approval, or closure claims.
 
   - detection_id: ID-DET-004
     source_truth_owner: hawkinsoperations-detections
@@ -419,7 +419,7 @@ entries:
     platform_visibility_owner: hawkinsoperations-platform
     platform_visibility_status: STATUS_VISIBILITY_PRESENT_NON_PROMOTIONAL
     proof_record_path: proof/records/ID-DET-004.md
-    proof_card_path: null
+    proof_card_path: proof/cards/ID-DET-004.md
     proof_ceiling: CONTROLLED_TEST_VALIDATED
     runtime_status: NOT_PROVEN
     signal_status: NOT_PROVEN
@@ -443,7 +443,7 @@ entries:
       - GitHub rendering as proof
       - green CI as approval
     next_gate: reviewer validates source and controlled-test validation before any separately approved identity runtime gate
-    notes: Proof-record backfill from repo-visible source and controlled validation evidence only. Platform identity-lane context remains non-promotional and does not create runtime, signal, public_safe, customer, production, approval, or closure claims.
+    notes: ProofCard backfill from an existing proof record and repo-visible evidence only. Platform identity-lane context remains non-promotional and this card does not create runtime, signal, public_safe, customer, production, approval, or closure claims.
 
   - detection_id: HO-NDR-001
     source_truth_owner: hawkinsoperations-detections
