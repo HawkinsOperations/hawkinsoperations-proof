@@ -87,6 +87,63 @@ class DetectionProofStatusIndexTests(unittest.TestCase):
         data["entries"][0]["source_status"] = "EXTERNAL_BOUNDARY_CONTRACT"
         self.assert_verification_fails(data, "source_status drift")
 
+    def test_current_counts_are_derived(self) -> None:
+        data = self.load_index()
+        data["current_authority"]["derived_counts"]["proof_record_count"] = 99
+        self.assert_verification_fails(data, "current proof counts drift")
+
+    def test_duplicate_proof_record_path_fails(self) -> None:
+        data = self.load_index()
+        data["entries"][1]["proof_record_path"] = data["entries"][0]["proof_record_path"]
+        data["entries"][1]["proof_ceiling"] = data["entries"][0]["proof_ceiling"]
+        self.assert_verification_fails(data, "proof_record_path must map to exactly one case")
+
+    def test_duplicate_proof_card_path_fails(self) -> None:
+        data = self.load_index()
+        data["entries"][1]["proof_card_path"] = data["entries"][0]["proof_card_path"]
+        self.assert_verification_fails(data, "proof_card_path must map to exactly one case")
+
+    def test_duplicate_proof_path_alias_fails(self) -> None:
+        entries = {
+            "ONE": {"proof_record_path": "proof/records/HO-DET-009.md", "proof_card_path": None, "public_safe_status": "NOT_PUBLIC_SAFE"},
+            "TWO": {"proof_record_path": "proof/records/./HO-DET-009.md", "proof_card_path": None, "public_safe_status": "NOT_PUBLIC_SAFE"},
+        }
+        with self.assertRaisesRegex(verifier.VerificationError, "proof_record_path must map to exactly one case"):
+            verifier.derive_current_counts(entries)
+
+    def test_owned_artifact_rejects_body_only_identity_and_forged_ceiling(self) -> None:
+        temp_dir = tempfile.TemporaryDirectory()
+        self.addCleanup(temp_dir.cleanup)
+        prior_root = verifier.ROOT
+        self.addCleanup(setattr, verifier, "ROOT", prior_root)
+        verifier.ROOT = Path(temp_dir.name)
+        record_dir = verifier.ROOT / "proof" / "records"
+        record_dir.mkdir(parents=True)
+        record_path = record_dir / "EX-DET-001.md"
+        entry = {"proof_ceiling": "CONTROLLED_TEST_VALIDATED"}
+        record_path.write_text(
+            "# OTHER-DET-001 Proof Record\ncase_id: EX-DET-001\nproof_ceiling: CONTROLLED_TEST_VALIDATED\npublic_safe_status: NOT_PUBLIC_SAFE\n",
+            encoding="utf-8",
+        )
+        with self.assertRaisesRegex(verifier.VerificationError, "heading does not exactly identify"):
+            verifier.validate_owned_artifact(entry, "proof_record_path", "proof/records/EX-DET-001.md", "EX-DET-001", is_card=False)
+        record_path.write_text(
+            "# EX-DET-001 Proof Record\ncase_id: EX-DET-001\nproof_ceiling: CONTROLLED_TEST_VALIDATED_FORGED\npublic_safe_status: NOT_PUBLIC_SAFE\n",
+            encoding="utf-8",
+        )
+        with self.assertRaisesRegex(verifier.VerificationError, "ceiling mismatch"):
+            verifier.validate_owned_artifact(entry, "proof_record_path", "proof/records/EX-DET-001.md", "EX-DET-001", is_card=False)
+
+    def test_historical_mislabel_fails(self) -> None:
+        data = self.load_index()
+        data["current_authority"]["historical_snapshot"] = True
+        self.assert_verification_fails(data, "historical_snapshot must be false")
+
+    def test_card_ceiling_cannot_exceed_record(self) -> None:
+        data = self.load_index()
+        data["entries"][1]["proof_ceiling"] = "PRIVATE_RUNTIME_EVIDENCE_CAPTURED"
+        self.assert_verification_fails(data, "proof record ceiling mismatch")
+
 
 if __name__ == "__main__":
     unittest.main()

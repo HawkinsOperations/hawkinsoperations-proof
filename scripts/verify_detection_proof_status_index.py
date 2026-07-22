@@ -20,7 +20,15 @@ DETECTIONS_MATRIX_PATH = ORG_ROOT / "hawkinsoperations-detections" / "detections
 VALIDATION_REGISTRY_PATH = ORG_ROOT / "hawkinsoperations-validation" / "validation" / "VALIDATION_REGISTRY.yml"
 PLATFORM_FACTORY_PATH = ORG_ROOT / "hawkinsoperations-platform" / "scripts" / "ho_factory.py"
 
-REQUIRED_TOP_LEVEL = {"schema_version", "owner_repo", "truth_surface", "human_review_required", "claim_boundary", "entries"}
+REQUIRED_TOP_LEVEL = {
+    "schema_version",
+    "owner_repo",
+    "truth_surface",
+    "human_review_required",
+    "current_authority",
+    "claim_boundary",
+    "entries",
+}
 REQUIRED_ENTRY_FIELDS = {
     "detection_id",
     "source_truth_owner",
@@ -218,6 +226,15 @@ def validate_top_level(index: dict[str, Any]) -> None:
         raise VerificationError("truth_surface must be proof_boundary_index")
     if index.get("human_review_required") is not True:
         raise VerificationError("human_review_required must be true")
+    current = require_mapping(index.get("current_authority"), "current_authority")
+    if current.get("historical_snapshot") is not False:
+        raise VerificationError("current_authority.historical_snapshot must be false")
+    if current.get("current_authority") is not True:
+        raise VerificationError("current_authority.current_authority must be true")
+    if current.get("source_path") != "proof/indexes/DETECTION_PROOF_STATUS_INDEX.yml":
+        raise VerificationError("current_authority.source_path must identify the proof-owned index")
+    if current.get("derivation_method") != "derive_non_null_unique_paths_from_entries":
+        raise VerificationError("current_authority.derivation_method must be derive_non_null_unique_paths_from_entries")
     boundary = require_mapping(index.get("claim_boundary"), "claim_boundary")
     blocked = boundary.get("blocked_claims")
     if not isinstance(blocked, list):
@@ -234,12 +251,106 @@ def validate_path_field(entry: dict[str, Any], field: str, detection_id: str) ->
         return None
     if not isinstance(value, str) or not value.strip():
         raise VerificationError(f"{detection_id}.{field} must be null or a non-empty relative path")
-    if Path(value).is_absolute() or ".." in Path(value).parts:
+    value_path = Path(value)
+    if value_path.is_absolute() or ".." in value_path.parts:
         raise VerificationError(f"{detection_id}.{field} must be a safe relative path")
-    path = ROOT / value
+    root = ROOT.resolve()
+    path = (root / value_path).resolve()
+    owned_root = (root / "proof" / ("records" if field == "proof_record_path" else "cards")).resolve()
+    try:
+        path.relative_to(owned_root)
+    except ValueError:
+        raise VerificationError(f"{detection_id}.{field} must remain under {owned_root.relative_to(root).as_posix()}")
     if not path.is_file():
         raise VerificationError(f"{detection_id}.{field} points to missing file: {value}")
+    if path.name.casefold() != f"{detection_id}.md".casefold():
+        raise VerificationError(f"{detection_id}.{field} filename must exactly identify its owning case")
     return value
+
+
+def owned_path_key(value: str) -> str:
+    """Normalize aliases with the case-insensitive semantics of the governed Windows workspace."""
+    return str((ROOT.resolve() / Path(value)).resolve()).replace("\\", "/").casefold()
+
+
+def metadata_value(text: str, scalar_names: tuple[str, ...], table_names: tuple[str, ...] = ()) -> str | None:
+    for name in scalar_names:
+        pattern = rf"(?im)^\s*(?:-\s*)?{re.escape(name)}\s*:\s*([^\r\n]+?)\s*$"
+        match = re.search(pattern, text)
+        if match:
+            return match.group(1).strip().rstrip(".")
+    for name in table_names:
+        pattern = rf"(?im)^\s*\|\s*{re.escape(name)}\s*\|\s*([^|]+?)\s*\|\s*$"
+        match = re.search(pattern, text)
+        if match:
+            return match.group(1).strip().rstrip(".")
+    return None
+
+
+def validate_owned_artifact(
+    entry: dict[str, Any], field: str, path_value: str, detection_id: str, *, is_card: bool
+) -> None:
+    text = (ROOT / path_value).read_text(encoding="utf-8")
+    artifact_kind = "ProofCard" if is_card else "proof record"
+    heading = next((line.strip() for line in text.splitlines() if line.strip()), "")
+    if re.fullmatch(rf"#\s+{re.escape(detection_id)}(?:\s+|\s*[-:—]\s*).+", heading, re.IGNORECASE) is None:
+        raise VerificationError(f"{detection_id}.{field} heading does not exactly identify its owning case")
+    declared_case_id = metadata_value(text, ("case_id", "detection_id", "artifact_id"), ("Case ID", "Detection ID", "Artifact ID"))
+    if declared_case_id is not None and declared_case_id != detection_id:
+        raise VerificationError(
+            f"{detection_id} {artifact_kind} structured identity mismatch: {declared_case_id}"
+        )
+    ceiling = metadata_value(
+        text,
+        ("proof_ceiling", "Current proof level", "Proof packet status"),
+        ("Current ceiling",),
+    )
+    expected_ceiling = entry["proof_ceiling"]
+    if ceiling != expected_ceiling:
+        raise VerificationError(
+            f"{detection_id} {artifact_kind} ceiling mismatch: expected {expected_ceiling}, actual {ceiling}"
+        )
+    public_safe = metadata_value(text, ("public_safe_status", "Public-safe status"), ("Public-safe status",))
+    if public_safe != PUBLIC_SAFE_REQUIRED:
+        raise VerificationError(
+            f"{detection_id} {artifact_kind} public-safe status must remain {PUBLIC_SAFE_REQUIRED}"
+        )
+    if is_card and entry.get("proof_record_path") is not None:
+        declared_record = metadata_value(text, ("proof_record_path",))
+        if declared_record is not None and declared_record != entry["proof_record_path"]:
+            raise VerificationError(
+                f"{detection_id} ProofCard proof_record_path mismatch: expected {entry['proof_record_path']}, actual {declared_record}"
+            )
+
+
+def derive_current_counts(entries: dict[str, dict[str, Any]]) -> dict[str, int]:
+    records = [entry["proof_record_path"] for entry in entries.values() if entry.get("proof_record_path") is not None]
+    cards = [entry["proof_card_path"] for entry in entries.values() if entry.get("proof_card_path") is not None]
+    if len(records) != len({owned_path_key(value) for value in records}):
+        raise VerificationError("proof_record_path must map to exactly one case")
+    if len(cards) != len({owned_path_key(value) for value in cards}):
+        raise VerificationError("proof_card_path must map to exactly one case")
+    return {
+        "indexed_case_count": len(entries),
+        "proof_record_count": len(records),
+        "proof_card_count": len(cards),
+        "missing_proof_record_count": len(entries) - len(records),
+        "missing_proof_card_count": len(entries) - len(cards),
+        "public_safe_count": sum(
+            1 for entry in entries.values() if entry.get("public_safe_status") != PUBLIC_SAFE_REQUIRED
+        ),
+    }
+
+
+def validate_current_counts(index: dict[str, Any], entries: dict[str, dict[str, Any]]) -> dict[str, int]:
+    derived = derive_current_counts(entries)
+    current = require_mapping(index["current_authority"], "current_authority")
+    declared = require_mapping(current.get("derived_counts"), "current_authority.derived_counts")
+    if declared != derived:
+        raise VerificationError(f"current proof counts drift: declared={declared}, derived={derived}")
+    if derived["public_safe_count"] != 0:
+        raise VerificationError("current proof index must derive public_safe_count=0")
+    return derived
 
 
 def validate_private_runtime_status(entry: dict[str, Any], record_path: str | None, detection_id: str) -> None:
@@ -418,6 +529,10 @@ def validate_entry(
 
     record_path = validate_path_field(entry, "proof_record_path", detection_id)
     card_path = validate_path_field(entry, "proof_card_path", detection_id)
+    if record_path is not None:
+        validate_owned_artifact(entry, "proof_record_path", record_path, detection_id, is_card=False)
+    if card_path is not None:
+        validate_owned_artifact(entry, "proof_card_path", card_path, detection_id, is_card=True)
     validate_proof_ceiling(entry, record_path, card_path, detection_id)
     validate_private_runtime_status(entry, record_path, detection_id)
     validate_claim_boundary_text(entry, detection_id)
@@ -473,8 +588,10 @@ def verify_index(index_path: Path = INDEX_PATH) -> list[dict[str, Any]]:
     detections = load_detection_matrix()
     validation = load_validation_registry()
     platform_text = PLATFORM_FACTORY_PATH.read_text(encoding="utf-8") if PLATFORM_FACTORY_PATH.exists() else ""
+    derive_current_counts(entries)
     for entry in entries.values():
         validate_entry(entry, detections, validation, platform_text)
+    validate_current_counts(index, entries)
     return list(entries.values())
 
 
@@ -484,6 +601,11 @@ def main() -> int:
     except VerificationError as exc:
         fail(str(exc))
     print("Detection proof status index verification passed.")
+    counts = derive_current_counts({entry["detection_id"]: entry for entry in entries})
+    print(
+        "CURRENT_PROOF_COUNTS | "
+        + " | ".join(f"{field}={value}" for field, value in counts.items())
+    )
     print("DETECTION_ID | PROOF_CEILING | RUNTIME_STATUS | SIGNAL_STATUS | PUBLIC_SAFE_STATUS")
     for entry in entries:
         print(
