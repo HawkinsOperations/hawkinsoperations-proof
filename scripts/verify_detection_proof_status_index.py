@@ -123,11 +123,14 @@ BOUNDARY_CONTEXT_MARKERS = [
 AFFIRMATIVE_AUTHORITY_CLAIM_RE = re.compile(
     r"\b(?:"
     r"(?:customer|socaas)\s+(?:deployment\s+)?(?:is\s+)?(?:active|live|deployed|confirmed|approved)"
-    r"|analyst\s+approval\s+(?:is\s+)?(?:granted|approved)"
-    r"|final\s+authorization\s+(?:is\s+)?(?:granted|approved)"
-    r"|case\s+(?:closure\s+(?:is\s+)?approved|is\s+closed|closed)"
-    r"|public[\s_-]*safe(?:\s+runtime\s+proof)?\s+(?:is\s+)?(?:established|confirmed|approved)"
-    r"|production\s+(?:deployment\s+)?(?:is\s+)?(?:active|ready|confirmed)"
+    r"|deployed\s+to\s+(?:a\s+)?customer"
+    r"|analyst\s+(?:approval\s+(?:is\s+)?(?:granted|approved)|approved)"
+    r"|final\s+authorization\s+(?:is\s+)?(?:granted|approved|received)"
+    r"|case\s+(?:closure\s+(?:is\s+)?(?:approved|complete)|is\s+closed|closed)"
+    r"|public[\s_-]*safe(?:\s+runtime\s+proof)?\s+(?:is\s+)?(?:established|confirmed|approved|for\s+release)"
+    r"|production\s+(?:deployment\s+)?(?:is\s+)?(?:active|live|ready|confirmed)"
+    r"|runtime\s+(?:is\s+)?active"
+    r"|signal\s+(?:is\s+)?observed"
     r"|ai\s+(?:disposition\s+)?authority\s+(?:is\s+)?enabled"
     r")\b",
     re.IGNORECASE,
@@ -136,6 +139,20 @@ LOCAL_NEGATION_RE = re.compile(
     r"\b(?:blocked|denied|false|not|never|no|prohibited|reject(?:ed|s)?|unsupported|without)\b",
     re.IGNORECASE,
 )
+
+EXACT_BLOCKED_CLAIM_VALUES = {
+    value.casefold()
+    for value in {
+        *BLOCKED_CLAIMS,
+        "GitHub rendering as proof",
+        "green CI as approval",
+        "customer deployment",
+        "SOCaaS deployment",
+        "final authorization",
+        "case closure",
+        "public-safe proof unless an explicit proof record supports it",
+    }
+}
 
 
 class VerificationError(Exception):
@@ -453,9 +470,13 @@ def normalized_field_name(value: Any) -> str:
 
 
 def validate_authority_prose(value: str, label: str) -> None:
-    if "blockedclaims" in normalized_field_name(label) or "claimboundary" in normalized_field_name(label):
-        return
     normalized = unicodedata.normalize("NFKC", value).replace("\r", "\n")
+    normalized_label = unicodedata.normalize("NFKC", label).casefold()
+    if (
+        re.search(r"(?:^|\.)blocked_claims\[\d+\]$", normalized_label)
+        and normalized.strip().casefold() in EXACT_BLOCKED_CLAIM_VALUES
+    ):
+        return
     for clause in re.split(r"[;\n]|(?<=[.!?])\s+", normalized):
         if AFFIRMATIVE_AUTHORITY_CLAIM_RE.search(clause) and not LOCAL_NEGATION_RE.search(clause):
             raise VerificationError(f"{label} contains an unauthorized affirmative authority claim")
@@ -609,7 +630,67 @@ def _coerce_metadata_scalar(raw: str) -> Any:
 
 def validate_markdown_authority_metadata(text: str, label: str) -> None:
     """Apply recursive authority policies to scalar and inline structured Markdown metadata."""
-    for line_number, line in enumerate(text.splitlines(), 1):
+    current_heading = ""
+    table_headers: list[str] | None = None
+    lines = text.splitlines()
+    for line_number, line in enumerate(lines, 1):
+        normalized_line = unicodedata.normalize("NFKC", line).strip()
+        heading = re.match(r"^#{1,6}\s+(.+?)\s*$", normalized_line)
+        if heading is not None:
+            current_heading = normalized_field_name(heading.group(1))
+            table_headers = None
+        if normalized_line.startswith("|"):
+            cells = [cell.strip() for cell in normalized_line.strip("|").split("|")]
+            if all(cell and set(cell) <= {"-", ":"} for cell in cells):
+                continue
+            next_line = (
+                unicodedata.normalize("NFKC", lines[line_number]).strip()
+                if line_number < len(lines)
+                else ""
+            )
+            next_cells = (
+                [cell.strip() for cell in next_line.strip("|").split("|")]
+                if next_line.startswith("|")
+                else []
+            )
+            next_is_separator = bool(next_cells) and all(
+                cell and set(cell) <= {"-", ":"} for cell in next_cells
+            )
+            if table_headers is None and next_is_separator:
+                table_headers = [normalized_field_name(cell) for cell in cells]
+                continue
+            active_headers = table_headers or [
+                f"column{cell_index + 1}" for cell_index in range(len(cells))
+            ]
+            truth_label = ""
+            if "truthlabel" in active_headers:
+                truth_index = active_headers.index("truthlabel")
+                if truth_index < len(cells):
+                    truth_label = normalized_field_name(cells[truth_index])
+            for cell_index, cell in enumerate(cells):
+                column = active_headers[cell_index] if cell_index < len(active_headers) else ""
+                if column == "blockedwording":
+                    continue
+                if column == "claim" and truth_label == "blocked":
+                    continue
+                validate_authority_prose(
+                    cell,
+                    f"{label}:{line_number}.{column or f'column{cell_index + 1}'}",
+                )
+            continue
+        if normalized_line:
+            table_headers = None
+        blocked_item = re.match(r"^[-*+]\s+(.+?)\s*$", normalized_line)
+        if (
+            blocked_item is not None
+            and ("blockedclaims" in current_heading or "blockedwording" in current_heading)
+            and (
+                blocked_item.group(1).strip().casefold() in EXACT_BLOCKED_CLAIM_VALUES
+                or re.fullmatch(r'["“].+["”]\.?', blocked_item.group(1).strip()) is not None
+                or blocked_item.group(1).strip().casefold().startswith("blocked:")
+            )
+        ):
+            continue
         validate_authority_prose(line, f"{label}:{line_number}")
     for line_number, key, raw in markdown_metadata_pairs(text):
         value = _coerce_metadata_scalar(raw)
@@ -1031,20 +1112,77 @@ def validate_entry(
 
 
 CASE_ARTIFACT_NAME_RE = re.compile(r"^(?:HO-(?:DET|NDR)|AWS-DET|ID-DET)-\d{3}\.md$", re.IGNORECASE)
+CASE_ID_RE = re.compile(r"(?:HO-(?:DET|NDR)|AWS-DET|ID-DET)-\d{3}", re.IGNORECASE)
 
 
 def discover_case_artifacts(directory: Path, label: str) -> dict[str, str]:
+    """Discover canonical and aliased case artifacts from content, not filenames alone."""
     discovered: dict[str, str] = {}
+    identities: dict[str, str] = {}
     if not directory.is_dir():
         raise VerificationError(f"missing proof {label} directory: {rel(directory)}")
-    for path in directory.iterdir():
-        if not path.is_file() or CASE_ARTIFACT_NAME_RE.fullmatch(path.name) is None:
+    expected_heading_kind = "proofcard" if label == "card" else "proof record"
+    for path in sorted(directory.rglob("*")):
+        if not path.is_file():
             continue
-        key = path.name.casefold()
+        try:
+            text = path.read_text(encoding="utf-8")
+        except UnicodeDecodeError as exc:
+            raise VerificationError(f"proof {label} file is not valid UTF-8: {rel(path)}") from exc
+        heading = next((line.strip() for line in text.splitlines() if line.strip()), "")
+        normalized_heading = unicodedata.normalize("NFKC", heading)
+        heading_id_match = CASE_ID_RE.search(normalized_heading)
+        heading_declares_kind = expected_heading_kind in normalized_heading.casefold()
+        canonical_filename = CASE_ARTIFACT_NAME_RE.fullmatch(path.name) is not None
+        raw_declared_ids = metadata_values(
+            text,
+            ("case_id", "detection_id", "Detection ID", "Case ID"),
+            ("Case ID", "Detection ID"),
+        )
+        metadata_keys = {
+            normalized_field_name(key) for _, key, _ in markdown_metadata_pairs(text)
+        }
+        structured_artifact = bool(raw_declared_ids) and {
+            "proofceiling",
+            "publicsafestatus",
+        }.issubset(metadata_keys)
+        if not canonical_filename and not (
+            (heading_id_match is not None and heading_declares_kind)
+            or structured_artifact
+        ):
+            continue
+
+        # An aliased artifact is still authority-bearing content and must be
+        # scanned before the reverse-inventory mismatch is reported.
+        validate_markdown_authority_metadata(text, f"unindexed proof {label} {rel(path)}")
+        declared_ids = {
+            value.strip("` ").upper()
+            for value in raw_declared_ids
+            if CASE_ID_RE.fullmatch(value.strip("` "))
+        }
+        if heading_id_match is not None:
+            declared_ids.add(heading_id_match.group(0).upper())
+        filename_id = CASE_ID_RE.fullmatch(path.stem)
+        if filename_id is not None:
+            declared_ids.add(filename_id.group(0).upper())
+        if len(declared_ids) != 1:
+            raise VerificationError(
+                f"proof {label} artifact identity is missing or contradictory: "
+                f"{rel(path)} declares {sorted(declared_ids)}"
+            )
+        case_id = next(iter(declared_ids)).casefold()
+        if case_id in identities:
+            raise VerificationError(
+                f"proof {label} artifact identity is owned by multiple files: "
+                f"{identities[case_id]} and {rel(path)}"
+            )
+        identities[case_id] = rel(path)
+
         relative = rel(path)
+        key = owned_path_key(relative)
         if key in discovered:
             raise VerificationError(
-                f"duplicate normalized {label} filename: {discovered[key]} and {relative}"
+                f"duplicate normalized {label} path: {discovered[key]} and {relative}"
             )
         discovered[key] = relative
     return discovered
@@ -1054,12 +1192,12 @@ def verify_reverse_inventory(entries: dict[str, dict[str, Any]]) -> None:
     discovered_records = discover_case_artifacts(ROOT / "proof" / "records", "record")
     discovered_cards = discover_case_artifacts(ROOT / "proof" / "cards", "card")
     indexed_records = {
-        Path(entry["proof_record_path"]).name.casefold(): entry["proof_record_path"]
+        owned_path_key(entry["proof_record_path"]): entry["proof_record_path"]
         for entry in entries.values()
         if entry.get("proof_record_path") is not None
     }
     indexed_cards = {
-        Path(entry["proof_card_path"]).name.casefold(): entry["proof_card_path"]
+        owned_path_key(entry["proof_card_path"]): entry["proof_card_path"]
         for entry in entries.values()
         if entry.get("proof_card_path") is not None
     }

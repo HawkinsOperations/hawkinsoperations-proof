@@ -323,10 +323,20 @@ class DetectionProofStatusIndexTests(unittest.TestCase):
     def test_affirmative_proof_prose_variants_fail_closed(self) -> None:
         attacks = (
             "customer deployment is active",
+            "deployed to customer",
+            "customer deployed",
+            "production live",
+            "analyst approved",
             "analyst approval granted",
             "SOCaaS deployment is live",
+            "SOCaaS deployed",
             "final authorization granted",
+            "final authorization received",
             "case closure approved",
+            "case closure complete",
+            "runtime active",
+            "signal observed",
+            "public safe for release",
         )
         for attack in attacks:
             with self.subTest(attack=attack):
@@ -336,6 +346,75 @@ class DetectionProofStatusIndexTests(unittest.TestCase):
                     verifier.validate_recursive_authority_boundaries(
                         {"notes": attack}, "proof index"
                     )
+                with self.assertRaisesRegex(
+                    verifier.VerificationError, "affirmative authority claim"
+                ):
+                    verifier.validate_markdown_authority_metadata(
+                        attack, "hostile proof record"
+                    )
+
+    def test_nfkc_affirmative_proof_prose_variants_fail_closed(self) -> None:
+        attacks = (
+            "ｐｒｏｄｕｃｔｉｏｎ ｌｉｖｅ",
+            "ａｎａｌｙｓｔ ａｐｐｒｏｖｅｄ",
+            "ｆｉｎａｌ ａｕｔｈｏｒｉｚａｔｉｏｎ ｒｅｃｅｉｖｅｄ",
+            "ｐｕｂｌｉｃ ｓａｆｅ ｆｏｒ ｒｅｌｅａｓｅ",
+        )
+        for attack in attacks:
+            with self.subTest(attack=attack):
+                with self.assertRaisesRegex(
+                    verifier.VerificationError, "affirmative authority claim"
+                ):
+                    verifier.validate_recursive_authority_boundaries(
+                        {"notes": attack}, "proof index"
+                    )
+
+    def test_boundary_containers_allow_only_exact_negative_shapes(self) -> None:
+        verifier.validate_recursive_authority_boundaries(
+            {"claim_boundary": {"blocked_claims": ["production-ready"]}},
+            "proof index",
+        )
+        attacks = (
+            "production live",
+            "production-ready; customer deployed",
+            "final authorization received",
+        )
+        for attack in attacks:
+            with self.subTest(attack=attack):
+                with self.assertRaisesRegex(
+                    verifier.VerificationError, "affirmative authority claim"
+                ):
+                    verifier.validate_recursive_authority_boundaries(
+                        {"claim_boundary": {"blocked_claims": [attack]}},
+                        "proof index",
+                    )
+        with self.assertRaisesRegex(
+            verifier.VerificationError, "affirmative authority claim"
+        ):
+            verifier.validate_recursive_authority_boundaries(
+                {
+                    "claim_boundary": {
+                        "blocked_claims": [
+                            {"claim": "runtime-active public proof", "detail": "customer deployed"}
+                        ]
+                    }
+                },
+                "proof index",
+            )
+
+    def test_markdown_blocked_section_cannot_launder_affirmative_prose(self) -> None:
+        verifier.validate_markdown_authority_metadata(
+            "## Blocked Claims\n\n- production-ready\n- final authorization",
+            "bounded proof record",
+        )
+        attacks = (
+            "## Blocked Claims\n\n- production live",
+            "## Blocked Claims\n\n- production-ready; customer deployed",
+            "## Claim Boundary\n\n| detail | analyst approved |",
+            "## Blocked Wording\n\n- public safe for release",
+        )
+        for attack in attacks:
+            with self.subTest(attack=attack):
                 with self.assertRaisesRegex(
                     verifier.VerificationError, "affirmative authority claim"
                 ):
@@ -375,6 +454,79 @@ class DetectionProofStatusIndexTests(unittest.TestCase):
             verifier.verify_reverse_inventory(entries)
         (verifier.ROOT / "proof" / "records" / "HO-DET-999.md").unlink()
         verifier.verify_reverse_inventory(entries)
+
+    def test_reverse_inventory_rejects_aliased_artifact_from_internal_identity(self) -> None:
+        temp_dir = tempfile.TemporaryDirectory()
+        self.addCleanup(temp_dir.cleanup)
+        prior_root = verifier.ROOT
+        self.addCleanup(setattr, verifier, "ROOT", prior_root)
+        verifier.ROOT = Path(temp_dir.name)
+        record_dir = verifier.ROOT / "proof" / "records"
+        card_dir = verifier.ROOT / "proof" / "cards"
+        record_dir.mkdir(parents=True)
+        card_dir.mkdir(parents=True)
+        record_body = (
+            "# HO-DET-009 Proof Record\n"
+            "detection_id: HO-DET-009\n"
+            "proof_ceiling: CONTROLLED_TEST_VALIDATED\n"
+            "runtime_status: NOT_PROVEN\n"
+            "signal_status: NOT_PROVEN\n"
+            "public_safe_status: NOT_PUBLIC_SAFE\n"
+        )
+        (record_dir / "HO-DET-009.md").write_text(record_body, encoding="utf-8")
+        aliased_body = record_body.replace(
+            "# HO-DET-009 Proof Record", "# Controlled Review Copy"
+        )
+        (record_dir / "HO-DET-009-copy.md").write_text(aliased_body, encoding="utf-8")
+        (card_dir / "HO-NDR-001.md").write_text(
+            "# HO-NDR-001 ProofCard\ncase_id: HO-NDR-001\n",
+            encoding="utf-8",
+        )
+        entries = {
+            "HO-DET-009": {
+                "proof_record_path": "proof/records/HO-DET-009.md",
+                "proof_card_path": None,
+            },
+            "HO-NDR-001": {
+                "proof_record_path": None,
+                "proof_card_path": "proof/cards/HO-NDR-001.md",
+            },
+        }
+        with self.assertRaisesRegex(
+            verifier.VerificationError, "owned by multiple files"
+        ):
+            verifier.verify_reverse_inventory(entries)
+
+    def test_reverse_inventory_scans_aliased_artifact_before_exclusion(self) -> None:
+        temp_dir = tempfile.TemporaryDirectory()
+        self.addCleanup(temp_dir.cleanup)
+        prior_root = verifier.ROOT
+        self.addCleanup(setattr, verifier, "ROOT", prior_root)
+        verifier.ROOT = Path(temp_dir.name)
+        record_dir = verifier.ROOT / "proof" / "records"
+        card_dir = verifier.ROOT / "proof" / "cards"
+        record_dir.mkdir(parents=True)
+        card_dir.mkdir(parents=True)
+        (record_dir / "HO-DET-009-copy.md").write_text(
+            "# HO-DET-009 Proof Record\n"
+            "detection_id: HO-DET-009\n"
+            "notes: analyst approved\n",
+            encoding="utf-8",
+        )
+        (card_dir / "HO-NDR-001.md").write_text(
+            "# HO-NDR-001 ProofCard\ncase_id: HO-NDR-001\n",
+            encoding="utf-8",
+        )
+        entries = {
+            "HO-NDR-001": {
+                "proof_record_path": None,
+                "proof_card_path": "proof/cards/HO-NDR-001.md",
+            }
+        }
+        with self.assertRaisesRegex(
+            verifier.VerificationError, "affirmative authority claim"
+        ):
+            verifier.verify_reverse_inventory(entries)
 
     def test_ho_ndr_001_record_promotion_fails(self) -> None:
         temp_dir = tempfile.TemporaryDirectory()
