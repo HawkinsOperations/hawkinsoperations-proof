@@ -35,7 +35,7 @@ jobs:
         uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
         with:
           repository: HawkinsOperations/hawkinsoperations-platform
-          ref: 775feb781d9ee7665c2ce623824de040e3341735
+          ref: dce32809fcee7faef3f92da7139b2781bb9c4330
           path: hawkinsoperations-platform
           persist-credentials: false
       - name: Set up Python
