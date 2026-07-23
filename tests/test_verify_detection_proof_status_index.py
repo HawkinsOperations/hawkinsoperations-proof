@@ -425,13 +425,23 @@ class DetectionProofStatusIndexTests(unittest.TestCase):
                     )
 
     def test_negation_is_clause_local(self) -> None:
-        with self.assertRaisesRegex(
-            verifier.VerificationError, "affirmative authority claim"
-        ):
-            verifier.validate_recursive_authority_boundaries(
-                {"notes": "not historical; customer deployment is active"},
-                "proof index",
-            )
+        attacks = (
+            "not historical; customer deployment is active",
+            "pending documentation, production is live",
+            "unsupported note — customer environment deployed",
+            "future issue: signal was observed",
+            "missing receipt while production is live",
+            "no proof currently, customer environment deployed",
+            "not approved / production is live",
+        )
+        for attack in attacks:
+            with self.subTest(attack=attack), self.assertRaisesRegex(
+                verifier.VerificationError, "affirmative authority claim"
+            ):
+                verifier.validate_recursive_authority_boundaries(
+                    {"notes": attack},
+                    "proof index",
+                )
         verifier.validate_recursive_authority_boundaries(
             {"notes": "customer deployment is not active"}, "proof index"
         )

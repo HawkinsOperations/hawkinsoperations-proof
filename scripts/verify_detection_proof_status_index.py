@@ -477,7 +477,11 @@ def validate_authority_prose(value: str, label: str) -> None:
         and normalized.strip().casefold() in EXACT_BLOCKED_CLAIM_VALUES
     ):
         return
-    for clause in re.split(r"[;\n]|(?<=[.!?])\s+", normalized):
+    for clause in re.split(
+        r"[,;:/\n—–]+|\b(?:but|however|although|yet|while|whereas)\b|(?<=[.!?])\s+",
+        normalized,
+        flags=re.IGNORECASE,
+    ):
         if AFFIRMATIVE_AUTHORITY_CLAIM_RE.search(clause) and not LOCAL_NEGATION_RE.search(clause):
             raise VerificationError(f"{label} contains an unauthorized affirmative authority claim")
 
