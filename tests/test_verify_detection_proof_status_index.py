@@ -264,6 +264,46 @@ class DetectionProofStatusIndexTests(unittest.TestCase):
                         attack, "hostile proof record"
                     )
 
+    def test_unicode_confusable_authority_keys_fail_closed(self) -> None:
+        attacks = (
+            {"ｐｕｂｌｉｃ＿ｓａｆｅ": "approved"},
+            {"ＡＩ＿ｄｉｓｐｏｓｉｔｉｏｎ＿ａｕｔｈｏｒｉｔｙ": "approved"},
+            {"ｒｕｎｔｉｍｅ＿ａｃｔｉｖｅ": True},
+        )
+        for attack in attacks:
+            with self.subTest(attack=attack):
+                with self.assertRaisesRegex(
+                    verifier.VerificationError, "unauthorized authority value"
+                ):
+                    verifier.validate_recursive_authority_boundaries(
+                        attack, "hostile proof record"
+                    )
+
+    def test_unicode_confusable_markdown_metadata_fails_closed(self) -> None:
+        attacks = (
+            "ｐｕｂｌｉｃ＿ｓａｆｅ: approved",
+            "ＡＩ＿ｄｉｓｐｏｓｉｔｉｏｎ＿ａｕｔｈｏｒｉｔｙ: approved",
+            "ｒｕｎｔｉｍｅ＿ａｃｔｉｖｅ: true",
+        )
+        for attack in attacks:
+            with self.subTest(attack=attack):
+                with self.assertRaises(verifier.VerificationError):
+                    verifier.validate_markdown_authority_metadata(
+                        attack, "hostile proof record"
+                    )
+
+    def test_normalized_authority_key_collision_fails_closed(self) -> None:
+        with self.assertRaisesRegex(
+            verifier.VerificationError, "normalized key collision"
+        ):
+            verifier.validate_recursive_authority_boundaries(
+                {
+                    "public_safe": False,
+                    "ｐｕｂｌｉｃ＿ｓａｆｅ": "approved",
+                },
+                "hostile proof record",
+            )
+
     def test_formatted_conflicting_identity_is_collected(self) -> None:
         text = (
             "case_id: EX-DET-001\n"

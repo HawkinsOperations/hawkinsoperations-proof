@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import re
 import sys
+import unicodedata
 from pathlib import Path, PurePosixPath
 from typing import Any
 from urllib.parse import unquote
@@ -447,13 +448,14 @@ ALLOWED_CANDIDATE_REVIEW_FIELDS = {
 
 
 def normalized_field_name(value: Any) -> str:
-    return re.sub(r"[^a-z0-9]", "", str(value).casefold())
+    normalized = unicodedata.normalize("NFKC", str(value)).casefold()
+    return re.sub(r"[^a-z0-9]", "", normalized)
 
 
 def validate_authority_prose(value: str, label: str) -> None:
     if "blockedclaims" in normalized_field_name(label) or "claimboundary" in normalized_field_name(label):
         return
-    normalized = value.replace("\r", "\n")
+    normalized = unicodedata.normalize("NFKC", value).replace("\r", "\n")
     for clause in re.split(r"[;\n]|(?<=[.!?])\s+", normalized):
         if AFFIRMATIVE_AUTHORITY_CLAIM_RE.search(clause) and not LOCAL_NEGATION_RE.search(clause):
             raise VerificationError(f"{label} contains an unauthorized affirmative authority claim")
@@ -462,9 +464,16 @@ def validate_authority_prose(value: str, label: str) -> None:
 def validate_recursive_authority_boundaries(value: Any, label: str = "proof status index") -> None:
     """Reject authority promotion even when hidden in nested extension objects or arrays."""
     if isinstance(value, dict):
+        normalized_keys: dict[str, Any] = {}
         for key, child in value.items():
             child_label = f"{label}.{key}"
             normalized = normalized_field_name(key)
+            if normalized in normalized_keys:
+                raise VerificationError(
+                    f"{label} contains normalized key collision: "
+                    f"{normalized_keys[normalized]!r} and {key!r}"
+                )
+            normalized_keys[normalized] = key
             policy = PROMOTION_KEY_POLICIES.get(normalized)
             if policy is not None:
                 try:
@@ -480,9 +489,10 @@ def validate_recursive_authority_boundaries(value: Any, label: str = "proof stat
         for index, child in enumerate(value):
             validate_recursive_authority_boundaries(child, f"{label}[{index}]")
     elif isinstance(value, str):
-        if value.strip().upper() in PROMOTIONAL_VALUE_TOKENS:
+        normalized_value = unicodedata.normalize("NFKC", value)
+        if normalized_value.strip().upper() in PROMOTIONAL_VALUE_TOKENS:
             raise VerificationError(f"{label} contains unauthorized promotion token: {value!r}")
-        validate_authority_prose(value, label)
+        validate_authority_prose(normalized_value, label)
 
 
 def owned_path_key(value: str) -> str:
@@ -505,7 +515,7 @@ def _clean_markdown_key(value: str) -> str:
 def markdown_metadata_pairs(text: str) -> list[tuple[int, str, str]]:
     pairs: list[tuple[int, str, str]] = []
     for line_number, original in enumerate(text.splitlines(), 1):
-        line = original.strip()
+        line = unicodedata.normalize("NFKC", original).strip()
         while line.startswith(">"):
             line = line[1:].lstrip()
         if line.startswith("|"):
@@ -589,7 +599,7 @@ def enum_metadata_value(
 
 
 def _coerce_metadata_scalar(raw: str) -> Any:
-    value = raw.strip().strip("`").rstrip(".")
+    value = unicodedata.normalize("NFKC", raw).strip().strip("`").rstrip(".")
     if value.casefold() == "true":
         return True
     if value.casefold() == "false":
@@ -608,7 +618,11 @@ def validate_markdown_authority_metadata(text: str, label: str) -> None:
             raise VerificationError(
                 f"{label}:{line_number} contains unauthorized {key} value: {raw!r}"
             )
-        if isinstance(value, str) and value.strip().upper() in PROMOTIONAL_VALUE_TOKENS:
+        if (
+            isinstance(value, str)
+            and unicodedata.normalize("NFKC", value).strip().upper()
+            in PROMOTIONAL_VALUE_TOKENS
+        ):
             raise VerificationError(
                 f"{label}:{line_number} contains unauthorized promotion token: {raw!r}"
             )
