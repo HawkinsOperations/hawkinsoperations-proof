@@ -1,4 +1,7 @@
 # HO-DET-012 - Suspicious Scheduled Task Creation
+detection_id: HO-DET-012
+runtime_status: NOT_PROVEN
+signal_status: NOT_PROVEN
 
 ## Header
 

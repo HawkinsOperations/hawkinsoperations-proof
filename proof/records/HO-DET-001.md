@@ -1,4 +1,7 @@
 # HO-DET-001 - Suspicious PowerShell EncodedCommand Execution via Sysmon Event ID 1
+detection_id: HO-DET-001
+runtime_status: PRIVATE_RUNTIME_BOUNDARY_CONTEXT_ONLY
+signal_status: NOT_PROVEN
 
 ## Header
 

@@ -1,4 +1,7 @@
 # AWS-DET-001 - Denied IAM API Activity From CloudTrail-Style Fixtures
+detection_id: AWS-DET-001
+runtime_status: NOT_PROVEN
+signal_status: NOT_PROVEN
 
 ## Header
 

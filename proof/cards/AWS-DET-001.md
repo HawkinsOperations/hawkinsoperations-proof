@@ -1,4 +1,8 @@
 # AWS-DET-001 Proof Card
+case_id: AWS-DET-001
+proof_record_path: proof/records/AWS-DET-001.md
+runtime_status: NOT_PROVEN
+signal_status: NOT_PROVEN
 
 ## Header
 

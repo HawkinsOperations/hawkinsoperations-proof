@@ -1,4 +1,8 @@
 # HO-DET-012 Proof Card
+case_id: HO-DET-012
+proof_record_path: proof/records/HO-DET-012.md
+runtime_status: NOT_PROVEN
+signal_status: NOT_PROVEN
 
 ## Header
 

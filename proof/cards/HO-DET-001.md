@@ -1,4 +1,8 @@
 # HO-DET-001 Proof Card
+case_id: HO-DET-001
+proof_record_path: proof/records/HO-DET-001.md
+runtime_status: PRIVATE_RUNTIME_BOUNDARY_CONTEXT_ONLY
+signal_status: NOT_PROVEN
 
 ## Header
 

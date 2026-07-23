@@ -30,6 +30,13 @@ class DetectionProofStatusIndexTests(unittest.TestCase):
         path.write_text(yaml.safe_dump(data, sort_keys=False), encoding="utf-8")
         return path
 
+    def write_temp_index_text(self, text: str) -> Path:
+        temp_dir = tempfile.TemporaryDirectory()
+        self.addCleanup(temp_dir.cleanup)
+        path = Path(temp_dir.name) / "DETECTION_PROOF_STATUS_INDEX.yml"
+        path.write_text(text, encoding="utf-8")
+        return path
+
     def assert_verification_fails(self, data: dict, expected: str) -> None:
         path = self.write_temp_index(data)
         with self.assertRaises(verifier.VerificationError) as caught:
@@ -46,15 +53,63 @@ class DetectionProofStatusIndexTests(unittest.TestCase):
         data["entries"].append(duplicate)
         self.assert_verification_fails(data, "duplicate detection_id")
 
+    def test_duplicate_yaml_key_fails_closed(self) -> None:
+        text = INDEX_PATH.read_text(encoding="utf-8")
+        text = text.replace(
+            "owner_repo: hawkinsoperations-proof",
+            "owner_repo: hawkinsoperations-proof\nowner_repo: attacker-proof",
+            1,
+        )
+        path = self.write_temp_index_text(text)
+        with self.assertRaisesRegex(verifier.VerificationError, "duplicate key"):
+            verifier.verify_index(path)
+
+    def test_nested_duplicate_yaml_key_fails_closed(self) -> None:
+        text = INDEX_PATH.read_text(encoding="utf-8")
+        text = text.replace(
+            "    public_safe_count: 0",
+            "    public_safe_count: 0\n    public_safe_count: 1",
+            1,
+        )
+        path = self.write_temp_index_text(text)
+        with self.assertRaisesRegex(verifier.VerificationError, "duplicate key"):
+            verifier.verify_index(path)
+
     def test_missing_required_field_fails(self) -> None:
         data = self.load_index()
         del data["entries"][0]["proof_ceiling"]
-        self.assert_verification_fails(data, "entry missing fields")
+        self.assert_verification_fails(data, "missing fields")
+
+    def test_unknown_top_level_and_entry_fields_fail(self) -> None:
+        data = self.load_index()
+        data["extension"] = {"safe": True}
+        self.assert_verification_fails(data, "unknown fields")
+        data = self.load_index()
+        data["entries"][0]["extension"] = {"safe": True}
+        self.assert_verification_fails(data, "unknown fields")
+
+    def test_nested_authority_laundering_fails_before_shape_acceptance(self) -> None:
+        data = self.load_index()
+        data["entries"][0]["extension"] = {
+            "review": [{"ai_disposition_authority": True}],
+        }
+        self.assert_verification_fails(data, "unauthorized authority value")
+
+    def test_nested_public_safe_and_case_closure_laundering_fail(self) -> None:
+        for key, value in (
+            ("public_safe", True),
+            ("case_closed", True),
+            ("proof_status", "PUBLIC_SAFE"),
+            ("runtime_status", "RUNTIME_ACTIVE"),
+        ):
+            data = self.load_index()
+            data["entries"][0]["extension"] = {"nested": {key: value}}
+            self.assert_verification_fails(data, "unauthorized authority value")
 
     def test_public_safe_promotion_fails(self) -> None:
         data = self.load_index()
         data["entries"][0]["public_safe_status"] = "PUBLIC_SAFE"
-        self.assert_verification_fails(data, "public_safe_status must be NOT_PUBLIC_SAFE")
+        self.assert_verification_fails(data, "unauthorized authority value")
 
     def test_runtime_promotion_without_record_fails(self) -> None:
         data = self.load_index()
@@ -62,12 +117,12 @@ class DetectionProofStatusIndexTests(unittest.TestCase):
             if entry["detection_id"] == "HO-DET-012":
                 entry["runtime_status"] = "PRIVATE_RUNTIME_EVIDENCE_CAPTURED"
                 break
-        self.assert_verification_fails(data, "HO-DET-012 proof record does not support runtime_status")
+        self.assert_verification_fails(data, "runtime status mismatch")
 
     def test_signal_promotion_fails(self) -> None:
         data = self.load_index()
         data["entries"][0]["signal_status"] = "SIGNAL_OBSERVED"
-        self.assert_verification_fails(data, "unsupported signal_status")
+        self.assert_verification_fails(data, "unauthorized authority value")
 
     def test_missing_proof_record_fails_when_claimed(self) -> None:
         data = self.load_index()
@@ -111,6 +166,21 @@ class DetectionProofStatusIndexTests(unittest.TestCase):
         with self.assertRaisesRegex(verifier.VerificationError, "proof_record_path must map to exactly one case"):
             verifier.derive_current_counts(entries)
 
+    def test_owned_paths_reject_cross_platform_absolute_and_encoded_forms(self) -> None:
+        hostile = [
+            r"C:\private\HO-DET-009.md",
+            r"\\server\share\HO-DET-009.md",
+            "/proof/records/HO-DET-009.md",
+            r"proof\records/HO-DET-009.md",
+            "proof/records/%2e%2e/cards/HO-DET-009.md",
+            "proof/records/%252e%252e/cards/HO-DET-009.md",
+            "proof/records/./HO-DET-009.md",
+        ]
+        for value in hostile:
+            with self.subTest(value=value):
+                with self.assertRaises(verifier.VerificationError):
+                    verifier.canonical_owned_path(value, "proof_record_path", "HO-DET-009")
+
     def test_owned_artifact_rejects_body_only_identity_and_forged_ceiling(self) -> None:
         temp_dir = tempfile.TemporaryDirectory()
         self.addCleanup(temp_dir.cleanup)
@@ -131,8 +201,94 @@ class DetectionProofStatusIndexTests(unittest.TestCase):
             "# EX-DET-001 Proof Record\ncase_id: EX-DET-001\nproof_ceiling: CONTROLLED_TEST_VALIDATED_FORGED\npublic_safe_status: NOT_PUBLIC_SAFE\n",
             encoding="utf-8",
         )
-        with self.assertRaisesRegex(verifier.VerificationError, "ceiling mismatch"):
+        with self.assertRaisesRegex(verifier.VerificationError, "malformed or ambiguous metadata"):
             verifier.validate_owned_artifact(entry, "proof_record_path", "proof/records/EX-DET-001.md", "EX-DET-001", is_card=False)
+
+    def test_owned_artifact_rejects_conflicting_repeated_metadata(self) -> None:
+        temp_dir = tempfile.TemporaryDirectory()
+        self.addCleanup(temp_dir.cleanup)
+        prior_root = verifier.ROOT
+        self.addCleanup(setattr, verifier, "ROOT", prior_root)
+        verifier.ROOT = Path(temp_dir.name)
+        record_dir = verifier.ROOT / "proof" / "records"
+        record_dir.mkdir(parents=True)
+        (record_dir / "EX-DET-001.md").write_text(
+            "# EX-DET-001 Proof Record\n"
+            "detection_id: EX-DET-001\n"
+            "detection_id: OTHER-DET-001\n"
+            "proof_ceiling: CONTROLLED_TEST_VALIDATED\n"
+            "runtime_status: NOT_PROVEN\n"
+            "signal_status: NOT_PROVEN\n"
+            "public_safe_status: NOT_PUBLIC_SAFE\n",
+            encoding="utf-8",
+        )
+        entry = {
+            "proof_ceiling": "CONTROLLED_TEST_VALIDATED",
+            "runtime_status": "NOT_PROVEN",
+            "signal_status": "NOT_PROVEN",
+            "proof_record_path": "proof/records/EX-DET-001.md",
+        }
+        with self.assertRaisesRegex(verifier.VerificationError, "conflicting repeated metadata"):
+            verifier.validate_owned_artifact(
+                entry,
+                "proof_record_path",
+                "proof/records/EX-DET-001.md",
+                "EX-DET-001",
+                is_card=False,
+            )
+
+    def test_owned_artifact_rejects_inline_nested_authority_laundering(self) -> None:
+        text = (
+            "# EX-DET-001 Proof Record\n"
+            "detection_id: EX-DET-001\n"
+            "proof_ceiling: CONTROLLED_TEST_VALIDATED\n"
+            "runtime_status: NOT_PROVEN\n"
+            "signal_status: NOT_PROVEN\n"
+            "public_safe_status: NOT_PUBLIC_SAFE\n"
+            'extensions: {"review": {"analyst_approved": true}}\n'
+        )
+        with self.assertRaisesRegex(verifier.VerificationError, "unauthorized authority value"):
+            verifier.validate_markdown_authority_metadata(text, "hostile proof record")
+
+    def test_reverse_inventory_rejects_orphans_and_preserves_card_only_case(self) -> None:
+        temp_dir = tempfile.TemporaryDirectory()
+        self.addCleanup(temp_dir.cleanup)
+        prior_root = verifier.ROOT
+        self.addCleanup(setattr, verifier, "ROOT", prior_root)
+        verifier.ROOT = Path(temp_dir.name)
+        (verifier.ROOT / "proof" / "records").mkdir(parents=True)
+        (verifier.ROOT / "proof" / "cards").mkdir(parents=True)
+        (verifier.ROOT / "proof" / "records" / "HO-DET-999.md").write_text("# orphan\n", encoding="utf-8")
+        (verifier.ROOT / "proof" / "cards" / "HO-NDR-001.md").write_text("# boundary\n", encoding="utf-8")
+        entries = {
+            "HO-NDR-001": {
+                "proof_record_path": None,
+                "proof_card_path": "proof/cards/HO-NDR-001.md",
+            }
+        }
+        with self.assertRaisesRegex(verifier.VerificationError, "unindexed case artifacts"):
+            verifier.verify_reverse_inventory(entries)
+        (verifier.ROOT / "proof" / "records" / "HO-DET-999.md").unlink()
+        verifier.verify_reverse_inventory(entries)
+
+    def test_ho_ndr_001_record_promotion_fails(self) -> None:
+        temp_dir = tempfile.TemporaryDirectory()
+        self.addCleanup(temp_dir.cleanup)
+        prior_root = verifier.ROOT
+        self.addCleanup(setattr, verifier, "ROOT", prior_root)
+        verifier.ROOT = Path(temp_dir.name)
+        (verifier.ROOT / "proof" / "records").mkdir(parents=True)
+        (verifier.ROOT / "proof" / "cards").mkdir(parents=True)
+        (verifier.ROOT / "proof" / "records" / "HO-NDR-001.md").write_text("# record\n", encoding="utf-8")
+        (verifier.ROOT / "proof" / "cards" / "HO-NDR-001.md").write_text("# card\n", encoding="utf-8")
+        entries = {
+            "HO-NDR-001": {
+                "proof_record_path": "proof/records/HO-NDR-001.md",
+                "proof_card_path": "proof/cards/HO-NDR-001.md",
+            }
+        }
+        with self.assertRaisesRegex(verifier.VerificationError, "must remain card-only"):
+            verifier.verify_reverse_inventory(entries)
 
     def test_historical_mislabel_fails(self) -> None:
         data = self.load_index()

@@ -27,18 +27,37 @@ HEX64_RE = re.compile(r"^[0-9a-fA-F]{64}$")
 COMMIT_RE = re.compile(r"^[0-9a-f]{7,40}$")
 
 
+def reject_duplicate_json_keys(pairs: list[tuple[str, object]]) -> dict:
+    result = {}
+    for key, value in pairs:
+        if key in result:
+            raise ValueError(f"duplicate JSON key: {key}")
+        result[key] = value
+    return result
+
+
 def fail(msg: str) -> None:
     print(f"Baseline proof integrity check failed: {msg}", file=sys.stderr)
     raise SystemExit(1)
 
 
 def load_json(path: Path, label: str) -> dict:
-    if not path.exists():
-        fail(f"missing {label}: {path.relative_to(ROOT).as_posix()}")
     try:
-        return json.loads(path.read_text(encoding="utf-8"))
-    except json.JSONDecodeError as exc:
-        fail(f"invalid JSON in {label} ({path.relative_to(ROOT).as_posix()}): {exc}")
+        display_path = path.relative_to(ROOT).as_posix()
+    except ValueError:
+        display_path = path.name
+    if not path.exists():
+        fail(f"missing {label}: {display_path}")
+    try:
+        value = json.loads(
+            path.read_text(encoding="utf-8"),
+            object_pairs_hook=reject_duplicate_json_keys,
+        )
+    except (json.JSONDecodeError, ValueError) as exc:
+        fail(f"invalid JSON in {label} ({display_path}): {exc}")
+    if not isinstance(value, dict):
+        fail(f"{label} must contain a top-level JSON object")
+    return value
 
 
 def validate_required_artifacts_exist() -> None:
