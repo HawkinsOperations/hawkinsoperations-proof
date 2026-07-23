@@ -21,21 +21,21 @@ jobs:
         uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
         with:
           repository: HawkinsOperations/hawkinsoperations-detections
-          ref: e204d671cae59c4adcb1e106b865bc36c04c666a
+          ref: 16d4432eb46d457939f1cfe573c0c5d712650efb
           path: hawkinsoperations-detections
           persist-credentials: false
       - name: Check out validation authority source
         uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
         with:
           repository: HawkinsOperations/hawkinsoperations-validation
-          ref: ebf52f7c6c9b78de767272cc56fccdc584f5c4e0
+          ref: 34bbfc4f48f75f647d5946b4cbe6835abf5e7dbc
           path: hawkinsoperations-validation
           persist-credentials: false
       - name: Check out platform test-fixture source
         uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
         with:
           repository: HawkinsOperations/hawkinsoperations-platform
-          ref: d1ea495f2b010fbaefc2dccf22986526958ba424
+          ref: 775feb781d9ee7665c2ce623824de040e3341735
           path: hawkinsoperations-platform
           persist-credentials: false
       - name: Set up Python
