@@ -31,6 +31,13 @@ jobs:
           ref: ebf52f7c6c9b78de767272cc56fccdc584f5c4e0
           path: hawkinsoperations-validation
           persist-credentials: false
+      - name: Check out platform test-fixture source
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+        with:
+          repository: HawkinsOperations/hawkinsoperations-platform
+          ref: d1ea495f2b010fbaefc2dccf22986526958ba424
+          path: hawkinsoperations-platform
+          persist-credentials: false
       - name: Set up Python
         uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065 # v5.6.0
         with:
