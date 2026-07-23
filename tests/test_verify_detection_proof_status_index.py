@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import copy
 import importlib.util
+import json
 import subprocess
 import sys
 import tempfile
@@ -565,6 +566,80 @@ class DetectionProofStatusIndexTests(unittest.TestCase):
                 verifier.validate_recursive_authority_boundaries(
                     {"notes": control}, "proof index"
                 )
+
+    def test_combining_mark_obfuscation_in_nested_shapes_fails_closed(self) -> None:
+        templates = (
+            "public\\u{code} safe is confirmed",
+            "case\\u{code} closure approved",
+            "runtime\\u{code} is active",
+            "AI\\u{code} authority is enabled",
+        )
+        for code in ("034f", "0301", "fe0f", "0000", "0008", "001f", "007f"):
+            for template in templates:
+                value = json.loads(
+                    '{"extensions":[{"notes":[{"deep":"'
+                    + template.format(code=code)
+                    + '"}]}]}'
+                )
+                with self.subTest(code=code, template=template):
+                    with self.assertRaisesRegex(
+                        verifier.VerificationError, "affirmative authority claim"
+                    ):
+                        verifier.validate_recursive_authority_boundaries(
+                            value, "proof index"
+                        )
+
+        verifier.validate_recursive_authority_boundaries(
+            {
+                "extensions": [
+                    {
+                        "notes": [
+                            "Café résumé – reviewer note.",
+                            {"deep": "Reviewer 👩‍💻️ note."},
+                            {"multiline": "Reviewer note.\n\tStill bounded."},
+                        ]
+                    }
+                ]
+            },
+            "proof index",
+        )
+
+    def test_connector_independent_and_trailing_negation_attacks_fail(self) -> None:
+        connectors = (
+            ",", "and", "plus", "though", "because", "therefore",
+            "meanwhile", "furthermore", "also", "nevertheless",
+            "nonetheless", "except", "despite that", "in fact", "so",
+            "consequently", "moreover", "then", "still", "even though",
+        )
+        attacks = [
+            (
+                f"does not prove runtime{connector} customer deployment is active"
+                if connector == ","
+                else f"does not prove runtime {connector} customer deployment is active"
+            )
+            for connector in connectors
+        ]
+        attacks.extend(
+            (
+                "customer deployment is active and not a typo",
+                "runtime is active and not simulated",
+                "final authorization received and no objections",
+                "AI authority is enabled and not revoked",
+                "public safe is confirmed and not disputed",
+                "case closure approved and not provisional",
+                "production is ready and not delayed",
+                "signal is observed and not inferred",
+                "customer deployment is active without ambiguity",
+            )
+        )
+        for attack in attacks:
+            with self.subTest(attack=attack):
+                with self.assertRaisesRegex(
+                    verifier.VerificationError, "affirmative authority claim"
+                ):
+                    verifier.validate_recursive_authority_boundaries(
+                        {"notes": attack}, "proof index"
+                    )
 
     def test_compositional_promotion_keys_fail_closed(self) -> None:
         attacks = (

@@ -148,8 +148,7 @@ NEGATIVE_LIST_SUFFIX_RE = re.compile(
     r"\bclaims?\s+(?:remain|remains|are|is)\s+(?:blocked|unsupported|not\s+approved)\.?$",
     re.IGNORECASE,
 )
-AFFIRMATIVE_RESET_AFTER_NEGATIVE_LIST_RE = re.compile(
-    r"(?:,\s*|\b(?:and|plus|though)\b\s*)"
+AFFIRMATIVE_STATE_AFTER_NEGATIVE_LIST_RE = re.compile(
     r"(?:"
     r"\b(?:customer|socaas)\b.{0,32}\b(?:deployment\s+)?(?:is|was)\s+"
     r"(?:active|confirmed|deployed|live|ready)\b"
@@ -169,11 +168,20 @@ AFFIRMATIVE_RESET_AFTER_NEGATIVE_LIST_RE = re.compile(
 
 
 def normalize_authority_security_text(value: str) -> str:
-    normalized = unicodedata.normalize("NFKC", value)
+    normalized = unicodedata.normalize("NFKD", value).translate(
+        {ord("\t"): " ", ord("\n"): " ", ord("\r"): " "}
+    )
     return "".join(
         character
         for character in normalized
-        if unicodedata.category(character) != "Cf"
+        if not unicodedata.category(character).startswith(("C", "M"))
+    )
+
+
+def contains_unnegated_affirmative_state(value: str) -> bool:
+    return any(
+        not LOCAL_NEGATION_RE.search(value[:match.start()])
+        for match in AFFIRMATIVE_STATE_AFTER_NEGATIVE_LIST_RE.finditer(value)
     )
 
 
@@ -598,8 +606,8 @@ def validate_authority_prose(value: str, label: str) -> None:
         intro = NEGATIVE_LIST_INTRO_RE.search(segment)
         suffix = NEGATIVE_LIST_SUFFIX_RE.search(segment)
         if suffix:
-            if AFFIRMATIVE_RESET_AFTER_NEGATIVE_LIST_RE.search(
-                ", " + segment[:suffix.start()]
+            if AFFIRMATIVE_STATE_AFTER_NEGATIVE_LIST_RE.search(
+                segment[:suffix.start()]
             ):
                 raise VerificationError(
                     f"{label} contains an unauthorized affirmative authority claim"
@@ -607,7 +615,7 @@ def validate_authority_prose(value: str, label: str) -> None:
             continue
         if intro:
             if (
-                AFFIRMATIVE_RESET_AFTER_NEGATIVE_LIST_RE.search(
+                AFFIRMATIVE_STATE_AFTER_NEGATIVE_LIST_RE.search(
                     segment[intro.end():]
                 )
             ):
@@ -617,8 +625,11 @@ def validate_authority_prose(value: str, label: str) -> None:
             continue
         clauses = segment.split(",")
         if any(
-            AFFIRMATIVE_AUTHORITY_CLAIM_RE.search(clause)
-            and not LOCAL_NEGATION_RE.search(clause)
+            contains_unnegated_affirmative_state(clause)
+            or (
+                AFFIRMATIVE_AUTHORITY_CLAIM_RE.search(clause)
+                and not LOCAL_NEGATION_RE.search(clause)
+            )
             for clause in clauses
             if clause.strip()
         ):
