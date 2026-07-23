@@ -535,10 +535,15 @@ def explicitly_bounded_authority_value(value: Any) -> bool:
         "partial",
         "pending",
         "existingflowcandidate",
+        "privateruntimeboundarycontextonly",
+        "privateruntimeevidencecaptured",
+        "privateruntimeevidencecapturedlocalwindowsonly",
         "publicruntimeblocked",
+        "runtimeactiveprivate",
         "runtimeblocked",
         "runtimeevidenceverifiedprivate",
         "signalblocked",
+        "signalobservedprivate",
         "sourceexists",
         "unsupported",
     }
@@ -667,6 +672,10 @@ def validate_recursive_authority_boundaries(
                 normalized_path,
                 promotion_context,
             )
+    elif promotion_context and not explicitly_bounded_authority_value(value):
+        raise VerificationError(
+            f"{label} contains compositional authority promotion: {value!r}"
+        )
     elif isinstance(value, str):
         normalized_value = unicodedata.normalize("NFKC", value)
         if normalized_value.strip().upper() in PROMOTIONAL_VALUE_TOKENS:
