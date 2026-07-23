@@ -20,6 +20,25 @@ spec.loader.exec_module(verifier)
 
 
 class DetectionProofStatusIndexTests(unittest.TestCase):
+    def test_required_ci_uses_exact_authority_shas_and_rejects_retired_vocabulary(
+        self,
+    ) -> None:
+        workflow_path = ROOT / ".github/workflows/proof-authority-integrity.yml"
+        workflow = yaml.safe_load(workflow_path.read_text(encoding="utf-8"))
+        job = workflow["jobs"]["proof-authority-integrity"]
+        env_names = (
+            "DETECTIONS_AUTHORITY_SHA",
+            "VALIDATION_AUTHORITY_SHA",
+            "PLATFORM_FIXTURE_SHA",
+        )
+        for env_name in env_names:
+            self.assertRegex(job["env"][env_name], r"^[0-9a-f]{40}$")
+        text = workflow_path.read_text(encoding="utf-8")
+        for env_name in env_names:
+            self.assertIn(f'rev-parse HEAD)" = "${env_name}"', text)
+        self.assertIn("'s[y]nthetic'", text)
+        self.assertNotIn("feature/hoxline-case-growth-convergence-v1", text)
+
     def load_index(self) -> dict:
         return yaml.safe_load(INDEX_PATH.read_text(encoding="utf-8"))
 
