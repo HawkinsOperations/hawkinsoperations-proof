@@ -119,6 +119,22 @@ BOUNDARY_CONTEXT_MARKERS = [
     "blocked_claims",
     "claim_boundary",
 ]
+AFFIRMATIVE_AUTHORITY_CLAIM_RE = re.compile(
+    r"\b(?:"
+    r"(?:customer|socaas)\s+(?:deployment\s+)?(?:is\s+)?(?:active|live|deployed|confirmed|approved)"
+    r"|analyst\s+approval\s+(?:is\s+)?(?:granted|approved)"
+    r"|final\s+authorization\s+(?:is\s+)?(?:granted|approved)"
+    r"|case\s+(?:closure\s+(?:is\s+)?approved|is\s+closed|closed)"
+    r"|public[\s_-]*safe(?:\s+runtime\s+proof)?\s+(?:is\s+)?(?:established|confirmed|approved)"
+    r"|production\s+(?:deployment\s+)?(?:is\s+)?(?:active|ready|confirmed)"
+    r"|ai\s+(?:disposition\s+)?authority\s+(?:is\s+)?enabled"
+    r")\b",
+    re.IGNORECASE,
+)
+LOCAL_NEGATION_RE = re.compile(
+    r"\b(?:blocked|denied|false|not|never|no|prohibited|reject(?:ed|s)?|unsupported|without)\b",
+    re.IGNORECASE,
+)
 
 
 class VerificationError(Exception):
@@ -434,6 +450,15 @@ def normalized_field_name(value: Any) -> str:
     return re.sub(r"[^a-z0-9]", "", str(value).casefold())
 
 
+def validate_authority_prose(value: str, label: str) -> None:
+    if "blockedclaims" in normalized_field_name(label) or "claimboundary" in normalized_field_name(label):
+        return
+    normalized = value.replace("\r", "\n")
+    for clause in re.split(r"[;\n]|(?<=[.!?])\s+", normalized):
+        if AFFIRMATIVE_AUTHORITY_CLAIM_RE.search(clause) and not LOCAL_NEGATION_RE.search(clause):
+            raise VerificationError(f"{label} contains an unauthorized affirmative authority claim")
+
+
 def validate_recursive_authority_boundaries(value: Any, label: str = "proof status index") -> None:
     """Reject authority promotion even when hidden in nested extension objects or arrays."""
     if isinstance(value, dict):
@@ -454,8 +479,10 @@ def validate_recursive_authority_boundaries(value: Any, label: str = "proof stat
     elif isinstance(value, list):
         for index, child in enumerate(value):
             validate_recursive_authority_boundaries(child, f"{label}[{index}]")
-    elif isinstance(value, str) and value.strip().upper() in PROMOTIONAL_VALUE_TOKENS:
-        raise VerificationError(f"{label} contains unauthorized promotion token: {value!r}")
+    elif isinstance(value, str):
+        if value.strip().upper() in PROMOTIONAL_VALUE_TOKENS:
+            raise VerificationError(f"{label} contains unauthorized promotion token: {value!r}")
+        validate_authority_prose(value, label)
 
 
 def owned_path_key(value: str) -> str:
@@ -463,15 +490,53 @@ def owned_path_key(value: str) -> str:
     return "/".join(part.casefold() for part in PurePosixPath(value).parts)
 
 
+def _clean_markdown_key(value: str) -> str:
+    cleaned = value.strip()
+    while (
+        (cleaned.startswith("**") and cleaned.endswith("**"))
+        or (cleaned.startswith("__") and cleaned.endswith("__"))
+        or (cleaned.startswith("`") and cleaned.endswith("`"))
+    ):
+        cleaned = cleaned[2:-2] if cleaned[:2] in {"**", "__"} else cleaned[1:-1]
+        cleaned = cleaned.strip()
+    return cleaned.rstrip(":").strip()
+
+
+def markdown_metadata_pairs(text: str) -> list[tuple[int, str, str]]:
+    pairs: list[tuple[int, str, str]] = []
+    for line_number, original in enumerate(text.splitlines(), 1):
+        line = original.strip()
+        while line.startswith(">"):
+            line = line[1:].lstrip()
+        if line.startswith("|"):
+            cells = [cell.strip() for cell in line.strip("|").split("|")]
+            if len(cells) >= 2 and cells[0] and cells[1] and not set(cells[0]) <= {"-", ":"}:
+                pairs.append((line_number, _clean_markdown_key(cells[0]), cells[1]))
+            continue
+        line = re.sub(r"^[-*+]\s+", "", line)
+        formatted = re.match(r"^(?P<mark>\*\*|__|`)(?P<key>.+?)(?P=mark)\s*:?\s*(?P<value>.+?)\s*$", line)
+        if formatted is not None:
+            pairs.append(
+                (
+                    line_number,
+                    _clean_markdown_key(formatted.group("key")),
+                    formatted.group("value").strip(),
+                )
+            )
+            continue
+        plain = re.match(r"^([A-Za-z][A-Za-z0-9 _.-]*)\s*:\s*(.+?)\s*$", line)
+        if plain is not None:
+            pairs.append((line_number, _clean_markdown_key(plain.group(1)), plain.group(2).strip()))
+    return pairs
+
+
 def metadata_values(text: str, scalar_names: tuple[str, ...], table_names: tuple[str, ...] = ()) -> list[str]:
-    values: list[str] = []
-    for name in scalar_names:
-        pattern = rf"(?im)^\s*(?:-\s*)?{re.escape(name)}\s*:\s*([^\r\n]+?)\s*$"
-        values.extend(match.group(1).strip().rstrip(".") for match in re.finditer(pattern, text))
-    for name in table_names:
-        pattern = rf"(?im)^\s*\|\s*{re.escape(name)}\s*\|\s*([^|]+?)\s*\|\s*$"
-        values.extend(match.group(1).strip().rstrip(".") for match in re.finditer(pattern, text))
-    return values
+    expected = {normalized_field_name(name) for name in (*scalar_names, *table_names)}
+    return [
+        raw.strip().rstrip(".")
+        for _, key, raw in markdown_metadata_pairs(text)
+        if normalized_field_name(key) in expected
+    ]
 
 
 def unique_metadata_value(
@@ -535,10 +600,8 @@ def _coerce_metadata_scalar(raw: str) -> Any:
 def validate_markdown_authority_metadata(text: str, label: str) -> None:
     """Apply recursive authority policies to scalar and inline structured Markdown metadata."""
     for line_number, line in enumerate(text.splitlines(), 1):
-        match = re.match(r"^\s*(?:-\s*)?([A-Za-z][A-Za-z0-9 _-]*)\s*:\s*(.+?)\s*$", line)
-        if match is None:
-            continue
-        key, raw = match.groups()
+        validate_authority_prose(line, f"{label}:{line_number}")
+    for line_number, key, raw in markdown_metadata_pairs(text):
         value = _coerce_metadata_scalar(raw)
         policy = PROMOTION_KEY_POLICIES.get(normalized_field_name(key))
         if policy is not None and value not in policy:

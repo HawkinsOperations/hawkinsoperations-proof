@@ -250,6 +250,71 @@ class DetectionProofStatusIndexTests(unittest.TestCase):
         with self.assertRaisesRegex(verifier.VerificationError, "unauthorized authority value"):
             verifier.validate_markdown_authority_metadata(text, "hostile proof record")
 
+    def test_markdown_authority_variants_fail_closed(self) -> None:
+        attacks = (
+            "- **public_safe_status:** PUBLIC_SAFE",
+            "> runtime_status: RUNTIME_ACTIVE",
+            "| public_safe_status | PUBLIC_SAFE | extra |",
+            "- `final_authorization`: FINAL_AUTHORIZED",
+        )
+        for attack in attacks:
+            with self.subTest(attack=attack):
+                with self.assertRaises(verifier.VerificationError):
+                    verifier.validate_markdown_authority_metadata(
+                        attack, "hostile proof record"
+                    )
+
+    def test_formatted_conflicting_identity_is_collected(self) -> None:
+        text = (
+            "case_id: EX-DET-001\n"
+            "- **case_id:** OTHER-DET-001\n"
+        )
+        with self.assertRaisesRegex(
+            verifier.VerificationError, "conflicting repeated metadata"
+        ):
+            verifier.unique_metadata_value(
+                text,
+                ("case_id",),
+                ("Case ID",),
+                label="hostile identity",
+                required=True,
+            )
+
+    def test_affirmative_proof_prose_variants_fail_closed(self) -> None:
+        attacks = (
+            "customer deployment is active",
+            "analyst approval granted",
+            "SOCaaS deployment is live",
+            "final authorization granted",
+            "case closure approved",
+        )
+        for attack in attacks:
+            with self.subTest(attack=attack):
+                with self.assertRaisesRegex(
+                    verifier.VerificationError, "affirmative authority claim"
+                ):
+                    verifier.validate_recursive_authority_boundaries(
+                        {"notes": attack}, "proof index"
+                    )
+                with self.assertRaisesRegex(
+                    verifier.VerificationError, "affirmative authority claim"
+                ):
+                    verifier.validate_markdown_authority_metadata(
+                        attack, "hostile proof record"
+                    )
+
+    def test_negation_is_clause_local(self) -> None:
+        with self.assertRaisesRegex(
+            verifier.VerificationError, "affirmative authority claim"
+        ):
+            verifier.validate_recursive_authority_boundaries(
+                {"notes": "not historical; customer deployment is active"},
+                "proof index",
+            )
+        verifier.validate_recursive_authority_boundaries(
+            {"notes": "customer deployment is not active"}, "proof index"
+        )
+
     def test_reverse_inventory_rejects_orphans_and_preserves_card_only_case(self) -> None:
         temp_dir = tempfile.TemporaryDirectory()
         self.addCleanup(temp_dir.cleanup)
