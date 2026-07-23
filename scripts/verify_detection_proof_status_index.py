@@ -496,18 +496,19 @@ def normalized_field_name(value: Any) -> str:
 
 def compositional_promotion_key(key: str) -> bool:
     return (
-        ("production" in key and any(part in key for part in ("active", "live", "ready", "deploy", "status")))
-        or (any(part in key for part in ("customer", "socaas")) and "deploy" in key)
-        or ("runtime" in key and any(part in key for part in ("active", "status")))
-        or ("signal" in key and any(part in key for part in ("observed", "status")))
-        or ("publicsafe" in key and not key.endswith("count"))
-        or ("final" in key and "authoriz" in key)
-        or ("case" in key and any(part in key for part in ("closed", "closure")))
-        or any(part in key for part in ("approvalstatus", "closurestatus", "casestatus"))
+        ("production" in key and any(part in key for part in ("active", "live", "ready", "deploy", "state", "status")))
+        or (any(part in key for part in ("customer", "socaas")) and any(part in key for part in ("active", "deploy", "state", "status")))
+        or ("runtime" in key and any(part in key for part in ("active", "state", "status")))
+        or ("signal" in key and any(part in key for part in ("observed", "state", "status")))
+        or ("publicsafe" in key and "count" not in key)
+        or ("final" in key and any(part in key for part in ("authoriz", "authority")))
+        or ("case" in key and "count" not in key and any(part in key for part in ("closed", "closure", "state", "status")))
+        or any(part in key for part in ("approvalstate", "approvalstatus", "closurestatus", "casestate", "casestatus"))
         or (
             key.startswith(("ai", "analyst"))
             and any(part in key for part in ("approved", "approval", "authority", "disposition"))
         )
+        or ("review" in key and "disposition" in key)
     )
 
 
@@ -531,10 +532,14 @@ def explicitly_bounded_authority_value(value: Any) -> bool:
         "notpublicsafe",
         "notruntimeactive",
         "open",
+        "partial",
         "pending",
+        "existingflowcandidate",
         "publicruntimeblocked",
         "runtimeblocked",
+        "runtimeevidenceverifiedprivate",
         "signalblocked",
+        "sourceexists",
         "unsupported",
     }
 
@@ -587,21 +592,51 @@ def validate_authority_prose(value: str, label: str) -> None:
             raise VerificationError(f"{label} contains an unauthorized affirmative authority claim")
 
 
-def validate_recursive_authority_boundaries(value: Any, label: str = "proof status index") -> None:
+def validate_recursive_authority_boundaries(
+    value: Any,
+    label: str = "proof status index",
+    normalized_path: tuple[str, ...] = (),
+    promotion_context: bool = False,
+) -> None:
     """Reject authority promotion even when hidden in nested extension objects or arrays."""
     if isinstance(value, dict):
         normalized_keys: dict[str, Any] = {}
         for key, child in value.items():
             child_label = f"{label}.{key}"
             normalized = normalized_field_name(key)
+            child_normalized_path = (*normalized_path, normalized)
+            cumulative_keys = {normalized}
+            cumulative_keys.update(
+                f"{segment}{normalized}"
+                for segment in normalized_path
+                if segment
+                in {
+                    "runtime",
+                    "signal",
+                    "public",
+                    "approval",
+                    "production",
+                    "customer",
+                    "socaas",
+                    "ai",
+                    "analyst",
+                    "review",
+                    "final",
+                    "case",
+                }
+            )
             if normalized in normalized_keys:
                 raise VerificationError(
                     f"{label} contains normalized key collision: "
                     f"{normalized_keys[normalized]!r} and {key!r}"
                 )
             normalized_keys[normalized] = key
+            child_promotion_context = promotion_context or any(
+                compositional_promotion_key(candidate)
+                for candidate in cumulative_keys
+            )
             policy = PROMOTION_KEY_POLICIES.get(normalized)
-            if policy is not None:
+            if policy is not None and not isinstance(child, (dict, list)):
                 try:
                     allowed = child in policy
                 except TypeError:
@@ -611,16 +646,27 @@ def validate_recursive_authority_boundaries(value: Any, label: str = "proof stat
                         f"{child_label} contains unauthorized authority value: {child!r}"
                     )
             elif (
-                compositional_promotion_key(normalized)
+                not isinstance(child, (dict, list))
+                and child_promotion_context
                 and not explicitly_bounded_authority_value(child)
             ):
                 raise VerificationError(
                     f"{child_label} contains compositional authority promotion: {child!r}"
                 )
-            validate_recursive_authority_boundaries(child, child_label)
+            validate_recursive_authority_boundaries(
+                child,
+                child_label,
+                child_normalized_path,
+                child_promotion_context,
+            )
     elif isinstance(value, list):
         for index, child in enumerate(value):
-            validate_recursive_authority_boundaries(child, f"{label}[{index}]")
+            validate_recursive_authority_boundaries(
+                child,
+                f"{label}[{index}]",
+                normalized_path,
+                promotion_context,
+            )
     elif isinstance(value, str):
         normalized_value = unicodedata.normalize("NFKC", value)
         if normalized_value.strip().upper() in PROMOTIONAL_VALUE_TOKENS:

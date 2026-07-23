@@ -60,10 +60,49 @@ jobs:
       - name: Reject retired fixture vocabulary
         working-directory: hawkinsoperations-proof
         run: |
-          if git grep -n -I -i -E 's[y]nthetic' -- .; then
-            echo "retired fixture vocabulary found in tracked source" >&2
-            exit 1
-          fi
+          python - <<'PY'
+          import subprocess
+          import unicodedata
+          from pathlib import PurePosixPath
+
+          retired = "".join(("syn", "thetic"))
+          binary_extensions = frozenset({
+              ".7z", ".avif", ".avi", ".bz2", ".dll", ".dylib", ".eot", ".exe", ".gif",
+              ".gz", ".ico", ".jpeg", ".jpg", ".mov", ".mp3", ".mp4", ".pdf",
+              ".png", ".pyc", ".so", ".tar", ".tgz", ".ttf", ".wasm", ".webp",
+              ".woff", ".woff2", ".xz", ".zip",
+          })
+          paths = subprocess.run(
+              ["git", "ls-files", "-z"],
+              check=True,
+              capture_output=True,
+          ).stdout.decode("utf-8").split("\0")
+          findings = []
+          for relative in filter(None, paths):
+              if retired in unicodedata.normalize("NFKC", relative).casefold():
+                  findings.append(f"tracked filename: {relative}")
+              if PurePosixPath(relative).suffix.casefold() in binary_extensions:
+                  continue
+              blob = subprocess.run(
+                  ["git", "show", f":{relative}"],
+                  check=True,
+                  capture_output=True,
+              ).stdout
+              if b"\0" in blob:
+                  findings.append(f"tracked non-binary content contains NUL: {relative}")
+                  continue
+              try:
+                  text = blob.decode("utf-8")
+              except UnicodeDecodeError:
+                  findings.append(f"tracked non-binary content is not UTF-8: {relative}")
+                  continue
+              if retired in unicodedata.normalize("NFKC", text).casefold():
+                  findings.append(f"tracked content: {relative}")
+          if findings:
+              raise SystemExit(
+                  "retired fixture vocabulary found:\n- " + "\n- ".join(findings)
+              )
+          PY
       - name: Verify proof status index and reverse inventory
         working-directory: hawkinsoperations-proof
         run: python -B scripts/verify_detection_proof_status_index.py
