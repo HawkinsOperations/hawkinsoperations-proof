@@ -148,16 +148,34 @@ NEGATIVE_LIST_SUFFIX_RE = re.compile(
     r"\bclaims?\s+(?:remain|remains|are|is)\s+(?:blocked|unsupported|not\s+approved)\.?$",
     re.IGNORECASE,
 )
-AFFIRMATIVE_ACTION_AFTER_NEGATIVE_LIST_RE = re.compile(
-    r"\b(?:customer|socaas)\b.{0,48}\b(?:is|was)?\s*deployed\b"
+AFFIRMATIVE_RESET_AFTER_NEGATIVE_LIST_RE = re.compile(
+    r"(?:,\s*|\b(?:and|plus|though)\b\s*)"
+    r"(?:"
+    r"\b(?:customer|socaas)\b.{0,32}\b(?:deployment\s+)?(?:is|was)\s+"
+    r"(?:active|confirmed|deployed|live|ready)\b"
+    r"|\b(?:customer|socaas)\b.{0,32}\b(?:is|was)\s+deployed\b"
     r"|\bproduction\b.{0,24}\b(?:is|was)\s+(?:active|live|ready)\b"
     r"|\bruntime\b.{0,16}\b(?:is|was)\s+active\b"
     r"|\bsignal\b.{0,16}\b(?:is|was)\s+observed\b"
+    r"|\bpublic[\s_-]*safe\b.{0,24}\b(?:is|was)\s+"
+    r"(?:approved|confirmed|established|ready|released)\b"
     r"|\b(?:ai|analyst)\b.{0,32}\b(?:(?:is|was)\s+approved|approval\s+(?:is\s+)?granted|authority\s+(?:is\s+)?enabled)\b"
     r"|\bfinal\s+authori[sz]ation\b.{0,16}\b(?:is|was)?\s*(?:approved|granted|received)\b"
-    r"|\bcase\b.{0,16}\b(?:is|was)\s+closed\b",
+    r"|\bcase\s+closure\b.{0,16}\b(?:is|was)?\s*(?:approved|complete|granted|received)\b"
+    r"|\bcase\b.{0,16}\b(?:is|was)\s+closed\b"
+    r")",
     re.IGNORECASE,
 )
+
+
+def normalize_authority_security_text(value: str) -> str:
+    normalized = unicodedata.normalize("NFKC", value)
+    return "".join(
+        character
+        for character in normalized
+        if unicodedata.category(character) != "Cf"
+    )
+
 
 EXACT_BLOCKED_CLAIM_VALUES = {
     value.casefold()
@@ -561,7 +579,7 @@ EXACT_BOUNDED_AUTHORITY_PROSE = {
 
 
 def validate_authority_prose(value: str, label: str) -> None:
-    normalized = unicodedata.normalize("NFKC", value).replace("\r", "\n")
+    normalized = normalize_authority_security_text(value).replace("\r", "\n")
     normalized_label = unicodedata.normalize("NFKC", label).casefold()
     if (
         re.search(r"(?:^|\.)blocked_claims\[\d+\]$", normalized_label)
@@ -579,15 +597,25 @@ def validate_authority_prose(value: str, label: str) -> None:
             continue
         intro = NEGATIVE_LIST_INTRO_RE.search(segment)
         suffix = NEGATIVE_LIST_SUFFIX_RE.search(segment)
-        clauses = [segment]
-        if (
-            not suffix
-            and (
-                not intro
-                or AFFIRMATIVE_ACTION_AFTER_NEGATIVE_LIST_RE.search(segment[intro.end():])
-            )
-        ):
-            clauses = segment.split(",")
+        if suffix:
+            if AFFIRMATIVE_RESET_AFTER_NEGATIVE_LIST_RE.search(
+                ", " + segment[:suffix.start()]
+            ):
+                raise VerificationError(
+                    f"{label} contains an unauthorized affirmative authority claim"
+                )
+            continue
+        if intro:
+            if (
+                AFFIRMATIVE_RESET_AFTER_NEGATIVE_LIST_RE.search(
+                    segment[intro.end():]
+                )
+            ):
+                raise VerificationError(
+                    f"{label} contains an unauthorized affirmative authority claim"
+                )
+            continue
+        clauses = segment.split(",")
         if any(
             AFFIRMATIVE_AUTHORITY_CLAIM_RE.search(clause)
             and not LOCAL_NEGATION_RE.search(clause)
