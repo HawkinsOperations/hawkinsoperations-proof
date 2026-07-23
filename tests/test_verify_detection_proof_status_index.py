@@ -325,6 +325,7 @@ class DetectionProofStatusIndexTests(unittest.TestCase):
             "customer deployment is active",
             "deployed to customer",
             "customer deployed",
+            "customer environment deployed",
             "production live",
             "analyst approved",
             "analyst approval granted",
@@ -336,6 +337,7 @@ class DetectionProofStatusIndexTests(unittest.TestCase):
             "case closure complete",
             "runtime active",
             "signal observed",
+            "signal was observed",
             "public safe for release",
         )
         for attack in attacks:

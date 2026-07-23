@@ -122,7 +122,7 @@ BOUNDARY_CONTEXT_MARKERS = [
 ]
 AFFIRMATIVE_AUTHORITY_CLAIM_RE = re.compile(
     r"\b(?:"
-    r"(?:customer|socaas)\s+(?:deployment\s+)?(?:is\s+)?(?:active|live|deployed|confirmed|approved)"
+    r"(?:customer|socaas)\b.{0,48}\bdeploy(?:ed|ment|ing)?\b"
     r"|deployed\s+to\s+(?:a\s+)?customer"
     r"|analyst\s+(?:approval\s+(?:is\s+)?(?:granted|approved)|approved)"
     r"|final\s+authorization\s+(?:is\s+)?(?:granted|approved|received)"
@@ -130,7 +130,7 @@ AFFIRMATIVE_AUTHORITY_CLAIM_RE = re.compile(
     r"|public[\s_-]*safe(?:\s+runtime\s+proof)?\s+(?:is\s+)?(?:established|confirmed|approved|for\s+release)"
     r"|production\s+(?:deployment\s+)?(?:is\s+)?(?:active|live|ready|confirmed)"
     r"|runtime\s+(?:is\s+)?active"
-    r"|signal\s+(?:is\s+)?observed"
+    r"|signal\s+(?:(?:is|was)\s+)?observed"
     r"|ai\s+(?:disposition\s+)?authority\s+(?:is\s+)?enabled"
     r")\b",
     re.IGNORECASE,
