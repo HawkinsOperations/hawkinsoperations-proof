@@ -446,6 +446,30 @@ class DetectionProofStatusIndexTests(unittest.TestCase):
             {"notes": "customer deployment is not active"}, "proof index"
         )
 
+    def test_compositional_promotion_keys_fail_closed(self) -> None:
+        attacks = (
+            ("production_active", True),
+            ("production_live", {"enabled": True}),
+            ("customer_deployment", True),
+            ("socaas_deployment", True),
+            ("runtime_status", "active"),
+            ("signal_status", "observed"),
+            ("approval_status", "approved"),
+            ("closure_status", "closed"),
+            ("case_status", "closed"),
+            ("public_safe_runtime", True),
+            ("final_authorized", True),
+            ("%70roduction_active", True),
+        )
+        for key, value in attacks:
+            with self.subTest(key=key), self.assertRaisesRegex(
+                verifier.VerificationError, "authority"
+            ):
+                verifier.validate_recursive_authority_boundaries(
+                    {"metadata": {key: value}},
+                    "proof index",
+                )
+
     def test_reverse_inventory_rejects_orphans_and_preserves_card_only_case(self) -> None:
         temp_dir = tempfile.TemporaryDirectory()
         self.addCleanup(temp_dir.cleanup)
