@@ -1229,6 +1229,19 @@ def validate_entry(
             ALLOWED_CANDIDATE_REVIEW_FIELDS,
             f"{detection_id}.candidate_review_state",
         )
+        if candidate["human_review_required"] is not True:
+            raise VerificationError(
+                f"{detection_id}.candidate_review_state.human_review_required "
+                "must remain true"
+            )
+        if (
+            candidate["claim_authority"]
+            != "BLOCK_STRONGER_RUNTIME_SIGNAL_PUBLIC_SAFE_CLAIMS"
+        ):
+            raise VerificationError(
+                f"{detection_id}.candidate_review_state.claim_authority must "
+                "remain BLOCK_STRONGER_RUNTIME_SIGNAL_PUBLIC_SAFE_CLAIMS"
+            )
     for field in [
         "source_truth_owner",
         "source_status",

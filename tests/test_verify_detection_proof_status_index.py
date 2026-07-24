@@ -72,6 +72,26 @@ class DetectionProofStatusIndexTests(unittest.TestCase):
         self.assertNotIn("git grep", text)
         self.assertNotIn("feature/hoxline-case-growth-convergence-v1", text)
 
+    def test_required_ci_checks_pr_or_push_commit_range_for_whitespace(self) -> None:
+        workflow_path = ROOT / ".github/workflows/proof-authority-integrity.yml"
+        workflow = yaml.safe_load(workflow_path.read_text(encoding="utf-8"))
+        steps = workflow["jobs"]["proof-authority-integrity"]["steps"]
+        checkout = next(
+            step for step in steps if step.get("name") == "Check out proof PR source"
+        )
+        self.assertEqual(0, checkout["with"]["fetch-depth"])
+        self.assertIs(checkout["with"]["persist-credentials"], False)
+
+        whitespace = next(
+            step for step in steps if step.get("name") == "Reject whitespace errors"
+        )
+        source = whitespace["run"]
+        self.assertIn("set -euo pipefail", source)
+        self.assertIn('git diff --check "$PR_BASE_SHA...$PR_HEAD_SHA"', source)
+        self.assertIn('git diff --check "$EVENT_BEFORE_SHA...$EVENT_SHA"', source)
+        self.assertIn('git diff --check "$EVENT_SHA^...$EVENT_SHA"', source)
+        self.assertIn('git diff-tree --check --root "$EVENT_SHA"', source)
+
     def test_required_vocabulary_guard_rejects_nfkc_utf16_and_git_errors(self) -> None:
         workflow_path = ROOT / ".github/workflows/proof-authority-integrity.yml"
         retired = "".join(("syn", "thetic"))
@@ -132,6 +152,31 @@ class DetectionProofStatusIndexTests(unittest.TestCase):
     def test_valid_index_passes(self) -> None:
         entries = verifier.verify_index(INDEX_PATH)
         self.assertGreaterEqual(len(entries), 10)
+
+    def test_candidate_review_state_cannot_grant_claim_authority_or_skip_human_review(
+        self,
+    ) -> None:
+        for field, value, expected in (
+            (
+                "claim_authority",
+                "GRANT_STRONGER_RUNTIME_SIGNAL_PUBLIC_SAFE_CLAIMS",
+                "claim_authority must remain",
+            ),
+            (
+                "human_review_required",
+                False,
+                "human_review_required must remain true",
+            ),
+        ):
+            with self.subTest(field=field):
+                data = self.load_index()
+                entry = next(
+                    item
+                    for item in data["entries"]
+                    if item.get("candidate_review_state") is not None
+                )
+                entry["candidate_review_state"][field] = value
+                self.assert_verification_fails(data, expected)
 
     def test_duplicate_detection_id_fails(self) -> None:
         data = self.load_index()

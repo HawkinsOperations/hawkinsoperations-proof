@@ -20,6 +20,7 @@ jobs:
         uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
         with:
           path: hawkinsoperations-proof
+          fetch-depth: 0
           persist-credentials: false
       - name: Check out detection authority source
         uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
@@ -117,4 +118,23 @@ jobs:
         run: python -B -m pytest
       - name: Reject whitespace errors
         working-directory: hawkinsoperations-proof
-        run: git diff --check
+        shell: bash
+        env:
+          EVENT_NAME: ${{ github.event_name }}
+          PR_BASE_SHA: ${{ github.event.pull_request.base.sha }}
+          PR_HEAD_SHA: ${{ github.event.pull_request.head.sha }}
+          EVENT_BEFORE_SHA: ${{ github.event.before }}
+          EVENT_SHA: ${{ github.sha }}
+        run: |
+          set -euo pipefail
+          if [[ "$EVENT_NAME" == "pull_request" ]]; then
+            test -n "$PR_BASE_SHA"
+            test -n "$PR_HEAD_SHA"
+            git diff --check "$PR_BASE_SHA...$PR_HEAD_SHA"
+          elif [[ -n "$EVENT_BEFORE_SHA" && ! "$EVENT_BEFORE_SHA" =~ ^0+$ ]]; then
+            git diff --check "$EVENT_BEFORE_SHA...$EVENT_SHA"
+          elif git rev-parse "$EVENT_SHA^" >/dev/null 2>&1; then
+            git diff --check "$EVENT_SHA^...$EVENT_SHA"
+          else
+            git diff-tree --check --root "$EVENT_SHA"
+          fi
