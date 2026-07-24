@@ -12,7 +12,7 @@ jobs:
   proof-authority-integrity:
     runs-on: ubuntu-latest
     env:
-      DETECTIONS_AUTHORITY_SHA: 455dc07603f1a502481351c7b57df67206085a16
+      DETECTIONS_AUTHORITY_SHA: f8bc0a0925113ca815bf5692081b5216162cc918
       VALIDATION_AUTHORITY_SHA: e4a9fc1e35ad7dda56a8e7e6976ee31b82afadef
       PLATFORM_FIXTURE_SHA: 0c9fa3654db8691c0730a5ddd1e74a343c62c3a2
     steps:
