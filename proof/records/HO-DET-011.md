@@ -1,4 +1,7 @@
 # HO-DET-011 - Windows Service Creation or Service Binary Change
+detection_id: HO-DET-011
+runtime_status: PRIVATE_RUNTIME_EVIDENCE_CAPTURED
+signal_status: NOT_PROVEN
 
 ## Header
 

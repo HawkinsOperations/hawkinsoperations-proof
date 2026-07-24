@@ -1,4 +1,5 @@
 # ID-DET-004 Proof Record
+detection_id: ID-DET-004
 
 ## 1. Summary
 

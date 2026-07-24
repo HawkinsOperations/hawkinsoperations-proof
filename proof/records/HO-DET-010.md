@@ -1,4 +1,5 @@
 # HO-DET-010 Proof Record
+detection_id: HO-DET-010
 
 ## 1. Summary
 

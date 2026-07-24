@@ -1,4 +1,7 @@
 # HO-NDR-001 Boundary Card
+case_id: HO-NDR-001
+runtime_status: NOT_PROVEN
+signal_status: NOT_PROVEN
 
 ## Header
 

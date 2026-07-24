@@ -3,6 +3,18 @@ owner_repo: hawkinsoperations-proof
 truth_surface: proof_boundary_index
 human_review_required: true
 purpose: Carry detection IDs through proof-boundary truth without promoting runtime, signal, public-safe, or website proof status.
+current_authority:
+  historical_snapshot: false
+  current_authority: true
+  source_path: proof/indexes/DETECTION_PROOF_STATUS_INDEX.yml
+  derivation_method: derive_non_null_unique_paths_from_entries
+  derived_counts:
+    indexed_case_count: 12
+    proof_record_count: 11
+    proof_card_count: 12
+    missing_proof_record_count: 1
+    missing_proof_card_count: 0
+    public_safe_count: 0
 claim_boundary:
   allowed_status_values:
     - SOURCE_EXISTS
