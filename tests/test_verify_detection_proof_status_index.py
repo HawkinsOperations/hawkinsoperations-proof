@@ -526,6 +526,7 @@ class DetectionProofStatusIndexTests(unittest.TestCase):
             "does not prove runtime, final authorization received",
             "does not prove runtime, case closure approved",
             "does not prove runtime and customer deployment is active",
+            "not historical customer deployment is active",
             "does not prove runtime plus public safe is confirmed",
             "does not prove runtime though case closure is approved",
             "public\u200b safe is confirmed",

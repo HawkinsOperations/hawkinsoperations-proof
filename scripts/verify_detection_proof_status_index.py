@@ -179,10 +179,10 @@ def normalize_authority_security_text(value: str) -> str:
 
 
 def contains_unnegated_affirmative_state(value: str) -> bool:
-    return any(
-        not LOCAL_NEGATION_RE.search(value[:match.start()])
-        for match in AFFIRMATIVE_STATE_AFTER_NEGATIVE_LIST_RE.finditer(value)
-    )
+    # The affirmative pattern already requires a positive predicate such as
+    # "is active" or "is confirmed". A negative word elsewhere in the same
+    # scalar must not launder that later assertion.
+    return AFFIRMATIVE_STATE_AFTER_NEGATIVE_LIST_RE.search(value) is not None
 
 
 EXACT_BLOCKED_CLAIM_VALUES = {
